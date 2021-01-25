@@ -17,7 +17,7 @@
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.13",
-    "react-router-dom": "^5.2.0"
+    "melon-chart-parser": "^1.2.2",
+    "mongoose": "^5.11.13"
   }
 }

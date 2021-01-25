@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 mongoose
   .connect(config.mongoURI, {
-    uesNewUrlParser: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -24,6 +24,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/hello', (req, res) => res.send('🍏 Hello New World!'));
+
+app.use('/api/chart', require('./routes/chart'));
 
 app.listen(5000, () => {
   console.log(`running on 5000`);
