@@ -19,8 +19,6 @@ router.get('/getSongs', async (req, res) => {
       console.log(err);
     });
 
-  console.log('🍑');
-  console.log(result);
   res.status(200).json({ success: true, result });
 });
 
