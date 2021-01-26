@@ -3,13 +3,13 @@ const router = express.Router();
 var melon = require('melon-chart-parser');
 
 var opts = {
-  limit: 2,
+  limit: 25,
   type: 'artist',
   genre: 'KPOP',
   term: 'BLACKPINK',
 };
 
-router.post('/getSongs', async (req, res) => {
+router.get('/getSongs', async (req, res) => {
   var result = await melon
     .parse(opts)
     .then(function (res) {
@@ -19,6 +19,7 @@ router.post('/getSongs', async (req, res) => {
       console.log(err);
     });
 
+  console.log('🍑');
   console.log(result);
   res.status(200).json({ success: true, result });
 });
