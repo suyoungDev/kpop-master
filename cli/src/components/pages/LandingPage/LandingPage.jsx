@@ -19,8 +19,10 @@ const LandingPage = () => {
 
   return (
     <Wrapper>
-      <h1>K-pop Master Quiz</h1>
-      <Button child={'START'} links={'/start'} />
+      <div>
+        <h1>K-pop Master Quiz</h1>
+        <Button child={'START'} links={'/start'} />
+      </div>
     </Wrapper>
   );
 };

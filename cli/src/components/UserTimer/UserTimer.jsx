@@ -20,7 +20,6 @@ const UserTimer = () => {
     <div>
       <p>{diff}milliseconds passed</p>
       <button onClick={onClick}>click here</button>
-      <ProgressBar />
     </div>
   );
 };

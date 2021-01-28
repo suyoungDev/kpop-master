@@ -4,6 +4,7 @@ import AlbumArt from '../../AlbumArt/AlbumArt';
 import Logging from '../../Logging/Logging';
 import QuizLeft from '../../QuizLeft/QuizLeft';
 import UserTimer from '../../UserTimer/UserTimer';
+import Player from '../../Player/Player';
 
 import './Start.css';
 
@@ -14,19 +15,21 @@ const Start = () => {
   const [currentRound, setCurrentRound] = useState(0);
   const [inputvalue, setinputvalue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
+  const [url, setUrl] = useState('');
 
   const focusedInput = useRef(null);
 
   useEffect(() => {
     let result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
     setShuffled(result);
+    setUrl(result[currentRound].url);
 
     focusedInput.current.focus();
 
     currentRound < 9 &&
       setTimeout(() => {
         setCurrentRound(currentRound + 1);
-      }, 1000);
+      }, 10000);
   }, [currentRound]);
 
   const isCorrect = (answer) => {
@@ -70,16 +73,13 @@ const Start = () => {
       >
         <QuizLeft passed={currentRound + 1} left={shuffled.length} />
 
-        <div style={{ height: '50vh' }}>
-          <AlbumArt />
-        </div>
-
         {currentRound <= 9 && (
           <label>
             <p>{shuffled[currentRound].trackName}</p>
           </label>
         )}
-
+        <Player url={url} />
+        <UserTimer />
         <form onSubmit={answerSubmit}>
           <input
             placeholder='guess what?'
@@ -88,13 +88,12 @@ const Start = () => {
             onChange={onChange}
             ref={focusedInput}
           />
+          {givenAnswersList
+            .filter((item, idx) => idx < 3)
+            .map((answer, idx) => (
+              <Logging key={idx} answer={answer} />
+            ))}
         </form>
-        <UserTimer />
-        {givenAnswersList
-          .filter((item, idx) => idx < 3)
-          .map((answer, idx) => (
-            <Logging key={idx} answer={answer} />
-          ))}
       </div>
     </body>
   );
