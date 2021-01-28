@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 // import ProgressBar from '../ProgressBar/ProgressBar';
 
 const UserTimer = () => {
-  const [startTime, setStartTime] = useState(new Date().getTime());
-  const [endTime, setEndTime] = useState(0);
+  const [startTime, setStartTime] = useState();
   const [diff, setDiff] = useState(0);
 
+  useEffect(() => {
+    const now = new Date();
+    setStartTime(Date.now());
+    console.log('👉' + now);
+  }, []);
+
   const onClick = () => {
-    setEndTime(Date.now());
+    const endTime = Date.now();
     setDiff(endTime - startTime);
     setStartTime(endTime);
   };
-  useEffect(() => {
-    let now = new Date();
-    setStartTime(now.getTime());
-    console.log('👉' + startTime);
-  }, []);
 
   return (
     <div>
