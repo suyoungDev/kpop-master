@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// import ProgressBar from '../ProgressBar/ProgressBar';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const UserTimer = () => {
   const [startTime, setStartTime] = useState();
+
   const [diff, setDiff] = useState(0);
 
   useEffect(() => {
-    const now = new Date();
     setStartTime(Date.now());
-    console.log('👉' + now);
   }, []);
 
   const onClick = () => {
@@ -21,6 +20,7 @@ const UserTimer = () => {
     <div>
       <p>{diff}milliseconds passed</p>
       <button onClick={onClick}>click here</button>
+      <ProgressBar />
     </div>
   );
 };

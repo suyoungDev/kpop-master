@@ -1,0 +1,7 @@
+.bar {
+  left: 0;
+  height: 100%;
+  border-radius: 10px;
+  align-items: flex-start;
+  transition: all 10s ease;
+}
