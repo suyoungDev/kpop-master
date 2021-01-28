@@ -1,52 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import AlbumArt from '../../AlbumArt/AlbumArt';
-import { blackpinkData } from '../../../data/blackpink';
+import Logging from '../../Logging/Logging';
+import QuizLeft from '../../QuizLeft/QuizLeft';
+import ProgressBar from '../../ProgressBar/ProgressBar';
 
-import styled from 'styled-components';
 import './Start.css';
 
-const QuizLeft = styled.p`
-  font-size: 50px;
-  font-weight: bold;
-  color: #7a979c;
-  position: fixed;
-  left: 10px;
-  top: 10px;
-`;
+import { blackpinkData } from '../../../data/blackpink';
 
 const Start = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [shuffled, setShuffled] = useState(blackpinkData);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [showScore, setShowScore] = useState(false);
+  const [currentRound, setCurrentRound] = useState(0);
+
   const [inputvalue, setinputvalue] = useState('');
-  const [givenAnswer, setGivenAnswer] = useState('');
+  const [givenAnswersList, setGivenAnswersList] = useState([]);
+  const focusedInput = useRef(null);
 
   useEffect(() => {
     setIsLoading(true);
-
     let result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
     setShuffled(result);
-
     setIsLoading(false);
-  }, []);
 
-  if (isLoading) {
-    return <div>..loading...</div>;
-  }
+    focusedInput.current.focus();
 
-  const timePassed = () => {
-    // 10초 지나서 다음 문제로 강제로 넘어가기
-    // 틀렸다고 DB에 기록
-    // 이건 setInterval에 기록해넣기?!?!?
-  };
+    currentRound < 9 &&
+      setTimeout(() => {
+        setCurrentRound(currentRound + 1);
+      }, 1000);
+  }, [currentRound]);
 
   const isCorrect = (answer) => {
     // onSubmit function! form에다 작성할것
     // onSbumit={()=>isCorrect(answer)} 이런식
     let givenAnswer = answer.toLowerCase().replace(/\W/g, '');
-    let correct = shuffled[currentQuestion].trackName
+    let correct = shuffled[currentRound].trackName
       .toLowerCase()
       .replace(/\W/g, '');
 
@@ -54,58 +44,71 @@ const Start = () => {
       alert('틀림');
       // 사실 wrong 사운드로 하고싶지만 ~_~ + 화면이펙트
     } else {
-      setCurrentQuestion(currentQuestion++);
-      if (currentQuestion < shuffled.length) {
-        setShowScore(true);
+      setCurrentRound(currentRound + 1);
+      if (currentRound < shuffled.length) {
         // result page 만들어야겠구먼..
       }
       // + re-render Question Compoment;
     }
   };
 
-  const update = (event) => {
+  const onChange = (event) => {
     setinputvalue(event.target.value);
   };
-  const submit = (event) => {
+
+  const answerSubmit = (event) => {
     event.preventDefault();
-    setGivenAnswer(inputvalue);
-    console.log(inputvalue);
-    console.log(givenAnswer);
+    setGivenAnswersList([inputvalue, ...givenAnswersList]);
+    setinputvalue('');
   };
 
+  if (isLoading) {
+    return <div>..loading...</div>;
+  }
+
   return (
-    <div>
-      {showScore ? (
-        <div>
-          <p>ended of games!</p>
-          <p>you score 10 / 10</p>
-        </div>
-      ) : (
-        <React.Fragment>
-          <QuizLeft>
-            {currentQuestion + 1} / {shuffled.length}
-          </QuizLeft>
+    <body>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: 'space-around',
+        }}
+      >
+        <QuizLeft passed={currentRound + 1} left={shuffled.length} />
+
+        <div style={{ height: '50vh' }}>
           <AlbumArt />
-          {shuffled.map((song, idx) => (
-            <label key={song.id}>
-              <p>{song.trackName}</p>
-            </label>
+          <ProgressBar
+            done={90}
+            style={{
+              height: '100%',
+            }}
+          />
+        </div>
+
+        {currentRound <= 9 && (
+          <label>
+            <p>{shuffled[currentRound].trackName}</p>
+          </label>
+        )}
+
+        <form onSubmit={answerSubmit}>
+          <input
+            placeholder='guess what?'
+            type='text'
+            value={inputvalue}
+            onChange={onChange}
+            ref={focusedInput}
+          />
+        </form>
+        {givenAnswersList
+          .filter((item, idx) => idx < 3)
+          .map((answer, idx) => (
+            <Logging key={idx} answer={answer} />
           ))}
-                
-          <form onSubmit={submit}>
-                    
-            <input
-              placeholder='guess what?'
-              type='text'
-              value={inputvalue}
-              onChange={update}
-            />
-                  
-          </form>
-          <p>{givenAnswer}</p>
-        </React.Fragment>
-      )}
-    </div>
+      </div>
+    </body>
   );
 };
 
