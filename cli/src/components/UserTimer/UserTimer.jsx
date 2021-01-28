@@ -1,17 +1,26 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ProgressBar from '../../ProgressBar/ProgressBar';
+// import ProgressBar from '../ProgressBar/ProgressBar';
 
 const UserTimer = () => {
-  const [distance, setdistance] = useState(initialState);
-  const startTime = useRef(0);
-  const endTime = useRef(0);
+  const [startTime, setStartTime] = useState(new Date().getTime());
+  const [endTime, setEndTime] = useState(0);
+  const [diff, setDiff] = useState(0);
 
-  let now = new Date().toLocalseString();
+  const onClick = () => {
+    setEndTime(Date.now());
+    setDiff(endTime - startTime);
+    setStartTime(endTime);
+  };
+  useEffect(() => {
+    let now = new Date();
+    setStartTime(now.getTime());
+    console.log('👉' + startTime);
+  }, []);
 
   return (
     <div>
-      <p>{distance}초 지남</p>
-      <ProgressBar done={distance} />
+      <p>{diff}milliseconds passed</p>
+      <button onClick={onClick}>click here</button>
     </div>
   );
 };

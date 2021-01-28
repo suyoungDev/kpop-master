@@ -3,26 +3,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import AlbumArt from '../../AlbumArt/AlbumArt';
 import Logging from '../../Logging/Logging';
 import QuizLeft from '../../QuizLeft/QuizLeft';
-import ProgressBar from '../../ProgressBar/ProgressBar';
+import UserTimer from '../../UserTimer/UserTimer';
 
 import './Start.css';
 
 import { blackpinkData } from '../../../data/blackpink';
 
 const Start = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [shuffled, setShuffled] = useState(blackpinkData);
   const [currentRound, setCurrentRound] = useState(0);
-
   const [inputvalue, setinputvalue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
+
   const focusedInput = useRef(null);
 
   useEffect(() => {
-    setIsLoading(true);
     let result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
     setShuffled(result);
-    setIsLoading(false);
 
     focusedInput.current.focus();
 
@@ -62,10 +59,6 @@ const Start = () => {
     setinputvalue('');
   };
 
-  if (isLoading) {
-    return <div>..loading...</div>;
-  }
-
   return (
     <body>
       <div
@@ -79,12 +72,6 @@ const Start = () => {
 
         <div style={{ height: '50vh' }}>
           <AlbumArt />
-          <ProgressBar
-            done={90}
-            style={{
-              height: '100%',
-            }}
-          />
         </div>
 
         {currentRound <= 9 && (
@@ -102,6 +89,7 @@ const Start = () => {
             ref={focusedInput}
           />
         </form>
+        <UserTimer />
         {givenAnswersList
           .filter((item, idx) => idx < 3)
           .map((answer, idx) => (
