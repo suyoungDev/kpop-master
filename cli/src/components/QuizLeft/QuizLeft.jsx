@@ -10,7 +10,7 @@ const Container = styled.div`
   align-self: start;
   justify-self: start;
   margin-left: 40px;
-  margin-top: -150px;
+  margin-top: -300px;
 `;
 
 const PassedQ = styled.p`
