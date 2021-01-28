@@ -3,12 +3,13 @@ import axios from 'axios';
 
 import styled from 'styled-components';
 import Button from '../../Button/Button';
+import './LandingPage.css';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `;
 
 const LandingPage = () => {
@@ -18,8 +19,8 @@ const LandingPage = () => {
 
   return (
     <Wrapper>
-      K-pop Master Quiz
-      <Button child={'시작하기'} links={'/start'} />
+      <p>K-pop Master Quiz</p>
+      <Button child={'START'} links={'/start'} />
     </Wrapper>
   );
 };

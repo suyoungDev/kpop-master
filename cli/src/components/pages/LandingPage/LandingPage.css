@@ -1,0 +1,12 @@
+body {
+  background: #f2e8ec;
+  min-height: 100vh;
+}
+
+p {
+  font-family: Fredoka One;
+  font-size: 60px;
+  letter-spacing: 5px;
+  color: rgb(161, 154, 254, 0.8);
+  text-shadow: 2px 2px 4px #fff, -2px -2px 0px rgba(87, 82, 165, 0.8);
+}

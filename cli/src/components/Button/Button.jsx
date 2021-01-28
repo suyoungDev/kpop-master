@@ -1,22 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { COLORS, SIZES, FONTS } from '../../constants/theme';
+import './Button.css';
 
 const LinkContainer = styled(Link)`
-  border-radius: 6px;
-  border: none;
+  display: flex;
+`;
+
+const Label = styled.p`
+  position: relative;
   align-items: center;
-  justify-content: center;
-  padding: 25px;
-  background-color: #f8a5c2;
-  color: white;
-  font-size: bold;
-  text-decoration: none;
-  margin-top: 50px;
+  font-family: ${FONTS.engTitle};
+  font-size: ${SIZES.body1}px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: rgba(244, 192, 211, 0.9);
+  text-shadow: 1px 1px 0px #fff, -1px -1px 0px rgba(192, 145, 161, 0.8);
 `;
 
 const Button = ({ child, links }) => {
-  return <LinkContainer to={links}>{child}</LinkContainer>;
+  return (
+    <LinkContainer className='container' to={links}>
+      <Label>{child}</Label>
+    </LinkContainer>
+  );
 };
 
 export default Button;
