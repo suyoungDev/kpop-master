@@ -25,6 +25,15 @@ const Wrapper = styled.div`
   padding-left: 3rem;
 `;
 
+const AnswerWrapper = styled.div`
+  position: absolute;
+  width: auto;
+  height: auto;
+  margin-top: 50rem;
+  align-self: center;
+  justify-self: center;
+`;
+
 const Test = () => {
   const [shuffled, setShuffled] = useState(blackpinkData);
   const [currentRound, setCurrentRound] = useState(0);
@@ -56,15 +65,24 @@ const Test = () => {
   const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
   const isCorrect = (answer) => {
-    const regex = /\W/g;
-    const givenAnswer = answer.toLowerCase().replace(regex, '');
+    const regex = /[ ]+/g;
+    const englishRegex = /\w/g;
 
-    const correct = shuffled[currentRound].trackName
-      .toLowerCase()
-      .replace(regex, '');
-    const alterCorrect = shuffled[currentRound].alterTrackName
-      .toLowerCase()
-      .replace(regex, '');
+    let givenAnswer = '';
+    let correct = shuffled[currentRound].trackName;
+    let alterCorrect = shuffled[currentRound].alterTrackName;
+
+    englishRegex.test(answer)
+      ? (givenAnswer = answer.toLowerCase().replace(regex, ''))
+      : (givenAnswer = answer.replace(regex, ''));
+
+    englishRegex.test(correct)
+      ? (correct = correct.toLowerCase().replace(regex, ''))
+      : (correct = correct.replace(regex, ''));
+
+    englishRegex.test(alterCorrect)
+      ? (alterCorrect = alterCorrect.toLowerCase().replace(regex, ''))
+      : (alterCorrect = alterCorrect.replace(regex, ''));
 
     if (givenAnswer === correct || givenAnswer === alterCorrect) {
       playCorrect();
@@ -102,23 +120,25 @@ const Test = () => {
         <QuizLeft passed={currentRound + 1} left='10' />
       </Wrapper>
 
+      <AnswerWrapper>
+        <form onSubmit={answerSubmit}>
+          <input
+            placeholder='guess what?'
+            type='text'
+            value={inputValue}
+            onChange={onChange}
+            ref={focusedInput}
+          />
+
+          {givenAnswersList
+            .filter((item, idx) => idx < 5)
+            .map((answer, idx) => (
+              <LogList key={idx} answer={answer} />
+            ))}
+        </form>
+      </AnswerWrapper>
+
       <Player url={url} />
-
-      <form onSubmit={answerSubmit}>
-        <input
-          placeholder='guess what?'
-          type='text'
-          value={inputValue}
-          onChange={onChange}
-          ref={focusedInput}
-        />
-
-        {givenAnswersList
-          .filter((item, idx) => idx < 5)
-          .map((answer, idx) => (
-            <LogList key={idx} answer={answer} />
-          ))}
-      </form>
     </Container>
   );
 };
