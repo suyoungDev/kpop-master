@@ -3,7 +3,7 @@ import useSound from 'use-sound';
 
 import QuizLeft from '../../QuizLeft/QuizLeft';
 import styled from 'styled-components';
-import Logging from '../../Logging/Logging';
+import LogList from '../../LogList/LogList';
 import Player from '../../Player/Player';
 
 import { blackpinkData } from '../../../data/blackpink';
@@ -26,9 +26,10 @@ const Wrapper = styled.div`
 const Test = () => {
   const [shuffled, setShuffled] = useState(blackpinkData);
   const [currentRound, setCurrentRound] = useState(0);
+  const [url, setUrl] = useState('');
+
   const [inputValue, setInputValue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
-  const [url, setUrl] = useState('');
 
   const focusedInput = useRef(null);
 
@@ -48,23 +49,23 @@ const Test = () => {
     //   }, 11000);
   }, [currentRound]);
 
-  const [playCorrect] = useSound(correctSfx);
-  const [playWrong] = useSound(wrongSfx);
+  const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
+  const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
   const isCorrect = (answer) => {
     const regex = /\W/g;
-    let givenAnswer = answer.toLowerCase().replace(regex, '');
+    const givenAnswer = answer.toLowerCase().replace(regex, '');
 
-    let correct = shuffled[currentRound].trackName
+    const correct = shuffled[currentRound].trackName
       .toLowerCase()
       .replace(regex, '');
-    let alterCorrect = shuffled[currentRound].alterTrackName
+    const alterCorrect = shuffled[currentRound].alterTrackName
       .toLowerCase()
       .replace(regex, '');
 
     if (givenAnswer === correct || givenAnswer === alterCorrect) {
-      goNextRound();
       playCorrect();
+      goNextRound();
     } else {
       playWrong();
     }
@@ -84,6 +85,7 @@ const Test = () => {
 
   const answerSubmit = (event) => {
     event.preventDefault();
+
     setGivenAnswersList([inputValue, ...givenAnswersList]);
     isCorrect(inputValue);
     setInputValue('');
@@ -97,7 +99,6 @@ const Test = () => {
 
       <Player url={url} />
 
-      <p>answer: {shuffled[currentRound].trackName}</p>
       <form onSubmit={answerSubmit}>
         <input
           placeholder='guess what?'
@@ -106,10 +107,11 @@ const Test = () => {
           onChange={onChange}
           ref={focusedInput}
         />
+
         {givenAnswersList
           .filter((item, idx) => idx < 5)
           .map((answer, idx) => (
-            <Logging key={idx} answer={answer} />
+            <LogList key={idx} answer={answer} />
           ))}
       </form>
     </Container>
