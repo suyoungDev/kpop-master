@@ -1,19 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useSound from 'use-sound';
 
-import AlbumArt from '../../AlbumArt/AlbumArt';
-import Logging from '../../Logging/Logging';
 import QuizLeft from '../../QuizLeft/QuizLeft';
-import UserTimer from '../../UserTimer/UserTimer';
+import styled from 'styled-components';
+import Logging from '../../Logging/Logging';
 import Player from '../../Player/Player';
-
-import './Start.css';
 
 import { blackpinkData } from '../../../data/blackpink';
 
-const Start = () => {
+import correctSfx from '../../../sounds/correct.mp3';
+import wrongSfx from '../../../sounds/wrong1.mp3';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+`;
+
+const Test = () => {
   const [shuffled, setShuffled] = useState(blackpinkData);
   const [currentRound, setCurrentRound] = useState(0);
-  const [inputvalue, setinputvalue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
   const [url, setUrl] = useState('');
 
@@ -24,83 +37,83 @@ const Start = () => {
     if (currentRound === 0) {
       setShuffled(result);
     }
+
     setUrl(shuffled[currentRound].url);
 
     focusedInput.current.focus();
 
-    currentRound < 9 &&
-      setTimeout(() => {
-        setCurrentRound(currentRound + 1);
-      }, 5000);
+    // currentRound < 9 &&
+    //   setTimeout(() => {
+    //     setCurrentRound(currentRound + 1);
+    //   }, 11000);
   }, [currentRound]);
 
+  const [playCorrect] = useSound(correctSfx);
+  const [playWrong] = useSound(wrongSfx);
+
   const isCorrect = (answer) => {
-    // onSubmit function! form에다 작성할것
-    // onSbumit={()=>isCorrect(answer)} 이런식
-    let givenAnswer = answer.toLowerCase().replace(/\W/g, '');
+    const regex = /\W/g;
+    let givenAnswer = answer.toLowerCase().replace(regex, '');
+
     let correct = shuffled[currentRound].trackName
       .toLowerCase()
-      .replace(/\W/g, '');
+      .replace(regex, '');
+    let alterCorrect = shuffled[currentRound].alterTrackName
+      .toLowerCase()
+      .replace(regex, '');
 
-    if (givenAnswer !== correct) {
-      alert('틀림');
-      // 사실 wrong 사운드로 하고싶지만 ~_~ + 화면이펙트
+    if (givenAnswer === correct || givenAnswer === alterCorrect) {
+      goNextRound();
+      playCorrect();
     } else {
-      setCurrentRound(currentRound + 1);
-      if (currentRound < shuffled.length) {
-        // result page 만들어야겠구먼..
-      }
-      // + re-render Question Compoment;
+      playWrong();
     }
   };
 
+  const goNextRound = () => {
+    if (currentRound === 9) {
+      return setUrl('');
+    }
+
+    setCurrentRound(currentRound + 1);
+  };
+
   const onChange = (event) => {
-    setinputvalue(event.target.value);
+    setInputValue(event.target.value);
   };
 
   const answerSubmit = (event) => {
     event.preventDefault();
-    setGivenAnswersList([inputvalue, ...givenAnswersList]);
-    setinputvalue('');
+    setGivenAnswersList([inputValue, ...givenAnswersList]);
+    isCorrect(inputValue);
+    setInputValue('');
   };
 
   return (
-    <body>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignContent: 'space-around',
-        }}
-      >
-        <QuizLeft passed={currentRound + 1} left={shuffled.length} />
-        <div style={{ width: '100%', height: '90%' }}>
-          <Player url={url} />
+    <Container>
+      <Wrapper>
+        <QuizLeft passed={currentRound + 1} left='10' />
+      </Wrapper>
 
-          <div style={{ width: '100%', height: '40%' }}>
-            {shuffled.map((song) => (
-              <p key={song.id}>{song.trackName}</p>
-            ))}
-          </div>
-        </div>
+      <Player url={url} />
 
-        <form onSubmit={answerSubmit}>
-          <input
-            placeholder='guess what?'
-            type='text'
-            value={inputvalue}
-            onChange={onChange}
-            ref={focusedInput}
-          />
-          {givenAnswersList
-            .filter((item, idx) => idx < 3)
-            .map((answer, idx) => (
-              <Logging key={idx} answer={answer} />
-            ))}
-        </form>
-      </div>
-    </body>
+      <p>answer: {shuffled[currentRound].trackName}</p>
+      <form onSubmit={answerSubmit}>
+        <input
+          placeholder='guess what?'
+          type='text'
+          value={inputValue}
+          onChange={onChange}
+          ref={focusedInput}
+        />
+        {givenAnswersList
+          .filter((item, idx) => idx < 5)
+          .map((answer, idx) => (
+            <Logging key={idx} answer={answer} />
+          ))}
+      </form>
+    </Container>
   );
 };
 
-export default Start;
+export default Test;

@@ -11,3 +11,5 @@ cli/src/logo.svg
 cli/public/logo192.png
 server/routes/chart.js
 data/
+correct.mp3
+wrong1.mp3
