@@ -7,10 +7,6 @@ const Container = styled.div`
   height: 50px;
   display: flex;
   flex-direction: row;
-  align-self: start;
-  justify-self: start;
-  margin-left: 40px;
-  margin-top: -300px;
 `;
 
 const PassedQ = styled.p`

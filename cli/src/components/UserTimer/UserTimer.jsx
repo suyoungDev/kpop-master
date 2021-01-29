@@ -14,6 +14,9 @@ const UserTimer = () => {
     const endTime = Date.now();
     setDiff(endTime - startTime);
     setStartTime(endTime);
+
+    let seconds = diff / 1000;
+    let milliseconds = diff % 1000;
   };
 
   return (

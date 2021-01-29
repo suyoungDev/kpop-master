@@ -8,7 +8,6 @@ cli/public/logo512.png
 .gitignore
 cli/public/robots.txt
 cli/src/logo.svg
-test.jsx
 cli/public/logo192.png
 server/routes/chart.js
 data/

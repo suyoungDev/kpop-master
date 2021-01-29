@@ -11,19 +11,19 @@ const Wrapper = styled.div`
 `;
 
 const Progress = styled.div`
-  position: absolute;
   width: 0%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  align-items: flex-start;
+  border-radius: 10px;
   background: rgb(238, 174, 202);
   background: linear-gradient(
     153deg,
     ${COLORS.lavender} 0%,
     ${COLORS.babyPink} 100%
   );
-  left: 0;
-  height: 100%;
-  border-radius: 10px;
-  align-items: flex-start;
-  transition: all 10s ease;
+  transition: all 10s;
 `;
 
 const ProgressBar = () => {

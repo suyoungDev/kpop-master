@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 import styled from 'styled-components';
 import Button from '../../Button/Button';
@@ -12,17 +11,19 @@ const Wrapper = styled.div`
   justify-content: space-around;
 `;
 
-const LandingPage = () => {
-  useEffect(() => {
-    axios.get('/api/hello').then((res) => console.log(res.data));
-  }, []);
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
+const LandingPage = () => {
   return (
     <Wrapper>
-      <div>
-        <h1>K-pop Master Quiz</h1>
+      <h1>K-pop Master Quiz</h1>
+      <Row>
         <Button child={'START'} links={'/start'} />
-      </div>
+        <Button child={'test'} links={'/test'} />
+      </Row>
     </Wrapper>
   );
 };
