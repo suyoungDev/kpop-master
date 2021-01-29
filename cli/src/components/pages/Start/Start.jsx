@@ -21,15 +21,17 @@ const Start = () => {
 
   useEffect(() => {
     let result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
-    setShuffled(result);
-    setUrl(result[currentRound].url);
+    if (currentRound === 0) {
+      setShuffled(result);
+    }
+    setUrl(shuffled[currentRound].url);
 
     focusedInput.current.focus();
 
     currentRound < 9 &&
       setTimeout(() => {
         setCurrentRound(currentRound + 1);
-      }, 10000);
+      }, 5000);
   }, [currentRound]);
 
   const isCorrect = (answer) => {
@@ -72,14 +74,16 @@ const Start = () => {
         }}
       >
         <QuizLeft passed={currentRound + 1} left={shuffled.length} />
+        <div style={{ width: '100%', height: '90%' }}>
+          <Player url={url} />
 
-        {currentRound <= 9 && (
-          <label>
-            <p>{shuffled[currentRound].trackName}</p>
-          </label>
-        )}
-        <Player url={url} />
-        <UserTimer />
+          <div style={{ width: '100%', height: '40%' }}>
+            {shuffled.map((song) => (
+              <p key={song.id}>{song.trackName}</p>
+            ))}
+          </div>
+        </div>
+
         <form onSubmit={answerSubmit}>
           <input
             placeholder='guess what?'
