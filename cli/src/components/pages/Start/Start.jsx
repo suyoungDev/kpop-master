@@ -20,7 +20,9 @@ const Wrapper = styled.div`
   width: 100%;
   height: 50px;
   position: fixed;
-  bottom: 0;
+  top: 0;
+  padding-top: 2rem;
+  padding-left: 3rem;
 `;
 
 const Test = () => {
@@ -30,6 +32,7 @@ const Test = () => {
 
   const [inputValue, setInputValue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
+  const [checkingAnswer, setCheckingAnswer] = useState(false);
 
   const focusedInput = useRef(null);
 
@@ -65,9 +68,11 @@ const Test = () => {
 
     if (givenAnswer === correct || givenAnswer === alterCorrect) {
       playCorrect();
+      setCheckingAnswer(true);
       goNextRound();
     } else {
-      playWrong();
+      setCheckingAnswer(false);
+      return playWrong();
     }
   };
 

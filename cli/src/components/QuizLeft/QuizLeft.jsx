@@ -13,14 +13,14 @@ const PassedQ = styled.p`
   font-size: ${SIZES.largeTitle}px;
   color: ${COLORS.black};
   padding-right: ${SIZES.base}px;
-  font-family: ${FONTS.engTitle};
+  font-family: '${FONTS.gameTitle}';
   padding-bottom: 20px;
 `;
 const LeftQ = styled.p`
   font-size: ${SIZES.h1}px;
   color: ${COLORS.slateGray};
   padding-left: ${SIZES.base}px;
-  font-family: ${FONTS.engTitle};
+  font-family: '${FONTS.gameTitle}';
 `;
 
 const QuizLeft = ({ passed, left }) => {

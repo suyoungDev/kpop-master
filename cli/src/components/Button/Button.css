@@ -5,7 +5,8 @@ body {
 }
 .container {
   overflow: hidden;
-  width: 20vw;
+  max-width: 60vw;
+
   height: 10vh;
   border-radius: 50px;
   align-items: center;

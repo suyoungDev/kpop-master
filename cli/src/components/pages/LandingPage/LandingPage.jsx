@@ -21,7 +21,7 @@ const LandingPage = () => {
     <Wrapper>
       <h1>K-pop Master Quiz</h1>
       <Row>
-        <Button child={'START'} links={'/start'} />
+        <Button child={'PRESS TO START'} links={'/start'} />
       </Row>
     </Wrapper>
   );

@@ -42,6 +42,7 @@ export const FONTS = {
   engBody: 'Raleway',
   korTitle: 'Nanum Gothic',
   korBody: 'Nanum Gothic',
+  gameTitle: 'Press Start 2P',
 };
 
 export const THEME = {
