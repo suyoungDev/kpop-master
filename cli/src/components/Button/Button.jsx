@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { SIZES, FONTS } from '../../constants/theme';
+import { FONTS } from '../../constants/theme';
 import './Button.css';
 
 const LinkContainer = styled(Link)`

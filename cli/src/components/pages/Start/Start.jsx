@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import LogList from '../../LogList/LogList';
 import Player from '../../Player/Player';
 import Session from '../../Session/Session';
+import OutroPage from '../OutroPage/OutroPage';
 
 import { blackpinkData } from '../../../data/blackpink';
 
@@ -44,8 +45,9 @@ const Test = () => {
 
   const [inputValue, setInputValue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
-
   const [resultList, setResultList] = useState([]);
+
+  const [isGameEnded, setIsGameEnded] = useState(false);
 
   const focusedInput = useRef(null);
 
@@ -99,13 +101,14 @@ const Test = () => {
   const goNextRound = () => {
     const newResult = {
       id: Math.random().toString(36).substr(2, 9),
-      title: shuffled[currentRound].trackName,
+      trackName: shuffled[currentRound].trackName,
       result: true,
     };
 
     setResultList([...resultList, newResult]);
 
     if (currentRound === 9) {
+      setIsGameEnded(true);
       return setUrl('');
     }
 
@@ -123,6 +126,10 @@ const Test = () => {
     isCorrect(inputValue);
     setInputValue('');
   };
+
+  if (isGameEnded) {
+    return <OutroPage resultList={resultList} />;
+  }
 
   return (
     <Container>
