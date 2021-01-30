@@ -13,7 +13,7 @@ const Player = ({ url }) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <ReactPlayer url={url} playing='true' controls='false' />
+        <ReactPlayer url={url} playing />
       </Wrapper>
     </React.Fragment>
   );

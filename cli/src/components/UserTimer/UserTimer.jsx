@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 const UserTimer = () => {
   const [startTime, setStartTime] = useState();
-
   const [diff, setDiff] = useState(0);
 
   useEffect(() => {
@@ -21,7 +20,9 @@ const UserTimer = () => {
 
   return (
     <div>
-      <p>{diff}milliseconds passed</p>
+      <p>
+        {seconds}.{milliseconds}초 지남
+      </p>
       <button onClick={onClick}>click here</button>
     </div>
   );

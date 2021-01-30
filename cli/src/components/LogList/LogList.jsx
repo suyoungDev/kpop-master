@@ -4,8 +4,7 @@ import { COLORS, SIZES, FONTS } from '../../constants/theme';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
 `;
 
 const Log = styled.p`
@@ -13,12 +12,17 @@ const Log = styled.p`
   color: ${COLORS.darkGray};
   font-family: ${FONTS.engBody};
   font-size: ${SIZES.font}px;
+  text-align: left;
 `;
 
-const LogList = ({ answer }) => {
+const LogList = ({ giveAnswers }) => {
   return (
     <Wrapper>
-      <Log>{answer}</Log>
+      {giveAnswers
+        .filter((answer, idx) => idx < 5)
+        .map((answer, idx) => (
+          <Log key={idx}>{answer}</Log>
+        ))}
     </Wrapper>
   );
 };
