@@ -5,6 +5,7 @@ import QuizLeft from '../../QuizLeft/QuizLeft';
 import styled from 'styled-components';
 import LogList from '../../LogList/LogList';
 import Player from '../../Player/Player';
+import Session from '../../Session/Session';
 
 import { blackpinkData } from '../../../data/blackpink';
 
@@ -32,6 +33,8 @@ const AnswerWrapper = styled.div`
   margin-top: 50rem;
   align-self: center;
   justify-self: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Test = () => {
@@ -41,7 +44,8 @@ const Test = () => {
 
   const [inputValue, setInputValue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
-  const [checkingAnswer, setCheckingAnswer] = useState(false);
+
+  const [resultList, setResultList] = useState([]);
 
   const focusedInput = useRef(null);
 
@@ -65,7 +69,7 @@ const Test = () => {
   const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
   const isCorrect = (answer) => {
-    const regex = /[ ]+/g;
+    const regex = /[ '"-]+/g;
     const englishRegex = /\w/g;
 
     let givenAnswer = '';
@@ -86,15 +90,21 @@ const Test = () => {
 
     if (givenAnswer === correct || givenAnswer === alterCorrect) {
       playCorrect();
-      setCheckingAnswer(true);
       goNextRound();
     } else {
-      setCheckingAnswer(false);
-      return playWrong();
+      playWrong();
     }
   };
 
   const goNextRound = () => {
+    const newResult = {
+      id: Math.random().toString(36).substr(2, 9),
+      title: shuffled[currentRound].trackName,
+      result: true,
+    };
+
+    setResultList([...resultList, newResult]);
+
     if (currentRound === 9) {
       return setUrl('');
     }
@@ -120,6 +130,7 @@ const Test = () => {
         <QuizLeft passed={currentRound + 1} left='10' />
       </Wrapper>
 
+      <Session resultList={resultList} />
       <AnswerWrapper>
         <form onSubmit={answerSubmit}>
           <input
@@ -130,11 +141,9 @@ const Test = () => {
             ref={focusedInput}
           />
 
-          {givenAnswersList
-            .filter((item, idx) => idx < 5)
-            .map((answer, idx) => (
-              <LogList key={idx} answer={answer} />
-            ))}
+          {shuffled[currentRound].trackName}
+
+          <LogList giveAnswers={givenAnswersList} />
         </form>
       </AnswerWrapper>
 
