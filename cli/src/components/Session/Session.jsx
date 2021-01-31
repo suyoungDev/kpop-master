@@ -25,7 +25,7 @@ const Session = () => {
   return (
     <Wrapper key={resultList.id}>
       {resultList.map((item) => (
-        <Log>{item ? '🌼' : '✖'}</Log>
+        <Log>{item === 'correct' ? '🌼' : '✖'}</Log>
       ))}
     </Wrapper>
   );

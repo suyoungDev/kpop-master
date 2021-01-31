@@ -51,20 +51,22 @@ const GameLayout = ({ trackList }) => {
 
     setUrl(trackList[currentRound].url);
 
-    // currentRound < 9 &&
-    //   setTimeout(() => {
-    //     setCurrentRound(currentRound + 1);
-    //   }, 11000);
+    const timer = setTimeout(() => {
+      goNextRound();
+      setInputValue('');
+    }, 10200);
+
+    return () => clearTimeout(timer);
   }, [currentRound]);
 
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
   const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
   const isCorrect = (answer) => {
-    const regex = /[ '"-]+/g;
+    const regex = /[ '"-_]+/g;
     const englishRegex = /\w/g;
 
-    let givenAnswer = '';
+    let givenAnswer = answer;
     let correct = trackList[currentRound].trackName;
     let alterCorrect = trackList[currentRound].alterTrackName;
 
@@ -82,23 +84,24 @@ const GameLayout = ({ trackList }) => {
 
     if (givenAnswer === correct || givenAnswer === alterCorrect) {
       playCorrect();
-      goNextRound();
+      let answerResult = 'correct';
+      goNextRound(answerResult);
     } else {
       playWrong();
     }
   };
 
-  const goNextRound = () => {
+  const goNextRound = (answerResult) => {
     const newResult = {
       id: Math.random().toString(36).substr(2, 9),
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
-      result: true,
+      result: answerResult === 'correct' ? 'correct' : 'wrong',
       duration: 0,
     };
 
     setGameResult([...gameResult, newResult]);
-
+    console.log(gameResult);
     if (currentRound === 9) {
       setIsGameEnd(1);
       return setUrl('');
@@ -136,6 +139,7 @@ const GameLayout = ({ trackList }) => {
             ref={focusedInput}
           />
           <Session />
+          <br />
           <LogList giveAnswers={givenAnswersList} />
         </form>
       </AnswerWrapper>

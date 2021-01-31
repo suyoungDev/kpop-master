@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 import LandingPage from './components/pages/LandingPage/LandingPage';
 import Start from './components/pages/Start/Start';
+import Test from './components/pages/LandingPage/Test';
 
 import { GameResultProvider } from './components/GameResultContext/GameResultContext';
 import { GameEndProvider } from './components/GamEndContext/GameEndContext';
@@ -16,6 +17,7 @@ function App() {
             <Switch>
               <Route exact path='/' component={LandingPage} />
               <Route exact path='/start' component={Start} />
+              <Route exact path='/test' component={Test} />
             </Switch>
           </BrowserRouter>
         </div>

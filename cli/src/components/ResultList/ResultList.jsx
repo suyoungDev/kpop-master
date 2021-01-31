@@ -44,7 +44,7 @@ const ResultList = ({ resultList, wrong }) => {
   const [condition, setCondition] = useState(true);
 
   useEffect(() => {
-    wrong ? setCondition(false) : setCondition(true);
+    wrong ? setCondition('wrong') : setCondition('correct');
   }, []);
 
   return (
@@ -56,9 +56,9 @@ const ResultList = ({ resultList, wrong }) => {
       </TitleWrapper>
       {resultList
         .filter((song) => song.result === condition)
-        .map((song, idx) => (
+        .map((song) => (
           <ContentWrapper key={song.id}>
-            <IndexDiv>{idx + 1}</IndexDiv>
+            <IndexDiv>{song.roundIndex + 1}</IndexDiv>
             <TrackDiv>{song.trackName}</TrackDiv>
             <DurationDiv>00.00</DurationDiv>
           </ContentWrapper>
