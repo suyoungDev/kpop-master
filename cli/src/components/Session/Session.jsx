@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONTS } from '../../constants/theme';
+
+import { GameResultContext } from '../GameResultContext/GameResultContext';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: start;
 `;
 
 const Log = styled.p`
@@ -15,11 +17,15 @@ const Log = styled.p`
   font-size: ${SIZES.font}px;
 `;
 
-const Session = ({ resultList }) => {
+const Session = () => {
+  const [gameResult, setGameResult] = useContext(GameResultContext);
+
+  let resultList = gameResult.map((song) => song.result);
+
   return (
     <Wrapper key={resultList.id}>
       {resultList.map((item) => (
-        <Log>{item.result ? '✔' : '✖'}</Log>
+        <Log>{item ? '🌼' : '✖'}</Log>
       ))}
     </Wrapper>
   );

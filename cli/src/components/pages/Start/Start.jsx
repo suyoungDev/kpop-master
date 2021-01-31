@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 
+import GameLayout from '../GameLayout/GameLayout';
 import OutroPage from '../OutroPage/OutroPage';
-import GameLayout from '../../GameLayout/GameLayout';
 
 import { blackpinkData } from '../../../data/blackpink';
 
+import { GameEndContext } from '../../GamEndContext/GameEndContext';
+
 const Start = () => {
-  const [shuffled, setShuffled] = useState(blackpinkData);
+  const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
 
-  useEffect(() => {
-    let result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
-    setShuffled(result);
-  }, []);
+  const result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
 
-  if (isGameEnded) {
-    return <OutroPage resultList={resultList} />;
+  if (isGameEnd === 1) {
+    return <OutroPage />;
   }
 
-  return <GameLayout trackList={shuffled} />;
+  return <GameLayout trackList={result} />;
 };
 
 export default Start;

@@ -1,40 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '../../Button/Button';
 import ResultList from '../../ResultList/ResultList';
+import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
-const OutroPage = ({ resultList }) => {
-  const [inputValue, setInputValue] = useState('');
+const OutroPage = () => {
+  const [name, setName] = useState('');
+  const [gameResult, setGameResult] = useContext(GameResultContext);
 
   const update = (e) => {
-    setInputValue(e.target.value);
+    setName(e.target.value);
   };
 
   const addName = (e) => {
     e.preventDefault();
 
-    localStorage.setItem('kpop_userName', inputValue);
-    setInputValue('');
+    localStorage.setItem('_userName', name);
+    setName('');
+
+    setGameResult([...gameResult, { userName: name }]);
   };
 
-  const quantityRightAnswers = resultList.filter((item) => item.result === true)
-    .length;
-  const quantityWrongAnswers = resultList.filter(
-    (item) => item.result === false
+  const quantityCorrectAnswers = gameResult.filter(
+    (game) => game.result === true
+  ).length;
+  const quantityWrongAnswers = gameResult.filter(
+    (game) => game.result === false
   ).length;
 
   return (
     <div>
       <h1>결과</h1>
       <div style={{ marginTop: '50px' }}>
-        <h3>맞춘 노래 {quantityRightAnswers}개</h3>
+        <h3>맞춘 노래 {quantityCorrectAnswers}개</h3>
 
-        <ResultList resultList={resultList} />
+        <ResultList resultList={gameResult} />
 
         <h3 style={{ marginTop: '20px' }}>
           못맞춘 노래 {quantityWrongAnswers}개
         </h3>
 
-        <ResultList resultList={resultList} wrong />
+        <ResultList resultList={gameResult} wrong />
 
         <h4>평균 응답 속도 00초</h4>
       </div>
@@ -44,7 +49,7 @@ const OutroPage = ({ resultList }) => {
           <input
             placeholder='your name'
             type='text'
-            value={inputValue}
+            value={name}
             onChange={update}
           />
           <button type='submit'>내 기록 남기기</button>

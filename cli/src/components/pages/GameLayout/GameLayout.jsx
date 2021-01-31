@@ -1,13 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
+import useSound from 'use-sound';
 
 import QuizLeft from '../../QuizLeft/QuizLeft';
 import Player from '../../Player/Player';
 import Session from '../../Session/Session';
+
 import LogList from '../../LogList/LogList';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
 import wrongSfx from '../../../constants/sounds/wrong1.mp3';
+
+import { GameEndContext } from '../../GamEndContext/GameEndContext';
+import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
 const QuizWrapper = styled.div`
   width: 100%;
@@ -30,24 +35,27 @@ const AnswerWrapper = styled.div`
 `;
 
 const GameLayout = ({ trackList }) => {
+  const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
+  const [gameResult, setGameResult] = useContext(GameResultContext);
+
   const [inputValue, setInputValue] = useState('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
-  const [resultList, setResultList] = useState([]);
-
-  const [url, setUrl] = useState('');
 
   const [currentRound, setCurrentRound] = useState(0);
-  const [isGameEnded, setIsGameEnded] = useState(false);
+  const [url, setUrl] = useState('');
 
   const focusedInput = useRef(null);
 
   useEffect(() => {
     focusedInput.current.focus();
+
+    setUrl(trackList[currentRound].url);
+
     // currentRound < 9 &&
     //   setTimeout(() => {
     //     setCurrentRound(currentRound + 1);
     //   }, 11000);
-  }, []);
+  }, [currentRound]);
 
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
   const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
@@ -83,19 +91,20 @@ const GameLayout = ({ trackList }) => {
   const goNextRound = () => {
     const newResult = {
       id: Math.random().toString(36).substr(2, 9),
+      roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: true,
+      duration: 0,
     };
 
-    setResultList([...resultList, newResult]);
+    setGameResult([...gameResult, newResult]);
 
     if (currentRound === 9) {
-      setIsGameEnded(true);
+      setIsGameEnd(1);
       return setUrl('');
     }
 
     setCurrentRound(currentRound + 1);
-    setUrl(trackList[currentRound].url);
   };
 
   const onChange = (event) => {
@@ -110,13 +119,14 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <>
+    <div style={{ height: '100%', display: 'flex', justifyContent: 'center' }}>
       <Player url={url} />
       <QuizWrapper>
         <QuizLeft passed={currentRound + 1} left='10' />
       </QuizWrapper>
       <AnswerWrapper>
-        <Session resultList={resultList} />
+        {trackList[currentRound].trackName}
+        <br />
         <form onSubmit={answerSubmit}>
           <input
             placeholder='guess what?'
@@ -125,13 +135,11 @@ const GameLayout = ({ trackList }) => {
             onChange={onChange}
             ref={focusedInput}
           />
-
-          {trackList[currentRound].trackName}
-
+          <Session />
           <LogList giveAnswers={givenAnswersList} />
         </form>
       </AnswerWrapper>
-    </>
+    </div>
   );
 };
 
