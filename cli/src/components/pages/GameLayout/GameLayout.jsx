@@ -46,9 +46,12 @@ const GameLayout = ({ trackList }) => {
 
   const focusedInput = useRef(null);
 
+  const [startTime, setStartTime] = useState(Date.now());
+
   useEffect(() => {
     focusedInput.current.focus();
 
+    setStartTime(Date.now());
     setUrl(trackList[currentRound].url);
 
     const timer = setTimeout(() => {
@@ -61,6 +64,13 @@ const GameLayout = ({ trackList }) => {
 
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
   const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
+
+  const timeOut = () => {
+    const endTime = Date.now();
+    const diff = endTime - startTime;
+    setStartTime(endTime);
+    return diff;
+  };
 
   const isCorrect = (answer) => {
     const regex = /[ '"-_]+/g;
@@ -97,7 +107,7 @@ const GameLayout = ({ trackList }) => {
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
-      duration: 0,
+      duration: answerResult === 'correct' ? timeOut() : '10000',
     };
 
     setGameResult([...gameResult, newResult]);
@@ -123,10 +133,10 @@ const GameLayout = ({ trackList }) => {
 
   return (
     <div style={{ height: '100%', display: 'flex', justifyContent: 'center' }}>
-      <Player url={url} />
       <QuizWrapper>
         <QuizLeft passed={currentRound + 1} left='10' />
       </QuizWrapper>
+      <Player url={url} />
       <AnswerWrapper>
         {trackList[currentRound].trackName}
         <br />

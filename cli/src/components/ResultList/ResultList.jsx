@@ -60,7 +60,7 @@ const ResultList = ({ resultList, wrong }) => {
           <ContentWrapper key={song.id}>
             <IndexDiv>{song.roundIndex + 1}</IndexDiv>
             <TrackDiv>{song.trackName}</TrackDiv>
-            <DurationDiv>00.00</DurationDiv>
+            <DurationDiv>{(song.duration / 1000).toFixed(2)}</DurationDiv>
           </ContentWrapper>
         ))}
     </Container>
