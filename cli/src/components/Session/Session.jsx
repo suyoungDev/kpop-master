@@ -22,10 +22,11 @@ const Session = () => {
 
   let resultList = gameResult.map((song) => song.result);
 
+  console.log('session에서 업뎃됨');
   return (
-    <Wrapper key={resultList.id}>
+    <Wrapper>
       {resultList.map((item) => (
-        <Log>{item === 'correct' ? '🌼' : '✖'}</Log>
+        <Log key={resultList.id}>{item === 'correct' ? '🌼' : '✖'}</Log>
       ))}
     </Wrapper>
   );

@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import QuizLeft from '../../QuizLeft/QuizLeft';
 import Player from '../../Player/Player';
 import Session from '../../Session/Session';
-
+import Hint from '../../Hint/Hint';
 import LogList from '../../LogList/LogList';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
@@ -50,7 +50,7 @@ const GameLayout = ({ trackList }) => {
 
   useEffect(() => {
     focusedInput.current.focus();
-
+    console.log('updated');
     setStartTime(Date.now());
     setUrl(trackList[currentRound].url);
 
@@ -107,7 +107,7 @@ const GameLayout = ({ trackList }) => {
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
-      duration: answerResult === 'correct' ? timeOut() : '10000',
+      duration: answerResult === 'correct' ? timeOut() : 10000,
     };
 
     setGameResult([...gameResult, newResult]);
@@ -130,15 +130,17 @@ const GameLayout = ({ trackList }) => {
     isCorrect(inputValue);
     setInputValue('');
   };
-
+  console.log('레이아웃에서 업뎃된');
   return (
     <div style={{ height: '100%', display: 'flex', justifyContent: 'center' }}>
       <QuizWrapper>
         <QuizLeft passed={currentRound + 1} left='10' />
       </QuizWrapper>
-      <Player url={url} />
+
       <AnswerWrapper>
         {trackList[currentRound].trackName}
+        <br />
+        <Hint currentSong={trackList[currentRound].trackName} />
         <br />
         <form onSubmit={answerSubmit}>
           <input
