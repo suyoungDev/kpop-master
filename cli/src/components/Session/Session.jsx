@@ -20,13 +20,10 @@ const Log = styled.p`
 const Session = () => {
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
-  let resultList = gameResult.map((song) => song.result);
-
-  console.log('session에서 업뎃됨');
   return (
     <Wrapper>
-      {resultList.map((item) => (
-        <Log key={resultList.id}>{item === 'correct' ? '🌼' : '✖'}</Log>
+      {gameResult.map((song, idx) => (
+        <Log key={song.id}>{song.result === 'correct' ? '🌼' : '✖'}</Log>
       ))}
     </Wrapper>
   );
