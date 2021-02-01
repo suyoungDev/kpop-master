@@ -1,8 +1,23 @@
-import React from 'react';
-import _ from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
 
-const Hint = ({ currentSong }) => {
-  let givenHints = '';
+const Hint = ({ trackName }) => {
+  const [givenHints, setGivenHints] = useState('');
+
+  useEffect(() => {
+    let result = '';
+
+    if (trackName.length < 7) {
+      englishRegex.test(trackName)
+        ? (result = englishHint(trackName, 2))
+        : (result = getKoreanInitials(trackName));
+    } else {
+      englishRegex.test(trackName)
+        ? (result = englishHint(trackName))
+        : (result = getKoreanInitials(trackName));
+    }
+
+    setGivenHints(result);
+  }, [trackName]);
 
   const englishRegex = /\w/g;
 
@@ -34,14 +49,8 @@ const Hint = ({ currentSong }) => {
 
     return hintString;
   };
-  console.log('힌트에서 업뎃됨');
-  return (
-    <div>
-      {englishRegex.test(currentSong)
-        ? englishHint(currentSong)
-        : () => getKoreanInitials(currentSong)}
-    </div>
-  );
+
+  return <div>{givenHints}</div>;
 };
 
 export default Hint;

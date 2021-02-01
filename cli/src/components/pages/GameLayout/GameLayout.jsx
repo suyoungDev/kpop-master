@@ -50,7 +50,6 @@ const GameLayout = ({ trackList }) => {
 
   useEffect(() => {
     focusedInput.current.focus();
-    console.log('updated');
     setStartTime(Date.now());
     setUrl(trackList[currentRound].url);
 
@@ -111,7 +110,7 @@ const GameLayout = ({ trackList }) => {
     };
 
     setGameResult([...gameResult, newResult]);
-    console.log(gameResult);
+
     if (currentRound === 9) {
       setIsGameEnd(1);
       return setUrl('');
@@ -130,7 +129,7 @@ const GameLayout = ({ trackList }) => {
     isCorrect(inputValue);
     setInputValue('');
   };
-  console.log('레이아웃에서 업뎃된');
+
   return (
     <div style={{ height: '100%', display: 'flex', justifyContent: 'center' }}>
       <QuizWrapper>
@@ -140,7 +139,7 @@ const GameLayout = ({ trackList }) => {
       <AnswerWrapper>
         {trackList[currentRound].trackName}
         <br />
-        <Hint currentSong={trackList[currentRound].trackName} />
+        <Hint trackName={trackList[currentRound].trackName} />
         <br />
         <form onSubmit={answerSubmit}>
           <input
