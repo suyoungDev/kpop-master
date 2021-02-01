@@ -11,9 +11,20 @@ const OutroPage = () => {
     const userName = localStorage.getItem('_userName');
     if (userName) {
       setGameResult([...gameResult, { userName: name }]);
+      writeRecord(userName);
     }
-    console.log(gameResult);
   }, []);
+
+  const writeRecord = (userName) => {
+    if (localStorage.getItem('_userName')) {
+      if (averageResponseTime < localStorage.getItem('_personalRecord')) {
+        localStorage.setItem('_personalRecord', averageResponseTime);
+      }
+    } else {
+      localStorage.setItem('_userName', userName);
+      localStorage.setItem('_personalRecord', averageResponseTime);
+    }
+  };
 
   const update = (e) => {
     setName(e.target.value);
@@ -21,9 +32,8 @@ const OutroPage = () => {
 
   const addName = (e) => {
     e.preventDefault();
-    localStorage.setItem('_userName', name);
 
-    setGameResult([...gameResult, { userName: name }]);
+    writeRecord(name);
   };
 
   const quantityCorrectAnswers = gameResult.filter(
@@ -33,11 +43,11 @@ const OutroPage = () => {
     (game) => game.result === 'wrong'
   ).length;
 
-  const totalDuration = gameResult
-    .map((item) => item.duration)
+  const totalResponseTime = gameResult
+    .map((item) => item.responseTime)
     .reduce((prev, curr) => prev + curr, 0);
 
-  const averageDuration = (totalDuration / 10000).toFixed(2);
+  const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
 
   return (
     <div>
@@ -51,7 +61,7 @@ const OutroPage = () => {
 
         <ResultList resultList={gameResult} wrong />
 
-        <h4>평균 응답 속도 {averageDuration}초</h4>
+        <h4>평균 응답 속도 {averageResponseTime}초</h4>
       </div>
       {!localStorage.getItem('_userName') && (
         <React.Fragment>

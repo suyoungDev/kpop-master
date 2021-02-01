@@ -35,7 +35,7 @@ const IndexDiv = styled.div`
 const TrackDiv = styled.div`
   width: 200px;
 `;
-const DurationDiv = styled.div`
+const ResponseTimeDiv = styled.div`
   width: 100px;
   text-align: end;
 `;
@@ -52,7 +52,7 @@ const ResultList = ({ resultList, wrong }) => {
       <TitleWrapper>
         <IndexDiv>순서</IndexDiv>
         <TrackDiv>곡명</TrackDiv>
-        <DurationDiv>기록(초)</DurationDiv>
+        <ResponseTimeDiv>기록(초)</ResponseTimeDiv>
       </TitleWrapper>
       {resultList
         .filter((song) => song.result === condition)
@@ -60,7 +60,9 @@ const ResultList = ({ resultList, wrong }) => {
           <ContentWrapper key={song.id}>
             <IndexDiv>{song.roundIndex + 1}</IndexDiv>
             <TrackDiv>{song.trackName}</TrackDiv>
-            <DurationDiv>{(song.duration / 1000).toFixed(2)}</DurationDiv>
+            <ResponseTimeDiv>
+              {(song.responseTime / 1000).toFixed(2)}
+            </ResponseTimeDiv>
           </ContentWrapper>
         ))}
     </Container>

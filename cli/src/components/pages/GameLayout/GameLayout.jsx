@@ -82,7 +82,7 @@ const GameLayout = ({ trackList }) => {
   const timeOut = () => {
     const endTime = Date.now();
     const diff = endTime - startTime;
-    setStartTime(endTime);
+
     return diff;
   };
 
@@ -121,11 +121,11 @@ const GameLayout = ({ trackList }) => {
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
-      duration: answerResult === 'correct' ? timeOut() : 10000,
+      responseTime: answerResult === 'correct' ? timeOut() : 10000,
     };
 
     setGameResult([...gameResult, newResult]);
-
+    console.log(gameResult);
     if (currentRound === 9) {
       setIsGameEnd(1);
       return setUrl('');
