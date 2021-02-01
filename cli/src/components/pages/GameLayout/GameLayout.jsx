@@ -44,6 +44,7 @@ const GameLayout = ({ trackList }) => {
   const [currentRound, setCurrentRound] = useState(0);
   const [url, setUrl] = useState('');
   const [showHints, setShowHints] = useState(false);
+  const [timeOver, setTimeOver] = useState(false);
 
   const focusedInput = useRef(null);
 
@@ -55,16 +56,24 @@ const GameLayout = ({ trackList }) => {
     setUrl(trackList[currentRound].url);
     setShowHints(false);
 
-    const timer = setTimeout(() => {
-      goNextRound();
-      setInputValue('');
-    }, 10200);
-
     const giveHints = setTimeout(() => {
       setShowHints(true);
-    }, 7000);
+    }, 6000);
 
-    return () => (clearTimeout(timer), clearTimeout(giveHints));
+    const timer = setTimeout(() => {
+      setInputValue('');
+      setTimeOver(true);
+    }, 10200);
+
+    const setOver = setTimeout(() => {
+      goNextRound();
+      setTimeOver(false);
+      focusedInput.current.focus();
+    }, 13000);
+
+    return () => (
+      clearTimeout(timer), clearTimeout(giveHints), clearTimeout(setOver)
+    );
   }, [currentRound]);
 
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
@@ -144,8 +153,11 @@ const GameLayout = ({ trackList }) => {
       <Player url={url} />
       <AnswerWrapper>
         <br />
-        {showHints && <Hint trackName={trackList[currentRound].trackName} />}
+        {showHints && timeOver === false && (
+          <Hint trackName={trackList[currentRound].trackName} />
+        )}
         <br />
+        {timeOver && <p>정답: {trackList[currentRound].trackName}</p>}
         <form onSubmit={answerSubmit}>
           <input
             placeholder='guess what?'
@@ -153,6 +165,7 @@ const GameLayout = ({ trackList }) => {
             value={inputValue}
             onChange={onChange}
             ref={focusedInput}
+            disabled={timeOver}
           />
           <Session />
           <br />
