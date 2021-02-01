@@ -43,6 +43,7 @@ const GameLayout = ({ trackList }) => {
 
   const [currentRound, setCurrentRound] = useState(0);
   const [url, setUrl] = useState('');
+  const [showHints, setShowHints] = useState(false);
 
   const focusedInput = useRef(null);
 
@@ -52,13 +53,18 @@ const GameLayout = ({ trackList }) => {
     focusedInput.current.focus();
     setStartTime(Date.now());
     setUrl(trackList[currentRound].url);
+    setShowHints(false);
 
     const timer = setTimeout(() => {
       goNextRound();
       setInputValue('');
     }, 10200);
 
-    return () => clearTimeout(timer);
+    const giveHints = setTimeout(() => {
+      setShowHints(true);
+    }, 7000);
+
+    return () => (clearTimeout(timer), clearTimeout(giveHints));
   }, [currentRound]);
 
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
@@ -135,11 +141,10 @@ const GameLayout = ({ trackList }) => {
       <QuizWrapper>
         <QuizLeft passed={currentRound + 1} left='10' />
       </QuizWrapper>
-
+      <Player url={url} />
       <AnswerWrapper>
-        {trackList[currentRound].trackName}
         <br />
-        <Hint trackName={trackList[currentRound].trackName} />
+        {showHints && <Hint trackName={trackList[currentRound].trackName} />}
         <br />
         <form onSubmit={answerSubmit}>
           <input
