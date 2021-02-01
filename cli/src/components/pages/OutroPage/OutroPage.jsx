@@ -33,6 +33,12 @@ const OutroPage = () => {
     (game) => game.result === 'wrong'
   ).length;
 
+  const totalDuration = gameResult
+    .map((item) => item.duration)
+    .reduce((prev, curr) => prev + curr, 0);
+
+  const averageDuration = (totalDuration / 10000).toFixed(2);
+
   return (
     <div>
       <h1>결과</h1>
@@ -45,7 +51,7 @@ const OutroPage = () => {
 
         <ResultList resultList={gameResult} wrong />
 
-        <h4>평균 응답 속도 00초</h4>
+        <h4>평균 응답 속도 {averageDuration}초</h4>
       </div>
       {!localStorage.getItem('_userName') && (
         <React.Fragment>
