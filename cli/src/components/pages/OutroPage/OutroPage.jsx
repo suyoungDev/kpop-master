@@ -4,26 +4,44 @@ import ResultList from '../../ResultList/ResultList';
 import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
 const OutroPage = () => {
-  const [name, setName] = useState('');
   const [gameResult, setGameResult] = useContext(GameResultContext);
+
+  const [name, setName] = useState('');
+  const [existingUserName, setExistingUserName] = useState('');
+  const [existingUserRecord, setExistingUserRecord] = useState('');
 
   useEffect(() => {
     const userName = localStorage.getItem('_userName');
-    if (userName) {
-      setGameResult([...gameResult, { userName: name }]);
-      writeRecord(userName);
+    setExistingUserName(userName);
+
+    if (existingUserName) {
+      const previousRecord = loadUserRecord();
+      setExistingUserRecord(previousRecord);
+
+      const comparedResult = compareRecord(previousRecord, averageResponseTime);
+      if (comparedResult === 'better') {
+        uploadNewRecord(averageResponseTime);
+      }
     }
   }, []);
 
-  const writeRecord = (userName) => {
-    if (localStorage.getItem('_userName')) {
-      if (averageResponseTime < localStorage.getItem('_personalRecord')) {
-        localStorage.setItem('_personalRecord', averageResponseTime);
-      }
-    } else {
-      localStorage.setItem('_userName', userName);
-      localStorage.setItem('_personalRecord', averageResponseTime);
+  const uploadNewRecord = (currentRecord) => {
+    localStorage.setItem('_personalRecord', currentRecord);
+  };
+
+  const loadUserRecord = () => {
+    return localStorage.getItem('_personalRecord');
+  };
+
+  const compareRecord = (previousRecord, currentRecord) => {
+    if (previousRecord > currentRecord) {
+      return 'better';
     }
+  };
+
+  const writeNewRecord = (userName) => {
+    localStorage.setItem('_userName', userName);
+    localStorage.setItem('_personalRecord', averageResponseTime);
   };
 
   const update = (e) => {
@@ -32,8 +50,7 @@ const OutroPage = () => {
 
   const addName = (e) => {
     e.preventDefault();
-
-    writeRecord(name);
+    writeNewRecord(name);
   };
 
   const quantityCorrectAnswers = gameResult.filter(
@@ -52,7 +69,13 @@ const OutroPage = () => {
   return (
     <div>
       <h1>결과</h1>
+      {existingUserRecord && (
+        <h2>
+          {existingUserName}님의 이전기록: {existingUserRecord}sec
+        </h2>
+      )}
       <div style={{ marginTop: '50px' }}>
+        <h2>평균 기록 {averageResponseTime}초</h2>
         <h3>맞춘 곡 {quantityCorrectAnswers}개</h3>
 
         <ResultList resultList={gameResult} />
@@ -60,8 +83,6 @@ const OutroPage = () => {
         <h3 style={{ marginTop: '20px' }}>틀린 곡 {quantityWrongAnswers}개</h3>
 
         <ResultList resultList={gameResult} wrong />
-
-        <h4>평균 응답 속도 {averageResponseTime}초</h4>
       </div>
       {!localStorage.getItem('_userName') && (
         <React.Fragment>
