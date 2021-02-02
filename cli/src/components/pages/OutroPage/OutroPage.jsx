@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Button from '../../Button/Button';
 import ResultList from '../../ResultList/ResultList';
 import { GameResultContext } from '../../GameResultContext/GameResultContext';
+import axios from 'axios';
 
 const OutroPage = () => {
   const [gameResult, setGameResult] = useContext(GameResultContext);
@@ -12,19 +13,46 @@ const OutroPage = () => {
 
   useEffect(() => {
     const userName = localStorage.getItem('_userName');
-    setExistingUserName(userName);
 
     if (userName) {
+      uploadToDB(userName);
+      setExistingUserName(userName);
+
       const previousRecord = localStorage.getItem('_personalRecord');
       setExistingUserRecord(previousRecord);
-
       const comparedResult = compareRecord(previousRecord, averageResponseTime);
 
-      if (comparedResult === 'better') {
+      if (comparedResult === 'better now') {
         uploadNewRecord(averageResponseTime);
       }
     }
   }, []);
+
+  const uploadToDB = (user) => {
+    const correctAnswers = gameResult
+      .filter((game) => game.result === 'correct')
+      .map((song) => song.trackName);
+
+    const wrongAnswers = gameResult
+      .filter((game) => game.result === 'wrong')
+      .map((song) => song.trackName);
+
+    const userData = {
+      userName: user,
+      record: averageResponseTime,
+      correctTrackName: correctAnswers,
+      wrongTrackName: wrongAnswers,
+      gameResult: gameResult,
+    };
+
+    axios.post('/api/user/upload', userData).then((res) => {
+      if (res.data.DBsuccess) {
+        console.log('good');
+      } else {
+        console.log('fail');
+      }
+    });
+  };
 
   const uploadNewRecord = (currentRecord) => {
     localStorage.setItem('_personalRecord', currentRecord);
@@ -32,7 +60,7 @@ const OutroPage = () => {
 
   const compareRecord = (previousRecord, currentRecord) => {
     if (previousRecord > currentRecord) {
-      return 'better';
+      return 'better now';
     }
     return 'not better';
   };
@@ -40,6 +68,7 @@ const OutroPage = () => {
   const writeNewRecord = (userName) => {
     localStorage.setItem('_userName', userName);
     localStorage.setItem('_personalRecord', averageResponseTime);
+    uploadToDB(userName);
   };
 
   const update = (e) => {
@@ -69,7 +98,7 @@ const OutroPage = () => {
       <h1>결과</h1>
       {existingUserRecord && (
         <h2>
-          {existingUserName}님의 이전기록: {existingUserRecord}sec
+          {existingUserName}님의 최고 기록: {existingUserRecord}초
         </h2>
       )}
       <div style={{ marginTop: '50px' }}>

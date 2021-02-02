@@ -19,13 +19,8 @@ mongoose
   .then(() => console.log('MongoDB Connected...🌼'))
   .catch((err) => console.log(err));
 
-app.get('/', (req, res) => {
-  res.send('🌼hello world🌼');
-});
-
-app.get('/api/hello', (req, res) => res.send('🍏 Hello New World!'));
-
 app.use('/api/chart', require('./routes/chart'));
+app.use('/api/user', require('./routes/user'));
 
 app.listen(5000, () => {
   console.log(`running on 5000`);
