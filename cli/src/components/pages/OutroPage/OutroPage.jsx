@@ -14,11 +14,12 @@ const OutroPage = () => {
     const userName = localStorage.getItem('_userName');
     setExistingUserName(userName);
 
-    if (existingUserName) {
-      const previousRecord = loadUserRecord();
+    if (userName) {
+      const previousRecord = localStorage.getItem('_personalRecord');
       setExistingUserRecord(previousRecord);
 
       const comparedResult = compareRecord(previousRecord, averageResponseTime);
+
       if (comparedResult === 'better') {
         uploadNewRecord(averageResponseTime);
       }
@@ -29,14 +30,11 @@ const OutroPage = () => {
     localStorage.setItem('_personalRecord', currentRecord);
   };
 
-  const loadUserRecord = () => {
-    return localStorage.getItem('_personalRecord');
-  };
-
   const compareRecord = (previousRecord, currentRecord) => {
     if (previousRecord > currentRecord) {
       return 'better';
     }
+    return 'not better';
   };
 
   const writeNewRecord = (userName) => {
@@ -62,7 +60,7 @@ const OutroPage = () => {
 
   const totalResponseTime = gameResult
     .map((item) => item.responseTime)
-    .reduce((prev, curr) => prev + curr, 0);
+    .reduce((previous, currrent) => previous + currrent, 0);
 
   const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
 

@@ -66,9 +66,11 @@ const GameLayout = ({ trackList }) => {
     }, 10200);
 
     const setOver = setTimeout(() => {
-      goNextRound();
       setTimeOver(false);
-      focusedInput.current.focus();
+      if (isGameEnd === 0) {
+        goNextRound();
+        focusedInput.current.focus();
+      }
     }, 13000);
 
     return () => (
