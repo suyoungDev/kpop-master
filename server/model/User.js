@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
   {
-    userName: String,
+    userName: { type: String, unique: 1, maxLength: 10 },
     record: Number,
     correctTrackName: Array,
     wrongTrackName: Array,
