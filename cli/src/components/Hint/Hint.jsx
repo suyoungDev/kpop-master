@@ -8,7 +8,7 @@ const Hint = ({ trackName }) => {
 
     if (trackName.length < 7) {
       englishRegex.test(trackName)
-        ? (result = englishHint(trackName, 2))
+        ? (result = englishHint(trackName, 1))
         : (result = getKoreanInitials(trackName));
     } else {
       englishRegex.test(trackName)
@@ -33,21 +33,18 @@ const Hint = ({ trackName }) => {
   };
 
   const englishHint = (string, hints = 3) => {
-    let hintString = string.replaceAll(/./g, '_');
+    let hintString = Array(string.length).fill('_');
     let hintsRemainig = hints;
 
     while (hintsRemainig) {
       const i = Math.floor(Math.random() * hintString.length);
-      if (hintString.charAt(i) === '_') {
-        hintString =
-          hintString.substring(0, i) +
-          string.charAt(i) +
-          hintString.substring(i + 1);
+      if (hintString[i] === '_') {
+        hintString[i] = string.charAt(i);
         hintsRemainig--;
       }
     }
 
-    return hintString;
+    return hintString.join('');
   };
 
   return <div>{givenHints}</div>;
