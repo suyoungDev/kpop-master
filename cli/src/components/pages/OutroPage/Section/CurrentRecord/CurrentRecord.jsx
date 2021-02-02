@@ -53,7 +53,7 @@ const CurrentRecord = ({ gameResult }) => {
                 {(song.responseTime / 1000).toFixed(2)}
               </TableContext>
               <TableContext isWorng={song.result}>
-                {song.result === 'wrong' ? '✖' : '💝'}
+                {song.result === 'wrong' ? '✖' : '✔'}
               </TableContext>
             </tr>
           ))}

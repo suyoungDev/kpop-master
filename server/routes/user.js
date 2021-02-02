@@ -17,10 +17,15 @@ router.get('/getRecords', (req, res) => {
   User.find().exec((err, userData) => {
     if (err) return res.status(400).send(err);
 
-    userRecordList = userData.map(({ userName: userName, record: record }) => ({
-      userName,
-      record,
-    }));
+    userRecordList = userData
+      .sort((a, b) => {
+        return a.record - b.record;
+      })
+      .map(({ userName: userName, record: record, _id: _id }) => ({
+        userName,
+        record,
+        _id,
+      }));
     console.log(userRecordList);
     return res.status(200).json({ success: true, userRecordList });
   });

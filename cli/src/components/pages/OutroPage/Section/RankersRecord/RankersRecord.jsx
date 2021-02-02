@@ -1,65 +1,69 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
-const RankersRecord = ({ myRecord }) => {
-  const [userRankList, setUserRankList] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    const getRecordsAll = async () => {
-      const responseData = await axios.get('/api/user/getRecords');
-      const dataList = responseData.data.userRecordList.record;
-
-      setUserRankList(dataList);
-      setIsLoading(false);
-    };
-
-    getRecordsAll();
-  }, []);
-
-  if (isLoading) {
-    <div>...Loading...</div>;
-  }
+const RankersRecord = ({ userRankList, myRecord }) => {
+  console.log('내기록' + myRecord);
+  console.log(userRankList.map((user) => user.record).indexOf(2.96));
   return (
     <div style={{ marginTop: '50px' }}>
+      <h3>현재 랭커들 10위권 리스트</h3>
+      <div></div>
+      <table style={{ width: '250px', marginTop: '20px', padding: '20px' }}>
+        <th
+          style={{
+            textAlign: 'left',
+            backgroundColor: 'black',
+            color: 'white',
+          }}
+        >
+          이름
+        </th>
+        <th
+          style={{
+            textAlign: 'right',
+            backgroundColor: 'black',
+            color: 'white',
+          }}
+        >
+          기록
+        </th>
+        {userRankList
+          .filter((item, index) => index < 10)
+          .map((item) => (
+            <tr key={item._id}>
+              <th style={{ width: '70%', textAlign: 'left' }}>
+                {item.userName}
+              </th>
+              <th style={{ textAlign: 'right' }}>{item.record}</th>
+            </tr>
+          ))}
+      </table>
       <div>
-        <h3>현재 랭커들 10위권 리스트</h3>
-        <p>이름 + 맞춘 갯수 + 평균 속도</p>
-        {userRankList.map((item, index) => (
-          <div>
-            <p key={index}>{item.name}</p>
-            <p key={index}>{item.record}</p>
-          </div>
-        ))}
         <div>
-          <div>
-            <h2>10위권 랭커들의 평균 응답 시간</h2>
-          </div>
-          <div>
-            <h2>10위권 유저들 평균 속도</h2>
+          <p>
+            10위권 유저들 평균 속도:
             {(
               userRankList
                 .map((user) => user.record)
-                .sort((a, b) => a - b)
-                .filter((item, index) => index > 11)
+                .filter((item, index) => index < 10)
                 .reduce((previous, current) => previous + current) / 10
+            ).toFixed(2)}{' '}
+            초
+          </p>
+        </div>
+        <div>
+          <p>
+            유저들 전체 평균 속도:
+            {(
+              userRankList
+                .map((user) => user.record)
+                .reduce((prev, curr) => prev + curr) / userRankList.length
             ).toFixed(2)}
-          </div>
-          <div>
-            <p>
-              유저들 전체 평균 속도:
-              {(
-                userRankList
-                  .map((user) => user.record)
-                  .reduce((prev, curr) => prev + curr) / userRankList.length
-              ).toFixed(2)}
-              초
-            </p>
-            <p>나의 기록이면 몇등일까?</p>
-            {userRankList.map((user) => user.record).indexOf({ myRecord })}등
-          </div>
+            초
+          </p>
+          <br />
+          <br />
+          <p>나의 기록이면 몇등일까?</p>
+          {userRankList.map((user) => user.record).indexOf(myRecord)}등
         </div>
       </div>
     </div>

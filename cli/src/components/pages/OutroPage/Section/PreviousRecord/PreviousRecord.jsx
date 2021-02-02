@@ -23,6 +23,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
         uploadRecordToLocal(averageResponseTime);
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   const uploadRecordToDB = (user) => {

@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import Button from '../../Button/Button';
+import React, { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
@@ -8,9 +8,27 @@ import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
 import SavingMyRecord from './Section/SavingMyRecord/SavingMyRecord';
 import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
+import Button from '../../Button/Button';
 
 const OutroPage = () => {
+  // eslint-disable-next-line
   const [gameResult, setGameResult] = useContext(GameResultContext);
+
+  const [userRankList, setUserRankList] = useState();
+  const [isLoading, setIsLoading] = useState('loading');
+
+  useEffect(() => {
+    setIsLoading('loading');
+
+    axios.get('/api/user/getRecords').then((res) => {
+      if (res.data.success) {
+        setUserRankList(res.data.userRecordList);
+        setIsLoading('loaded');
+      } else {
+        console.log('데이터 가져오기 실패');
+      }
+    });
+  }, []);
 
   const totalResponseTime = gameResult
     .map((item) => item.responseTime)
@@ -43,7 +61,16 @@ const OutroPage = () => {
       />
       <br />
       <br />
-      <RankersRecord />
+
+      {isLoading === 'loading' ? (
+        <div>..loading...</div>
+      ) : (
+        <RankersRecord
+          userRankList={userRankList}
+          myRecord={averageResponseTime}
+        />
+      )}
+
       <ShareMyRecord />
       <div>
         <Button child={'다시하기'} links='/' />
