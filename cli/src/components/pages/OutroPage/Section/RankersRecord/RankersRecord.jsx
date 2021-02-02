@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const RankersRecord = ({ userRankList, myRecord }) => {
-  console.log('내기록' + myRecord);
-  console.log(userRankList.map((user) => user.record).indexOf(2.96));
   return (
     <div style={{ marginTop: '50px' }}>
       <h3>현재 랭커들 10위권 리스트</h3>
       <div></div>
-      <table style={{ width: '250px', marginTop: '20px', padding: '20px' }}>
+      <table
+        style={{
+          width: '450px',
+          marginTop: '20px',
+          border: 'solid 1px',
+          margin: '15px',
+        }}
+      >
+        <th
+          style={{
+            backgroundColor: 'black',
+            color: 'white',
+          }}
+        >
+          순위
+        </th>
         <th
           style={{
             textAlign: 'left',
@@ -28,14 +41,36 @@ const RankersRecord = ({ userRankList, myRecord }) => {
         </th>
         {userRankList
           .filter((item, index) => index < 10)
-          .map((item) => (
+          .map((item, index) => (
             <tr key={item._id}>
+              <th>{index + 1}</th>
               <th style={{ width: '70%', textAlign: 'left' }}>
                 {item.userName}
               </th>
               <th style={{ textAlign: 'right' }}>{item.record}</th>
             </tr>
           ))}
+        <tr>
+          <th></th>
+          <th>...</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>
+            {
+              userRankList
+                .map((user) => user.record)
+                .filter((record) => record < myRecord).length
+            }
+          </th>
+          <th>👈👈</th>
+          <th style={{ textAlign: 'right' }}>{myRecord}</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>...</th>
+          <th></th>
+        </tr>
       </table>
       <div>
         <div>
@@ -60,10 +95,6 @@ const RankersRecord = ({ userRankList, myRecord }) => {
             ).toFixed(2)}
             초
           </p>
-          <br />
-          <br />
-          <p>나의 기록이면 몇등일까?</p>
-          {userRankList.map((user) => user.record).indexOf(myRecord)}등
         </div>
       </div>
     </div>
