@@ -11,7 +11,12 @@ const OutroPage = () => {
   const [existingUserName, setExistingUserName] = useState('');
   const [existingUserRecord, setExistingUserRecord] = useState('');
 
+  const [userRankList, setUserRankList] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
+
     const userName = localStorage.getItem('_userName');
 
     if (userName) {
@@ -26,6 +31,18 @@ const OutroPage = () => {
         uploadNewRecord(averageResponseTime);
       }
     }
+
+    const getRecordsAll = async () => {
+      const responseData = await axios.get('/api/user/getRecords');
+      const dataList = responseData.data.userRecordList.record;
+
+      // .sort((a, b) => a - b)
+      //   .slice(0, 9);
+      setUserRankList(dataList);
+      setIsLoading(false);
+    };
+
+    getRecordsAll();
   }, []);
 
   const uploadToDB = (user) => {
@@ -45,13 +62,7 @@ const OutroPage = () => {
       gameResult: gameResult,
     };
 
-    axios.post('/api/user/upload', userData).then((res) => {
-      if (res.data.DBsuccess) {
-        console.log('good');
-      } else {
-        console.log('fail');
-      }
-    });
+    axios.post('/api/user/upload', userData);
   };
 
   const uploadNewRecord = (currentRecord) => {
@@ -80,6 +91,12 @@ const OutroPage = () => {
     writeNewRecord(name);
   };
 
+  const totalResponseTime = gameResult
+    .map((item) => item.responseTime)
+    .reduce((previous, currrent) => previous + currrent, 0);
+
+  const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
+
   const quantityCorrectAnswers = gameResult.filter(
     (game) => game.result === 'correct'
   ).length;
@@ -87,11 +104,9 @@ const OutroPage = () => {
     (game) => game.result === 'wrong'
   ).length;
 
-  const totalResponseTime = gameResult
-    .map((item) => item.responseTime)
-    .reduce((previous, currrent) => previous + currrent, 0);
-
-  const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
+  if (isLoading) {
+    return <div>...isLoading</div>;
+  }
 
   return (
     <div>
@@ -120,6 +135,9 @@ const OutroPage = () => {
               type='text'
               value={name}
               onChange={update}
+              minLength='3'
+              maxLength='10'
+              title='3 to 10 charactor avaiable'
             />
             <button type='submit'>내 기록 남기기</button>
           </form>
@@ -129,6 +147,24 @@ const OutroPage = () => {
         <div>
           <h3>현재 랭커들 10위권 리스트</h3>
           <p>이름 + 맞춘 갯수 + 평균 속도</p>
+          {userRankList.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))}
+          <div>
+            <div>
+              <h2>10위권 랭커들의 평균 응답 시간</h2>
+            </div>
+            <div>
+              <p>
+                랭커들 평균 속도:
+                {(
+                  userRankList.reduce((prev, curr) => prev + curr) /
+                  userRankList.length
+                ).toFixed(2)}
+              </p>
+              <p></p>
+            </div>
+          </div>
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>

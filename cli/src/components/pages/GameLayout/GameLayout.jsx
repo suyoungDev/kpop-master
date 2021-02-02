@@ -127,7 +127,7 @@ const GameLayout = ({ trackList }) => {
     };
 
     setGameResult([...gameResult, newResult]);
-    console.log(gameResult);
+
     if (currentRound === 9) {
       setIsGameEnd(1);
       return setUrl('');
@@ -159,6 +159,7 @@ const GameLayout = ({ trackList }) => {
           <Hint trackName={trackList[currentRound].trackName} />
         )}
         <br />
+        {trackList[currentRound].trackName}
         {timeOver && <p>정답: {trackList[currentRound].trackName}</p>}
         <form onSubmit={answerSubmit}>
           <input

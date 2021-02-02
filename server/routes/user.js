@@ -11,4 +11,19 @@ router.post('/upload', (req, res) => {
   });
 });
 
+router.get('/getRecords', (req, res) => {
+  let userRecordList = [];
+
+  User.find().exec((err, userData) => {
+    if (err) return res.status(400).send(err);
+
+    userRecordList = userData.map(({ userName: userName, record: record }) => ({
+      userName,
+      record,
+    }));
+    console.log(userRecordList);
+    return res.status(200).json({ success: true, userRecordList });
+  });
+});
+
 module.exports = router;
