@@ -1,38 +1,19 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import styled from 'styled-components';
 import useSound from 'use-sound';
+import './GameLayout.css';
 
 import QuizLeft from '../../QuizLeft/QuizLeft';
 import Player from '../../Player/Player';
 import Session from '../../Session/Session';
 import Hint from '../../Hint/Hint';
 import LogList from '../../LogList/LogList';
+import AlbumArt from '../../AlbumArt/AlbumArt';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
 import wrongSfx from '../../../constants/sounds/wrong1.mp3';
 
 import { GameEndContext } from '../../GamEndContext/GameEndContext';
 import { GameResultContext } from '../../GameResultContext/GameResultContext';
-
-const QuizWrapper = styled.div`
-  width: 100%;
-  height: 50px;
-  position: fixed;
-  top: 0;
-  padding-top: 2rem;
-  padding-left: 3rem;
-`;
-
-const AnswerWrapper = styled.div`
-  position: absolute;
-  width: auto;
-  height: auto;
-  margin-top: 50rem;
-  align-self: center;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-`;
 
 const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
@@ -148,19 +129,20 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <div style={{ height: '100%', display: 'flex', justifyContent: 'center' }}>
-      <QuizWrapper>
-        <QuizLeft passed={currentRound + 1} left='10' />
-      </QuizWrapper>
+    <div className='center'>
       <Player url={url} />
-      <AnswerWrapper>
-        <br />
-        {showHints && timeOver === false && (
-          <Hint trackName={trackList[currentRound].trackName} />
-        )}
-        <br />
-        {trackList[currentRound].trackName}
-        {timeOver && <p>정답: {trackList[currentRound].trackName}</p>}
+      <AlbumArt />
+      <div className='answer-wrapper'>
+        <div className='hint-answer'>
+          <div className='hint-wrapper'>
+            {showHints && timeOver === false && (
+              <Hint trackName={trackList[currentRound].trackName} />
+            )}
+          </div>
+          <div className='correct-answer'>
+            {timeOver && <p>정답: {trackList[currentRound].trackName}</p>}
+          </div>
+        </div>
         <form onSubmit={answerSubmit}>
           <input
             placeholder='guess what?'
@@ -174,7 +156,7 @@ const GameLayout = ({ trackList }) => {
           <br />
           <LogList giveAnswers={givenAnswersList} />
         </form>
-      </AnswerWrapper>
+      </div>
     </div>
   );
 };

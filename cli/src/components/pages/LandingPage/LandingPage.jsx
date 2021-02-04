@@ -35,7 +35,7 @@ const LandingPage = () => {
             </ul>
           </div>
           <div className='button-container'>
-            <Button child={'START'} links={'/start'} />
+            <Button child={'start'} links={'/start'} />
           </div>
         </div>
       </div>

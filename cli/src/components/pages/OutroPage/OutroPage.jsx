@@ -75,7 +75,7 @@ const OutroPage = () => {
       <br />
       <ShareMyRecord />
       <div>
-        <Button child={'다시하기'} links='/' />
+        <Button child={'play again'} links='/' />
       </div>
     </div>
   );
