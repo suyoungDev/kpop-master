@@ -10,9 +10,6 @@ $margin: 1rem;
   justify-content: center;
   align-items: center;
 
-  .album {
-    position: relative;
-  }
   .left-quiz {
     position: absolute;
     left: 0;
@@ -22,12 +19,11 @@ $margin: 1rem;
 
   .session {
     margin: $margin;
-
-    background: rgba(131, 127, 127, 0.219);
+    background: rgba(131, 127, 127, 0.082);
     backdrop-filter: blur(14.5px);
-    -webkit-backdrop-filter: blur(14.5px);
+    -webkit-backdrop-filter: blur(4.5px);
     border-radius: 10px;
-    border: 1px solid rgba(131, 127, 127, 0.233);
+    border: 1px solid rgba(165, 165, 165, 0.233);
   }
 
   .answer-wrapper {
