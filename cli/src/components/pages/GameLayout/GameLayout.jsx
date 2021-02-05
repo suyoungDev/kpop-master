@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useSound from 'use-sound';
-import './GameLayout.css';
+import './GameLayout.scss';
 
 import QuizLeft from '../../QuizLeft/QuizLeft';
 import Player from '../../Player/Player';
@@ -48,9 +48,8 @@ const GameLayout = ({ trackList }) => {
 
     const setOver = setTimeout(() => {
       setTimeOver(false);
-      if (isGameEnd === 0) {
-        goNextRound();
-        focusedInput.current.focus();
+      if (isGameEnd === 'onGoing') {
+        //  goNextRound();
       }
     }, 13000);
 
@@ -110,7 +109,7 @@ const GameLayout = ({ trackList }) => {
     setGameResult([...gameResult, newResult]);
 
     if (currentRound === 9) {
-      setIsGameEnd(1);
+      setIsGameEnd('end');
       return setUrl('');
     }
 
@@ -131,31 +130,48 @@ const GameLayout = ({ trackList }) => {
   return (
     <div className='center'>
       <Player url={url} />
-      <AlbumArt />
-      <div className='answer-wrapper'>
-        <div className='hint-answer'>
-          <div className='hint-wrapper'>
-            {showHints && timeOver === false && (
-              <Hint trackName={trackList[currentRound].trackName} />
-            )}
-          </div>
-          <div className='correct-answer'>
-            {timeOver && <p>정답: {trackList[currentRound].trackName}</p>}
-          </div>
+      <div className='album'>
+        <AlbumArt />
+        <div className='left-quiz'>
+          <QuizLeft passed={currentRound} left='10' />
         </div>
-        <form onSubmit={answerSubmit}>
-          <input
-            placeholder='guess what?'
-            type='text'
-            value={inputValue}
-            onChange={onChange}
-            ref={focusedInput}
-            disabled={timeOver}
-          />
-          <Session />
-          <br />
-          <LogList giveAnswers={givenAnswersList} />
-        </form>
+      </div>
+      <div className='session'>
+        <Session />
+      </div>
+
+      <div className='answer-wrapper'>
+        <div className='hint-wrapper'>
+          {showHints && timeOver === false && (
+            <div className='correct-answer'>
+              <span>hint :</span>
+              <Hint trackName={trackList[currentRound].trackName} />
+            </div>
+          )}
+
+          {timeOver && (
+            <div className='correct-answer'>
+              <span>정답 :</span>
+              <p>{trackList[currentRound].trackName}</p>
+            </div>
+          )}
+        </div>
+        <div className='input-wrapper'>
+          <form onSubmit={answerSubmit}>
+            <input
+              placeholder='guess what?'
+              type='text'
+              value={inputValue}
+              onChange={onChange}
+              ref={focusedInput}
+              disabled={timeOver}
+            />
+            <span className='input-highlight'>
+              {inputValue.replace(/ /g, '\u00a0')}
+            </span>
+          </form>
+        </div>
+        <LogList giveAnswers={givenAnswersList} />
       </div>
     </div>
   );

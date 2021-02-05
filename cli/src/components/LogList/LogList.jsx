@@ -8,8 +8,9 @@ const Wrapper = styled.div`
 `;
 
 const Log = styled.p`
+  width: 15rem;
   margin-top: ${SIZES.base}px;
-  color: ${COLORS.darkGray};
+  color: rgba(0, 0, 0, 0.7);
   font-family: ${FONTS.engBody};
   font-size: ${SIZES.font}px;
   text-align: left;

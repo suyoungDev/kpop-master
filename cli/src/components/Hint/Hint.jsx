@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Hint = ({ trackName }) => {
   const [givenHints, setGivenHints] = useState('');
@@ -17,6 +17,7 @@ const Hint = ({ trackName }) => {
     }
 
     setGivenHints(result);
+    // eslint-disable-next-lin
   }, [trackName]);
 
   const englishRegex = /\w/g;

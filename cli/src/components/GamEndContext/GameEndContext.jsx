@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 export const GameEndContext = createContext();
 
 export const GameEndProvider = (props) => {
-  const [isGameEnd, setIsGameEnd] = useState(0);
+  const [isGameEnd, setIsGameEnd] = useState('onGoing');
 
   return (
     <GameEndContext.Provider value={[isGameEnd, setIsGameEnd]}>

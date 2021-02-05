@@ -8,11 +8,12 @@ import { blackpinkData } from '../../../data/blackpink';
 import { GameEndContext } from '../../GamEndContext/GameEndContext';
 
 const Start = () => {
+  // eslint-disable-next-line
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
 
   const result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
 
-  if (isGameEnd === 1) {
+  if (isGameEnd === 'end') {
     return <OutroPage />;
   }
 

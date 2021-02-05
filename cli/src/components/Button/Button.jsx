@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,10 +8,10 @@ const LinkContainer = styled(Link)`
   display: flex;
 `;
 
-const Button = ({ child, links }) => {
+const Button = ({ children, links }) => {
   return (
     <LinkContainer className='container' to={links}>
-      <label>{child}</label>
+      <label>{children}</label>
     </LinkContainer>
   );
 };
