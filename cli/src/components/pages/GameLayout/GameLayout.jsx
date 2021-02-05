@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useSound from 'use-sound';
+import { FiAlertCircle } from 'react-icons/fi';
+import { IconContext } from 'react-icons';
+
 import './GameLayout.scss';
 
 import QuizLeft from '../../QuizLeft/QuizLeft';
@@ -7,7 +10,6 @@ import Player from '../../Player/Player';
 import Session from '../../Session/Session';
 import Hint from '../../Hint/Hint';
 import LogList from '../../LogList/LogList';
-import AlbumArt from '../../AlbumArt/AlbumArt';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
 import wrongSfx from '../../../constants/sounds/wrong1.mp3';
@@ -49,7 +51,7 @@ const GameLayout = ({ trackList }) => {
     const setOver = setTimeout(() => {
       setTimeOver(false);
       if (isGameEnd === 'onGoing') {
-        //  goNextRound();
+        goNextRound();
       }
     }, 13000);
 
@@ -128,52 +130,57 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <div className='center'>
-      <Player url={url} />
-      <div className='album'>
-        <AlbumArt />
-        <div className='left-quiz'>
-          <QuizLeft passed={currentRound} left='10' />
+    <IconContext.Provider value={{ paddingRight: '1rem' }}>
+      <div className='center'>
+        <Player url={url} />
+        <div className='album'>
+          <div className='left-quiz'>
+            <QuizLeft passed={currentRound} left='10' />
+          </div>
         </div>
-      </div>
-      <div className='session'>
-        <Session />
-      </div>
+        <div className='session'>
+          <Session />
+        </div>
 
-      <div className='answer-wrapper'>
-        <div className='hint-wrapper'>
-          {showHints && timeOver === false && (
-            <div className='correct-answer'>
-              <span>hint :</span>
-              <Hint trackName={trackList[currentRound].trackName} />
-            </div>
-          )}
+        <div className='answer-wrapper'>
+          <div className='hint-wrapper'>
+            {showHints && timeOver === false && (
+              <div className='correct-answer'>
+                <span>
+                  <FiAlertCircle /> hint :
+                </span>
+                <Hint trackName={trackList[currentRound].trackName} />
+              </div>
+            )}
 
-          {timeOver && (
-            <div className='correct-answer'>
-              <span>정답 :</span>
-              <p>{trackList[currentRound].trackName}</p>
-            </div>
-          )}
+            {timeOver && (
+              <div className='correct-answer'>
+                <span>
+                  <FiAlertCircle /> 정답 :
+                </span>
+                <p>{trackList[currentRound].trackName}</p>
+              </div>
+            )}
+          </div>
+          <div className='input-wrapper'>
+            <form onSubmit={answerSubmit}>
+              <input
+                placeholder='guess what?'
+                type='text'
+                value={inputValue}
+                onChange={onChange}
+                ref={focusedInput}
+                disabled={timeOver}
+              />
+              <span className='input-highlight'>
+                {inputValue.replace(/ /g, '\u00a0')}
+              </span>
+            </form>
+          </div>
+          <LogList giveAnswers={givenAnswersList} />
         </div>
-        <div className='input-wrapper'>
-          <form onSubmit={answerSubmit}>
-            <input
-              placeholder='guess what?'
-              type='text'
-              value={inputValue}
-              onChange={onChange}
-              ref={focusedInput}
-              disabled={timeOver}
-            />
-            <span className='input-highlight'>
-              {inputValue.replace(/ /g, '\u00a0')}
-            </span>
-          </form>
-        </div>
-        <LogList giveAnswers={givenAnswersList} />
       </div>
-    </div>
+    </IconContext.Provider>
   );
 };
 

@@ -28,11 +28,11 @@
 
 .center .session {
   margin: 1rem;
-  background: rgba(131, 127, 127, 0.219);
+  background: rgba(131, 127, 127, 0.082);
   backdrop-filter: blur(14.5px);
-  -webkit-backdrop-filter: blur(14.5px);
+  -webkit-backdrop-filter: blur(4.5px);
   border-radius: 10px;
-  border: 1px solid rgba(131, 127, 127, 0.233);
+  border: 1px solid rgba(165, 165, 165, 0.233);
 }
 
 .center .answer-wrapper {
