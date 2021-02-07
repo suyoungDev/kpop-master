@@ -9,6 +9,12 @@ import SavingMyRecord from './Section/SavingMyRecord/SavingMyRecord';
 import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
 import Button from '../../Button/Button';
+import Spinner from './Section/Spinner/Spinner';
+
+import './OutroPage.scss';
+
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti';
 
 const OutroPage = () => {
   // eslint-disable-next-line
@@ -16,6 +22,8 @@ const OutroPage = () => {
 
   const [userRankList, setUserRankList] = useState();
   const [isLoading, setIsLoading] = useState('loading');
+
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     setIsLoading('loading');
@@ -37,44 +45,31 @@ const OutroPage = () => {
   const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <PreviousRecord
-        averageResponseTime={averageResponseTime}
-        gameResult={gameResult}
-      />
-      <SavingMyRecord
-        averageResponseTime={averageResponseTime}
-        gameResult={gameResult}
-      />
-      <CurrentRecord
-        averageResponseTime={averageResponseTime}
-        gameResult={gameResult}
-      />
-      <br />
-      <br />
-
-      {isLoading === 'loading' ? (
-        <div>..loading...</div>
-      ) : (
-        <RankersRecord
-          userRankList={userRankList}
-          myRecord={averageResponseTime}
+    <div className='box-container'>
+      <Confetti width={width} height={height} recycle={false} />
+      <div className='glass-wrapper'>
+        <PreviousRecord
+          averageResponseTime={averageResponseTime}
+          gameResult={gameResult}
         />
-      )}
+        <SavingMyRecord
+          averageResponseTime={averageResponseTime}
+          gameResult={gameResult}
+        />
+        <CurrentRecord
+          averageResponseTime={averageResponseTime}
+          gameResult={gameResult}
+        />
 
-      <br />
-      <br />
-      <ShareMyRecord />
-      <div>
+        {isLoading === 'loading' ? (
+          <Spinner />
+        ) : (
+          <RankersRecord
+            userRankList={userRankList}
+            myRecord={averageResponseTime}
+          />
+        )}
+        <ShareMyRecord />
         <Button links='/'>play again</Button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './PreviousRecord';
 
 // 이전 기록과 비교해서 지금이 더 나으면 local에 저장하기
 // 비교하지 않고 그냥 자동으로 DB에 저장하기
@@ -58,18 +59,13 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   };
 
   if (!existingUserName) {
-    return (
-      <div>
-        <p>이전 기록 없음</p>
-      </div>
-    );
+    return <div></div>;
   }
 
   return (
-    <div>
-      <h2>
-        {existingUserName}님의 이전 최고 기록: {existingUserRecord}초
-      </h2>
+    <div className='previous-record-div'>
+      <h3>{existingUserName}님의 최고 기록</h3>
+      <h3>{existingUserRecord}초</h3>
     </div>
   );
 };

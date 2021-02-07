@@ -42,6 +42,8 @@
 }
 
 .alert {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 200;
   width: 100%;
   height: 25rem;
   padding: 2rem;

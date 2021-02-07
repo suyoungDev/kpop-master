@@ -45,38 +45,6 @@ export const FONTS = {
   gameTitle: 'Press Start 2P',
 };
 
-export const THEME = {
-  largeTitle: {
-    fontFamily: 'Fredoka One',
-    fontSize: SIZES.largeTitle,
-    lineHeight: 55,
-  },
-  h1: { fontFamily: 'Fredoka One', fontSize: SIZES.h1, lineHeight: 36 },
-  h2: { fontFamily: 'Fredoka One', fontSize: SIZES.h2, lineHeight: 30 },
-  h3: { fontFamily: 'Fredoka One', fontSize: SIZES.h3, lineHeight: 22 },
-  h4: { fontFamily: 'Fredoka One', fontSize: SIZES.h4, lineHeight: 22 },
-  body1: {
-    fontFamily: 'Nanum Gothic',
-    fontSize: SIZES.body1,
-    lineHeight: 36,
-  },
-  body2: {
-    fontFamily: 'Nanum Gothic',
-    fontSize: SIZES.body2,
-    lineHeight: 30,
-  },
-  body3: {
-    fontFamily: 'Nanum Gothic',
-    fontSize: SIZES.body3,
-    lineHeight: 22,
-  },
-  body4: {
-    fontFamily: 'Nanum Gothic',
-    fontSize: SIZES.body4,
-    lineHeight: 22,
-  },
-};
-
-const appTheme = { COLORS, SIZES, FONTS, THEME };
+const appTheme = { COLORS, SIZES, FONTS };
 
 export default appTheme;

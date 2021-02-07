@@ -15,10 +15,6 @@
           align-items: center;
 }
 
-.center .album {
-  position: relative;
-}
-
 .center .left-quiz {
   position: absolute;
   left: 0;
@@ -130,7 +126,7 @@
   border-radius: 0;
   line-height: 70px;
   background-color: transparent;
-  color: white;
+  color: black;
   font-size: 30px;
   border: none;
   outline: none;

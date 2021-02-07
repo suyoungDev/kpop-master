@@ -1,0 +1,57 @@
+$margin: 1rem;
+$border-radius: 15px;
+$big-border-radius: 25px;
+$font-small: 16px;
+
+.current-record-table {
+  width: 85%;
+  height: 21rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(240, 138, 138, 0.15) 0%,
+    rgba(246, 185, 185, 0.26) 100%
+  );
+
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(14.5px);
+  border-radius: $big-border-radius;
+  border: 1px solid rgba(255, 255, 255, 0.233);
+
+  .table-explain {
+    width: 460px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-small;
+    padding: 0.4rem;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+
+    #explain-count {
+      display: flex;
+      flex-direction: row;
+
+      li {
+        margin-right: $margin;
+        list-style: none;
+      }
+    }
+
+    span {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      #icon {
+        margin-right: 5px;
+      }
+    }
+  }
+}

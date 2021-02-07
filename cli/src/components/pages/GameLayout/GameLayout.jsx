@@ -46,7 +46,7 @@ const GameLayout = ({ trackList }) => {
     const timer = setTimeout(() => {
       setInputValue('');
       setTimeOver(true);
-    }, 10200);
+    }, 10000);
 
     const setOver = setTimeout(() => {
       setTimeOver(false);

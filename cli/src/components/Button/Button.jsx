@@ -10,7 +10,7 @@ const LinkContainer = styled(Link)`
 
 const Button = ({ children, links }) => {
   return (
-    <LinkContainer className='container' to={links}>
+    <LinkContainer className='button-wrapper' to={links}>
       <label>{children}</label>
     </LinkContainer>
   );

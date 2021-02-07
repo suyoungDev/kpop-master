@@ -1,0 +1,68 @@
+$margin: 1rem;
+$border-radius: 15px;
+$big-border-radius: 25px;
+$font-small: 16px;
+
+.saving-records {
+  margin: $margin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+
+  .title-wrapper {
+    margin: 1rem;
+    width: 20rem;
+    text-align: center;
+  }
+
+  .name-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 13rem;
+    position: relative;
+
+    input {
+      border: none;
+      width: 8rem;
+      height: 2rem;
+      padding: 0;
+      border-radius: 0;
+      line-height: 70px;
+      background-color: transparent;
+      color: black;
+      font-size: 20px;
+      outline: none;
+      border-bottom: 3px solid black;
+      font-family: 'Montserrat', sans-serif;
+    }
+  }
+}
+
+.aws-btn {
+  --button-default-height: 45px;
+  --button-default-font-size: 14px;
+  --button-default-border-radius: 6px;
+  --button-horizontal-padding: 8px;
+  --button-raise-level: 5px;
+  --button-hover-pressure: 2;
+  --transform-speed: 0.185s;
+  --button-primary-color: #475472;
+  --button-primary-color-dark: #2a3143;
+  --button-primary-color-light: #d4d9e4;
+  --button-primary-color-hover: #424e6a;
+  --button-primary-border: none;
+  --button-secondary-color: #fffc6c;
+  --button-secondary-color-dark: #b9b500;
+  --button-secondary-color-light: #6c6a00;
+  --button-secondary-color-hover: #fffb3e;
+  --button-secondary-border: none;
+  --button-anchor-color: #f3c8ad;
+  --button-anchor-color-dark: #734922;
+  --button-anchor-color-light: #4c3016;
+  --button-anchor-color-hover: #f1bfa0;
+  --button-anchor-border: 1px solid #8c633c;
+}
