@@ -17,7 +17,7 @@ const ShareMyRecord = () => {
         }}
       >
         <li>
-          <AwesomeButtonSocial />
+          <AwesomeButtonSocial type='secondary' />
         </li>
         <li>
           <AwesomeButtonSocial type='facebook' />

@@ -135,7 +135,7 @@ const GameLayout = ({ trackList }) => {
         <Player url={url} />
         <div className='album'>
           <div className='left-quiz'>
-            <QuizLeft passed={currentRound} left='10' />
+            <QuizLeft passed={currentRound + 1} left='10' />
           </div>
         </div>
         <div className='session'>

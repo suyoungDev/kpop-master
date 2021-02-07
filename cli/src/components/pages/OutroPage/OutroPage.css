@@ -17,7 +17,7 @@
 }
 
 .box-container .glass-wrapper {
-  width: 30rem;
+  width: 25rem;
   height: 40rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -26,9 +26,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

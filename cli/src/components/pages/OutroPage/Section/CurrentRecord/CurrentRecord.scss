@@ -4,35 +4,47 @@ $big-border-radius: 25px;
 $font-small: 16px;
 
 .current-record-table {
-  width: 85%;
-  height: 21rem;
-  padding: 1rem;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: rgba(255, 255, 255, 0);
   background: linear-gradient(
     180deg,
     rgba(240, 138, 138, 0.15) 0%,
     rgba(246, 185, 185, 0.26) 100%
   );
-
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(14.5px);
-  border-radius: $big-border-radius;
-  border: 1px solid rgba(255, 255, 255, 0.233);
+  // border: 1px solid rgba(255, 255, 255, 0.233);
+  overflow: hidden;
 
   .table-explain {
-    width: 460px;
+    width: 100%;
+    height: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     font-size: $font-small;
     padding: 0.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0%;
+    background-position: 100% 100%;
+    transition: background-size 0.3s ease;
 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    &:hover {
+      border: none;
+      outline: none;
+      background-size: 100% 100%;
+    }
+
+    &:focus {
+      outline: none;
+    }
 
     #explain-count {
       display: flex;
@@ -41,17 +53,25 @@ $font-small: 16px;
       li {
         margin-right: $margin;
         list-style: none;
+
+        span {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          #icon {
+            margin-right: 5px;
+          }
+        }
       }
     }
 
-    span {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
 
-      #icon {
-        margin-right: 5px;
-      }
+    .rotate {
+      transform: rotate(90deg);
     }
   }
 }
