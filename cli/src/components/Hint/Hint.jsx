@@ -35,12 +35,12 @@ const Hint = ({ trackName }) => {
 
   const englishHint = (string, hints = 3) => {
     let filteredString = string.replace(/\W/g, '').toLowerCase();
-    let hintString = Array(filteredString.length).fill('⬜');
+    let hintString = Array(filteredString.length).fill('_');
     let hintsRemainig = hints;
 
     while (hintsRemainig) {
       const i = Math.floor(Math.random() * hintString.length);
-      if (hintString[i] === '⬜') {
+      if (hintString[i] === '_') {
         hintString[i] = filteredString.charAt(i);
         hintsRemainig--;
       }

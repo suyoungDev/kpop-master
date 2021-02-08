@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { COLORS, SIZES, FONTS } from '../../constants/theme';
 
 const Container = styled.div`
   width: 4rem;

@@ -58,6 +58,7 @@ const GameLayout = ({ trackList }) => {
     return () => (
       clearTimeout(timer), clearTimeout(giveHints), clearTimeout(setOver)
     );
+    // eslint-disable-next-line
   }, [currentRound]);
 
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
@@ -147,7 +148,7 @@ const GameLayout = ({ trackList }) => {
             {showHints && timeOver === false && (
               <div className='correct-answer'>
                 <span>
-                  <FiAlertCircle /> hint :
+                  <FiAlertCircle id='icon' /> hint
                 </span>
                 <Hint trackName={trackList[currentRound].trackName} />
               </div>
@@ -156,7 +157,7 @@ const GameLayout = ({ trackList }) => {
             {timeOver && (
               <div className='correct-answer'>
                 <span>
-                  <FiAlertCircle /> 정답 :
+                  <FiAlertCircle id='icon' /> 정답
                 </span>
                 <p>{trackList[currentRound].trackName}</p>
               </div>

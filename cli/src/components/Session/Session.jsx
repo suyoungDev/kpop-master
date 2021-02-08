@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { COLORS, SIZES, FONTS } from '../../constants/theme';
+import { SIZES, FONTS } from '../../constants/theme';
 import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
 

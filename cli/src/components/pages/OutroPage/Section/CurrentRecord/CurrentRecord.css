@@ -12,12 +12,14 @@
   background: linear-gradient(180deg, rgba(240, 138, 138, 0.15) 0%, rgba(246, 185, 185, 0.26) 100%);
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(14.5px);
+  border: 1px solid rgba(255, 255, 255, 0.233);
   overflow: hidden;
 }
 
-.current-record-table .table-explain {
+.current-record-table .table-title-wrapper {
   width: 100%;
   height: 2rem;
+  padding: 0 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,7 +34,6 @@
       -ms-flex-align: center;
           align-items: center;
   font-size: 16px;
-  padding: 0.4rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -44,17 +45,31 @@
   transition: background-size 0.3s ease;
 }
 
-.current-record-table .table-explain:hover {
+.current-record-table .table-title-wrapper:hover {
   border: none;
   outline: none;
   background-size: 100% 100%;
 }
 
-.current-record-table .table-explain:focus {
+.current-record-table .table-title-wrapper:focus {
   outline: none;
 }
 
-.current-record-table .table-explain #explain-count {
+.current-record-table .table-title-wrapper .table-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2rem;
+}
+
+.current-record-table .table-title-wrapper .table-title #explain-count-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,12 +79,12 @@
           flex-direction: row;
 }
 
-.current-record-table .table-explain #explain-count li {
+.current-record-table .table-title-wrapper .table-title #explain-count-list li {
   margin-right: 1rem;
   list-style: none;
 }
 
-.current-record-table .table-explain #explain-count li span {
+.current-record-table .table-title-wrapper .table-title #explain-count-list li span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -82,19 +97,36 @@
           align-items: center;
 }
 
-.current-record-table .table-explain #explain-count li span #icon {
+.current-record-table .table-title-wrapper .table-title #explain-count-list li span #icon {
   margin-right: 5px;
 }
 
-.current-record-table .table-explain .accordion-icon {
+.current-record-table .table-title-wrapper .accordion-icon {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 
-.current-record-table .table-explain .rotate {
+.current-record-table .table-title-wrapper .rotate {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
+}
+
+.current-record-table .current-record-content {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 1rem;
+}
+
+.current-record-table .current-record-content #trackName {
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.current-record-table .current-record-content #index {
+  width: 2rem;
+  padding: 0;
+  text-align: center;
 }
 /*# sourceMappingURL=CurrentRecord.css.map */

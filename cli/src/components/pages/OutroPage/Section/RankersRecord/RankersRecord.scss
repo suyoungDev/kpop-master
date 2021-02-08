@@ -1,12 +1,21 @@
 $margin: 1rem;
+$padding-small: 0.4rem;
 $border-radius: 15px;
-$big-border-radius: 25px;
 $font-small: 16px;
+$font-korean: Nanum Gothic;
 
-.current-record-table {
+.rank-table-container {
   width: 90%;
+  margin: $margin;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: right;
+
+  font-family: $font-korean;
+  font-size: $font-small;
+  color: #2c2c2c;
 
   background: rgba(255, 255, 255, 0);
   background: linear-gradient(
@@ -18,9 +27,7 @@ $font-small: 16px;
   -webkit-backdrop-filter: blur(14.5px);
   border: 1px solid rgba(255, 255, 255, 0.233);
 
-  overflow: hidden;
-
-  .table-title-wrapper {
+  .rank-table-title {
     width: 100%;
     height: 2rem;
     padding: 0 $margin;
@@ -31,6 +38,7 @@ $font-small: 16px;
     align-items: center;
 
     font-size: $font-small;
+    font-weight: bold;
 
     background: transparent;
     border: none;
@@ -52,54 +60,61 @@ $font-small: 16px;
       outline: none;
     }
 
-    .table-title {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      height: 2rem;
-
-      #explain-count-list {
-        display: flex;
-        flex-direction: row;
-
-        li {
-          margin-right: $margin;
-          list-style: none;
-
-          span {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            #icon {
-              margin-right: 5px;
-            }
-          }
-        }
-      }
-    }
     .accordion-icon {
       transition: transform 0.3s ease;
+      margin-left: 4px;
     }
 
     .rotate {
       transform: rotate(90deg);
     }
   }
-  .current-record-content {
+
+  .rank-table-content {
     width: 100%;
     overflow: hidden;
-    padding: 0 $margin;
 
-    #trackName {
-      text-align: left;
-      padding: 0 1rem;
+    .rank-table {
+      padding: 0.3rem $margin;
+
+      .rankers-record {
+        font-weight: 200;
+      }
+
+      #name {
+        width: 65%;
+      }
+
+      #record {
+        text-align: right;
+      }
+
+      th {
+        padding: 4px;
+      }
+
+      #myRecord {
+        color: #000000;
+        font-weight: bold;
+      }
     }
+  }
 
-    #index {
-      width: 2rem;
-      padding: 0;
-      text-align: center;
+  .users-average-data {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 24px;
+    align-items: flex-end;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+
+    .users-data {
+      width: 60%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      line-height: 24px;
+      font-size: $font-small;
     }
   }
 }

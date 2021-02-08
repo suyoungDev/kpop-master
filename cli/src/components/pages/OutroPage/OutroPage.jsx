@@ -56,10 +56,6 @@ const OutroPage = () => {
           averageResponseTime={averageResponseTime}
           gameResult={gameResult}
         />
-        <CurrentRecord
-          averageResponseTime={averageResponseTime}
-          gameResult={gameResult}
-        />
 
         {isLoading === 'loading' ? (
           <Spinner />
@@ -69,6 +65,12 @@ const OutroPage = () => {
             myRecord={averageResponseTime}
           />
         )}
+
+        <CurrentRecord
+          averageResponseTime={averageResponseTime}
+          gameResult={gameResult}
+        />
+
         <ShareMyRecord />
         <Button links='/'>play again</Button>
       </div>

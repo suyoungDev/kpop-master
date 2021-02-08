@@ -26,7 +26,7 @@ router.get('/getRecords', (req, res) => {
         record,
         _id,
       }));
-    console.log(userRecordList);
+
     return res.status(200).json({ success: true, userRecordList });
   });
 });
