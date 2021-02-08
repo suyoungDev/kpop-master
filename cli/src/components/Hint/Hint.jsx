@@ -17,7 +17,7 @@ const Hint = ({ trackName }) => {
     }
 
     setGivenHints(result);
-    // eslint-disable-next-lin
+    // eslint-disable-next-line
   }, [trackName]);
 
   const englishRegex = /\w/g;
@@ -34,13 +34,14 @@ const Hint = ({ trackName }) => {
   };
 
   const englishHint = (string, hints = 3) => {
-    let hintString = Array(string.length).fill('_');
+    let filteredString = string.replace(/\W/g, '').toLowerCase();
+    let hintString = Array(filteredString.length).fill('⬜');
     let hintsRemainig = hints;
 
     while (hintsRemainig) {
       const i = Math.floor(Math.random() * hintString.length);
-      if (hintString[i] === '_') {
-        hintString[i] = string.charAt(i);
+      if (hintString[i] === '⬜') {
+        hintString[i] = filteredString.charAt(i);
         hintsRemainig--;
       }
     }
