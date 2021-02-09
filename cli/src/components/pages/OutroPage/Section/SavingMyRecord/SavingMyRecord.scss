@@ -2,44 +2,98 @@ $margin: 1rem;
 $border-radius: 15px;
 $big-border-radius: 25px;
 $font-small: 16px;
+$padding: 1.5rem;
 
 .saving-records {
-  margin: $margin;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 20rem;
+  margin: $margin;
+  padding: $padding;
+
+  background: rgba(255, 255, 255, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  box-shadow: 0 8px 32px 0 rgba(111, 113, 136, 0.37);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(14.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.233);
 
   .title-wrapper {
-    margin: 1rem;
-    width: 20rem;
-    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    span {
+      display: flex;
+
+      #icon {
+        margin-right: 7px;
+      }
+    }
+
+    #record-alert {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.7);
+      margin-top: 0.5rem;
+    }
   }
 
   .name-input-wrapper {
+    width: 18rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 13rem;
     position: relative;
+    margin-top: 1rem;
 
     input {
-      border: none;
-      width: 8rem;
+      width: 10rem;
       height: 2rem;
       padding: 0;
+      border: none;
       border-radius: 0;
       line-height: 70px;
       background-color: transparent;
-      color: black;
+      color: rgb(255, 255, 255);
       font-size: 20px;
       outline: none;
-      border-bottom: 3px solid black;
+      border-bottom: 3px solid rgba(0, 0, 0, 0.6);
       font-family: 'Montserrat', sans-serif;
     }
+
+    button {
+      width: 5rem;
+      height: 2rem;
+      border: none;
+      background: #7c7d81;
+      color: white;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      box-shadow: rgb(71, 71, 71) 0 7px;
+
+      &:hover {
+        background: #363a42;
+        box-shadow: rgb(121, 121, 121) 0 2px;
+      }
+      &:active {
+        outline: none;
+        border: none;
+        transform: scale(0.95);
+        box-shadow: 0 1px 4px -1px rgba(10, 22, 50, 0.24);
+      }
+    }
   }
+}
+.saved {
+  display: none;
 }
 
 .aws-btn {

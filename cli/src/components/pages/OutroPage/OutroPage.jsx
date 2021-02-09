@@ -33,8 +33,6 @@ const OutroPage = () => {
       if (res.data.success) {
         setUserRankList(res.data.userRecordList);
         setIsLoading('loaded');
-      } else {
-        console.log('데이터 가져오기 실패');
       }
     });
   }, []);
@@ -58,7 +56,10 @@ const OutroPage = () => {
           averageResponseTime={averageResponseTime}
           gameResult={gameResult}
         />
-
+        <CurrentRecord
+          averageResponseTime={averageResponseTime}
+          gameResult={gameResult}
+        />
         {isLoading === 'loading' ? (
           <Spinner />
         ) : (
@@ -67,12 +68,6 @@ const OutroPage = () => {
             myRecord={averageResponseTime}
           />
         )}
-
-        <CurrentRecord
-          averageResponseTime={averageResponseTime}
-          gameResult={gameResult}
-        />
-
         <ShareMyRecord />
         <Button links='/'>play again</Button>
       </div>

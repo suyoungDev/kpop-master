@@ -1,6 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './PreviousRecord';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  width: 90%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+`;
+
+const Title = styled.span`
+  font-weight: 200;
+  font-size: 18px;
+
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.3em;
+  background-position: 0 80%;
+  transition: background-size 0.25s ease-in;
+
+  &:hover {
+    background-size: 100% 88%;
+  }
+`;
+
+const Content = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+`;
+
+const Em = styled.span`
+  font-weight: bold;
+`;
 
 // 이전 기록과 비교해서 지금이 더 나으면 local에 저장하기
 // 비교하지 않고 그냥 자동으로 DB에 저장하기
@@ -63,10 +98,13 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   }
 
   return (
-    <div className='previous-record-div'>
-      <h3>{existingUserName}님의 최고 기록</h3>
-      <h3>{existingUserRecord}초</h3>
-    </div>
+    <Wrapper>
+      <Title>
+        <Em>{existingUserName}</Em>
+        님의 최고 기록
+      </Title>
+      <Content>{existingUserRecord}초</Content>
+    </Wrapper>
   );
 };
 

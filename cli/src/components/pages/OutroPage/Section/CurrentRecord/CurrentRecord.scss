@@ -70,14 +70,17 @@ $font-small: 16px;
             display: flex;
             flex-direction: row;
             align-items: center;
+            color: rgba(0, 0, 0, 0.7);
 
             #icon {
               margin-right: 5px;
+              color: black;
             }
           }
         }
       }
     }
+
     .accordion-icon {
       transition: transform 0.3s ease;
     }
@@ -90,6 +93,7 @@ $font-small: 16px;
     width: 100%;
     overflow: hidden;
     padding: 0 $margin;
+    margin-bottom: 1rem;
 
     #trackName {
       text-align: left;

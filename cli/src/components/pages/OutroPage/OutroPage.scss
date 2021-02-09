@@ -4,20 +4,21 @@ $big-border-radius: 25px;
 $font-small: 16px;
 
 .box-container {
-  width: 100%;
-  height: 100%;
   display: flex;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   .glass-wrapper {
-    width: 25rem;
-    height: 90vh;
+    width: 26rem;
+    height: auto;
+    margin: 1.8rem 0;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     background: rgba(255, 255, 255, 0);
     background: linear-gradient(

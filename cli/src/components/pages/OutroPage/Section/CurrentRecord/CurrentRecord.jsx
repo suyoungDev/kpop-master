@@ -10,11 +10,10 @@ import './CurrentRecord.scss';
 
 const TableContainer = styled.table`
   width: 100%;
-  height: 100%;
   font-family: ${FONTS.korBody};
   font-size: 16px;
   font-weight: 200;
-  margin-top: 0.3rem;
+  margin-top: -0.2rem;
 `;
 
 const Tablehead = styled.th`
@@ -79,11 +78,11 @@ const CurrentRecord = ({ gameResult }) => {
               </span>
             </li>
           </ul>
-          <FiChevronRight
-            className={`${isActivate && 'rotate'} accordion-icon`}
-            size='1.2rem'
-          />
         </div>
+        <FiChevronRight
+          className={`${isActivate && 'rotate'} accordion-icon`}
+          size='1.2rem'
+        />
       </button>
 
       <div

@@ -55,9 +55,11 @@ const GameLayout = ({ trackList }) => {
       }
     }, 13000);
 
-    return () => (
-      clearTimeout(timer), clearTimeout(giveHints), clearTimeout(setOver)
-    );
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(giveHints);
+      clearTimeout(setOver);
+    };
     // eslint-disable-next-line
   }, [currentRound]);
 
@@ -163,6 +165,7 @@ const GameLayout = ({ trackList }) => {
               </div>
             )}
           </div>
+
           <div className='input-wrapper'>
             <form onSubmit={answerSubmit}>
               <input

@@ -6,6 +6,7 @@ import './Button.css';
 
 const LinkContainer = styled(Link)`
   display: flex;
+  margin: 1rem;
 `;
 
 const Button = ({ children, links }) => {

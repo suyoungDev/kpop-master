@@ -61,7 +61,7 @@
   width: 7rem;
   text-align: center;
   padding: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-radius: 40px;
   font-size: 12px;
   letter-spacing: 0.1rem;
@@ -75,8 +75,10 @@
   color: rgb(29, 20, 109);
 }
 
-.alert-text p {
+.alert-text ul {
   font-size: 15px;
+  list-style: none;
+  line-height: 1.3rem;
   padding-left: 1rem;
 }
 
@@ -89,10 +91,4 @@
   line-height: 1.3rem;
   font-size: 15px;
   padding-left: 1rem;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin: 2rem;
 }

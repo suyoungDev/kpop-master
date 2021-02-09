@@ -4,19 +4,24 @@ import levelImage from '../../../../../constants/image/outroImage/level';
 
 const Wrapper = styled.div`
   width: auto;
-`;
-
-const Descript = styled.div`
-  width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1rem;
+`;
+
+const Descript = styled.div`
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   font-size: 15px;
   font-weight: 200;
   color: black;
-  line-height: 20px;
+  line-height: 23px;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 
 const Description = ({ averageResponseTime }) => {
@@ -44,7 +49,7 @@ const Description = ({ averageResponseTime }) => {
 
   const levelDescription = {
     zero:
-      '블랙핑크의 노래를 정말 아무것도 모르시네요. 이번기회에 블랙핑크에 빠져보는건 어때요?',
+      '블랙핑크의 노래를 정말 아무것도 모르시네요. 이번 기회에 블랙핑크 노래를 들어보는 건 어때요?',
     one:
       '블랙핑크의 유명한 타이틀 곡을 조금은 알고는 있지만, 힌트가 주어져야 간신히 눈치채는 머글이에요!',
     two:
@@ -59,7 +64,11 @@ const Description = ({ averageResponseTime }) => {
 
   return (
     <Wrapper>
-      <img src={levelImage[myLevel]} alt='description image' width='400' />
+      <img
+        src={levelImage[myLevel]}
+        alt='해당 레벨을 설명하는 그림'
+        width='300'
+      />
       <Descript>{levelDescription[myLevel]}</Descript>
     </Wrapper>
   );

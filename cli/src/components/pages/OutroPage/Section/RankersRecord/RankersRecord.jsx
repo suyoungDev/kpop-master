@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { FiChevronRight } from 'react-icons/fi';
+import { RiCake3Line } from 'react-icons/ri';
+
 import { FONTS } from '../../../../../constants/theme';
 import './RankersRecord.scss';
 
@@ -17,16 +19,30 @@ const RankersRecord = ({ userRankList, myRecord }) => {
   const content = useRef(null);
   const [isActivate, setIsActivate] = useState(false);
   const [tableHeight, setTableHeight] = useState('0rem');
+  const [existingUserName, setexistingUserName] = useState();
 
   const toggleAccordion = () => {
     setIsActivate(!isActivate);
     setTableHeight(isActivate ? '0rem' : `${content.current.scrollHeight}px`);
   };
 
+  useEffect(() => {
+    const userName = localStorage.getItem('_userName');
+    setexistingUserName(userName);
+  }, []);
+
   return (
     <div className='rank-table-container'>
       <button className='rank-table-title' onClick={toggleAccordion}>
-        내 순위 보기
+        <span>
+          <RiCake3Line id='icon' />
+          {
+            userRankList
+              .map((user) => user.record)
+              .filter((record) => record < myRecord).length
+          }
+          등 <span id='total'>(총 {userRankList.length}명)</span>
+        </span>
         <FiChevronRight
           className={`${isActivate && 'rotate'} accordion-icon`}
           size='1.2rem'
@@ -40,7 +56,7 @@ const RankersRecord = ({ userRankList, myRecord }) => {
       >
         <TableContainer className='rank-table'>
           {userRankList
-            .filter((item, index) => index < 5)
+            .filter((item, index) => index < 3)
             .map((item, index) => (
               <tr key={item._id}>
                 <th className='rankers-record'>{index + 1}위</th>
@@ -66,8 +82,10 @@ const RankersRecord = ({ userRankList, myRecord }) => {
               }
               위
             </th>
-            <th id='myRecord'>👈 내 순위</th>
-            <th id='myRecord'>{myRecord} 초</th>
+            <th id='myRecord'>
+              {existingUserName ? existingUserName : '내 순위'}
+            </th>
+            <th id='record'>{myRecord} 초</th>
           </tr>
         </TableContainer>
         <div className='users-average-data'>

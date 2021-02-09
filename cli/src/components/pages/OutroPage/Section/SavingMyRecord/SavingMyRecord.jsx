@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from 'react-awesome-button/dist/themes/theme-blue.css';
+import { RiSave2Fill } from 'react-icons/ri';
 
 import './SavingMyRecord.scss';
 
@@ -27,6 +25,7 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
     uploadRecordToLocal(name);
     uploadRecordToDB(name);
     setIsSaving(true);
+    setName('');
   };
 
   const uploadRecordToLocal = (userName) => {
@@ -55,11 +54,17 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
   };
 
   return (
-    <div>
+    <>
       {!nameSaved && (
-        <div className='saving-records'>
+        <div className={`saving-records ${isSaving && 'saved'}`}>
           <div className='title-wrapper'>
-            <h2>랭킹에 저장하시겠습니까?</h2>
+            <span>
+              <RiSave2Fill id='icon' />
+              기록을 저장하시겠습니까?
+            </span>
+            <span id='record-alert'>
+              저장하지 않으면 랭킹에 기록되지 않습니다.
+            </span>
           </div>
           <form onSubmit={addName}>
             <div className='name-input-wrapper'>
@@ -69,29 +74,18 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
                 value={name}
                 onChange={update}
                 minLength='3'
-                maxLength='10'
+                maxLength='15'
                 title='3 to 10 charactor avaiable'
                 autoComplete='off'
-              />
-
-              <AwesomeButtonProgress
-                size='small'
-                type='primary'
-                cssModule={AwesomeButtonStyles}
-                loadingLabel='기록 남기는 중...'
-                resultLAbel='성공!'
-                fakePress='true'
+                required
                 disabled={isSaving && 'true'}
-                action={(elem, next) => addName()}
-                ripple
-              >
-                기록 남기기
-              </AwesomeButtonProgress>
+              />
+              <button disabled={isSaving && 'true'}>기록 남기기</button>
             </div>
           </form>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
