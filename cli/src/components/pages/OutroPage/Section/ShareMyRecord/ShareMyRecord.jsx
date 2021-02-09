@@ -40,7 +40,6 @@ const ShareMyRecord = () => {
         <Highlight>내 결과 공유하기</Highlight>
       </ShareTitle>
       <ShareList>
-        <AwesomeButtonSocial type='secondary' />
         <AwesomeButtonSocial type='facebook' />
         <AwesomeButtonSocial type='twitter' />
       </ShareList>
