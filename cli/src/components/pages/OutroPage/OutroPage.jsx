@@ -10,6 +10,7 @@ import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
 import Button from '../../Button/Button';
 import Spinner from './Section/Spinner/Spinner';
+import Description from './Section/Description/Description';
 
 import './OutroPage.scss';
 
@@ -48,6 +49,7 @@ const OutroPage = () => {
     <div className='box-container'>
       <Confetti width={width} height={height} recycle={false} />
       <div className='glass-wrapper'>
+        <Description averageResponseTime={averageResponseTime} />
         <PreviousRecord
           averageResponseTime={averageResponseTime}
           gameResult={gameResult}
