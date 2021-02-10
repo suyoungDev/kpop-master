@@ -14,6 +14,10 @@ const TableContainer = styled.table`
   overflow: hidden;
 `;
 
+const MyTier = styled.span`
+  padding-left: 1rem;
+`;
+
 const RankersRecord = ({ userRankList, myRecord }) => {
   const content = useRef(null);
   const [isActivate, setIsActivate] = useState(false);
@@ -41,6 +45,17 @@ const RankersRecord = ({ userRankList, myRecord }) => {
               .filter((record) => record < myRecord).length
           }
           등 <span id='total'>(총 {userRankList.length}명)</span>
+          <MyTier>
+            상위{' '}
+            {Math.floor(
+              (userRankList
+                .map((user) => user.record)
+                .filter((record) => record < myRecord).length /
+                userRankList.length) *
+                100
+            )}
+            %
+          </MyTier>
         </span>
         <FiChevronRight
           className={`${isActivate && 'rotate'} accordion-icon`}
