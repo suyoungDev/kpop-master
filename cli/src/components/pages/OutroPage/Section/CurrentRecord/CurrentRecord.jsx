@@ -76,7 +76,7 @@ const CurrentRecord = ({ gameResult }) => {
             <li>
               <span>
                 <RiTimer2Line id='icon' />
-                평균 {averageResponseTime} 초
+                평균 {averageResponseTime}초
               </span>
             </li>
           </ul>
