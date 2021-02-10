@@ -108,6 +108,7 @@ const LandingPage = () => {
         </AlertContent>
 
         <Button links={'/start'}>start</Button>
+        <Button links={'/test'}>test</Button>
       </AlertWrapper>
     </GlassContainer>
   );

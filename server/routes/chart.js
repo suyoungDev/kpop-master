@@ -2,18 +2,39 @@ const express = require('express');
 const router = express.Router();
 var melon = require('melon-chart-parser');
 
-var opts = {
-  limit: 25,
-  type: 'artist',
-  genre: 'KPOP',
-  term: 'BLACKPINK',
-};
+router.get('/getBySinger', async (req, res) => {
+  var opt = {
+    limit: 50,
+    type: 'artist',
+    term: req.body.singer,
+  };
 
-router.get('/getSongs', async (req, res) => {
+  var result = await melon
+    .parse(opt)
+    .then(function (res) {
+      const shuffled = res.sort(() => Math.random() - 0.5).slice(0, 10);
+      return shuffled.map((item) => item.trackName);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+
+  res.status(200).json({ success: true, result });
+});
+
+router.post('/getByYear', async (req, res) => {
+  var opts = {
+    limit: 50,
+    type: 'year',
+    genre: 'KPOP',
+    year: req.body.year,
+  };
+
   var result = await melon
     .parse(opts)
     .then(function (res) {
-      return res;
+      const shuffled = res.sort(() => Math.random() - 0.5).slice(0, 10);
+      return shuffled.map((item) => item.trackName);
     })
     .catch(function (err) {
       console.log(err);
