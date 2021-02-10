@@ -58,10 +58,10 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
       {!nameSaved && (
         <div className={`saving-records ${isSaving && 'saved'}`}>
           <div className='title-wrapper'>
-            <span>
+            <p>
               <RiSave2Fill id='icon' />
               기록을 저장하시겠습니까?
-            </span>
+            </p>
             <span id='record-alert'>
               저장하지 않으면 랭킹에 기록되지 않습니다.
             </span>
@@ -69,13 +69,12 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
           <form onSubmit={addName}>
             <div className='name-input-wrapper'>
               <input
-                placeholder='your name'
+                placeholder='이름'
                 type='text'
                 value={name}
                 onChange={update}
                 minLength='3'
                 maxLength='15'
-                title='3 to 10 charactor avaiable'
                 autoComplete='off'
                 required
                 disabled={isSaving && 'true'}

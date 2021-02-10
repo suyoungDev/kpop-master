@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { SIZES, FONTS } from '../../constants/theme';
+
 import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
 
@@ -17,10 +17,10 @@ const Wrapper = styled.div`
 `;
 
 const Log = styled.p`
-  margin-top: ${SIZES.base}px;
+  margin-top: 8px;
   color: black;
-  font-family: ${FONTS.engBody};
-  font-size: ${SIZES.font}px;
+  font-family: 'Raleway';
+  font-size: 14px;
   padding: 2px;
 `;
 

@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { FiChevronRight } from 'react-icons/fi';
 import { RiCake3Line } from 'react-icons/ri';
 
-import { FONTS } from '../../../../../constants/theme';
 import './RankersRecord.scss';
 
 const TableContainer = styled.table`
   width: 100%;
-  font-family: ${FONTS.korBody};
+  font-family: 'Nanum Gothic';
   font-size: 16px;
   font-weight: 200;
   overflow: hidden;

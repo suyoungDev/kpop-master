@@ -3,34 +3,36 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 90%;
-  padding: 1rem;
+  width: 100%;
+  padding: 1rem 3rem;
+  margin-bottom: 2rem;
+
   display: flex;
   flex-direction: row;
+  align-items: baseline;
   justify-content: space-between;
-  margin: 0.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  box-shadow: 0 8px 20px 0 rgba(251, 128, 165, 0.2);
+  backdrop-filter: blur(14.5px);
+  -webkit-backdrop-filter: blur(14.5px);
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
 const Title = styled.span`
   font-weight: 200;
   font-size: 18px;
-
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-  background-repeat: no-repeat;
-  background-size: 100% 0.3em;
-  background-position: 0 80%;
-  transition: background-size 0.25s ease-in;
-
-  &:hover {
-    background-size: 100% 88%;
-  }
 `;
 
 const Content = styled.span`
   font-size: 18px;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.8);
+  color: black;
 `;
 
 const Em = styled.span`
@@ -100,7 +102,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   return (
     <Wrapper>
       <Title>
-        <Em>{existingUserName}</Em>
+        ✨ <Em>{existingUserName}</Em>
         님의 최고 기록
       </Title>
       <Content>{existingUserRecord}초</Content>

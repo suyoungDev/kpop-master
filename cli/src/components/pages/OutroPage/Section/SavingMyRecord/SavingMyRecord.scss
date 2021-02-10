@@ -3,21 +3,17 @@ $border-radius: 15px;
 $big-border-radius: 25px;
 $font-small: 16px;
 $padding: 1.5rem;
+$color-two: rgba(251, 128, 165, 0.2);
 
 .saving-records {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: $margin;
+  margin-bottom: 1rem;
   padding: $padding;
 
-  background: rgba(255, 255, 255, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.3) 100%
-  );
+  background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px 0 rgba(111, 113, 136, 0.37);
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(14.5px);
@@ -30,12 +26,19 @@ $padding: 1.5rem;
     flex-direction: column;
     align-items: flex-start;
 
-    span {
+    p {
       display: flex;
+
+      font-weight: bolder;
+      font-size: 20px;
 
       #icon {
         margin-right: 7px;
       }
+    }
+
+    span {
+      padding-left: 1.5rem;
     }
 
     #record-alert {
@@ -45,49 +48,54 @@ $padding: 1.5rem;
     }
   }
 
-  .name-input-wrapper {
-    width: 18rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    margin-top: 1rem;
+  form {
+    width: 90%;
+    .name-input-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      margin-top: 1rem;
 
-    input {
-      width: 10rem;
-      height: 2rem;
-      padding: 0;
-      border: none;
-      border-radius: 0;
-      line-height: 70px;
-      background-color: transparent;
-      color: rgb(255, 255, 255);
-      font-size: 20px;
-      outline: none;
-      border-bottom: 3px solid rgba(0, 0, 0, 0.6);
-      font-family: 'Montserrat', sans-serif;
-    }
+      input {
+        width: 60%;
+        max-width: 14rem;
 
-    button {
-      width: 5rem;
-      height: 2rem;
-      border: none;
-      background: #7c7d81;
-      color: white;
-      letter-spacing: 1px;
-      border-radius: 6px;
-      box-shadow: rgb(71, 71, 71) 0 7px;
-
-      &:hover {
-        background: #363a42;
-        box-shadow: rgb(121, 121, 121) 0 2px;
-      }
-      &:active {
-        outline: none;
+        height: 2rem;
+        padding: 0;
         border: none;
-        transform: scale(0.95);
-        box-shadow: 0 1px 4px -1px rgba(10, 22, 50, 0.24);
+        border-radius: 0;
+        line-height: 70px;
+        background-color: transparent;
+        color: black;
+        font-size: 20px;
+        outline: none;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.6);
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      ::placeholder {
+        padding: 10px;
+      }
+
+      button {
+        width: 5rem;
+        height: 2rem;
+        border: none;
+        background: #7c7d81;
+        color: white;
+        letter-spacing: 1px;
+        border-radius: 6px;
+
+        &:hover {
+          background: #363a42;
+          transform: scale(0.95);
+        }
+        &:active {
+          outline: none;
+          border: none;
+        }
       }
     }
   }

@@ -3,3 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+::selection {
+  background: rgba(251, 128, 165, 0.2);
+}
+
+body {
+  display: block;
+}

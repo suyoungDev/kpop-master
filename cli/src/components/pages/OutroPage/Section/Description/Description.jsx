@@ -3,25 +3,20 @@ import styled from 'styled-components';
 import levelImage from '../../../../../constants/image/outroImage/level';
 
 const Wrapper = styled.div`
-  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
 `;
 
 const Descript = styled.div`
-  width: 18rem;
+  width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  font-size: 15px;
-  font-weight: 200;
+  font-size: 16px;
   color: black;
   line-height: 23px;
   text-align: center;
-  margin-top: 0.5rem;
 `;
 
 const Description = ({ averageResponseTime }) => {
@@ -51,13 +46,13 @@ const Description = ({ averageResponseTime }) => {
     zero:
       '블랙핑크의 노래를 정말 아무것도 모르시네요. 이번 기회에 블랙핑크 노래를 들어보는 건 어때요?',
     one:
-      '블랙핑크의 유명한 타이틀 곡을 조금은 알고는 있지만, 힌트가 주어져야 간신히 눈치채는 머글이에요!',
+      '블랙핑크의 유명한 타이틀곡을 조금은 알고는 있지만, 힌트가 주어져야 간신히 눈치채는 머글이에요!',
     two:
       '유명한 대표곡은 알지만, 알려지지 않은 수록곡은 잘 모르는 입덕 초기 머글이에요. 이번 기회에 수록곡도 한번 들어보는 건 어떨까요?',
     three:
-      '블랙핑크의 노래에 푹 빠져있어요. 대표곡도 수록곡도 대부분 알고 있죠.',
+      '블랙핑크의 노래에 푹 빠져있어요. 대표곡도 수록곡도 대부분 알고 있고, 더 알고 싶어 하는 팬심도 가지고 있죠!',
     four:
-      '진정한 블링크로 임명합니다! 당신은 모든 노래를 알고있어요. 부족한건 타이핑 속도 뿐!',
+      '진정한 블링크로 임명합니다! 당신은 모든 노래를 알고 있어요. 부족한 건 타이핑 속도뿐!',
     five:
       '당신은 모든 노래를 거의 첫음만 듣고 알아챌 정도로 알고 있군요! 혹시 블랙핑크 본인이신가요? 와우!!!',
   };

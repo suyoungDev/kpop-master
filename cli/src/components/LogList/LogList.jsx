@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SIZES, FONTS } from '../../constants/theme';
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,10 +8,10 @@ const Wrapper = styled.div`
 
 const Log = styled.p`
   width: 15rem;
-  margin-top: ${SIZES.base}px;
+  margin-top: 8px;
   color: rgba(0, 0, 0, 0.7);
-  font-family: ${FONTS.engBody};
-  font-size: ${SIZES.font}px;
+  font-family: Raleway;
+  font-size: 14px;
   text-align: left;
 `;
 

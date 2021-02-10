@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
+import GlassContainer from '../../GlassContainer/GlassContainer';
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
 import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
 import SavingMyRecord from './Section/SavingMyRecord/SavingMyRecord';
@@ -12,10 +13,16 @@ import Button from '../../Button/Button';
 import Spinner from './Section/Spinner/Spinner';
 import Description from './Section/Description/Description';
 
-import './OutroPage.scss';
-
 import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti';
+import styled from 'styled-components';
+
+const ContentWrapper = styled.div`
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const OutroPage = () => {
   // eslint-disable-next-line
@@ -44,34 +51,55 @@ const OutroPage = () => {
   const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
 
   return (
-    <div className='box-container'>
-      <Confetti width={width} height={height} recycle={false} />
-      <div className='glass-wrapper'>
+    <>
+      <Confetti
+        width={width}
+        height={height}
+        recycle={false}
+        numberOfPieces={2000}
+        initialVelocityX={2}
+        initialVelocityY={20}
+        colors={[
+          '#ffb8b8',
+          '#ffffff',
+          '6c63ff',
+          '#795548',
+          '#FF5722',
+          '#fdfaac',
+          '#9be7ff',
+        ]}
+      />
+
+      <GlassContainer>
         <Description averageResponseTime={averageResponseTime} />
-        <PreviousRecord
-          averageResponseTime={averageResponseTime}
-          gameResult={gameResult}
-        />
-        <SavingMyRecord
-          averageResponseTime={averageResponseTime}
-          gameResult={gameResult}
-        />
-        <CurrentRecord
-          averageResponseTime={averageResponseTime}
-          gameResult={gameResult}
-        />
-        {isLoading === 'loading' ? (
-          <Spinner />
-        ) : (
-          <RankersRecord
-            userRankList={userRankList}
-            myRecord={averageResponseTime}
+
+        <ContentWrapper>
+          <PreviousRecord
+            averageResponseTime={averageResponseTime}
+            gameResult={gameResult}
           />
-        )}
-        <ShareMyRecord />
-        <Button links='/'>play again</Button>
-      </div>
-    </div>
+          <SavingMyRecord
+            averageResponseTime={averageResponseTime}
+            gameResult={gameResult}
+          />
+          <CurrentRecord
+            averageResponseTime={averageResponseTime}
+            gameResult={gameResult}
+          />
+          {isLoading === 'loading' ? (
+            <Spinner />
+          ) : (
+            <RankersRecord
+              userRankList={userRankList}
+              myRecord={averageResponseTime}
+            />
+          )}
+          <ShareMyRecord />
+
+          <Button links='/'>play again</Button>
+        </ContentWrapper>
+      </GlassContainer>
+    </>
   );
 };
 

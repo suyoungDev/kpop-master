@@ -2,18 +2,20 @@ $margin: 1rem;
 $padding-small: 0.4rem;
 $border-radius: 15px;
 $font-small: 16px;
+$font-mini: 14px;
 $font-korean: Nanum Gothic;
-$color-one: #84fab0;
-$color-two: #8fd3f4;
+$color-one: #ffb8b8;
+$color-two: rgba(251, 128, 165, 0.2);
 
 .rank-table-container {
-  width: 90%;
+  width: 100%;
   margin: $margin;
+  border-radius: 10px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: right;
+  justify-content: center;
 
   font-family: $font-korean;
   font-size: $font-small;
@@ -21,8 +23,8 @@ $color-two: #8fd3f4;
 
   background: rgba(255, 255, 255, 0);
   background: linear-gradient(
-    180deg,
-    rgba(240, 138, 138, 0.15) 0%,
+    70deg,
+    rgba(255, 255, 255, 0.075) 0%,
     rgba(246, 185, 185, 0.26) 100%
   );
   backdrop-filter: blur(12.5px);
@@ -33,6 +35,7 @@ $color-two: #8fd3f4;
     width: 100%;
     height: 2rem;
     padding: 0 $margin;
+    border-radius: 10px;
 
     display: flex;
     flex-direction: row;
@@ -61,7 +64,7 @@ $color-two: #8fd3f4;
       }
 
       #total {
-        font-size: 12px;
+        font-size: $font-mini;
         font-weight: 200;
         color: rgba(0, 0, 0, 0.7);
         margin-left: 7px;
@@ -125,7 +128,7 @@ $color-two: #8fd3f4;
     margin: 0.5rem 24px;
     align-items: flex-end;
     border-top: 1px solid rgba(0, 0, 0, 0.4);
-    padding: 0.5rem;
+    padding: 0.5rem 0;
 
     .users-data {
       width: 60%;

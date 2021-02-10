@@ -5,10 +5,15 @@ import { AwesomeButtonSocial } from 'react-awesome-button';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 
 const Wrapper = styled.div`
-  width: 90%;
-  font-size: 16px;
+  width: 100%;
+  font-size: 20px;
   font-weight: 200;
-  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1rem 1rem 0 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 const ShareTitle = styled.h2`
@@ -16,7 +21,11 @@ const ShareTitle = styled.h2`
 `;
 
 const Highlight = styled.span`
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-image: linear-gradient(
+    120deg,
+    #ffb8b8 0%,
+    rgba(251, 128, 165, 0.2) 100%
+  );
   background-repeat: no-repeat;
   background-size: 100% 0.4em;
   background-position: 0 70%;
@@ -28,9 +37,10 @@ const Highlight = styled.span`
 `;
 
 const ShareList = styled.div`
+  width: 6rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const ShareMyRecord = () => {

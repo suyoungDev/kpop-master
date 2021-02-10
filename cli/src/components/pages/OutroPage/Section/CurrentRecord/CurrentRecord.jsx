@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+
 import { RiTimer2Line } from 'react-icons/ri';
-import { FONTS } from '../../../../../constants/theme';
 import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
@@ -10,10 +10,11 @@ import './CurrentRecord.scss';
 
 const TableContainer = styled.table`
   width: 100%;
-  font-family: ${FONTS.korBody};
+  font-family: 'Nanum Gothic';
   font-size: 16px;
   font-weight: 200;
   margin-top: -0.2rem;
+  border-radius: 10px;
 `;
 
 const Tablehead = styled.th`
@@ -21,6 +22,7 @@ const Tablehead = styled.th`
   padding: 10px;
   height: 1rem;
   font-weight: bold;
+  font-size: 16px;
 `;
 
 const TableContext = styled.th`
@@ -62,13 +64,13 @@ const CurrentRecord = ({ gameResult }) => {
             <li>
               <span>
                 <FiCheckCircle id='icon' />
-                맞춘 곡 {quantityOfCorrect}개
+                {quantityOfCorrect}개
               </span>
             </li>
             <li>
               <span>
                 <FiX id='icon' />
-                틀린 곡 {quantityOfWrong}개
+                {quantityOfWrong}개
               </span>
             </li>
             <li>
