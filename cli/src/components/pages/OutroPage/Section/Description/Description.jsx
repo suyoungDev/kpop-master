@@ -33,10 +33,8 @@ const Description = ({ averageResponseTime }) => {
       setMyLevel('two');
     } else if (averageResponseTime < 9) {
       setMyLevel('one');
-    } else if (averageResponseTime <= 10) {
-      setMyLevel('zero');
     } else {
-      setMyLevel('sorry');
+      setMyLevel('zero');
     }
 
     // eslint-disable-next-line

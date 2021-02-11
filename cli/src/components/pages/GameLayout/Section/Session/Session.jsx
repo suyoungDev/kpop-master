@@ -10,8 +10,8 @@ import { GameResultContext } from '../../../../GameResultContext/GameResultConte
 
 const Wrapper = styled.div`
   width: 20rem;
-  height: 2rem;
-  padding: 0.5rem 2.7rem;
+  height: 2.5rem;
+  padding: 5px 2.7rem 0 2.7rem;
   margin-bottom: 1rem;
 
   display: flex;
@@ -26,12 +26,10 @@ const Wrapper = styled.div`
   border: 1px solid rgba(165, 165, 165, 0.233);
 `;
 
-const Log = styled.p`
-  margin-top: 8px;
+const Log = styled.span`
   color: black;
   font-family: 'Raleway';
-  font-size: 14px;
-  padding: 2px;
+  padding-right: 0.4rem;
 `;
 
 const Session = () => {

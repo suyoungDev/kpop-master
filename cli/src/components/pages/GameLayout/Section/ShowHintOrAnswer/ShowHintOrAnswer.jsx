@@ -20,20 +20,20 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Montserrat', sans-serif;
 
   span {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    font-size: 1.1rem;
     margin-bottom: 0.3rem;
 
     font-size: 14px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.5);
     text-align: left;
-    // margin: 0.33rem;
     letter-spacing: 1px;
   }
 

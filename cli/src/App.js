@@ -12,15 +12,13 @@ function App() {
   return (
     <GameEndProvider>
       <GameResultProvider>
-        <div className='App'>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path='/' component={LandingPage} />
-              <Route exact path='/start' component={Start} />
-              <Route exact path='/test' component={Test} />
-            </Switch>
-          </BrowserRouter>
-        </div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/' component={LandingPage} />
+            <Route exact path='/start' component={Start} />
+            <Route exact path='/test' component={Test} />
+          </Switch>
+        </BrowserRouter>
       </GameResultProvider>
     </GameEndProvider>
   );
