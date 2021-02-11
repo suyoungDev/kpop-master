@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Button from '../../Button/Button';
 import GlassContainer from '../../GlassContainer/GlassContainer';
+
+import { GameEndContext } from '../../GamEndContext/GameEndContext';
+import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
 const TitleWrapper = styled.div`
   width: 100%;
@@ -70,9 +73,18 @@ const AlertTitle = styled.p`
   background-color: ${({ blue }) =>
     blue ? 'rgb(128, 171, 251, 0.2)' : 'rgba(251, 128, 165, 0.2)'};
   color: ${({ blue }) => (blue ? 'rgb(29, 20, 107)' : 'rgb(177, 44, 44)')};
+  margin-top: ${({ blue }) => blue && '1.5rem'};
 `;
 
 const LandingPage = () => {
+  const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
+  const [gameResult, setGameResult] = useContext(GameResultContext);
+
+  useEffect(() => {
+    setIsGameEnd('onGoing');
+    setGameResult([]);
+  }, []);
+
   return (
     <GlassContainer>
       <TitleWrapper>
