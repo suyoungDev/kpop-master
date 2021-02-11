@@ -67,9 +67,9 @@ const AlertTitle = styled.p`
   font-size: 12px;
   letter-spacing: 0.1rem;
 
-  background-color: ${(props) =>
-    props.blue ? 'rgb(128, 171, 251, 0.2)' : 'rgba(251, 128, 165, 0.2)'};
-  color: ${(props) => (props.blue ? 'rgb(29, 20, 107)' : 'rgb(177, 44, 44);')};
+  background-color: ${({ blue }) =>
+    blue ? 'rgb(128, 171, 251, 0.2)' : 'rgba(251, 128, 165, 0.2)'};
+  color: ${({ blue }) => (blue ? 'rgb(29, 20, 107)' : 'rgb(177, 44, 44)')};
 `;
 
 const LandingPage = () => {

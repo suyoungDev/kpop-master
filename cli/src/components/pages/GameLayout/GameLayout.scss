@@ -10,123 +10,50 @@ $margin: 1rem;
   justify-content: center;
   align-items: center;
 
-  .left-quiz {
+  .input-wrapper {
+    position: relative;
+    width: 80%;
+    height: 3rem;
+    margin: $margin auto;
+  }
+
+  .input-highlight {
+    font-size: $input-font-size;
+    user-select: none;
+    line-height: $input-line-height;
+    border-top: 3px solid white;
     position: absolute;
     left: 0;
-    top: 1rem;
-    margin-left: 1.3rem;
+    bottom: 0;
+    max-width: 100%;
+    height: 0;
+    color: transparent;
+    font-family: $font-family;
+    overflow: hidden;
   }
 
-  .session {
-    margin: $margin;
-    background: rgba(131, 127, 127, 0.082);
-    backdrop-filter: blur(14.5px);
-    -webkit-backdrop-filter: blur(4.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(165, 165, 165, 0.233);
+  input {
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    border-radius: 0;
+    line-height: $input-line-height;
+    background-color: transparent;
+    color: black;
+    font-size: $input-font-size;
+    border: none;
+    outline: none;
+    border-bottom: 3px solid #333333b9;
+    font-family: $font-family;
+
+    &:focus {
+      + .input-highlight {
+        border-top: 3px solid #ff69b4;
+      }
+    }
   }
 
-  .answer-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    width: 20rem;
-    height: 17rem;
-
-    background: rgba(255, 255, 255, 0);
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.116) 0%,
-      rgba(255, 255, 255, 0.507) 100%
-    );
-    box-shadow: 0 8px 32px 0 rgba(111, 113, 136, 0.37);
-    backdrop-filter: blur(14.5px);
-    -webkit-backdrop-filter: blur(14.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.233);
-
-    .hint-wrapper {
-      font-family: $font-family;
-      height: 3rem;
-      margin-top: 1.5rem;
-      display: flex;
-      font-display: column;
-      justify-content: center;
-      align-items: center;
-      width: 80%;
-
-      .correct-answer {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-
-        span {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-
-          font-size: 14px;
-          font-weight: bold;
-          color: rgba(0, 0, 0, 0.5);
-          text-align: left;
-          margin: $margin/3;
-          letter-spacing: 1px;
-        }
-
-        #icon {
-          margin-right: 5px;
-        }
-      }
-    }
-
-    .input-wrapper {
-      position: relative;
-      width: 80%;
-      height: 3rem;
-      margin: $margin auto;
-    }
-
-    .input-highlight {
-      font-size: $input-font-size;
-      user-select: none;
-      line-height: $input-line-height;
-      border-top: 3px solid white;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      max-width: 100%;
-      height: 0;
-      color: transparent;
-      font-family: $font-family;
-      overflow: hidden;
-    }
-
-    input {
-      width: 100%;
-      height: 60px;
-      padding: 0;
-      border-radius: 0;
-      line-height: $input-line-height;
-      background-color: transparent;
-      color: black;
-      font-size: $input-font-size;
-      border: none;
-      outline: none;
-      border-bottom: 3px solid #333333b9;
-      font-family: $font-family;
-
-      &:focus {
-        + .input-highlight {
-          border-top: 3px solid #ff69b4;
-        }
-      }
-    }
-
-    ::placeholder {
-      color: rgba(0, 0, 0, 0.3);
-    }
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.3);
   }
 }

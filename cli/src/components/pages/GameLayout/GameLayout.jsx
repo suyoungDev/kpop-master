@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useSound from 'use-sound';
-import { FiAlertCircle } from 'react-icons/fi';
-import { IconContext } from 'react-icons';
 
 import './GameLayout.scss';
 
 import QuizLeft from './Section/QuizLeft/QuizLeft';
 import Player from './Section/Player/Player';
 import Session from './Section/Session/Session';
-import Hint from './Section/Hint/Hint';
 import LogList from './Section/LogList/LogList';
+import Glass from '../../GlassContainer/Glass';
+import ShowHintOrAnswer from './Section/ShowHintOrAnswer/ShowHintOrAnswer';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
 import wrongSfx from '../../../constants/sounds/wrong1.mp3';
@@ -133,58 +132,36 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <IconContext.Provider value={{ paddingRight: '1rem' }}>
-      <div className='center'>
-        <Player url={url} />
-        <div className='album'>
-          <div className='left-quiz'>
-            <QuizLeft passed={currentRound + 1} left='10' />
-          </div>
-        </div>
-        <div className='session'>
-          <Session />
-        </div>
+    <div className='center'>
+      <Player url={url} />
+      <QuizLeft passed={currentRound + 1} left='10' />
+      <Session />
 
-        <div className='answer-wrapper'>
-          <div className='hint-wrapper'>
-            {showHints && timeOver === false && (
-              <div className='correct-answer'>
-                <span>
-                  <FiAlertCircle id='icon' /> hint
-                </span>
-                <Hint trackName={trackList[currentRound].trackName} />
-              </div>
-            )}
+      <Glass width='20' height='17.5'>
+        <ShowHintOrAnswer
+          trackName={trackList[currentRound].trackName}
+          showHints={showHints}
+          timeOver={timeOver}
+        />
 
-            {timeOver && (
-              <div className='correct-answer'>
-                <span>
-                  <FiAlertCircle id='icon' /> 정답
-                </span>
-                <p>{trackList[currentRound].trackName}</p>
-              </div>
-            )}
-          </div>
-
-          <div className='input-wrapper'>
-            <form onSubmit={answerSubmit}>
-              <input
-                placeholder='guess what?'
-                type='text'
-                value={inputValue}
-                onChange={onChange}
-                ref={focusedInput}
-                disabled={timeOver}
-              />
-              <span className='input-highlight'>
-                {inputValue.replace(/ /g, '\u00a0')}
-              </span>
-            </form>
-          </div>
-          <LogList giveAnswers={givenAnswersList} />
+        <div className='input-wrapper'>
+          <form onSubmit={answerSubmit}>
+            <input
+              placeholder='guess what?'
+              type='text'
+              value={inputValue}
+              onChange={onChange}
+              ref={focusedInput}
+              disabled={timeOver}
+            />
+            <span className='input-highlight'>
+              {inputValue.replace(/ /g, '\u00a0')}
+            </span>
+          </form>
         </div>
-      </div>
-    </IconContext.Provider>
+        <LogList giveAnswers={givenAnswersList} />
+      </Glass>
+    </div>
   );
 };
 

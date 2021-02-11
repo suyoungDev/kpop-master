@@ -9,6 +9,11 @@ const Container = styled.div`
   align-items: right;
   text-align: right;
   font-family: 'Montserrat', sans-serif;
+
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  margin-left: 1.3rem;
 `;
 
 const PassedQ = styled.p`

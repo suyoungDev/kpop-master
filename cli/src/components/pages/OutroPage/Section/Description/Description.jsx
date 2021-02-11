@@ -33,7 +33,7 @@ const Description = ({ averageResponseTime }) => {
       setMyLevel('two');
     } else if (averageResponseTime < 9) {
       setMyLevel('one');
-    } else if (averageResponseTime < 10) {
+    } else if (averageResponseTime <= 10) {
       setMyLevel('zero');
     } else {
       setMyLevel('sorry');
