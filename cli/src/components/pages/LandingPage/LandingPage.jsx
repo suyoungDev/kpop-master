@@ -35,7 +35,6 @@ const AlertWrapper = styled.div`
 
 const AlertContent = styled.div`
   margin-bottom: 1rem;
-
   ul {
     margin: 0.5rem 0;
     font-size: 14px;
@@ -45,12 +44,12 @@ const AlertContent = styled.div`
 
     #tip {
       color: #696c70;
-      padding-left: 1rem;
+      padding-left: 0.5rem;
     }
 
     span {
       color: black;
-      background: rgba(251, 128, 165, 0.2);
+      background: rgba(178, 190, 195, 0.5);
       padding: 2px 4px;
     }
   }
@@ -90,7 +89,9 @@ const LandingPage = () => {
           <ul>
             <li>노래를 듣고 10초 안에 노래제목을 맞추는 게임입니다.</li>
             <li>6초에 힌트가 나가니 참고해주세요.</li>
-            <li>한글, 영어 모두 허용하며, 공백은 무시합니다.</li>
+            <li>
+              한글, 영어 모두 허용하며, 대소문자 구분과 공백은 무시합니다.
+            </li>
             <li id='tip'>
               🚩 정답이 <span>Crazy Over You</span>일 때,
               <br />

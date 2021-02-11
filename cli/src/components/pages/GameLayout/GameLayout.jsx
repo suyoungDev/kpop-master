@@ -5,11 +5,11 @@ import { IconContext } from 'react-icons';
 
 import './GameLayout.scss';
 
-import QuizLeft from '../../QuizLeft/QuizLeft';
-import Player from '../../Player/Player';
-import Session from '../../Session/Session';
-import Hint from '../../Hint/Hint';
-import LogList from '../../LogList/LogList';
+import QuizLeft from './Section/QuizLeft/QuizLeft';
+import Player from './Section/Player/Player';
+import Session from './Section/Session/Session';
+import Hint from './Section/Hint/Hint';
+import LogList from './Section/LogList/LogList';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
 import wrongSfx from '../../../constants/sounds/wrong1.mp3';
