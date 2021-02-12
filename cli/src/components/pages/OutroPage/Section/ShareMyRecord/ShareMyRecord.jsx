@@ -12,12 +12,12 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: baseline;
   justify-content: space-between;
-  padding: 1rem 1rem 0 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 2rem 1rem 0 1rem;
 `;
 
 const ShareTitle = styled.h2`
   margin-bottom: 1rem;
+  font-family: 'nanum gothic';
 `;
 
 const Highlight = styled.span`

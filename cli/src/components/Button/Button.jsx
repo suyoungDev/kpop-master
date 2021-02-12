@@ -2,18 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-`;
-
 const LinkContainer = styled(Link)`
   border-radius: 14px;
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: center;
 
   padding: 1rem 2.7rem;
@@ -34,6 +27,8 @@ const LinkContainer = styled(Link)`
   font-weight: bold;
   letter-spacing: 1px;
 
+  margin-top: 2rem;
+
   :hover {
     background: transparent;
     background: linear-gradient(
@@ -46,11 +41,11 @@ const LinkContainer = styled(Link)`
   }
 `;
 
-const Button = ({ children, links }) => {
+const Button = ({ children, links, ...otherprops }) => {
   return (
-    <ButtonWrapper>
-      <LinkContainer to={links}>{children}</LinkContainer>
-    </ButtonWrapper>
+    <LinkContainer to={links} {...otherprops}>
+      {children}
+    </LinkContainer>
   );
 };
 

@@ -28,7 +28,7 @@ const TextContainer = styled.div`
     flex-direction: row;
     align-items: center;
     font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
 
     font-size: 14px;
     font-weight: bold;

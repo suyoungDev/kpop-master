@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 1rem 3rem;
+  padding: 1rem;
   margin-bottom: 2rem;
 
   display: flex;
@@ -103,7 +103,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
     <Wrapper>
       <Title>
         ✨ <Em>{existingUserName}</Em>
-        님의 최고 기록
+        님의 이전 최고 기록
       </Title>
       <Content>{existingUserRecord}초</Content>
     </Wrapper>

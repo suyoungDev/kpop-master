@@ -9,6 +9,7 @@ import Session from './Section/Session/Session';
 import LogList from './Section/LogList/LogList';
 import Glass from '../../GlassContainer/Glass';
 import ShowHintOrAnswer from './Section/ShowHintOrAnswer/ShowHintOrAnswer';
+import Center from '../../Center/Center';
 
 import correctSfx from '../../../constants/sounds/correct.mp3';
 import wrongSfx from '../../../constants/sounds/wrong1.mp3';
@@ -132,12 +133,13 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <div className='center'>
+    <Center>
       <Player url={url} />
       <QuizLeft passed={currentRound + 1} left='10' />
+
       <Session />
 
-      <Glass width='20' height='17.5'>
+      <Glass width='20rem' height='17.5rem' evenly>
         <ShowHintOrAnswer
           trackName={trackList[currentRound].trackName}
           showHints={showHints}
@@ -161,7 +163,7 @@ const GameLayout = ({ trackList }) => {
         </div>
         <LogList giveAnswers={givenAnswersList} />
       </Glass>
-    </div>
+    </Center>
   );
 };
 

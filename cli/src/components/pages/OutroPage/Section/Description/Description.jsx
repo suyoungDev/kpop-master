@@ -17,6 +17,7 @@ const Descript = styled.div`
   color: black;
   line-height: 23px;
   text-align: center;
+  font-family: 'nanum gothic';
 `;
 
 const Description = ({ averageResponseTime }) => {

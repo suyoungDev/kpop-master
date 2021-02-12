@@ -4,14 +4,12 @@ import styled from 'styled-components';
 import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
 
-import Glass from '../../../../GlassContainer/Glass';
-
 import { GameResultContext } from '../../../../GameResultContext/GameResultContext';
 
 const Wrapper = styled.div`
   width: 20rem;
   height: 2.5rem;
-  padding: 5px 2.7rem 0 2.7rem;
+  padding: 5px 2.3rem 0 2.3rem;
   margin-bottom: 1rem;
 
   display: flex;

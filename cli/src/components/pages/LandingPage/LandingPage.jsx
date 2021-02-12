@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 import Button from '../../Button/Button';
 import GlassContainer from '../../GlassContainer/GlassContainer';
+import Glass from '../../GlassContainer/Glass';
 
 import { GameEndContext } from '../../GamEndContext/GameEndContext';
 import { GameResultContext } from '../../GameResultContext/GameResultContext';
 
 const TitleWrapper = styled.div`
   width: 100%;
-  height: 13rem;
+  height: auto;
   padding: 2rem;
   text-align: left;
   font-size: 1.2rem;
@@ -20,23 +21,7 @@ const TitleWrapper = styled.div`
   -webkit-text-stroke: 0.1px #f8f8f8;
 `;
 
-const AlertWrapper = styled.div`
-  width: 100%;
-  height: auto;
-  padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.233);
-  background: rgba(255, 255, 255, 0.589);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.466) 0%,
-    rgba(212, 175, 175, 0.37) 100%
-  );
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 200;
-`;
-
-const AlertContent = styled.div`
+const AlertContainer = styled.div`
   margin-bottom: 1rem;
   ul {
     margin: 0.5rem 0;
@@ -44,6 +29,7 @@ const AlertContent = styled.div`
     line-height: 1.4rem;
     padding-left: 1.4rem;
     list-style: none;
+    font-family: 'nanum gothic';
 
     #tip {
       color: #696c70;
@@ -69,6 +55,7 @@ const AlertTitle = styled.p`
   text-align: center;
   font-size: 12px;
   letter-spacing: 0.1rem;
+  font-family: 'nanum gothic';
 
   background-color: ${({ blue }) =>
     blue ? 'rgb(128, 171, 251, 0.2)' : 'rgba(251, 128, 165, 0.2)'};
@@ -77,7 +64,9 @@ const AlertTitle = styled.p`
 `;
 
 const LandingPage = () => {
+  // eslint-disable-next-line
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
+  // eslint-disable-next-line
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
   useEffect(() => {
@@ -95,34 +84,31 @@ const LandingPage = () => {
         </h1>
       </TitleWrapper>
 
-      <AlertWrapper>
-        <AlertContent>
+      <Glass width='100%' content left>
+        <AlertContainer>
           <AlertTitle>사용 방법</AlertTitle>
           <ul>
             <li>노래를 듣고 10초 안에 노래제목을 맞추는 게임입니다.</li>
             <li>6초에 힌트가 나가니 참고해주세요.</li>
-            <li>
-              한글, 영어 모두 허용하며, 대소문자 구분과 공백은 무시합니다.
-            </li>
+            <li>대소문자 구분과 공백, 특수문자는 무시합니다.</li>
             <li id='tip'>
               🚩 정답이 <span>Crazy Over You</span>일 때,
               <br />
-              <span>crazyoveryou</span> 혹은 <span>크레이지오버유</span>로 써도
-              정답처리 됨
+              <span>crazyoveryou</span> 혹은 <span>크레이지오버유</span>으로
+              제출해도 정답 처리합니다.
             </li>
           </ul>
-        </AlertContent>
-        <AlertContent>
+        </AlertContainer>
+        <AlertContainer>
           <AlertTitle blue>개발 예정 리스트</AlertTitle>
           <ul>
             <li>년도별 top 100</li>
             <li>가수 (검색 지원)</li>
           </ul>
-        </AlertContent>
+        </AlertContainer>
 
         <Button links={'/start'}>start</Button>
-        <Button links={'/test'}>test</Button>
-      </AlertWrapper>
+      </Glass>
     </GlassContainer>
   );
 };

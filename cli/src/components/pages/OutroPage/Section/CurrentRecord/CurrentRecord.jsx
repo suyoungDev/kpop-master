@@ -1,12 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { RiTimer2Line } from 'react-icons/ri';
 import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
-import { FiChevronRight } from 'react-icons/fi';
 
-import './CurrentRecord.scss';
+import Accordion from '../Accordion/Accordion';
 
 const TableContainer = styled.table`
   width: 100%;
@@ -32,92 +31,89 @@ const TableContext = styled.th`
   padding: 0.3rem 1rem;
 `;
 
-const CurrentRecord = ({ gameResult }) => {
-  const content = useRef(null);
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2rem;
+  font-size: 16px;
+  color: black;
 
-  const [isActivate, setIsActivate] = useState(false);
-  const [tableHeight, setTableHeight] = useState('0rem');
+  #list-container {
+    display: flex;
+    flex-direction: row;
+  }
+`;
 
-  const toggleAccordion = () => {
-    setIsActivate(!isActivate);
-    setTableHeight(isActivate ? '0rem' : `${content.current.scrollHeight}px`);
-  };
+const TitleList = styled.li`
+  margin-right: 1rem;
+  list-style: none;
 
-  const quantityOfCorrect = gameResult.filter(
-    (game) => game.result === 'correct'
-  ).length;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 200;
+`;
 
-  const quantityOfWrong = gameResult.filter((game) => game.result === 'wrong')
-    .length;
+const CurrentRecord = ({ gameResult, averageResponseTime }) => {
+  const [quantityOfCorrect, setquantityOfCorrect] = useState(0);
+  const [quantityOfWrong, setQuantitiyOfWrong] = useState(0);
 
-  const totalResponseTime = gameResult
-    .map((item) => item.responseTime)
-    .reduce((previous, currrent) => previous + currrent, 0);
+  useEffect(() => {
+    const correct = gameResult.filter((game) => game.result === 'correct')
+      .length;
+    setquantityOfCorrect(correct);
 
-  const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
+    const wrong = gameResult.filter((game) => game.result === 'wrong').length;
+    setQuantitiyOfWrong(wrong);
+  }, []);
 
-  return (
-    <div className='current-record-table'>
-      <button className='table-title-wrapper' onClick={toggleAccordion}>
-        <div className='table-title'>
-          <ul id='explain-count-list'>
-            <li>
-              <span>
-                <FiCheckCircle id='icon' />
-                {quantityOfCorrect}개
-              </span>
-            </li>
-            <li>
-              <span>
-                <FiX id='icon' />
-                {quantityOfWrong}개
-              </span>
-            </li>
-            <li>
-              <span>
-                <RiTimer2Line id='icon' />
-                평균 {averageResponseTime}초
-              </span>
-            </li>
-          </ul>
-        </div>
-        <FiChevronRight
-          className={`${isActivate && 'rotate'} accordion-icon`}
-          size='1.2rem'
-        />
-      </button>
-
-      <div
-        className='current-record-content'
-        style={{ height: tableHeight }}
-        ref={content}
-      >
-        <TableContainer>
-          <Tablehead id='index'>순서</Tablehead>
-          <Tablehead>노래 제목</Tablehead>
-          <Tablehead>초</Tablehead>
-          <Tablehead>결과</Tablehead>
-
-          {gameResult.map((song) => (
-            <tr key={song.id}>
-              <TableContext id='index' isWorng={song.result}>
-                {song.roundIndex + 1}
-              </TableContext>
-              <TableContext isWorng={song.result} id='trackName'>
-                {song.trackName}
-              </TableContext>
-              <TableContext isWorng={song.result}>
-                {(song.responseTime / 1000).toFixed(2)}
-              </TableContext>
-              <TableContext isWorng={song.result}>
-                {song.result === 'wrong' ? <FiX /> : <FiCheckCircle />}
-              </TableContext>
-            </tr>
-          ))}
-        </TableContainer>
-      </div>
-    </div>
+  const title = (
+    <TitleContainer>
+      <ul id='list-container'>
+        <TitleList>
+          <FiCheckCircle id='icon' />
+          {quantityOfCorrect}개
+        </TitleList>
+        <TitleList>
+          <FiX id='icon' />
+          {quantityOfWrong}개
+        </TitleList>
+        <TitleList>
+          <RiTimer2Line id='icon' />
+          평균 {averageResponseTime}초
+        </TitleList>
+      </ul>
+    </TitleContainer>
   );
+
+  const content = (
+    <TableContainer>
+      <Tablehead id='index'>순서</Tablehead>
+      <Tablehead>노래 제목</Tablehead>
+      <Tablehead>초</Tablehead>
+      <Tablehead>결과</Tablehead>
+
+      {gameResult.map((song) => (
+        <tr key={song.id}>
+          <TableContext id='index' isWorng={song.result}>
+            {song.roundIndex + 1}
+          </TableContext>
+          <TableContext isWorng={song.result} id='trackName'>
+            {song.trackName}
+          </TableContext>
+          <TableContext isWorng={song.result}>
+            {(song.responseTime / 1000).toFixed(2)}
+          </TableContext>
+          <TableContext isWorng={song.result}>
+            {song.result === 'wrong' ? <FiX /> : <FiCheckCircle />}
+          </TableContext>
+        </tr>
+      ))}
+    </TableContainer>
+  );
+
+  return <Accordion title={title} content={content} />;
 };
 
 export default CurrentRecord;

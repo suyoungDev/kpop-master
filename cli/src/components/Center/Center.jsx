@@ -1,6 +1,6 @@
 import React from 'react';
+
 import styled from 'styled-components';
-import Glass from './Glass';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -10,12 +10,8 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const GlassContainer = ({ children }) => {
-  return (
-    <Wrapper>
-      <Glass>{children}</Glass>
-    </Wrapper>
-  );
+const Center = ({ children }) => {
+  return <Wrapper>{children}</Wrapper>;
 };
 
-export default GlassContainer;
+export default Center;
