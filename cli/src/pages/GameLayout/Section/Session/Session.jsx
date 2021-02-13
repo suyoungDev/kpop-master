@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
 
-import { GameResultContext } from '../../../../GameResultContext/GameResultContext';
+import { GameResultContext } from '../../../../context/GameResultContext/GameResultContext';
 
 const Wrapper = styled.div`
   width: 20rem;

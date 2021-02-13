@@ -3,9 +3,9 @@ import React, { useContext } from 'react';
 import GameLayout from '../GameLayout/GameLayout';
 import OutroPage from '../OutroPage/OutroPage';
 
-import { blackpinkData } from '../../../data/blackpink';
+import { blackpinkData } from '../../data/blackpink';
 
-import { GameEndContext } from '../../GamEndContext/GameEndContext';
+import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
 
 const Start = () => {
   // eslint-disable-next-line

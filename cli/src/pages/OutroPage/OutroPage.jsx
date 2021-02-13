@@ -2,18 +2,18 @@ import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import { GameResultContext } from '../../GameResultContext/GameResultContext';
+import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
 
-import Glass from '../../GlassContainer/Glass';
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
 import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
 import SavingMyRecord from './Section/SavingMyRecord/SavingMyRecord';
 import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
-import Button from '../../Button/Button';
-import Spinner from './Section/Spinner/Spinner';
 import Description from './Section/Description/Description';
-import Center from '../../Center/Center';
+import Spinner from './Section/Spinner/Spinner';
+import LinkButton from '../../components/LinkButton/LinkButton';
+import Glass from '../../components/GlassContainer/Glass';
+import Center from '../../components/Center/Center';
 
 const ContentWrapper = styled.div`
   padding: 2rem;
@@ -74,7 +74,7 @@ const OutroPage = () => {
               />
             )}
             <ShareMyRecord />
-            <Button links='/'>play again</Button>
+            <LinkButton links='/'>play again</LinkButton>
           </ContentWrapper>
         </Glass>
       </Center>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import levelImage from '../../../../../constants/image/outroImage/level';
+
+import levelImage from '../../../../constants/image/outroImage/level';
 
 const Wrapper = styled.div`
   display: flex;

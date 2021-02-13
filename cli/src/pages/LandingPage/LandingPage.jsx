@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Button from '../../Button/Button';
-import GlassContainer from '../../GlassContainer/GlassContainer';
-import Glass from '../../GlassContainer/Glass';
+import LinkButton from '../../components/LinkButton/LinkButton';
+import Snippet from '../../components/Snippet/Snippet';
+import GlassContainer from '../../components/GlassContainer/GlassContainer';
+import Glass from '../../components/GlassContainer/Glass';
 
-import { GameEndContext } from '../../GamEndContext/GameEndContext';
-import { GameResultContext } from '../../GameResultContext/GameResultContext';
+import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
+import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
 
 const TitleWrapper = styled.div`
   width: 100%;
@@ -70,8 +71,8 @@ const LandingPage = () => {
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
   useEffect(() => {
-    setIsGameEnd('onGoing');
-    setGameResult([]);
+    //setIsGameEnd('onGoing');
+    //setGameResult([]);
   }, []);
 
   return (
@@ -86,6 +87,10 @@ const LandingPage = () => {
 
       <Glass width='100%' content left>
         <AlertContainer>
+          <Snippet>하이</Snippet>
+          <Snippet tips>팁</Snippet>
+          <Snippet secondary>세컨더리</Snippet>
+
           <AlertTitle>사용 방법</AlertTitle>
           <ul>
             <li>노래를 듣고 10초 안에 노래제목을 맞추는 게임입니다.</li>
@@ -100,14 +105,14 @@ const LandingPage = () => {
           </ul>
         </AlertContainer>
         <AlertContainer>
-          <AlertTitle blue>개발 예정 리스트</AlertTitle>
+          <AlertTitle blue>개발 예정</AlertTitle>
           <ul>
             <li>년도별 top 100</li>
             <li>가수 (검색 지원)</li>
           </ul>
         </AlertContainer>
 
-        <Button links={'/start'}>start</Button>
+        <LinkButton links={'/start'}>start</LinkButton>
       </Glass>
     </GlassContainer>
   );

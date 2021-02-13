@@ -7,15 +7,15 @@ import QuizLeft from './Section/QuizLeft/QuizLeft';
 import Player from './Section/Player/Player';
 import Session from './Section/Session/Session';
 import LogList from './Section/LogList/LogList';
-import Glass from '../../GlassContainer/Glass';
 import ShowHintOrAnswer from './Section/ShowHintOrAnswer/ShowHintOrAnswer';
-import Center from '../../Center/Center';
+import Glass from '../../components/GlassContainer/Glass';
+import Center from '../../components/Center/Center';
 
-import correctSfx from '../../../constants/sounds/correct.mp3';
-import wrongSfx from '../../../constants/sounds/wrong1.mp3';
+import correctSfx from '../../constants/sounds/correct.mp3';
+import wrongSfx from '../../constants/sounds/wrong1.mp3';
 
-import { GameEndContext } from '../../GamEndContext/GameEndContext';
-import { GameResultContext } from '../../GameResultContext/GameResultContext';
+import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
+import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
 
 const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
