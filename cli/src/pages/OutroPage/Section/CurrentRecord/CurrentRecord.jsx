@@ -24,7 +24,7 @@ const Tablehead = styled.th`
   font-size: 16px;
 `;
 
-const TableContext = styled.th`
+const TableContext = styled.td`
   color: ${({ isWorng }) => (isWorng === 'correct' ? 'black' : 'red')};
   font-weight: 200;
   overflow: hidden;

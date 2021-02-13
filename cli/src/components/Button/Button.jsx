@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LinkContainer = styled(Link)`
+  width: 240px;
   border-radius: 14px;
+
   display: flex;
   align-items: center;
   align-self: center;
   justify-content: center;
 
-  padding: 1rem 2.7rem;
   text-decoration: none;
 
   background: rgb(12, 5, 149);
@@ -19,15 +20,14 @@ const LinkContainer = styled(Link)`
     rgb(235, 173, 164) 100%
   );
   box-shadow: 0px 15px 25px rgba(223, 132, 117, 0.5);
-
   color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-style: italic;
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 1px;
 
-  margin-top: 2rem;
+  margin: 1rem 0;
 
   :hover {
     background: transparent;

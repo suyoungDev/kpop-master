@@ -4,14 +4,5 @@
   box-sizing: border-box;
 }
 ::selection {
-  background: rgba(251, 128, 165, 0.2);
-}
-
-body {
-  display: block;
-  background-image: url('./constants/image/Cristina-La-Porta-Chill-Solarium.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+  background: #e1e3fe;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
-import { COLORS, FONT } from '../../constants/theme';
+import { COLORS, FONT, SCREEN } from '../../constants/theme';
 
 const LinkContainer = styled(Link)`
   display: flex;
@@ -10,10 +10,9 @@ const LinkContainer = styled(Link)`
   align-items: center;
   justify-content: center;
 
-  width: 320px;
-  height: 90px;
+  width: 200px;
+  height: 70px;
   border-radius: 100px;
-  margin-top: 2rem;
 
   background: linear-gradient(
     30deg,
@@ -27,10 +26,11 @@ const LinkContainer = styled(Link)`
   font-family: ${FONT.englishButton};
   font-style: italic;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.8rem;
   letter-spacing: 3px;
   text-transform: capitalize;
   text-decoration: none;
+  transition: width 1s ease;
 
   :hover {
     background: ${COLORS.primaryDark};
@@ -49,6 +49,16 @@ const LinkContainer = styled(Link)`
     :hover {
       background: ${COLORS.secondaryDark};
     }
+  }
+
+  @media ${SCREEN.tablet} {
+    padding: 1rem 2.7rem;
+    font-size: 1.4rem;
+    width: 300px;
+    align-self: flex-start;
+  }
+  @media ${SCREEN.tablet} {
+    padding: 1rem 2.7rem;
   }
 `;
 

@@ -4,12 +4,10 @@ import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
 import Snippet from '../Snippet/Snippet';
 
 const Container = styled.div`
-  width: 380px;
-  height: 140px;
+  width: 90%;
   border-radius: ${SIZES.radiusSmall};
   padding: 0.8rem;
-
-  box-shadow: 0 4px 7px 0 ${COLORS.grayLight};
+  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
 
   display: flex;
   flex-direction: column;
@@ -23,15 +21,38 @@ const Container = styled.div`
 
   background: white;
   border: 1px solid ${COLORS.grayMiddle};
+  transition: 0.3s ease;
 
-  @media ${SCREEN.tablet} {
-    width: 250px;
-    height: 300px;
+  ul {
+    margin: 0.5rem 0;
+    font-size: 14px;
+    line-height: 1.4rem;
+    list-style: none;
+
+    #tip {
+      color: ${COLORS.grayDeepDark};
+      padding-left: 0.4rem;
+
+      span {
+        color: ${COLORS.textDark};
+        background: ${COLORS.primaryShaodw};
+        padding: 2px 4px;
+      }
+    }
   }
 
-  @media ${SCREEN.desktop} {
-    width: 381px;
-    height: 200px;
+  :hover {
+    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
+  }
+
+  @media ${SCREEN.tablet} {
+    width: 300px;
+    height: 350px;
+  }
+
+  @media ${SCREEN.laptop} {
+    width: 450px;
+    height: 280px;
   }
 `;
 
@@ -40,9 +61,10 @@ const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   color: ${COLORS.grayDeepDark};
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.2rem;
+  font-size: 14px;
 `;
 
 const Content = styled.div`
