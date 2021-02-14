@@ -6,7 +6,7 @@ import Snippet from '../Snippet/Snippet';
 const Container = styled.div`
   width: 90%;
   border-radius: ${SIZES.radiusSmall};
-  padding: 0.8rem;
+  padding: 1.2rem;
   box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
 
   display: flex;
@@ -26,7 +26,7 @@ const Container = styled.div`
   ul {
     margin: 0.5rem 0;
     font-size: 14px;
-    line-height: 1.4rem;
+    line-height: 1.7rem;
     list-style: none;
 
     #tip {
@@ -63,7 +63,7 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${COLORS.grayDeepDark};
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.6rem;
   font-size: 14px;
 `;
 

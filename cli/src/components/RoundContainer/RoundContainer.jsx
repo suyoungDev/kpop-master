@@ -15,11 +15,12 @@ const RoundContainer = styled.div`
 
   @media ${SCREEN.tablet} {
     padding-top: 0rem;
+    height: auto;
 
-    #cards {
+    #three {
       order: 3;
     }
-    #start-button {
+    #two {
       order: 2;
     }
   }

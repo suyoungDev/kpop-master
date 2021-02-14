@@ -10,7 +10,10 @@ export const COLORS = {
   grayMiddle: '#E5E5E5',
   grayDark: '#CBCBCB',
   grayDeepDark: '#6d7274',
-  textDark: '#222',
+  textBlack: '#222',
+  textDark: '#383838',
+  textMid: '#8b9097',
+  textWhiteMid: 'rgba(255,255,255,0.4)',
 };
 
 export const FONT = {

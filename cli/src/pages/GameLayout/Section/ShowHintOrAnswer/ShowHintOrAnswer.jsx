@@ -1,40 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FiAlertCircle } from 'react-icons/fi';
+import { AiFillAlert } from 'react-icons/ai';
 
 import Hint from '../Hint/Hint';
+import Snippet from '../../../../components/Snippet/Snippet';
+
+import { COLORS, FONT, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
-  width: 80%;
-  height: 3rem;
-  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-display: column;
+  justify-content: center;
+
+  font-family: ${FONT.korean};
+  font-size: 2rem;
+  font-weight: bold;
+  color: ${COLORS.textDark};
+  letter-spacing: 3px;
 `;
 
 const TextContainer = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   font-family: 'Montserrat', sans-serif;
 
-  span {
-    width: 100%;
+  .showHints {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-
-    font-size: 14px;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.5);
-    text-align: left;
-    letter-spacing: 1px;
+    align-self: flex-start;
+    margin-bottom: 2rem;
   }
 
   #icon {
@@ -42,14 +45,30 @@ const TextContainer = styled.div`
   }
 `;
 
-const HintContainer = ({ children, hint }) => {
+const Alarm = styled.div`
+  display: flex;
+  width: 100%;
+  height: 36px;
+  align-items: flex-start;
+`;
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const HintContainer = ({ children, hint, showHints }) => {
   return (
-    <TextContainer hint>
-      <span>
-        <FiAlertCircle id='icon' />
-        {hint ? 'hint' : '정답'}
-      </span>
-      {children}
+    <TextContainer>
+      <Alarm>
+        <Snippet tips className={`showHints ${showHints ? 'hint' : 'correct'}`}>
+          <AiFillAlert id='icon' size='1rem' />
+          {hint ? 'hint' : '정답'}
+        </Snippet>
+      </Alarm>
+      <Content>{children}</Content>
     </TextContainer>
   );
 };
@@ -58,11 +77,10 @@ const ShowHintOrAnswer = ({ trackName, showHints, timeOver }) => {
   return (
     <Wrapper>
       {showHints && timeOver === false && (
-        <HintContainer hint>
+        <HintContainer hint showHints>
           <Hint trackName={trackName} />
         </HintContainer>
       )}
-
       {timeOver && <HintContainer>{trackName}</HintContainer>}
     </Wrapper>
   );

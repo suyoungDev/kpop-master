@@ -1,21 +1,25 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useSound from 'use-sound';
 
-import './GameLayout.scss';
-
 import QuizLeft from './Section/QuizLeft/QuizLeft';
 import Player from './Section/Player/Player';
 import Session from './Section/Session/Session';
 import LogList from './Section/LogList/LogList';
 import ShowHintOrAnswer from './Section/ShowHintOrAnswer/ShowHintOrAnswer';
-import Glass from '../../components/GlassContainer/Glass';
 import Center from '../../components/Center/Center';
+import RoundContainer from '../../components/RoundContainer/RoundContainer';
+import Row from '../../components/Row/Row';
+import Glass from '../../components/GlassContainer/Glass';
+import Snippet from '../../components/Snippet/Snippet';
+import InputContainer from '../../components/InputContainer/InputContainer';
+import CleanCard from '../../components/Card/CleanCard';
 
 import correctSfx from '../../constants/sounds/correct.mp3';
 import wrongSfx from '../../constants/sounds/wrong1.mp3';
 
 import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
+import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
 
 const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
@@ -51,7 +55,7 @@ const GameLayout = ({ trackList }) => {
     const setOver = setTimeout(() => {
       setTimeOver(false);
       if (isGameEnd === 'onGoing') {
-        goNextRound();
+        // goNextRound();
       }
     }, 13000);
 
@@ -133,36 +137,37 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <Center>
+    <Center bgcolor={`${COLORS.primaryDark}`}>
       <Player url={url} />
-      <QuizLeft passed={currentRound + 1} left='10' />
 
-      <Session />
+      <Session id='first' />
 
-      <Glass width='20rem' height='17.5rem' evenly>
-        <ShowHintOrAnswer
-          trackName={trackList[currentRound].trackName}
-          showHints={showHints}
-          timeOver={timeOver}
-        />
+      <InputContainer id='third'>
+        <form onSubmit={answerSubmit}>
+          <input
+            placeholder='guess what?'
+            type='text'
+            value={inputValue}
+            onChange={onChange}
+            ref={focusedInput}
+            disabled={timeOver}
+          />
+        </form>
+      </InputContainer>
 
-        <div className='input-wrapper'>
-          <form onSubmit={answerSubmit}>
-            <input
-              placeholder='guess what?'
-              type='text'
-              value={inputValue}
-              onChange={onChange}
-              ref={focusedInput}
-              disabled={timeOver}
-            />
-            <span className='input-highlight'>
-              {inputValue.replace(/ /g, '\u00a0')}
-            </span>
-          </form>
-        </div>
+      <div id='four'>
         <LogList giveAnswers={givenAnswersList} />
-      </Glass>
+      </div>
+
+      <RoundContainer id='second'>
+        <CleanCard className={`${showHints === false && 'hide'}`}>
+          <ShowHintOrAnswer
+            trackName={trackList[currentRound].trackName}
+            showHints={showHints}
+            timeOver={timeOver}
+          />
+        </CleanCard>
+      </RoundContainer>
     </Center>
   );
 };

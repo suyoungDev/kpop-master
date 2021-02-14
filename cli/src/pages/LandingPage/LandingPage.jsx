@@ -61,10 +61,9 @@ const LandingPage = () => {
         <img src={levelImage.four} />
       </Row>
       <RoundContainer>
-        <CardContainer id='cards'>
+        <CardContainer id='three'>
           <Card alert='플레이 방법' title='2020-02'>
             <ul>
-              <li>아직 블랙핑크만 지원됩니다! 😥</li>
               <li>노래를 듣고 10초 안에 노래제목을 맞추는 게임입니다.</li>
               <li>6초에 힌트가 나가니 참고해주세요.</li>
               <li>대소문자 구분과 공백, 특수문자는 무시합니다.</li>
@@ -76,14 +75,15 @@ const LandingPage = () => {
               </li>
             </ul>
           </Card>
-          <Card alert='개발예정' title='2020-02' secondary>
+          <Card alert='개발 예정' title='2020-02' secondary>
             <ul>
-              <li>년도별 top 100</li>
+              <li>아직 블랙핑크만 지원됩니다! 😥</li>
+              <li>년도별 top 100 지원</li>
               <li>가수 (검색 지원)</li>
             </ul>
           </Card>
         </CardContainer>
-        <Row id='start-button'>
+        <Row id='two'>
           <LinkButton links={'/start'}>start</LinkButton>
         </Row>
       </RoundContainer>
