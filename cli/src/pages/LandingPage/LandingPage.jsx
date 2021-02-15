@@ -22,24 +22,21 @@ const TitleWrapper = styled.div`
   font-size: 3rem;
   font-family: ${FONT.englishTitleCurv};
   font-weight: 700;
-  color: ${COLORS.primaryMiddle};
-  text-shadow: 0 7px 7px rgba(0, 0, 0, 0.13);
-  -webkit-text-stroke: 2px #f8f8f8;
+
+  letter-spacing: 2px;
+  color: rgba(245, 235, 255, 0.4);
+  // 그림자용 + 베이스
+  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryShaodw},
+    -5px 10px 10px #3339c3;
 
   @media ${SCREEN.tablet} {
-    margin: 0;
-    color: ${COLORS.primaryMiddle};
-    text-shadow: none;
-    -webkit-text-stroke: 0;
-    background: -webkit-linear-gradient(
-      ${COLORS.primaryDark},
-      ${COLORS.primaryMiddle}
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     font-size: 5.4rem;
     width: 600px;
     flex-wrap: nowrap;
+    color: rgba(108, 99, 255, 0.8);
+    text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark},
+      -5px 10px 10px ${COLORS.primaryShaodw};
+    -webkit-text-stroke: none;
   }
 `;
 
