@@ -12,7 +12,6 @@ const Center = styled.div`
 
   @media ${SCREEN.tablet} {
     background: #ffffff;
-    border: 1px solid green;
 
     #first {
       order: 1;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
+import { SIZES, SCREEN } from '../../constants/theme';
 
 const RoundContainer = styled.div`
   width: 100%;

@@ -26,6 +26,7 @@ export const FONT = {
 
 export const SIZES = {
   radiusSmall: '15px',
+  radiusMid: '30px',
   radiusBig: '50px',
 };
 export const WIDTH = {

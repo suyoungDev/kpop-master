@@ -10,9 +10,9 @@ const LinkContainer = styled(Link)`
   align-items: center;
   justify-content: center;
 
-  width: 200px;
-  height: 70px;
+  padding: 0.75em 2.7em;
   border-radius: 100px;
+  margin-top: 1.4rem;
 
   background: linear-gradient(
     30deg,
@@ -26,11 +26,12 @@ const LinkContainer = styled(Link)`
   font-family: ${FONT.englishButton};
   font-style: italic;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   letter-spacing: 3px;
   text-transform: capitalize;
   text-decoration: none;
   transition: width 1s ease;
+  text-shadow: -5px 10px 10px #3339c3;
 
   :hover {
     background: ${COLORS.primaryDark};
@@ -39,12 +40,17 @@ const LinkContainer = styled(Link)`
   }
 
   &.secondary {
+    font-size: 1.2rem;
+    color: ${COLORS.primaryMiddle};
+    text-shadow: none;
+
     background: linear-gradient(
       30deg,
       #fff3d6 0%,
       ${COLORS.secondaryDark} 100%
     );
-    color: ${COLORS.primaryMiddle};
+    box-shadow: 0 22px 13px -12px rgba(255, 236, 187, 0.3);
+    text-shadow: -5px 5px 8px #ebb734;
 
     :hover {
       background: ${COLORS.secondaryDark};
@@ -52,19 +58,14 @@ const LinkContainer = styled(Link)`
   }
 
   @media ${SCREEN.tablet} {
-    padding: 1rem 2.7rem;
-    font-size: 1.4rem;
-    width: 300px;
+    font-size: 2rem;
     align-self: flex-start;
-  }
-  @media ${SCREEN.tablet} {
-    padding: 1rem 2.7rem;
   }
 `;
 
-const LinkButton = ({ children, links, name, ...otherprops }) => {
+const LinkButton = ({ children, links, ...otherprops }) => {
   return (
-    <LinkContainer to={links} {...otherprops} className={name}>
+    <LinkContainer to={links} {...otherprops}>
       {children}
     </LinkContainer>
   );

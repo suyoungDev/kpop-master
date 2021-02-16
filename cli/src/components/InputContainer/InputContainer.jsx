@@ -3,10 +3,9 @@ import { SCREEN, FONT, COLORS, SIZES } from '../../constants/theme';
 
 const InputContainer = styled.div`
   width: 100%;
-  height: auto;
-  line-height: 70px;
+  height: 120px;
   font-family: ${FONT.english};
-  margin: 1rem 2rem;
+  margin: 0.5rem 2rem;
 
   display: flex;
   flex-direction: column;
@@ -14,12 +13,12 @@ const InputContainer = styled.div`
   justify-content: center;
 
   input {
-    width: 310px;
+    font-size: 1rem;
+    padding: 1.3rem;
+    width: 300px;
     height: 3.4rem;
     border: none;
     border-radius: ${SIZES.radiusSmall};
-    padding: 1.2rem;
-
     background-color: ${COLORS.primaryMiddle};
 
     font-size: 1.3rem;
@@ -34,21 +33,40 @@ const InputContainer = styled.div`
   }
 
   & ::placeholder {
-    color: white;
-    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
     font-family: ${FONT.english};
     font-weight: 300;
   }
 
   @media ${SCREEN.tablet} {
-    margin: 2rem 2rem;
+    height: auto;
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    background: rgb(32, 34, 38);
+    background: linear-gradient(
+      190deg,
+      ${COLORS.primaryMiddle} 0%,
+      ${COLORS.primary} 100%
+    );
+
     input {
-      background-color: ${COLORS.primaryShaodw};
+      padding: 0.2rem;
+      border-radius: 0;
+      background-color: transparent;
+      border-bottom: 3px solid ${COLORS.textWhiteMid};
+      color: white;
+
+      &:focus {
+        background-color: transparent;
+      }
     }
+
     & ::placeholder {
-      color: ${COLORS.textBlack};
+      color: ${COLORS.textWhiteMid};
     }
-  } ;
+  }
 `;
 
 export default InputContainer;

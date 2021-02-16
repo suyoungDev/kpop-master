@@ -16,3 +16,5 @@ wrong1.mp3
 Test.jsx
 cli/src/constants/image/mueStudio.jpg
 cli/src/constants/image/Cristina-La-Porta-Chill-Solarium.jpg
+cli/src/constants/image/outroImage/error.svg
+.gitignore

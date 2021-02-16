@@ -66,6 +66,7 @@ const CurrentRecord = ({ gameResult, averageResponseTime }) => {
 
     const wrong = gameResult.filter((game) => game.result === 'wrong').length;
     setQuantitiyOfWrong(wrong);
+    // eslint-disable-next-line
   }, []);
 
   const title = (

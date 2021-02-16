@@ -12,7 +12,6 @@ import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
 import Description from './Section/Description/Description';
 import Spinner from './Section/Spinner/Spinner';
 import LinkButton from '../../components/LinkButton/LinkButton';
-import Glass from '../../components/GlassContainer/Glass';
 import Center from '../../components/Center/Center';
 
 const ContentWrapper = styled.div`
@@ -49,34 +48,34 @@ const OutroPage = () => {
   return (
     <>
       <Center>
-        <Glass>
-          <Description averageResponseTime={averageResponseTime} />
+        <Description averageResponseTime={averageResponseTime} />
 
-          <ContentWrapper>
-            <PreviousRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
+        <ContentWrapper>
+          <PreviousRecord
+            averageResponseTime={averageResponseTime}
+            gameResult={gameResult}
+          />
+          <SavingMyRecord
+            averageResponseTime={averageResponseTime}
+            gameResult={gameResult}
+          />
+          <CurrentRecord
+            averageResponseTime={averageResponseTime}
+            gameResult={gameResult}
+          />
+          {isLoading === 'loading' ? (
+            <Spinner />
+          ) : (
+            <RankersRecord
+              userRankList={userRankList}
+              myRecord={averageResponseTime}
             />
-            <SavingMyRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
-            />
-            <CurrentRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
-            />
-            {isLoading === 'loading' ? (
-              <Spinner />
-            ) : (
-              <RankersRecord
-                userRankList={userRankList}
-                myRecord={averageResponseTime}
-              />
-            )}
-            <ShareMyRecord />
-            <LinkButton links='/'>play again</LinkButton>
-          </ContentWrapper>
-        </Glass>
+          )}
+          <ShareMyRecord />
+          <LinkButton className='secondary' links='/'>
+            play again
+          </LinkButton>
+        </ContentWrapper>
       </Center>
     </>
   );

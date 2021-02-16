@@ -5,8 +5,10 @@ const CleanCard = styled.div`
   width: 90%;
   max-width: 450px;
   height: 250px;
-  border-radius: ${SIZES.radiusSmall};
   padding: 1rem;
+
+  border-bottom-left-radius: ${SIZES.radiusMid};
+  border-bottom-right-radius: ${SIZES.radiusMid};
 
   display: flex;
   flex-direction: column;
@@ -17,11 +19,6 @@ const CleanCard = styled.div`
   font-family: ${FONT.korean};
   font-weight: 200;
   color: ${COLORS.textDark};
-
-  &.hide {
-    display: none;
-    background-color: purple;
-  }
 
   @media ${SCREEN.tablet} {
     background: white;

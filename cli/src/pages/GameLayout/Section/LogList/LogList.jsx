@@ -3,11 +3,21 @@ import styled from 'styled-components';
 import { SCREEN, COLORS } from '../../../../constants/theme';
 
 const Wrapper = styled.ul`
-  width: 270px;
-  height: 180px;
+  width: 100%;
+  max-width: 300px;
+  height: 250px;
+
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.3rem;
+
+  padding: 0 1rem;
+
+  @media ${SCREEN.tablet} {
+    width: 100%;
+    max-width: none;
+    margin-top: 0.4rem;
+    padding: 2rem 2.4rem;
+  }
 `;
 
 const Log = styled.li`
@@ -22,7 +32,7 @@ const Log = styled.li`
   list-style: none;
 
   @media ${SCREEN.tablet} {
-    color: ${COLORS.textMid};
+    color: ${COLORS.grayDeepDark};
   }
 `;
 

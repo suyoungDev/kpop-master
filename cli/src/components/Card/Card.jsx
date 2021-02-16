@@ -26,7 +26,7 @@ const Container = styled.div`
   ul {
     margin: 0.5rem 0;
     font-size: 14px;
-    line-height: 1.7rem;
+    line-height: 1.4rem;
     list-style: none;
 
     #tip {

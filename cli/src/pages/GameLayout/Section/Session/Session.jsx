@@ -1,49 +1,51 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { FiCheckCircle } from 'react-icons/fi';
-import { FiX } from 'react-icons/fi';
+import { COLORS, SCREEN } from '../../../../constants/theme';
 
 import { GameResultContext } from '../../../../context/GameResultContext/GameResultContext';
 
 const Wrapper = styled.div`
-  width: 20rem;
-  height: 2.5rem;
-  padding: 5px 2.3rem 0 2.3rem;
-  margin-bottom: 1rem;
+  width: 100%;
+  height: 1rem;
 
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
+  background-color: ${COLORS.grayMiddle};
+  margin-bottom: 2rem;
 
-  background: rgba(131, 127, 127, 0.082);
-  backdrop-filter: blur(14.5px);
-  -webkit-backdrop-filter: blur(4.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(165, 165, 165, 0.233);
+  @media ${SCREEN.tablet} {
+    max-width: 450px;
+    height: 0.7rem;
+    box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+    margin-bottom: 0;
+  }
 `;
 
-const Log = styled.span`
-  color: black;
-  font-family: 'Raleway';
-  padding-right: 0.4rem;
+const SessionBox = styled.div`
+  width: 10%;
+  height: 100%;
+  border-right: 2px solid rgba(255, 255, 255, 0.45);
+
+  &.correct {
+    background-color: ${COLORS.secondaryDark};
+  }
+  &.wrong {
+    background-color: ${COLORS.grayDeepDark};
+  }
 `;
 
 const Session = () => {
   // eslint-disable-next-line
   const [gameResult, setGameResult] = useContext(GameResultContext);
-
   return (
     <Wrapper>
-      {gameResult.map((song, idx) => (
-        <Log key={song.id}>
-          {song.result === 'correct' ? (
-            <FiCheckCircle size='1.2rem' color='white' />
-          ) : (
-            <FiX size='1.2rem' color='rgba(255,255,255,0.4)' />
-          )}
-        </Log>
+      {gameResult.map((item) => (
+        <SessionBox
+          className={`${item.result === 'correct' ? 'correct' : 'wrong'}`}
+        />
       ))}
     </Wrapper>
   );

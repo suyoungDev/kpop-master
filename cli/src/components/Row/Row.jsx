@@ -20,7 +20,7 @@ const Row = styled.div`
   @media ${SCREEN.tablet} {
     width: 600px;
     justify-content: start;
-    padding: ${({ main }) => (main ? '1rem 0 0 0' : '1rem 0 1.4rem 0')};
+    padding: ${({ main }) => (main ? '1rem 0 0 0' : '0 0 0 0')};
     img {
       display: block;
       position: relative;
@@ -32,7 +32,7 @@ const Row = styled.div`
     width: 80%;
     max-width: 916px;
     align-items: center;
-    padding: ${({ main }) => (main ? '3rem 0 0 0' : '0 0 2rem 0')};
+    padding: ${({ main }) => (main ? '3rem 0 0 0' : '0 0 0 0')};
     img {
       display: flex;
       width: auto;

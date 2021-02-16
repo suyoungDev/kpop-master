@@ -12,21 +12,20 @@ import Row from '../../components/Row/Row';
 import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
 
-import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
+import { COLORS, FONT, SCREEN } from '../../constants/theme';
 
 const TitleWrapper = styled.div`
   width: 400px;
   height: auto;
 
   text-align: left;
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-family: ${FONT.englishTitleCurv};
   font-weight: 700;
 
   letter-spacing: 2px;
-  color: rgba(245, 235, 255, 0.4);
-  // 그림자용 + 베이스
-  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryShaodw},
+  color: rgba(255, 255, 255, 0.56);
+  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryLight},
     -5px 10px 10px #3339c3;
 
   @media ${SCREEN.tablet} {
@@ -47,15 +46,15 @@ const LandingPage = () => {
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
   useEffect(() => {
-    //setIsGameEnd('onGoing');
-    //setGameResult([]);
+    setIsGameEnd(false);
+    setGameResult([]);
   }, []);
 
   return (
     <Center bgcolor={`${COLORS.primaryDark}`}>
       <Row main>
         <TitleWrapper>K-pop Master Quiz</TitleWrapper>
-        <img src={levelImage.four} />
+        <img src={levelImage.four} alt='우주에서 학구열이 강한 몬스터' />
       </Row>
       <RoundContainer>
         <CardContainer id='three'>

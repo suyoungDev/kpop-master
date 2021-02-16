@@ -12,9 +12,9 @@ const Container = styled.div`
   justify-content: center;
 
   font-family: ${FONT.korean};
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-align: center;
-  font-weight: bold;
+  font-weight: 800;
   letter-spacing: 0.1rem;
 
   background-color: ${({ secondary }) =>

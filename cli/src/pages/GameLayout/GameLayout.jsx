@@ -1,25 +1,23 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useSound from 'use-sound';
+import checkImg from '../../constants/image/checkImg.svg';
 
-import QuizLeft from './Section/QuizLeft/QuizLeft';
 import Player from './Section/Player/Player';
 import Session from './Section/Session/Session';
 import LogList from './Section/LogList/LogList';
 import ShowHintOrAnswer from './Section/ShowHintOrAnswer/ShowHintOrAnswer';
 import Center from '../../components/Center/Center';
 import RoundContainer from '../../components/RoundContainer/RoundContainer';
-import Row from '../../components/Row/Row';
-import Glass from '../../components/GlassContainer/Glass';
-import Snippet from '../../components/Snippet/Snippet';
 import InputContainer from '../../components/InputContainer/InputContainer';
 import CleanCard from '../../components/Card/CleanCard';
+import AnswerCard from './Section/AnswerCard/AnswerCard';
 
 import correctSfx from '../../constants/sounds/correct.mp3';
 import wrongSfx from '../../constants/sounds/wrong1.mp3';
 
 import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
-import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
+import { COLORS } from '../../constants/theme';
 
 const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
@@ -32,10 +30,12 @@ const GameLayout = ({ trackList }) => {
   const [url, setUrl] = useState('');
   const [showHints, setShowHints] = useState(false);
   const [timeOver, setTimeOver] = useState(false);
+  const [startTime, setStartTime] = useState(Date.now());
 
   const focusedInput = useRef(null);
 
-  const [startTime, setStartTime] = useState(Date.now());
+  const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
+  const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
   useEffect(() => {
     focusedInput.current.focus();
@@ -54,7 +54,7 @@ const GameLayout = ({ trackList }) => {
 
     const setOver = setTimeout(() => {
       setTimeOver(false);
-      if (isGameEnd === 'onGoing') {
+      if (!isGameEnd) {
         // goNextRound();
       }
     }, 13000);
@@ -66,9 +66,6 @@ const GameLayout = ({ trackList }) => {
     };
     // eslint-disable-next-line
   }, [currentRound]);
-
-  const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
-  const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
   const timeOut = () => {
     const endTime = Date.now();
@@ -108,7 +105,7 @@ const GameLayout = ({ trackList }) => {
 
   const goNextRound = (answerResult) => {
     const newResult = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substr(2, 4),
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
@@ -118,7 +115,7 @@ const GameLayout = ({ trackList }) => {
     setGameResult([...gameResult, newResult]);
 
     if (currentRound === 9) {
-      setIsGameEnd('end');
+      setIsGameEnd(true);
       return setUrl('');
     }
 
@@ -142,29 +139,30 @@ const GameLayout = ({ trackList }) => {
 
       <Session id='first' />
 
-      <InputContainer id='third'>
-        <form onSubmit={answerSubmit}>
-          <input
-            placeholder='guess what?'
-            type='text'
-            value={inputValue}
-            onChange={onChange}
-            ref={focusedInput}
-            disabled={timeOver}
-          />
-        </form>
-      </InputContainer>
-
-      <div id='four'>
-        <LogList giveAnswers={givenAnswersList} />
-      </div>
+      <AnswerCard id='four'>
+        <img src={checkImg} alt='귀여운 체크 일러스트' />
+        <InputContainer className='input-wrapper'>
+          <form onSubmit={answerSubmit}>
+            <input
+              placeholder='guess what?'
+              type='text'
+              value={inputValue}
+              onChange={onChange}
+              ref={focusedInput}
+              disabled={timeOver}
+            />
+          </form>
+        </InputContainer>
+        <LogList giveAnswers={givenAnswersList} className='log-list' />
+      </AnswerCard>
 
       <RoundContainer id='second'>
-        <CleanCard className={`${showHints === false && 'hide'}`}>
+        <CleanCard>
           <ShowHintOrAnswer
             trackName={trackList[currentRound].trackName}
             showHints={showHints}
             timeOver={timeOver}
+            className='inputWrapper'
           />
         </CleanCard>
       </RoundContainer>
