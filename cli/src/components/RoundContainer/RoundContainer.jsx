@@ -14,8 +14,8 @@ const RoundContainer = styled.div`
   padding-top: 1.7rem;
 
   @media ${SCREEN.tablet} {
-    padding-top: 0rem;
-    height: auto;
+    height: 210px;
+    padding: 1.5rem;
 
     #three {
       order: 3;

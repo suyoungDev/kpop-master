@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { COLORS, SCREEN } from '../../../../constants/theme';
+import { COLORS, SCREEN, SIZES } from '../../../../constants/theme';
 
 import { GameResultContext } from '../../../../context/GameResultContext/GameResultContext';
 
@@ -17,9 +17,8 @@ const Wrapper = styled.div`
   margin-bottom: 2rem;
 
   @media ${SCREEN.tablet} {
-    max-width: 450px;
+    max-width: ${SIZES.gameLayoutWidth};
     height: 0.7rem;
-    box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
     margin-bottom: 0;
   }
 `;

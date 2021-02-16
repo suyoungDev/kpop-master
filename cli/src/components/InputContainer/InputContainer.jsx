@@ -3,7 +3,6 @@ import { SCREEN, FONT, COLORS, SIZES } from '../../constants/theme';
 
 const InputContainer = styled.div`
   width: 100%;
-  height: 120px;
   font-family: ${FONT.english};
   margin: 0.5rem 2rem;
 
@@ -16,6 +15,7 @@ const InputContainer = styled.div`
     font-size: 1rem;
     padding: 1.3rem;
     width: 300px;
+
     height: 3.4rem;
     border: none;
     border-radius: ${SIZES.radiusSmall};
@@ -40,19 +40,11 @@ const InputContainer = styled.div`
   }
 
   @media ${SCREEN.tablet} {
-    height: auto;
     width: 100%;
     margin: 0;
-    padding: 1rem;
-    background: rgb(32, 34, 38);
-    background: linear-gradient(
-      190deg,
-      ${COLORS.primaryMiddle} 0%,
-      ${COLORS.primary} 100%
-    );
 
     input {
-      padding: 0.2rem;
+      width: ${SIZES.gameLayoutMediumWidth};
       border-radius: 0;
       background-color: transparent;
       border-bottom: 3px solid ${COLORS.textWhiteMid};
@@ -60,6 +52,7 @@ const InputContainer = styled.div`
 
       &:focus {
         background-color: transparent;
+        border-bottom: 3px solid #ffffff;
       }
     }
 

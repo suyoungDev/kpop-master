@@ -18,7 +18,7 @@ export const COLORS = {
 
 export const FONT = {
   korean: 'Nanum Gothic',
-  english: 'Montserrat',
+  english: 'Roboto',
   englishTitleCurv: `'Fredoka One', cursive`,
   englishButton: `'Josefin Sans', sans-serif;`,
 };
@@ -27,6 +27,8 @@ export const SIZES = {
   radiusSmall: '15px',
   radiusMid: '30px',
   radiusBig: '30px',
+  gameLayoutWidth: '500px',
+  gameLayoutMediumWidth: '400px',
 };
 export const WIDTH = {
   mobileS: '320px',

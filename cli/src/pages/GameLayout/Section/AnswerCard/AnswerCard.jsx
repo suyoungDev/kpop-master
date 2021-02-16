@@ -20,30 +20,23 @@ const AnswerCard = styled.div`
 
   @media ${SCREEN.tablet} {
     position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+
+    background: rgb(32, 34, 38);
+    background: linear-gradient(
+      190deg,
+      ${COLORS.primaryMiddle} 0%,
+      ${COLORS.primary} 100%
+    );
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    width: 350px;
-    height: 400px;
-
-    margin-top: 3rem;
-    padding: 0;
-    border-radius: ${SIZES.radiusMid};
-    border: 1px solid ${COLORS.grayMiddle};
-
-    box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
     img {
       width: 140px;
-    }
-
-    .input-wrapper {
-      grid-area: input;
-      position: absolute;
-      top: 0;
-    }
-
-    .log-list {
-      grid-area: log;
     }
   }
 `;

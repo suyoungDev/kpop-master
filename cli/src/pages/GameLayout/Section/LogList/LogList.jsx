@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SCREEN, COLORS } from '../../../../constants/theme';
+import { SCREEN, COLORS, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.ul`
   width: 100%;
-  max-width: 300px;
-  height: 250px;
+  max-width: ${SIZES.gameLayoutMediumWidth};
+  height: 150px;
 
   display: flex;
   flex-direction: column;
@@ -13,10 +13,9 @@ const Wrapper = styled.ul`
   padding: 0 1rem;
 
   @media ${SCREEN.tablet} {
-    width: 100%;
-    max-width: none;
-    margin-top: 0.4rem;
-    padding: 2rem 2.4rem;
+    width: ${SIZES.gameLayoutMediumWidth};
+    height: 250px;
+    padding: 1.3rem;
   }
 `;
 
@@ -32,7 +31,7 @@ const Log = styled.li`
   list-style: none;
 
   @media ${SCREEN.tablet} {
-    color: ${COLORS.grayDeepDark};
+    color: rgba(255, 255, 255, 0.7);
   }
 `;
 

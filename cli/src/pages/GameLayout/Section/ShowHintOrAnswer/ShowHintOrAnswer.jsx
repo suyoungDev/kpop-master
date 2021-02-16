@@ -6,17 +6,20 @@ import { AiFillAlert } from 'react-icons/ai';
 import Hint from '../Hint/Hint';
 import Snippet from '../../../../components/Snippet/Snippet';
 
-import { COLORS, FONT, SCREEN } from '../../../../constants/theme';
+import { COLORS, FONT, SCREEN, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
   height: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media ${SCREEN.tablet} {
+    width: 100%;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -40,13 +43,13 @@ const TextContainer = styled.div`
 
 const Title = styled.div`
   display: flex;
-  width: 100%;
+  width: ${SIZES.gameLayoutMediumWidth};
   height: 36px;
   align-items: flex-start;
 `;
 const Content = styled.div`
   display: flex;
-  width: 100%;
+  width: ${SIZES.gameLayoutMediumWidth};
   height: 100%;
   justify-content: center;
   align-items: center;
@@ -61,7 +64,7 @@ const Content = styled.div`
   color: ${COLORS.textDark};
 
   @media ${SCREEN.tablet} {
-    font-size: 2.7rem;
+    font-size: 1.7rem;
   }
 `;
 

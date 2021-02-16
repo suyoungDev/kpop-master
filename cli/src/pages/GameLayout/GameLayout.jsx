@@ -138,35 +138,34 @@ const GameLayout = ({ trackList }) => {
       <Player url={url} />
 
       <Session id='first' />
+      <CleanCard>
+        <AnswerCard id='four'>
+          <img src={checkImg} alt='귀여운 체크' />
+          <InputContainer>
+            <form onSubmit={answerSubmit}>
+              <input
+                placeholder='guess what?'
+                type='text'
+                value={inputValue}
+                onChange={onChange}
+                ref={focusedInput}
+                disabled={timeOver}
+              />
+            </form>
+            <questionIcon />
+          </InputContainer>
+          <LogList giveAnswers={givenAnswersList} />
+        </AnswerCard>
 
-      <AnswerCard id='four'>
-        <img src={checkImg} alt='귀여운 체크' />
-        <InputContainer className='input-wrapper'>
-          <form onSubmit={answerSubmit}>
-            <input
-              placeholder='guess what?'
-              type='text'
-              value={inputValue}
-              onChange={onChange}
-              ref={focusedInput}
-              disabled={timeOver}
-            />
-          </form>
-          <questionIcon />
-        </InputContainer>
-        <LogList giveAnswers={givenAnswersList} className='log-list' />
-      </AnswerCard>
-
-      <RoundContainer id='second'>
-        <CleanCard>
+        <RoundContainer id='second'>
           <ShowHintOrAnswer
             trackName={trackList[currentRound].trackName}
             showHints={showHints}
             timeOver={timeOver}
             className='inputWrapper'
           />
-        </CleanCard>
-      </RoundContainer>
+        </RoundContainer>
+      </CleanCard>
     </Center>
   );
 };
