@@ -13,7 +13,7 @@ const Start = () => {
 
   const result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
 
-  if (isGameEnd === 'end') {
+  if (isGameEnd) {
     return <OutroPage />;
   }
 
