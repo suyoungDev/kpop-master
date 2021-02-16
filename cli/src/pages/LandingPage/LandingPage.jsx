@@ -25,16 +25,14 @@ const TitleWrapper = styled.div`
 
   letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.56);
-  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryLight},
-    -5px 10px 10px #3339c3;
+  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryLight};
 
   @media ${SCREEN.tablet} {
     font-size: 5.4rem;
     width: 600px;
     flex-wrap: nowrap;
     color: rgba(108, 99, 255, 0.8);
-    text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark},
-      -5px 10px 10px ${COLORS.primaryShaodw};
+    text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark};
     -webkit-text-stroke: none;
   }
 `;

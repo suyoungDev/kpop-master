@@ -140,11 +140,11 @@ const GameLayout = ({ trackList }) => {
       <Session id='first' />
 
       <AnswerCard id='four'>
-        <img src={checkImg} alt='귀여운 체크 일러스트' />
+        <img src={checkImg} alt='귀여운 체크' />
         <InputContainer className='input-wrapper'>
           <form onSubmit={answerSubmit}>
             <input
-              placeholder='guess what?'
+              placeholder='guess what?'
               type='text'
               value={inputValue}
               onChange={onChange}
@@ -152,6 +152,7 @@ const GameLayout = ({ trackList }) => {
               disabled={timeOver}
             />
           </form>
+          <questionIcon />
         </InputContainer>
         <LogList giveAnswers={givenAnswersList} className='log-list' />
       </AnswerCard>

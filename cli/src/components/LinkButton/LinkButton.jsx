@@ -20,7 +20,6 @@ const LinkContainer = styled(Link)`
     ${COLORS.primaryMiddle} 40%,
     ${COLORS.primaryDark} 100%
   );
-  box-shadow: 0 28px 13px -12px ${COLORS.primaryShaodw};
 
   color: white;
   font-family: ${FONT.englishButton};
@@ -31,11 +30,9 @@ const LinkContainer = styled(Link)`
   text-transform: capitalize;
   text-decoration: none;
   transition: width 1s ease;
-  text-shadow: -5px 10px 10px #3339c3;
 
   :hover {
     background: ${COLORS.primaryDark};
-    box-shadow: 0px 22px 13px -12px ${COLORS.primaryShaodw};
     color: white;
   }
 
@@ -49,8 +46,6 @@ const LinkContainer = styled(Link)`
       #fff3d6 0%,
       ${COLORS.secondaryDark} 100%
     );
-    box-shadow: 0 22px 13px -12px rgba(255, 236, 187, 0.3);
-    text-shadow: -5px 5px 8px #ebb734;
 
     :hover {
       background: ${COLORS.secondaryDark};

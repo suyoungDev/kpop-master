@@ -11,7 +11,7 @@ const AnswerCard = styled.div`
   overflow: hidden;
 
   img {
-    width: 140px;
+    width: 90px;
     position: absolute;
     right: 1rem;
     bottom: 0;
@@ -32,6 +32,9 @@ const AnswerCard = styled.div`
     border: 1px solid ${COLORS.grayMiddle};
 
     box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+    img {
+      width: 140px;
+    }
 
     .input-wrapper {
       grid-area: input;

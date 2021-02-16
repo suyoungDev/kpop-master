@@ -64,7 +64,7 @@ const InputContainer = styled.div`
     }
 
     & ::placeholder {
-      color: ${COLORS.textWhiteMid};
+      color: #ffffff;
     }
   }
 `;

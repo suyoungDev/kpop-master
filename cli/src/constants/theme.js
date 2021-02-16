@@ -18,7 +18,6 @@ export const COLORS = {
 
 export const FONT = {
   korean: 'Nanum Gothic',
-  koreanTitle: 'Do Hyeon',
   english: 'Montserrat',
   englishTitleCurv: `'Fredoka One', cursive`,
   englishButton: `'Josefin Sans', sans-serif;`,
@@ -27,7 +26,7 @@ export const FONT = {
 export const SIZES = {
   radiusSmall: '15px',
   radiusMid: '30px',
-  radiusBig: '50px',
+  radiusBig: '30px',
 };
 export const WIDTH = {
   mobileS: '320px',
