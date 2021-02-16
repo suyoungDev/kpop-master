@@ -12,7 +12,6 @@ const LinkContainer = styled(Link)`
 
   padding: 0.75em 2.7em;
   border-radius: 100px;
-  margin-top: 1.4rem;
 
   background: linear-gradient(
     30deg,

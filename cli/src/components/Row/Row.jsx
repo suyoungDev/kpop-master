@@ -20,7 +20,8 @@ const Row = styled.div`
   @media ${SCREEN.tablet} {
     width: 600px;
     justify-content: start;
-    padding: ${({ main }) => (main ? '1rem 0 0 0' : '0 0 0 0')};
+    padding: 0;
+
     img {
       display: block;
       position: relative;
@@ -29,10 +30,11 @@ const Row = styled.div`
   }
 
   @media ${SCREEN.laptop} {
-    width: 80%;
+    width: ${({ main }) => (main ? '80%' : '85%')};
     max-width: 916px;
     align-items: center;
     padding: ${({ main }) => (main ? '3rem 0 0 0' : '0 0 0 0')};
+
     img {
       display: flex;
       width: auto;

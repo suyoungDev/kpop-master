@@ -54,7 +54,7 @@ const LandingPage = () => {
         <TitleWrapper>K-pop Master Quiz</TitleWrapper>
         <img src={levelImage.four} alt='우주에서 학구열이 강한 몬스터' />
       </Row>
-      <RoundContainer>
+      <RoundContainer main>
         <CardContainer id='three'>
           <Card alert='플레이 방법' title='2020-02'>
             <ul>
