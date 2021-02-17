@@ -10,9 +10,9 @@ export const COLORS = {
   grayMiddle: '#E5E5E5',
   grayDark: '#CBCBCB',
   grayDeepDark: '#6d7274',
-  textBlack: '#222',
+  textBlack: '#343435',
   textDark: '#383838',
-  textMid: '#8b9097',
+  textMid: '#636e72',
   textWhiteDark: 'rgba(255,255,255,0.4)',
   textWhiteMid: 'rgba(255, 255, 255, 0.7)',
 };

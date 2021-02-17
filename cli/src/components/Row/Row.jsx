@@ -18,7 +18,7 @@ const Row = styled.div`
   @media ${SCREEN.tablet} {
     width: ${SIZES.tabletWidth};
     justify-content: start;
-    padding: 0;
+    padding: ${({ main }) => (main ? '1rem 0 0 0' : '0')};
 
     img {
       display: block;
@@ -31,7 +31,7 @@ const Row = styled.div`
     width: ${({ main }) => (main ? '80%' : '85%')};
     max-width: ${SIZES.laptopWidth};
     align-items: center;
-    padding: ${({ main }) => (main ? '3rem 0 0 0' : '0 0 0 0')};
+    padding: ${({ main }) => (main ? '1rem 0 0 0' : '0 0 0 0')};
 
     img {
       display: flex;
