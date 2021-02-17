@@ -55,7 +55,7 @@ const GameLayout = ({ trackList }) => {
     const setOver = setTimeout(() => {
       setTimeOver(false);
       if (!isGameEnd) {
-        // goNextRound();
+        goNextRound();
       }
     }, 13000);
 
@@ -134,11 +134,11 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <Center bgcolor={`${COLORS.primaryDark}`}>
+    <Center bgcolor={`${COLORS.primaryDark}`} inGame>
       <Player url={url} />
 
       <Session id='first' />
-      <CleanCard>
+      <CleanCard inGame>
         <AnswerCard id='four'>
           <img src={checkImg} alt='귀여운 체크' />
           <InputContainer>
@@ -152,7 +152,6 @@ const GameLayout = ({ trackList }) => {
                 disabled={timeOver}
               />
             </form>
-            <questionIcon />
           </InputContainer>
           <LogList giveAnswers={givenAnswersList} />
         </AnswerCard>

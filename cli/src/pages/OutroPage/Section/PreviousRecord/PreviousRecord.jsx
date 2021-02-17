@@ -39,9 +39,8 @@ const Em = styled.span`
   font-weight: bold;
 `;
 
+// 이전 기록이 있을 경우, 자동으로 DB에 저장하기
 // 이전 기록과 비교해서 지금이 더 나으면 local에 저장하기
-// 비교하지 않고 그냥 자동으로 DB에 저장하기
-// 위의 두개 다 수행
 const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   const [existingUserName, setExistingUserName] = useState('');
   const [existingUserRecord, setExistingUserRecord] = useState('');
@@ -50,15 +49,20 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
     const userName = localStorage.getItem('_userName');
 
     if (userName) {
-      uploadRecordToDB(userName);
-      setExistingUserName(userName);
+      if (averageResponseTime > 0) {
+        uploadRecordToDB(userName);
+        setExistingUserName(userName);
 
-      const previousRecord = localStorage.getItem('_personalRecord');
-      setExistingUserRecord(previousRecord);
+        const previousRecord = localStorage.getItem('_personalRecord');
+        setExistingUserRecord(previousRecord);
 
-      const comparedResult = compareRecord(previousRecord, averageResponseTime);
-      if (comparedResult === 'better now') {
-        uploadRecordToLocal(averageResponseTime);
+        const comparedResult = compareRecord(
+          previousRecord,
+          averageResponseTime
+        );
+        if (comparedResult === 'better now') {
+          uploadRecordToLocal(averageResponseTime);
+        }
       }
     }
     // eslint-disable-next-line

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FiChevronRight } from 'react-icons/fi';
+import { COLORS } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,21 +16,14 @@ const Wrapper = styled.div`
   font-size: 16px;
   color: #2c2c2c;
 
-  background: rgba(255, 255, 255, 0);
-  background: linear-gradient(
-    70deg,
-    rgba(255, 255, 255, 0.075) 0%,
-    rgba(246, 185, 185, 0.26) 100%
-  );
-  backdrop-filter: blur(12.5px);
-  -webkit-backdrop-filter: blur(14.5px);
-  border: 1px solid rgba(255, 255, 255, 0.233);
+  border: 1px solid ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
 `;
 
 const Title = styled.button`
   width: 100%;
   height: 2rem;
-  padding: 0 1rem;
+  padding: 1.2rem 1rem;
 
   border: none;
   border-radius: 10px;
@@ -48,8 +42,8 @@ const Title = styled.button`
   background: transparent;
   background-image: linear-gradient(
     120deg,
-    #ffb8b8 0%,
-    rgba(251, 128, 165, 0.2) 100%
+    ${COLORS.primaryShaodw} 0%,
+    ${COLORS.primaryMiddle} 100%
   );
   background-repeat: no-repeat;
   background-size: 100% 0%;
@@ -69,6 +63,7 @@ const Title = styled.button`
   .accordion-icon {
     transition: transform 0.3s ease;
     margin-left: 4px;
+    color: black;
   }
 
   .rotate {

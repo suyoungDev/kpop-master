@@ -1,16 +1,14 @@
 import styled from 'styled-components';
-import { SCREEN } from '../../constants/theme';
+import { SCREEN, SIZES } from '../../constants/theme';
 
 const Row = styled.div`
   width: 100%;
+  padding: ${({ main }) => (main ? '2rem' : '1rem 0 0 0')};
 
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-
   justify-content: ${({ main }) => (main ? 'space-between' : 'center')};
-
-  padding: ${({ main }) => (main ? '2rem' : '1rem 0 0 0')};
 
   img {
     display: none;
@@ -18,7 +16,7 @@ const Row = styled.div`
   }
 
   @media ${SCREEN.tablet} {
-    width: 600px;
+    width: ${SIZES.tabletWidth};
     justify-content: start;
     padding: 0;
 
@@ -31,7 +29,7 @@ const Row = styled.div`
 
   @media ${SCREEN.laptop} {
     width: ${({ main }) => (main ? '80%' : '85%')};
-    max-width: 916px;
+    max-width: ${SIZES.laptopWidth};
     align-items: center;
     padding: ${({ main }) => (main ? '3rem 0 0 0' : '0 0 0 0')};
 

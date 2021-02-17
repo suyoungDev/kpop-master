@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { SCREEN } from '../../constants/theme';
 
 const Center = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: ${({ landing }) => (landing ? '100%' : '')};
+  height: ${({ landing }) => (landing ? '' : '100vh')};
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${({ inGame }) => (inGame ? 'center' : 'space-between')};
   align-items: center;
 
   background: ${({ bgcolor }) => (bgcolor ? `${bgcolor}` : 'transparent')};

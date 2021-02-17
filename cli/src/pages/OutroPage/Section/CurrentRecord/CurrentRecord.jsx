@@ -9,7 +9,6 @@ import Accordion from '../Accordion/Accordion';
 
 const TableContainer = styled.table`
   width: 100%;
-  font-family: 'Nanum Gothic';
   font-size: 16px;
   font-weight: 200;
   margin-top: -0.2rem;
@@ -24,7 +23,7 @@ const Tablehead = styled.th`
   font-size: 16px;
 `;
 
-const TableContext = styled.td`
+const TableContext = styled.th`
   color: ${({ isWorng }) => (isWorng === 'correct' ? 'black' : 'red')};
   font-weight: 200;
   overflow: hidden;

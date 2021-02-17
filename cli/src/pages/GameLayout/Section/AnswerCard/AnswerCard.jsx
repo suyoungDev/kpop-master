@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS, SIZES, SCREEN } from '../../../../constants/theme';
+import { COLORS, SCREEN } from '../../../../constants/theme';
 
 const AnswerCard = styled.div`
   width: 100%;

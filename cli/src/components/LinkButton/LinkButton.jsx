@@ -12,6 +12,7 @@ const LinkContainer = styled(Link)`
 
   padding: 0.75em 2.7em;
   border-radius: 100px;
+  margin: 1rem 0;
 
   background: linear-gradient(
     30deg,
@@ -37,8 +38,7 @@ const LinkContainer = styled(Link)`
 
   &.secondary {
     font-size: 1.2rem;
-    color: ${COLORS.primaryMiddle};
-    text-shadow: none;
+    color: ${COLORS.primaryDark};
 
     background: linear-gradient(
       30deg,
@@ -53,7 +53,7 @@ const LinkContainer = styled(Link)`
 
   @media ${SCREEN.tablet} {
     font-size: 2rem;
-    align-self: flex-start;
+    align-self: ${({ outro }) => (outro ? 'center' : 'flex-start)')};
   }
 `;
 

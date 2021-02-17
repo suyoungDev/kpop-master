@@ -46,10 +46,11 @@ const LandingPage = () => {
   useEffect(() => {
     setIsGameEnd(false);
     setGameResult([]);
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <Center bgcolor={`${COLORS.primaryDark}`}>
+    <Center bgcolor={`${COLORS.primaryDark}`} landing>
       <Row main>
         <TitleWrapper>K-pop Master Quiz</TitleWrapper>
         <img src={levelImage.four} alt='우주에서 학구열이 강한 몬스터' />

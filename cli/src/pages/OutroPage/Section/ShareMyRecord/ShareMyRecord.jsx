@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { COLORS } from '../../../../constants/theme';
 import { AwesomeButtonSocial } from 'react-awesome-button';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 
@@ -12,7 +12,8 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: baseline;
   justify-content: space-between;
-  padding: 2rem 1rem 0 1rem;
+  padding: 0 1rem;
+  margin: 1.5rem 0;
 `;
 
 const ShareTitle = styled.h2`
@@ -23,12 +24,12 @@ const ShareTitle = styled.h2`
 const Highlight = styled.span`
   background-image: linear-gradient(
     120deg,
-    #ffb8b8 0%,
-    rgba(251, 128, 165, 0.2) 100%
+    ${COLORS.primaryShaodw} 0%,
+    ${COLORS.primaryMiddle} 100%
   );
   background-repeat: no-repeat;
   background-size: 100% 0.4em;
-  background-position: 0 70%;
+  background-position: 0 100%;
   transition: background-size 0.25s ease-in;
 
   &:hover {
@@ -47,7 +48,7 @@ const ShareMyRecord = () => {
   return (
     <Wrapper>
       <ShareTitle>
-        <Highlight>내 결과 공유하기</Highlight>
+        <Highlight>내 결과 공유</Highlight>
       </ShareTitle>
       <ShareList>
         <AwesomeButtonSocial type='facebook' />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { SIZES } from '../../../../constants/theme';
 
 import levelImage from '../../../../constants/image/outroImage/level';
 
@@ -10,7 +11,9 @@ const Wrapper = styled.div`
 `;
 
 const Descript = styled.div`
-  width: 20rem;
+  width: 95%;
+  max-width: ${SIZES.tabletWidth};
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +57,7 @@ const Description = ({ averageResponseTime }) => {
     four:
       '진정한 블링크로 임명합니다! 당신은 모든 노래를 알고 있어요. 부족한 건 타이핑 속도뿐!',
     five:
-      '당신은 모든 노래를 거의 첫음만 듣고 알아챌 정도로 알고 있군요! 혹시 블랙핑크 본인이신가요? 와우!!!',
+      '당신은 모든 노래를 거의 첫음만 듣고 알아챌 정도로 알고 있군요! 혹시 블랙핑크 본인이신가요?',
   };
 
   return (

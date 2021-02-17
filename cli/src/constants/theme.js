@@ -13,7 +13,8 @@ export const COLORS = {
   textBlack: '#222',
   textDark: '#383838',
   textMid: '#8b9097',
-  textWhiteMid: 'rgba(255,255,255,0.4)',
+  textWhiteDark: 'rgba(255,255,255,0.4)',
+  textWhiteMid: 'rgba(255, 255, 255, 0.7)',
 };
 
 export const FONT = {
@@ -29,7 +30,10 @@ export const SIZES = {
   radiusBig: '30px',
   gameLayoutWidth: '500px',
   gameLayoutMediumWidth: '400px',
+  tabletWidth: '600px',
+  laptopWidth: '916px',
 };
+
 export const WIDTH = {
   mobileS: '320px',
   mobileM: '375px',

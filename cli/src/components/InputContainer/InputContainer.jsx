@@ -33,7 +33,7 @@ const InputContainer = styled.div`
   }
 
   & ::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: ${COLORS.textWhiteMid};
     font-size: 1rem;
     font-family: ${FONT.english};
     font-weight: 300;
@@ -57,7 +57,7 @@ const InputContainer = styled.div`
     }
 
     & ::placeholder {
-      color: #ffffff;
+      color: ${COLORS.textWhiteMid};
     }
   }
 `;

@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import { SIZES } from '../../constants/theme';
+
 import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
 
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
@@ -13,13 +15,15 @@ import Description from './Section/Description/Description';
 import Spinner from './Section/Spinner/Spinner';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import Center from '../../components/Center/Center';
+import PageWrapper from './Section/PageWrapper/PageWrapper';
 
 const ContentWrapper = styled.div`
-  padding: 2rem;
-  width: 100%;
+  max-width: ${SIZES.tabletWidth};
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1rem;
+  width: 100%;
 `;
 
 const OutroPage = () => {
@@ -46,10 +50,12 @@ const OutroPage = () => {
   const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
 
   return (
-    <>
-      <Center>
+    <Center>
+      <PageWrapper>
         <Description averageResponseTime={averageResponseTime} />
-
+        <LinkButton className='secondary' links='/' outro>
+          play again
+        </LinkButton>
         <ContentWrapper>
           <PreviousRecord
             averageResponseTime={averageResponseTime}
@@ -72,12 +78,9 @@ const OutroPage = () => {
             />
           )}
           <ShareMyRecord />
-          <LinkButton className='secondary' links='/'>
-            play again
-          </LinkButton>
         </ContentWrapper>
-      </Center>
-    </>
+      </PageWrapper>
+    </Center>
   );
 };
 
