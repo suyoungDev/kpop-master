@@ -9,6 +9,8 @@ router.get('/getBySinger', async (req, res) => {
     term: req.body.singer,
   };
 
+  console.log(req.body);
+
   var result = await melon
     .parse(opt)
     .then(function (res) {
@@ -22,7 +24,7 @@ router.get('/getBySinger', async (req, res) => {
   res.status(200).json({ success: true, result });
 });
 
-router.post('/getByYear', async (req, res) => {
+router.get('/getByYear', async (req, res) => {
   var opts = {
     limit: 50,
     type: 'year',
@@ -39,6 +41,7 @@ router.post('/getByYear', async (req, res) => {
     .catch(function (err) {
       console.log(err);
     });
+  console.log(result);
 
   res.status(200).json({ success: true, result });
 });
