@@ -1,0 +1,83 @@
+import React from 'react';
+import styled from 'styled-components';
+import UserAverageData from '../UsersAverageData/UserAverageData';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TableContainer = styled.table`
+  width: 100%;
+  font-family: 'Nanum Gothic';
+  font-size: 16px;
+  font-weight: 200;
+  overflow: hidden;
+  padding: 0.5rem 1rem 1rem 1rem;
+
+  td {
+    padding: 4px;
+    text-align: center;
+  }
+
+  #ranking {
+    width: 20%;
+  }
+  #name {
+    width: 40%;
+  }
+  #record {
+    width: 30%;
+    text-align: right;
+  }
+
+  #myRecord {
+    color: black;
+    font-weight: bold;
+  }
+`;
+
+const RankersTable = ({ userRecords, myRecord, userName, quantityToShow }) => {
+  return (
+    <Wrapper>
+      <TableContainer>
+        <tbody>
+          {userRecords
+            .filter((userRecord, index) => index < `${quantityToShow}`)
+            .map((userRecord, index) => (
+              <tr key={userRecord._id}>
+                <td id='ranking'>{index + 1}위</td>
+                <td id='name'>{userRecord.userName}</td>
+                <td id='record'>{userRecord.record} 초</td>
+              </tr>
+            ))}
+          {myRecord && (
+            <>
+              <tr>
+                <td></td>
+                <td>...</td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td id='myRecord'>
+                  {userRecords
+                    .map((user) => user.record)
+                    .filter((record) => record < myRecord).length + 1}
+                  위
+                </td>
+                <td id='myRecord'>{userName ? userName : '내 순위'}</td>
+                <td id='record'>{myRecord} 초</td>
+              </tr>
+            </>
+          )}
+        </tbody>
+      </TableContainer>
+
+      <UserAverageData userRecords={userRecords} />
+    </Wrapper>
+  );
+};
+
+export default RankersTable;
