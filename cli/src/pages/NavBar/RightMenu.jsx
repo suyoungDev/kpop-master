@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
   font-family: ${FONT.korean};
   font-weight: 500;
   color: ${COLORS.textMid};
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   position: relative;
 
   .icon {
@@ -54,9 +54,9 @@ const StyledLink = styled(Link)`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     color: ${COLORS.textBlack};
-    font-size: 1rem;
+    font-size: 1.3rem;
     margin: 1rem 0;
 
     ::before {
@@ -65,16 +65,16 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const LinkContainer = styled.ul`
+const LinkContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
   width: 85%;
   max-width: ${SIZES.laptopWidth};
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     height: 100vh;
-    width: 300px;
+    width: 250px;
     flex-flow: column nowrap;
     justify-content: flex-start;
     z-index: 10;
@@ -82,7 +82,7 @@ const LinkContainer = styled.ul`
     position: fixed;
     top: 0;
     right: 0;
-    padding: 3rem 0 0 2rem;
+    padding: 3.4rem 0 0 2rem;
     background-color: white;
     border-left: 1px solid #ccc;
 

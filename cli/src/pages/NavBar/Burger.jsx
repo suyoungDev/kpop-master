@@ -51,12 +51,22 @@ const Burger = () => {
 
   return (
     <>
-      <StyledBurger open={open} onClick={() => setOpen(!open)}>
+      <StyledBurger
+        open={open}
+        tabIndex='0'
+        onClick={(e) => setOpen(!open)}
+        onBlur={(e) => setOpen(false)}
+      >
         <div />
         <div />
         <div />
       </StyledBurger>
-      <RightMenu open={open} />
+      <RightMenu
+        open={open}
+        onFocus={() => {
+          console.log('hi');
+        }}
+      />
     </>
   );
 };
