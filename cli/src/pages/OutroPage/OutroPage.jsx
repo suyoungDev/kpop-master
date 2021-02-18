@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti';
 
 import { SIZES } from '../../constants/theme';
 
@@ -29,6 +31,7 @@ const ContentWrapper = styled.div`
 const OutroPage = () => {
   // eslint-disable-next-line
   const [gameResult, setGameResult] = useContext(GameResultContext);
+  const { width, height } = useWindowSize();
 
   const [userRankList, setUserRankList] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -50,37 +53,46 @@ const OutroPage = () => {
   const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
 
   return (
-    <Center>
-      <PageWrapper>
-        <Description averageResponseTime={averageResponseTime} />
-        <LinkButton className='secondary' links='/' outro>
-          play again
-        </LinkButton>
-        <ContentWrapper>
-          <PreviousRecord
-            averageResponseTime={averageResponseTime}
-            gameResult={gameResult}
-          />
-          <SavingMyRecord
-            averageResponseTime={averageResponseTime}
-            gameResult={gameResult}
-          />
-          <CurrentRecord
-            averageResponseTime={averageResponseTime}
-            gameResult={gameResult}
-          />
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <RankersRecord
-              userRankList={userRankList}
-              myRecord={averageResponseTime}
+    <>
+      <Confetti
+        width={width}
+        height={height}
+        gravity={0.03}
+        recycle={false}
+        numberOfPieces={500}
+      />
+      <Center>
+        <PageWrapper>
+          <Description averageResponseTime={averageResponseTime} />
+          <LinkButton className='secondary' links='/' outro>
+            play again
+          </LinkButton>
+          <ContentWrapper>
+            <PreviousRecord
+              averageResponseTime={averageResponseTime}
+              gameResult={gameResult}
             />
-          )}
-          <ShareMyRecord />
-        </ContentWrapper>
-      </PageWrapper>
-    </Center>
+            <SavingMyRecord
+              averageResponseTime={averageResponseTime}
+              gameResult={gameResult}
+            />
+            <CurrentRecord
+              averageResponseTime={averageResponseTime}
+              gameResult={gameResult}
+            />
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <RankersRecord
+                userRankList={userRankList}
+                myRecord={averageResponseTime}
+              />
+            )}
+            <ShareMyRecord />
+          </ContentWrapper>
+        </PageWrapper>
+      </Center>
+    </>
   );
 };
 
