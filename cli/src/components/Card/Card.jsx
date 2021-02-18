@@ -47,7 +47,7 @@ const Container = styled.div`
 
   @media ${SCREEN.tablet} {
     width: 300px;
-    height: 350px;
+    height: 330px;
   }
 
   @media ${SCREEN.laptop} {

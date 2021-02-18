@@ -54,6 +54,7 @@ const LinkContainer = styled(Link)`
   @media ${SCREEN.tablet} {
     font-size: 2rem;
     align-self: ${({ outro }) => (outro ? 'center' : 'flex-start)')};
+    margin: 0 0 2rem 0;
   }
 `;
 

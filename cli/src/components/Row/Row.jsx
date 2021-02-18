@@ -3,7 +3,7 @@ import { SCREEN, SIZES } from '../../constants/theme';
 
 const Row = styled.div`
   width: 100%;
-  padding: ${({ main }) => (main ? '2rem' : '1rem 0 0 0')};
+  padding: ${({ main }) => (main ? '0 2rem 2rem 2rem' : '1rem 0 0 0')};
 
   display: flex;
   flex-direction: row;
@@ -18,7 +18,7 @@ const Row = styled.div`
   @media ${SCREEN.tablet} {
     width: ${SIZES.tabletWidth};
     justify-content: start;
-    padding: ${({ main }) => (main ? '1rem 0 0 0' : '0')};
+    padding: 0;
 
     img {
       display: block;
@@ -31,7 +31,6 @@ const Row = styled.div`
     width: ${({ main }) => (main ? '80%' : '85%')};
     max-width: ${SIZES.laptopWidth};
     align-items: center;
-    padding: ${({ main }) => (main ? '1rem 0 0 0' : '0 0 0 0')};
 
     img {
       display: flex;

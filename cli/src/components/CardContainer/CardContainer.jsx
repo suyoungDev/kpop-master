@@ -10,7 +10,6 @@ const CardContainer = styled.div`
 
   @media ${SCREEN.tablet} {
     flex-direction: row;
-    margin: 2rem;
   }
 `;
 

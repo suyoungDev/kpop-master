@@ -3,7 +3,7 @@ import { SCREEN } from '../../constants/theme';
 
 const Center = styled.div`
   width: ${({ landing }) => (landing ? '100%' : '')};
-  height: ${({ landing }) => (landing ? '' : '100vh')};
+  height: ${({ landing }) => (landing ? '' : '100%')};
 
   display: flex;
   flex-direction: column;
