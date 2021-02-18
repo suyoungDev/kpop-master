@@ -8,6 +8,7 @@ import RoundContainer from '../../components/RoundContainer/RoundContainer';
 import levelImage from '../../constants/image/outroImage/level';
 import Row from '../../components/Row/Row';
 import GameTitle from '../../components/GameTitle/GameTitle';
+import Snippet from '../../components/Snippet/Snippet';
 
 import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
@@ -47,11 +48,19 @@ const LandingPage = () => {
               </li>
             </ul>
           </Card>
-          <Card alert='개발 예정' title='2020-02' secondary>
+          <Card alert='주의 사항' title='2020-02' secondary>
             <ul>
               <li>아직 블랙핑크만 지원됩니다! 😥</li>
-              <li>년도별 top 100 지원</li>
-              <li>가수 (검색 지원)</li>
+              <li>유튜브 프리미엄을 사용해야지 원활한 플레이가 가능합니다.</li>
+            </ul>
+            <ul style={{ position: 'relative' }}>
+              <li>
+                <Snippet style={{ position: 'absolute', left: '-16px' }}>
+                  지원예정
+                </Snippet>
+              </li>
+              <li style={{ paddingTop: '2.5rem' }}>년도별 top 100</li>
+              <li>가수 (검색 가능)</li>
             </ul>
           </Card>
         </CardContainer>

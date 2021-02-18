@@ -33,13 +33,13 @@ const StyledLink = styled(Link)`
     display: block;
     position: absolute;
     width: 100%;
-    height: 5px;
+    height: 3px;
     border-radius: 5px;
-    bottom: -22px;
+    bottom: -15px;
     background: linear-gradient(
       to right,
-      ${COLORS.primaryMiddle} 0%,
-      ${COLORS.primary} 100%
+      ${COLORS.primaryLight} 0%,
+      ${COLORS.primaryMiddle} 100%
     );
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
