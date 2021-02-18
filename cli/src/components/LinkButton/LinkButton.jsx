@@ -49,6 +49,10 @@ const LinkContainer = styled(Link)`
     :hover {
       background: ${COLORS.secondaryDark};
     }
+
+    @media ${SCREEN.tablet} {
+      margin-bottom: 1rem;
+    }
   }
 
   @media ${SCREEN.tablet} {

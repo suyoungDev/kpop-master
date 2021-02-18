@@ -98,7 +98,7 @@ const RightMenu = ({ open }) => {
         <GiBarracksTent className='icon' />
         첫화면으로
       </StyledLink>
-      <StyledLink to='/outro'>
+      <StyledLink to='/rank'>
         <GiRank3 className='icon' />
         순위
       </StyledLink>

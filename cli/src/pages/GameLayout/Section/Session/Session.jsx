@@ -13,11 +13,12 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${COLORS.grayMiddle};
+  background-color: ${COLORS.primaryMiddle};
   margin-bottom: 2rem;
 
   @media ${SCREEN.tablet} {
     max-width: ${SIZES.gameLayoutWidth};
+    background-color: ${COLORS.grayMiddle};
     height: 0.7rem;
     margin-bottom: 0;
   }
@@ -32,7 +33,13 @@ const SessionBox = styled.div`
     background-color: ${COLORS.secondaryDark};
   }
   &.wrong {
-    background-color: ${COLORS.grayDeepDark};
+    background-color: ${COLORS.textBlack};
+  }
+
+  @media ${SCREEN.tablet} {
+    &.wrong {
+      background-color: ${COLORS.grayDeepDark};
+    }
   }
 `;
 

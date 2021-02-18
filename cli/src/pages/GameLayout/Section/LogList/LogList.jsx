@@ -4,16 +4,16 @@ import { SCREEN, COLORS, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.ul`
   width: 100%;
-  max-width: ${SIZES.gameLayoutMediumWidth};
+  max-width: 360px;
   height: 150px;
 
   display: flex;
   flex-direction: column;
 
-  padding: 0 1rem;
+  padding: 0 1.3rem;
 
   @media ${SCREEN.tablet} {
-    width: ${SIZES.gameLayoutMediumWidth};
+    max-width: ${SIZES.gameLayoutMediumWidth};
     height: 250px;
     padding: 1.3rem;
   }

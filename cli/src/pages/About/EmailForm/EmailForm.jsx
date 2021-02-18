@@ -2,27 +2,7 @@ import React from 'react';
 import emailjs from 'emailjs-com';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONT, SCREEN } from '../../../constants/theme';
-
-const MailCard = styled.div`
-  height: auto;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.2rem;
-  margin-bottom: 2rem;
-
-  border-radius: ${SIZES.radiusMid};
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
-  :hover {
-    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
-  }
-
-  @media ${SCREEN.tablet} {
-    width: ${SIZES.gameLayoutWidth};
-  }
-`;
+import CleanCard from '../../../components/Card/CleanCard';
 
 const Form = styled.form`
   width: 100%;
@@ -131,7 +111,7 @@ export default function ContactUs() {
   };
 
   return (
-    <MailCard>
+    <CleanCard mail>
       <Form className='contact-form' onSubmit={sendEmail}>
         <input type='hidden' name='contact_number' />
         <Row>
@@ -154,6 +134,6 @@ export default function ContactUs() {
         </Container>
         <SubmitButton type='submit' value='Send Message' />
       </Form>
-    </MailCard>
+    </CleanCard>
   );
 }

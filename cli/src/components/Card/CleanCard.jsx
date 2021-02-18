@@ -2,15 +2,19 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
 
+const hoverStyle = css`
+  :hover {
+    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
+  }
+`;
+
 const inGameCardStyle = css`
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutWidth};
     height: 600px;
-
     border: 1px solid ${COLORS.grayMiddle};
     box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
     background: white;
-
     display: grid;
     grid-gap: 10px;
     grid-template-rows: 200px 400px;
@@ -35,13 +39,12 @@ const inGameCardStyle = css`
 `;
 
 const savingCardStyle = css`
+  border-radius: ${SIZES.radiusSmall};
   padding: 1rem;
-  border-radius: 10px;
 
   border: 1px solid ${COLORS.grayMiddle};
   box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
   background: white;
-
   margin-bottom: 2rem;
   height: auto;
 
@@ -54,9 +57,46 @@ const savingCardStyle = css`
   }
 `;
 
+const rankCardStyle = css`
+  width: 90%;
+  max-width: ${SIZES.gameLayoutWidth};
+  margin-top: 2rem;
+  border-radius: ${SIZES.radiusSmall};
+  border: 1px solid ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  padding: 2rem;
+  ${hoverStyle}
+`;
+
+const mailCardStyle = css`
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+
+  border-radius: ${SIZES.radiusMid};
+  border: 1px solid ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+
+  ${hoverStyle}
+
+  @media ${SCREEN.tablet} {
+    width: ${SIZES.gameLayoutWidth};
+  }
+`;
+
 const getCardStyles = (props) => {
   if (props.inGame) {
     return inGameCardStyle;
+  }
+  if (props.rank) {
+    return rankCardStyle;
+  }
+  if (props.mail) {
+    return mailCardStyle;
   }
   return props.savingRecord && savingCardStyle;
 };

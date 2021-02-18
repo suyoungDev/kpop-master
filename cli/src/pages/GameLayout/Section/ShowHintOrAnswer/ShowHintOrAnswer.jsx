@@ -9,7 +9,7 @@ import Snippet from '../../../../components/Snippet/Snippet';
 import { COLORS, FONT, SCREEN, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
-  width: 400px;
+  width: 360px;
   height: 100%;
 
   display: flex;
@@ -43,10 +43,17 @@ const TextContainer = styled.div`
 
 const Title = styled.div`
   display: flex;
-  width: ${SIZES.gameLayoutMediumWidth};
+  width: 100%;
   height: 36px;
   align-items: flex-start;
+  margin-bottom: 2rem;
+
+  @media ${SCREEN.tablet} {
+    width: ${SIZES.gameLayoutMediumWidth};
+    margin-bottom: 0;
+  }
 `;
+
 const Content = styled.div`
   display: flex;
   width: ${SIZES.gameLayoutMediumWidth};

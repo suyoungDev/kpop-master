@@ -2,19 +2,19 @@ import styled from 'styled-components';
 import { SCREEN } from '../../constants/theme';
 
 const Center = styled.div`
-  width: ${({ landing }) => (landing ? '100%' : '')};
-  height: ${({ landing }) => (landing ? '' : '100%')};
+  width: ${({ landing }) => (landing ? '100%' : '100%')};
+  height: ${({ inGame }) => (inGame ? '100%' : '')};
 
   display: flex;
   flex-direction: column;
-  justify-content: ${({ inGame }) => (inGame ? 'center' : 'space-between')};
+  justify-content: ${({ inGame }) => (inGame ? 'center' : 'space-around')};
   align-items: center;
 
   background: ${({ bgcolor }) => (bgcolor ? `${bgcolor}` : 'transparent')};
 
   @media ${SCREEN.tablet} {
+    height: ${({ inGame }) => inGame && '80vh'};
     background: #ffffff;
-
     #first {
       order: 1;
     }

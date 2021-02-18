@@ -21,10 +21,6 @@ const aboutStyles = css`
   margin-top: 1rem;
   color: rgba(108, 99, 255, 0.8);
   text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark};
-
-  @media ${SCREEN.tablet} {
-    margin-top: 0;
-  }
 `;
 
 const getTitleStyles = (props) => {
