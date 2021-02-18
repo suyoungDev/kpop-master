@@ -78,9 +78,9 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
                 maxLength='15'
                 autoComplete='off'
                 required
-                disabled={isSaving && 'true'}
+                disabled={isSaving}
               />
-              <button disabled={isSaving && 'true'}>저장</button>
+              <button disabled={isSaving}>저장</button>
             </div>
           </SavingInputcontainer>
         </CleanCard>

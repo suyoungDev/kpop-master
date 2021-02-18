@@ -31,15 +31,15 @@ const OutroPage = () => {
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
   const [userRankList, setUserRankList] = useState();
-  const [isLoading, setIsLoading] = useState('loading');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading('loading');
+    setIsLoading(true);
 
     axios.get('/api/user/getRecords').then((res) => {
       if (res.data.success) {
         setUserRankList(res.data.userRecordList);
-        setIsLoading('loaded');
+        setIsLoading(false);
       }
     });
   }, []);
@@ -69,7 +69,7 @@ const OutroPage = () => {
             averageResponseTime={averageResponseTime}
             gameResult={gameResult}
           />
-          {isLoading === 'loading' ? (
+          {isLoading ? (
             <Spinner />
           ) : (
             <RankersRecord

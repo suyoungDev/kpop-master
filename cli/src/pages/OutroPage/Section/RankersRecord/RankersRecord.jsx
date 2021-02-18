@@ -134,40 +134,42 @@ const RankersRecord = ({ userRankList, myRecord }) => {
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <TableContainer>
-        {userRankList
-          .filter((item, index) => index < 3)
-          .map((item, index) => (
-            <tr key={item._id}>
-              <th className='rankers-record'>{index + 1}위</th>
-              <th className='rankers-record' id='name'>
-                {item.userName}
-              </th>
-              <th className='rankers-record' id='record'>
-                {item.record} 초
-              </th>
-            </tr>
-          ))}
+        <tbody>
+          {userRankList
+            .filter((item, index) => index < 3)
+            .map((item, index) => (
+              <tr key={item._id}>
+                <td className='rankers-record'>{index + 1}위</td>
+                <td className='rankers-record' id='name'>
+                  {item.userName}
+                </td>
+                <td className='rankers-record' id='record'>
+                  {item.record} 초
+                </td>
+              </tr>
+            ))}
 
-        <tr>
-          <th></th>
-          <th>...</th>
-          <th></th>
-        </tr>
+          <tr>
+            <td></td>
+            <td>...</td>
+            <td></td>
+          </tr>
 
-        <tr>
-          <th id='myRecord'>
-            {
-              userRankList
-                .map((user) => user.record)
-                .filter((record) => record < myRecord).length
-            }
-            위
-          </th>
-          <th id='myRecord'>
-            {existingUserName ? existingUserName : '내 순위'}
-          </th>
-          <th id='record'>{myRecord} 초</th>
-        </tr>
+          <tr>
+            <td id='myRecord'>
+              {
+                userRankList
+                  .map((user) => user.record)
+                  .filter((record) => record < myRecord).lengtd
+              }
+              위
+            </td>
+            <td id='myRecord'>
+              {existingUserName ? existingUserName : '내 순위'}
+            </td>
+            <td id='record'>{myRecord} 초</td>
+          </tr>
+        </tbody>
       </TableContainer>
       {userAverageData}
     </div>

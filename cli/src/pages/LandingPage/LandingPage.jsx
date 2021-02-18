@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import styled from 'styled-components';
 
 import LinkButton from '../../components/LinkButton/LinkButton';
 import Card from '../../components/Card/Card';
@@ -8,34 +7,12 @@ import CardContainer from '../../components/CardContainer/CardContainer';
 import RoundContainer from '../../components/RoundContainer/RoundContainer';
 import levelImage from '../../constants/image/outroImage/level';
 import Row from '../../components/Row/Row';
+import GameTitle from '../../components/GameTitle/GameTitle';
 
 import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
 
-import { COLORS, FONT, SCREEN } from '../../constants/theme';
-
-const TitleWrapper = styled.div`
-  width: 400px;
-  height: auto;
-
-  text-align: left;
-  font-size: 3.2rem;
-  font-family: ${FONT.englishTitleCurv};
-  font-weight: 700;
-
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.56);
-  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryLight};
-
-  @media ${SCREEN.tablet} {
-    font-size: 5.4rem;
-    width: 600px;
-    flex-wrap: nowrap;
-    color: rgba(108, 99, 255, 0.8);
-    text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark};
-    -webkit-text-stroke: none;
-  }
-`;
+import { COLORS } from '../../constants/theme';
 
 const LandingPage = () => {
   // eslint-disable-next-line
@@ -52,7 +29,7 @@ const LandingPage = () => {
   return (
     <Center bgcolor={`${COLORS.primaryDark}`} landing>
       <Row main>
-        <TitleWrapper>K-pop Master Quiz</TitleWrapper>
+        <GameTitle landing>K-pop Master Quiz</GameTitle>
         <img src={levelImage.four} alt='우주에서 학구열이 강한 몬스터' />
       </Row>
       <RoundContainer main>

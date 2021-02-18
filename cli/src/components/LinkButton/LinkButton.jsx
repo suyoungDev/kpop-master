@@ -15,7 +15,7 @@ const LinkContainer = styled(Link)`
   margin: 1rem 0;
 
   background: linear-gradient(
-    30deg,
+    20deg,
     #ced0ff 0%,
     ${COLORS.primaryMiddle} 40%,
     ${COLORS.primaryDark} 100%
@@ -41,7 +41,7 @@ const LinkContainer = styled(Link)`
     color: ${COLORS.primaryDark};
 
     background: linear-gradient(
-      30deg,
+      20deg,
       #fff3d6 0%,
       ${COLORS.secondaryDark} 100%
     );

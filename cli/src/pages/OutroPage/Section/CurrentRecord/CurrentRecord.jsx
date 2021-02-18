@@ -23,7 +23,7 @@ const Tablehead = styled.th`
   font-size: 16px;
 `;
 
-const TableContext = styled.th`
+const TableContext = styled.td`
   color: ${({ isWorng }) => (isWorng === 'correct' ? 'black' : 'red')};
   font-weight: 200;
   overflow: hidden;
@@ -89,27 +89,32 @@ const CurrentRecord = ({ gameResult, averageResponseTime }) => {
 
   const content = (
     <TableContainer>
-      <Tablehead id='index'>순서</Tablehead>
-      <Tablehead>노래 제목</Tablehead>
-      <Tablehead>초</Tablehead>
-      <Tablehead>결과</Tablehead>
-
-      {gameResult.map((song) => (
-        <tr key={song.id}>
-          <TableContext id='index' isWorng={song.result}>
-            {song.roundIndex + 1}
-          </TableContext>
-          <TableContext isWorng={song.result} id='trackName'>
-            {song.trackName}
-          </TableContext>
-          <TableContext isWorng={song.result}>
-            {(song.responseTime / 1000).toFixed(2)}
-          </TableContext>
-          <TableContext isWorng={song.result}>
-            {song.result === 'wrong' ? <FiX /> : <FiCheckCircle />}
-          </TableContext>
+      <thead>
+        <tr>
+          <Tablehead id='index'>순서</Tablehead>
+          <Tablehead>노래 제목</Tablehead>
+          <Tablehead>초</Tablehead>
+          <Tablehead>결과</Tablehead>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {gameResult.map((song) => (
+          <tr key={song.id}>
+            <TableContext id='index' isWorng={song.result}>
+              {song.roundIndex + 1}
+            </TableContext>
+            <TableContext isWorng={song.result} id='trackName'>
+              {song.trackName}
+            </TableContext>
+            <TableContext isWorng={song.result}>
+              {(song.responseTime / 1000).toFixed(2)}
+            </TableContext>
+            <TableContext isWorng={song.result}>
+              {song.result === 'wrong' ? <FiX /> : <FiCheckCircle />}
+            </TableContext>
+          </tr>
+        ))}
+      </tbody>
     </TableContainer>
   );
 
