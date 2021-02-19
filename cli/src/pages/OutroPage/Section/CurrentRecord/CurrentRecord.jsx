@@ -13,6 +13,7 @@ const TableContainer = styled.table`
   font-weight: 200;
   margin-top: -0.2rem;
   border-radius: 10px;
+  text-align: center;
 `;
 
 const Tablehead = styled.th`

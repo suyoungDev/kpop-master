@@ -51,7 +51,7 @@ const Session = () => {
       {gameResult.map((item) => (
         <SessionBox
           className={`${item.result === 'correct' ? 'correct' : 'wrong'}`}
-          id={item.id}
+          key={item.id}
         />
       ))}
     </Wrapper>

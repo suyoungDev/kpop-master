@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { COLORS, SIZES, FONT } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,21 +13,15 @@ const Wrapper = styled.div`
   align-items: baseline;
   justify-content: space-between;
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-  box-shadow: 0 8px 20px 0 rgba(251, 128, 165, 0.2);
-  backdrop-filter: blur(14.5px);
-  -webkit-backdrop-filter: blur(14.5px);
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border-radius: ${SIZES.radiusSmall};
 `;
 
 const Title = styled.span`
   font-weight: 200;
   font-size: 18px;
+  font-family: ${FONT.korean};
 `;
 
 const Content = styled.span`
@@ -35,7 +30,7 @@ const Content = styled.span`
   color: black;
 `;
 
-const Em = styled.span`
+const Bold = styled.span`
   font-weight: bold;
 `;
 
@@ -106,7 +101,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   return (
     <Wrapper>
       <Title>
-        ✨ <Em>{existingUserName}</Em>
+        ✨ <Bold>{existingUserName}</Bold>
         님의 이전 최고 기록
       </Title>
       <Content>{existingUserRecord}초</Content>
