@@ -42,6 +42,10 @@ const ShareList = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  .first-button {
+    margin-right: 1rem;
+  }
 `;
 
 const ShareMyRecord = () => {
@@ -51,7 +55,7 @@ const ShareMyRecord = () => {
         <Highlight>내 결과 공유</Highlight>
       </ShareTitle>
       <ShareList>
-        <AwesomeButtonSocial type='facebook' />
+        <AwesomeButtonSocial type='facebook' className='first-button' />
         <AwesomeButtonSocial type='twitter' />
       </ShareList>
     </Wrapper>
