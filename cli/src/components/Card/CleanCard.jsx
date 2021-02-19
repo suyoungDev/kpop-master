@@ -8,12 +8,16 @@ const hoverStyle = css`
   }
 `;
 
+const borderAndShadow = css`
+  border: 1px solid ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+`;
+
 const inGameCardStyle = css`
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutWidth};
     height: 600px;
-    border: 1px solid ${COLORS.grayMiddle};
-    box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+
     background: white;
     display: grid;
     grid-gap: 10px;
@@ -35,6 +39,8 @@ const inGameCardStyle = css`
     #second {
       grid-area: hint;
     }
+
+    ${borderAndShadow};
   }
 `;
 
@@ -42,8 +48,8 @@ const savingCardStyle = css`
   border-radius: ${SIZES.radiusSmall};
   padding: 1rem;
 
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  ${borderAndShadow};
+
   background: white;
   margin-bottom: 2rem;
   height: auto;
@@ -62,9 +68,8 @@ const rankCardStyle = css`
   max-width: ${SIZES.gameLayoutWidth};
   margin-top: 2rem;
   border-radius: ${SIZES.radiusSmall};
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
   padding: 2rem;
+  ${borderAndShadow};
   ${hoverStyle}
 `;
 
@@ -77,10 +82,9 @@ const mailCardStyle = css`
   padding: 1.2rem;
   margin-bottom: 2rem;
 
-  border-radius: ${SIZES.radiusMid};
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border-radius: ${SIZES.radiusBig};
 
+  ${borderAndShadow};
   ${hoverStyle}
 
   @media ${SCREEN.tablet} {

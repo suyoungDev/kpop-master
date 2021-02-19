@@ -3,17 +3,14 @@ export const COLORS = {
   primaryDark: '#4F53C5',
   primaryMiddle: '#868BFF',
   primaryLight: '#E1E3FE',
-  primaryShaodw: '#dedfff',
   secondary: '#FFEBB5',
   secondaryDark: '#FFD978',
-  grayLight: '#F5F5F5',
   grayMiddle: '#E5E5E5',
   grayDark: '#CBCBCB',
   grayDeepDark: '#6d7274',
   textBlack: '#343435',
   textDark: '#383838',
   textMid: '#636e72',
-  textWhiteDark: 'rgba(255,255,255,0.4)',
   textWhiteMid: 'rgba(255, 255, 255, 0.7)',
 };
 
@@ -26,7 +23,6 @@ export const FONT = {
 
 export const SIZES = {
   radiusSmall: '15px',
-  radiusMid: '30px',
   radiusBig: '30px',
   gameLayoutWidth: '500px',
   gameLayoutMediumWidth: '400px',

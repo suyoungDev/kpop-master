@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -24,6 +26,14 @@ app.use('/api/chart', require('./routes/chart'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/youtube', require('./routes/youtube'));
 
-app.listen(5000, () => {
-  console.log(`running on 5000`);
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('cli/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(_dirname, '../cli', 'build', 'index.html'));
+  });
+}
+
+app.listen(PORT, () => {
+  console.log(`running on ${PORT}`);
 });
