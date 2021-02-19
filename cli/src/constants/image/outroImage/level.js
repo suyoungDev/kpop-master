@@ -4,7 +4,6 @@ import levelTwo from './level2.svg';
 import levelThree from './level3.svg';
 import levelFour from './level4.svg';
 import levelFive from './level5.svg';
-import levelError from './error.svg';
 
 const levelImage = {
   zero: levelZero,
@@ -13,7 +12,6 @@ const levelImage = {
   three: levelThree,
   four: levelFour,
   five: levelFive,
-  none: levelError,
 };
 
 export default levelImage;
