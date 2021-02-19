@@ -10,9 +10,9 @@
   "scripts": {
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "frontend": "npm run start --prefix client",
+    "frontend": "npm run start --prefix cli",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix cli\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix cli && npm build --prefix cli"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix cli && npm run build --prefix cli"
   },
   "keywords": [],
   "author": "",
