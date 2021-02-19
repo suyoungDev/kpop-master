@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('cli/build'));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(_dirname, '../cli', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../cli', 'build', 'index.html'));
   });
 }
 
