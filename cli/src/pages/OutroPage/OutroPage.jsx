@@ -64,7 +64,7 @@ const OutroPage = () => {
       <Center>
         <PageWrapper>
           <Description averageResponseTime={averageResponseTime} />
-          <LinkButton className='secondary' links='/' outro>
+          <LinkButton links='/' secondary outro>
             play again
           </LinkButton>
           <ContentWrapper>
