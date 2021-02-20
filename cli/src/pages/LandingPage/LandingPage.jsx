@@ -37,8 +37,8 @@ const LandingPage = () => {
         <CardContainer id='three'>
           <Card alert='플레이 방법' title='2020-02'>
             <ul>
-              <li>노래를 듣고 10초 안에 노래제목을 맞추는 게임입니다.</li>
-              <li>6초에 힌트가 나가니 참고해주세요.</li>
+              <li>노래를 듣고 20초 안에 노래제목을 맞추는 게임입니다.</li>
+              <li>10초에 힌트가 나가니 참고해주세요.</li>
               <li>대소문자 구분과 공백, 특수문자는 무시합니다.</li>
               <li id='tip'>
                 🚩 정답이 <span>Crazy Over You</span>일 때,
