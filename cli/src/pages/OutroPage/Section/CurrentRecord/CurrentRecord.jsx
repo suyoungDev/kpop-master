@@ -91,14 +91,6 @@ const CurrentRecord = ({ gameResult, averageResponseTime }) => {
 
   const content = (
     <TableContainer>
-      <thead>
-        <tr>
-          <Tablehead id='index'>순서</Tablehead>
-          <Tablehead>노래 제목</Tablehead>
-          <Tablehead>초</Tablehead>
-          <Tablehead>결과</Tablehead>
-        </tr>
-      </thead>
       <tbody>
         {gameResult.map((song) => (
           <tr key={song.id}>

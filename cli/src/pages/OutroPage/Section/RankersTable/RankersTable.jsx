@@ -23,7 +23,7 @@ const TableContainer = styled.table`
 
   #ranking {
     width: 15%;
-    text-align: start;
+    text-align: center;
   }
   #name {
     width: 60%;

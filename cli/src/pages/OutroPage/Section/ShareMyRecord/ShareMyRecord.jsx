@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   margin: 1.5rem 0;
 `;
 
-const ShareTitle = styled.h2`
+const ShareTitle = styled.h3`
   margin-bottom: 1rem;
   font-family: 'nanum gothic';
 `;
@@ -42,7 +42,7 @@ const ShareList = styled.div`
   justify-content: space-between;
 
   .first-button {
-    margin-right: 2.5rem;
+    margin-right: 1.5rem;
   }
 `;
 

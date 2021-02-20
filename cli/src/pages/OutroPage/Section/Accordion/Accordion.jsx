@@ -73,6 +73,7 @@ const Title = styled.button`
 `;
 
 const Content = styled.div`
+  padding: 0 1rem;
   width: 100%;
   overflow: hidden;
   font-family: 'Nanum gothic';
