@@ -46,7 +46,7 @@ const Title = styled.div`
   width: 100%;
   height: 36px;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutMediumWidth};

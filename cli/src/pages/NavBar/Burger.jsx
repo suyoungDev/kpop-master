@@ -4,10 +4,10 @@ import { COLORS, SCREEN } from '../../constants/theme';
 import RightMenu from './RightMenu';
 
 const StyledBurger = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   position: fixed;
-  top: 10px;
+  top: 15px;
   right: 20px;
 
   display: flex;
@@ -16,7 +16,7 @@ const StyledBurger = styled.div`
   z-index: 11;
 
   div {
-    width: 25px;
+    width: 30px;
     height: 2px;
     background-color: ${({ open }) =>
       open ? `${COLORS.primaryDark}` : '#ccc'};

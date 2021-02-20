@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: ${COLORS.primaryMiddle};
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   @media ${SCREEN.tablet} {
     max-width: ${SIZES.gameLayoutWidth};

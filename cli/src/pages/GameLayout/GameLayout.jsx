@@ -136,36 +136,35 @@ const GameLayout = ({ trackList }) => {
   return (
     <Center bgcolor={`${COLORS.primaryDark}`} inGame>
       <Player url={url} />
-      <>
-        <Session id='first' />
-        <CleanCard inGame>
-          <AnswerCard id='four'>
-            <img src={checkImg} alt='귀여운 체크' />
-            <InputContainer>
-              <form onSubmit={answerSubmit}>
-                <input
-                  placeholder='guess what?'
-                  type='text'
-                  value={inputValue}
-                  onChange={onChange}
-                  ref={focusedInput}
-                  disabled={timeOver}
-                />
-              </form>
-            </InputContainer>
-            <LogList giveAnswers={givenAnswersList} />
-          </AnswerCard>
 
-          <RoundContainer id='second'>
-            <ShowHintOrAnswer
-              trackName={trackList[currentRound].trackName}
-              showHints={showHints}
-              timeOver={timeOver}
-              className='inputWrapper'
-            />
-          </RoundContainer>
-        </CleanCard>
-      </>
+      <Session id='first' />
+      <CleanCard inGame>
+        <AnswerCard id='four'>
+          <img src={checkImg} alt='귀여운 체크' />
+          <InputContainer>
+            <form onSubmit={answerSubmit}>
+              <input
+                placeholder='guess what?'
+                type='text'
+                value={inputValue}
+                onChange={onChange}
+                ref={focusedInput}
+                disabled={timeOver}
+              />
+            </form>
+          </InputContainer>
+          <LogList giveAnswers={givenAnswersList} />
+        </AnswerCard>
+
+        <RoundContainer id='second'>
+          <ShowHintOrAnswer
+            trackName={trackList[currentRound].trackName}
+            showHints={showHints}
+            timeOver={timeOver}
+            className='inputWrapper'
+          />
+        </RoundContainer>
+      </CleanCard>
     </Center>
   );
 };
