@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const Descript = styled.div`
   width: 95%;
   max-width: ${SIZES.tabletWidth};
-
+  margin-top: 0.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,15 +29,15 @@ const Description = ({ averageResponseTime }) => {
   const [myLevel, setMyLevel] = useState('');
 
   useEffect(() => {
-    if (averageResponseTime < 2) {
+    if (averageResponseTime < 5) {
       setMyLevel('five');
-    } else if (averageResponseTime < 4) {
+    } else if (averageResponseTime < 8) {
       setMyLevel('four');
-    } else if (averageResponseTime < 5.5) {
+    } else if (averageResponseTime < 10) {
       setMyLevel('three');
-    } else if (averageResponseTime < 7) {
+    } else if (averageResponseTime < 13) {
       setMyLevel('two');
-    } else if (averageResponseTime < 9) {
+    } else if (averageResponseTime < 16) {
       setMyLevel('one');
     } else {
       setMyLevel('zero');

@@ -14,7 +14,7 @@ const TableContainer = styled.table`
   font-size: 16px;
   font-weight: 200;
   overflow: hidden;
-  padding: 0.5rem 1rem 1rem 1rem;
+  padding: 0 0 1rem 0;
 
   td {
     padding: 4px;
@@ -22,10 +22,11 @@ const TableContainer = styled.table`
   }
 
   #ranking {
-    width: 20%;
+    width: 15%;
+    text-align: start;
   }
   #name {
-    width: 40%;
+    width: 60%;
   }
   #record {
     width: 30%;

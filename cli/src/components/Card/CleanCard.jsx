@@ -68,7 +68,7 @@ const rankCardStyle = css`
   max-width: ${SIZES.gameLayoutWidth};
   margin-top: 2rem;
   border-radius: ${SIZES.radiusSmall};
-  padding: 2rem;
+  padding: 1rem;
   ${borderAndShadow};
   ${hoverStyle}
 `;

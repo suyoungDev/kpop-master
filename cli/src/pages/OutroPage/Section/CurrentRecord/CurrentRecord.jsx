@@ -29,6 +29,7 @@ const TableContext = styled.td`
   font-weight: 200;
   overflow: hidden;
   padding: 0.3rem 1rem;
+  font-size: 14px;
 `;
 
 const TitleContainer = styled.div`

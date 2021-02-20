@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Center from '../../components/Center/Center';
 import { FaGithubAlt } from 'react-icons/fa';
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, SIZES, FONT } from '../../constants/theme';
 import GameTitle from '../../components/GameTitle/GameTitle';
 import EmailForm from './EmailForm/EmailForm';
 
@@ -15,6 +15,8 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   line-height: 1.8rem;
+  font-family: ${FONT.korean};
+  font-weight: 200;
   margin-bottom: ${({ bottom }) => (bottom ? '2rem' : '')};
 
   a {
