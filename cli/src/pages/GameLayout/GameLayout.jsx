@@ -45,19 +45,19 @@ const GameLayout = ({ trackList }) => {
 
     const giveHints = setTimeout(() => {
       setShowHints(true);
-    }, 6000);
+    }, 10000);
 
     const timer = setTimeout(() => {
       setInputValue('');
       setTimeOver(true);
-    }, 10000);
+    }, 20000);
 
     const setOver = setTimeout(() => {
       setTimeOver(false);
       if (!isGameEnd) {
         goNextRound();
       }
-    }, 13000);
+    }, 23000);
 
     return () => {
       clearTimeout(timer);
