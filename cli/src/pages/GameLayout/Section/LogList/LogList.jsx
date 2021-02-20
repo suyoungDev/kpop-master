@@ -9,19 +9,19 @@ const Wrapper = styled.ul`
 
   display: flex;
   flex-direction: column;
-
-  padding: 0 1.3rem;
+  padding: 1rem 1.3rem;
 
   @media ${SCREEN.tablet} {
     max-width: ${SIZES.gameLayoutMediumWidth};
     height: 250px;
     padding: 1.3rem;
+    margin-top: 0rem;
   }
 `;
 
 const Log = styled.li`
   width: 100%;
-  margin-top: 8px;
+  margin-bottom: 8px;
 
   font-family: 'nanum gothic';
   font-size: 14px;

@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FiChevronRight } from 'react-icons/fi';
-import { COLORS } from '../../../../constants/theme';
+import { COLORS, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  border-radius: 10px;
+  border-radius: ${SIZES.radiusSmall};
 
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ const Title = styled.button`
   padding: 1.2rem 1rem;
 
   border: none;
-  border-radius: 10px;
+  border-radius: ${SIZES.radiusSmall};
 
   display: flex;
   flex-direction: row;
@@ -50,20 +50,17 @@ const Title = styled.button`
   background-position: 100% 100%;
   transition: background-size 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus {
     border: none;
     outline: none;
     background-size: 100% 100%;
   }
 
-  &:focus {
-    outline: none;
-  }
-
   .accordion-icon {
     transition: transform 0.3s ease;
     margin-left: 4px;
-    color: black;
+    color: ${COLORS.primaryDark};
   }
 
   .rotate {

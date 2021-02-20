@@ -23,6 +23,14 @@ const Container = styled.div`
   border: 1px solid ${COLORS.grayMiddle};
   transition: 0.3s ease;
 
+  &:nth-child(1) {
+    margin: 0 0 1rem 0;
+
+    @media ${SCREEN.tablet} {
+      margin: 0 1rem 0 0;
+    }
+  }
+
   ul {
     margin: 0.5rem 0;
     font-size: 14px;

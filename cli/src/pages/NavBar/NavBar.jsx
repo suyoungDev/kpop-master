@@ -6,7 +6,7 @@ import Burger from './Burger';
 
 const Nav = styled.div`
   width: 100%;
-  height: 55px;
+  height: 40px;
   padding: 0 20px;
   background-color: ${COLORS.primaryDark};
 

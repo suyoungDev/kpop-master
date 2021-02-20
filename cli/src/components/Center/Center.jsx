@@ -13,7 +13,7 @@ const Center = styled.div`
   background: ${({ bgcolor }) => (bgcolor ? `${bgcolor}` : 'transparent')};
 
   @media ${SCREEN.tablet} {
-    height: ${({ inGame }) => inGame && '80vh'};
+    height: ${({ inGame }) => inGame && '90vh'};
     background: #ffffff;
     #first {
       order: 1;

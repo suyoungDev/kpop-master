@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONT } from '../../../../constants/theme';
+import { BiRocket } from 'react-icons/bi';
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 2.5rem;
   padding: 1rem;
   margin-bottom: 2rem;
-
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 
   border: 1px solid ${COLORS.grayMiddle};
@@ -19,19 +20,22 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.span`
+  font-size: 16px;
   font-weight: 200;
-  font-size: 18px;
   font-family: ${FONT.korean};
+  display: flex;
+  align-items: center;
 `;
 
 const Content = styled.span`
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
   color: black;
+  font-family: ${FONT.korean};
 `;
 
 const Bold = styled.span`
   font-weight: bold;
+  margin-left: 0.3rem;
 `;
 
 // 이전 기록이 있을 경우, 자동으로 DB에 저장하기
@@ -101,7 +105,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   return (
     <Wrapper>
       <Title>
-        ✨ <Bold>{existingUserName}</Bold>
+        <BiRocket /> <Bold>{existingUserName}</Bold>
         님의 이전 최고 기록
       </Title>
       <Content>{existingUserRecord}초</Content>

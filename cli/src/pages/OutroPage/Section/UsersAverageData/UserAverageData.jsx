@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLORS, FONT } from '../../../../constants/theme';
 
 const UsersAverageDataContainer = styled.div`
   width: 90%;
@@ -16,6 +17,8 @@ const UsersData = styled.div`
   justify-content: space-between;
   line-height: 24px;
   font-size: 14px;
+  font-family: ${FONT.korean};
+  color: ${COLORS.textMid};
 `;
 
 const userAverageData = ({ userRecords }) => {

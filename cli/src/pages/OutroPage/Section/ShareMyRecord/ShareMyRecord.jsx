@@ -5,14 +5,13 @@ import { AwesomeButtonSocial } from 'react-awesome-button';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 85%;
   font-size: 20px;
   font-weight: 200;
   display: flex;
   flex-direction: row;
   align-items: baseline;
   justify-content: space-between;
-  padding: 0 1rem;
   margin: 1.5rem 0;
 `;
 
@@ -38,13 +37,12 @@ const Highlight = styled.span`
 `;
 
 const ShareList = styled.div`
-  width: 6rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
   .first-button {
-    margin-right: 1rem;
+    margin-right: 2.5rem;
   }
 `;
 

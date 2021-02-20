@@ -7,14 +7,14 @@ import { GameResultContext } from '../../../../context/GameResultContext/GameRes
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 1rem;
+  height: 0.4rem;
 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background-color: ${COLORS.primaryMiddle};
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   @media ${SCREEN.tablet} {
     max-width: ${SIZES.gameLayoutWidth};

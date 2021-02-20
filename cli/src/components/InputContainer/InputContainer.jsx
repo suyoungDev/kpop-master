@@ -4,7 +4,6 @@ import { SCREEN, FONT, COLORS, SIZES } from '../../constants/theme';
 const InputContainer = styled.div`
   width: 100%;
   font-family: ${FONT.english};
-  margin: 0.5rem 2rem;
 
   display: flex;
   flex-direction: column;
@@ -15,13 +14,12 @@ const InputContainer = styled.div`
     font-size: 1rem;
     padding: 1.3rem;
     width: 360px;
-
-    height: 3.4rem;
+    height: 1.5rem;
     border: none;
-    border-radius: ${SIZES.radiusSmall};
+    border-radius: ${SIZES.radiusBig};
     background-color: ${COLORS.primaryMiddle};
 
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-family: ${FONT.korean};
     font-weight: 200;
     color: ${COLORS.textDark};
