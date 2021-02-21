@@ -1,49 +1,62 @@
 const express = require('express');
 const router = express.Router();
 var melon = require('melon-chart-parser');
-
-router.get('/getBySinger', async (req, res) => {
-  var opt = {
-    limit: 50,
+router.post('/getBySinger', async (req, res) => {
+  var opts = {
+    limit: req.body.limit,
     type: 'artist',
-    term: req.body.singer,
+    term: req.body.artist,
   };
-
-  console.log(req.body);
-
+  console.log(opts);
   var result = await melon
-    .parse(opt)
+    .parse(opts)
     .then(function (res) {
-      const shuffled = res.sort(() => Math.random() - 0.5).slice(0, 10);
-      return shuffled.map((item) => item.trackName);
+      return res;
     })
     .catch(function (err) {
       console.log(err);
     });
-
   res.status(200).json({ success: true, result });
 });
 
-router.get('/getByYear', async (req, res) => {
+router.post('/getByYear', async (req, res) => {
   var opts = {
-    limit: 50,
+    limit: req.body.limit,
     type: 'year',
     genre: 'KPOP',
     year: req.body.year,
   };
+  console.log(opts);
 
   var result = await melon
     .parse(opts)
     .then(function (res) {
-      const shuffled = res.sort(() => Math.random() - 0.5).slice(0, 10);
-      return shuffled.map((item) => item.trackName);
+      const result = res.map((song) => ({
+        rank: song.rank,
+        trackName: song.trackName,
+        artistName: song.artistName,
+      }));
+      return result;
     })
     .catch(function (err) {
       console.log(err);
     });
-  console.log(result);
-
   res.status(200).json({ success: true, result });
 });
 
+router.post('/getByWeek', async (req, res) => {
+  var opts = {
+    limit: req.body.limit,
+    type: 'weekly',
+  };
+  var result = await melon
+    .parse(opts)
+    .then(function (res) {
+      return res;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  res.status(200).json({ success: true, result });
+});
 module.exports = router;
