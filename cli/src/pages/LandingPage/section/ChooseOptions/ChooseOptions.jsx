@@ -28,7 +28,7 @@ const Form = styled.form`
   align-items: ${({ center }) => (center ? 'center' : '')};
   justify-content: center;
   flex-direction: ${({ row }) => (row ? 'row' : 'column')};
-  transition: all 0.3s ease;
+  transition: all 0.5s linear;
 
   :not(:first-child) {
     margin: 2rem 0 0 0;
@@ -52,6 +52,7 @@ const Title = styled.span`
   font-family: ${FONT.korean};
   font-weight: 200;
   color: ${COLORS.headingDarkGray};
+  cursor: ${({ tippy }) => (tippy ? 'help' : 'default')};
 
   .icon {
     margin-left: 0.4rem;
@@ -59,7 +60,7 @@ const Title = styled.span`
   }
 
   &:hover {
-    color: ${COLORS.primaryPoint};
+    color: ${({ tippy }) => (tippy ? `${COLORS.primaryPoint}` : '')};
     .icon {
       color: ${COLORS.primaryPoint};
     }
@@ -152,7 +153,7 @@ const ChooseOptions = () => {
     getByYear(e.target.value);
   };
 
-  const tips = (
+  const tipsForLevel = (
     <div style={{ padding: '.7rem' }}>
       <ul
         style={{
@@ -161,9 +162,9 @@ const ChooseOptions = () => {
           lineHeight: '25px',
         }}
       >
-        <li>쉬움은 top 10,</li>
-        <li>보통은 top 50, </li>
-        <li>어려움은 top 100에서 목록을 가져옵니다. </li>
+        <li>쉬움은 멜론 top 10,</li>
+        <li>보통은 멜론 top 50, </li>
+        <li>어려움은 멜론 top 100에서 목록을 가져옵니다. </li>
         <li>가져온 목록에서 랜덤으로 10곡을 뽑아,</li>
         <li>순서를 셔플합니다.</li>
       </ul>
@@ -173,8 +174,8 @@ const ChooseOptions = () => {
   return (
     <CleanCard options>
       <Form onClick={getLevel}>
-        <Tippy content={tips}>
-          <Title>
+        <Tippy content={tipsForLevel}>
+          <Title tippy>
             난이도
             <BsQuestionCircle className='icon' />
           </Title>
