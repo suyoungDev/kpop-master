@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 var melon = require('melon-chart-parser');
 
-router.post('/getBySinger', async (req, res) => {
+router.post('/getByArtist', async (req, res) => {
   var opts = {
     limit: req.body.limit,
     type: 'artist',
@@ -12,7 +12,9 @@ router.post('/getBySinger', async (req, res) => {
   var result = await melon
     .parse(opts)
     .then(function (res) {
-      return res;
+      return res.map((song) => ({
+        trackName: song.trackName,
+      }));
     })
     .catch(function (err) {
       console.log(err);
@@ -64,7 +66,10 @@ router.post('/getByWeek', async (req, res) => {
   var result = await melon
     .parse(opts)
     .then(function (res) {
-      return res;
+      return res.map((song) => ({
+        trackName: song.trackName,
+        artist: song.artistName,
+      }));
     })
     .catch(function (err) {
       console.log(err);

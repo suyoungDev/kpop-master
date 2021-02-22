@@ -53,7 +53,7 @@ const ChooseOptions = () => {
     setIsLoading(true);
 
     let endPoint;
-    if (theme === 'artist') endPoint = 'getBySinger';
+    if (theme === 'artist') endPoint = 'getByArtist';
     if (theme === 'year') endPoint = 'getByYear';
     if (theme === 'weekly') endPoint = 'getByWeek';
 
