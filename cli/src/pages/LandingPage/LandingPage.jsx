@@ -17,7 +17,7 @@ const LandingPage = () => {
     setGameResult([]); // eslint-disable-next-line
   }, []);
   return (
-    <Center bgcolor={`${COLORS.primaryDark}`} landing>
+    <Center bgcolor={`${COLORS.primaryTwo}`} landing>
       <Row main>
         <GameTitle landing>K-pop Master Quiz</GameTitle>
         <img src={levelImage.four} alt='우주에서 학구열이 강한 몬스터' />

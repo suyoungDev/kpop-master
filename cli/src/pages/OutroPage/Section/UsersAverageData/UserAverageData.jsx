@@ -18,7 +18,7 @@ const UsersData = styled.div`
   line-height: 24px;
   font-size: 14px;
   font-family: ${FONT.korean};
-  color: ${COLORS.textMid};
+  color: ${COLORS.contentGray};
 `;
 
 const userAverageData = ({ userRecords }) => {

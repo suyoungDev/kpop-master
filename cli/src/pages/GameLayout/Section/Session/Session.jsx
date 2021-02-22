@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
   @media ${SCREEN.tablet} {
     max-width: ${SIZES.gameLayoutWidth};
-    background-color: ${COLORS.grayMiddle};
+    background-color: ${COLORS.shadowLight};
     height: 0.7rem;
     margin-bottom: 0;
   }
@@ -33,12 +33,12 @@ const SessionBox = styled.div`
     background-color: ${COLORS.secondaryDark};
   }
   &.wrong {
-    background-color: ${COLORS.textBlack};
+    background-color: ${COLORS.headingDarkGray};
   }
 
   @media ${SCREEN.tablet} {
     &.wrong {
-      background-color: ${COLORS.grayDeepDark};
+      background-color: ${COLORS.contentGrayLight};
     }
   }
 `;

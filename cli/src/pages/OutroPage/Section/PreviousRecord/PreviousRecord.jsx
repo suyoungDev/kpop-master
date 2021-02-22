@@ -14,8 +14,8 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
   border-radius: ${SIZES.radiusSmall};
 `;
 

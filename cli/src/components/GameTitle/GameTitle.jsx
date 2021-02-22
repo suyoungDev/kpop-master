@@ -2,15 +2,12 @@ import styled, { css } from 'styled-components';
 import { COLORS, SCREEN, FONT } from '../../constants/theme';
 
 const landingStyles = css`
-  width: 400px;
-  height: auto;
-
-  color: rgba(255, 255, 255, 0.56);
-  text-shadow: -3px 3px 6px ${COLORS.primaryDark}, 0 0 0 ${COLORS.primaryLight};
+  width: 300px;
+  color: white;
 
   @media ${SCREEN.tablet} {
     font-size: 5.4rem;
-    width: 600px;
+    width: 400px;
     flex-wrap: nowrap;
     color: rgba(108, 99, 255, 0.8);
     text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark};
@@ -34,6 +31,8 @@ const TitleContainer = styled.div`
   font-family: ${FONT.englishTitleCurv};
   font-weight: 700;
   letter-spacing: 2px;
+  word-break: keep-all;
+  word-wrap: break-word;
 
   ${getTitleStyles}
 

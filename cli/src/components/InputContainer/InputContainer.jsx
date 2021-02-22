@@ -22,7 +22,7 @@ const InputContainer = styled.div`
     font-size: 1rem;
     font-family: ${FONT.korean};
     font-weight: 200;
-    color: ${COLORS.textDark};
+    color: ${COLORS.headingDarkGray};
 
     &:focus {
       outline: none;

@@ -32,7 +32,7 @@ const Input = styled.input`
   font-size: 0.8rem;
   font-family: ${FONT.korean};
   font-weight: 200;
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
 
   &:focus {
     outline: none;

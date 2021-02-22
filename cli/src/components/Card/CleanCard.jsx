@@ -4,13 +4,13 @@ import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
 
 const hoverStyle = css`
   :hover {
-    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
+    box-shadow: 0 8px 16px 0 ${COLORS.shadowDark};
   }
 `;
 
 const borderAndShadow = css`
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
 `;
 
 const inGameCardStyle = css`
@@ -30,7 +30,7 @@ const inGameCardStyle = css`
 
     font-family: ${FONT.korean};
     font-weight: 200;
-    color: ${COLORS.textDark};
+    color: ${COLORS.headingDarkGray};
 
     #four {
       grid-area: answer;

@@ -29,7 +29,7 @@ const Title = styled.span`
   align-items: center;
   font-family: ${FONT.korean};
   font-weight: 200;
-  color: ${COLORS.headingDark};
+  color: ${COLORS.headingDarkGray};
 
   .icon {
     margin-left: 0.4rem;

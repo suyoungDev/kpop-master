@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 90%;
   border-radius: ${SIZES.radiusSmall};
   padding: 1.2rem;
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
 
   display: flex;
   flex-direction: column;
@@ -17,10 +17,10 @@ const Container = styled.div`
 
   font-family: ${FONT.korean};
   font-weight: 200;
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
 
   background: white;
-  border: 1px solid ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
   transition: 0.3s ease;
 
   &:nth-child(1) {
@@ -38,11 +38,11 @@ const Container = styled.div`
     list-style: none;
 
     #tip {
-      color: ${COLORS.grayDeepDark};
+      color: ${COLORS.contentGrayLight};
       padding-left: 0.4rem;
 
       span {
-        color: ${COLORS.textDark};
+        color: ${COLORS.headingDarkGray};
         background: ${COLORS.primaryShaodw};
         padding: 2px 4px;
       }
@@ -50,7 +50,7 @@ const Container = styled.div`
   }
 
   :hover {
-    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
+    box-shadow: 0 8px 16px 0 ${COLORS.shadowDark};
   }
 
   @media ${SCREEN.tablet} {
@@ -70,7 +70,7 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: ${COLORS.grayDeepDark};
+  color: ${COLORS.contentGrayLight};
   margin-bottom: 0.6rem;
   font-size: 14px;
 `;
@@ -78,7 +78,7 @@ const Header = styled.div`
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
   font-size: 15px;
   padding-left: 0.7rem;
 `;

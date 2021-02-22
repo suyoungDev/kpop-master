@@ -45,6 +45,7 @@ const OutroPage = () => {
         setIsLoading(false);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   const totalResponseTime = gameResult

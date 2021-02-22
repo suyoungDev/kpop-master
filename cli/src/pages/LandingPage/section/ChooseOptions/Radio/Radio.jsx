@@ -9,11 +9,11 @@ export const RadioLabel = styled.label`
   padding: 0.8rem 1.5rem;
 
   border-radius: ${SIZES.radiusMini};
-  border: 1px solid ${COLORS.gray};
+  border: 1px solid ${COLORS.shadowLight};
 
   font-size: 14px;
   font-family: ${FONT.korean};
-  color: ${COLORS.primaryGray};
+  color: ${COLORS.contentGrayLight};
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -67,7 +67,7 @@ export const TextInput = styled.input`
   border-bottom-right-radius: 0;
 
   font-family: ${FONT.korean};
-  color: ${COLORS.headingDark};
+  color: ${COLORS.headingDarkGray};
   width: 90%;
 
   & + button {
@@ -79,7 +79,7 @@ export const TextInput = styled.input`
 
     background-color: ${COLORS.lightSkyGray};
     border: none;
-    color: ${COLORS.headingDark};
+    color: ${COLORS.headingDarkGray};
     cursor: pointer;
 
     & :hover {

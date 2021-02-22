@@ -61,14 +61,14 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
   font-family: ${FONT.english};
   font-size: 1.6rem;
   font-weight: 800;
   text-align: center;
   letter-spacing: 2px;
   flex-wrap: nowrap;
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
 
   @media ${SCREEN.tablet} {
     font-size: 1.7rem;

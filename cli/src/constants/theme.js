@@ -1,16 +1,28 @@
 export const COLORS = {
+  // new color theme
+  primaryOne: '#8960ff',
+  primaryTwo: '#605dff',
+  primaryThree: '#494bce',
+  primaryPoint: '#8d8dff',
+
+  // gray
+  lightSkyGray: '#eef1fb',
+  headingDarkGray: '#242a35',
+  contentGray: '#576784',
+  contentGrayLight: '#748199',
+
+  // gray for shadow
+  shadowLight: '#E5E5E5',
+  shadowDark: '#CBCBCB',
+
   primary: '#6C63FF',
   primaryDark: '#4F53C5',
   primaryMiddle: '#868BFF',
   primaryLight: '#E1E3FE',
+
   secondary: '#FFEBB5',
   secondaryDark: '#FFD978',
-  grayMiddle: '#E5E5E5',
-  grayDark: '#CBCBCB',
-  grayDeepDark: '#6d7274',
-  textBlack: '#343435',
-  textDark: '#383838',
-  textMid: '#636e72',
+
   textWhiteMid: 'rgba(255, 255, 255, 0.7)',
 };
 
@@ -18,10 +30,11 @@ export const FONT = {
   korean: 'Nanum Gothic',
   english: 'Roboto',
   englishTitleCurv: `'Fredoka One', cursive`,
-  englishButton: `'Josefin Sans', sans-serif;`,
+  englishButton: `Mulish`,
 };
 
 export const SIZES = {
+  radiusMini: '5.5px',
   radiusSmall: '15px',
   radiusBig: '30px',
   gameLayoutWidth: '500px',
