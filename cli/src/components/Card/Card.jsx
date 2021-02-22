@@ -5,6 +5,7 @@ import Snippet from '../Snippet/Snippet';
 
 const Container = styled.div`
   width: 90%;
+  max-width: 450px;
   border-radius: ${SIZES.radiusSmall};
   padding: 1.2rem;
   box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
@@ -17,7 +18,6 @@ const Container = styled.div`
 
   font-family: ${FONT.korean};
   font-weight: 200;
-  color: ${COLORS.headingDarkGray};
 
   background: white;
   border: 1px solid ${COLORS.shadowLight};
@@ -34,33 +34,18 @@ const Container = styled.div`
   ul {
     margin: 0.5rem 0;
     font-size: 14px;
-    line-height: 1.4rem;
+    line-height: 1.7rem;
     list-style: none;
-
-    #tip {
-      color: ${COLORS.contentGrayLight};
-      padding-left: 0.4rem;
-
-      span {
-        color: ${COLORS.headingDarkGray};
-        background: ${COLORS.primaryShaodw};
-        padding: 2px 4px;
-      }
-    }
+    color: ${COLORS.headingDarkGray};
   }
 
   :hover {
     box-shadow: 0 8px 16px 0 ${COLORS.shadowDark};
   }
 
-  @media ${SCREEN.tablet} {
-    width: 300px;
-    height: 330px;
-  }
-
   @media ${SCREEN.laptop} {
-    width: 450px;
-    height: 280px;
+    width: 400px;
+    height: 300px;
   }
 `;
 

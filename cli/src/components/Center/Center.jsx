@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { SCREEN } from '../../constants/theme';
 
 const Center = styled.div`
-  width: ${({ landing }) => (landing ? '100%' : '100%')};
+  width: 100%;
   height: ${({ inGame }) => (inGame ? '100%' : '')};
 
   display: flex;
