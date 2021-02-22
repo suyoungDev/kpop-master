@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema(
     correctTrackName: Array,
     wrongTrackName: Array,
     gameResult: Array,
+    theme: Array,
   },
   { timestamps: true }
 );
