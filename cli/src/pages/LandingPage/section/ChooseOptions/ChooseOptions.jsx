@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 import LinkButton from '../../../../components/LinkButton/LinkButton';
 import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
@@ -11,19 +13,43 @@ import {
   RadioRowContainer,
   TextInput,
 } from './Radio/Radio';
+import CleanCard from '../../../../components/Card/CleanCard';
+import {
+  levelList,
+  typeList,
+  yearList,
+} from '../LevelStructureList/LevelStructureList';
 
 import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
-import { COLORS, FONT } from '../../../../constants/theme';
+import { COLORS, FONT, SCREEN } from '../../../../constants/theme';
 
 const Wrapper = styled.form`
   display: flex;
   align-items: ${({ center }) => (center ? 'center' : '')};
   justify-content: center;
   flex-direction: ${({ row }) => (row ? 'row' : 'column')};
-  margin-top: ${({ center }) => (center ? '' : '2rem')};
+  transition: all 0.3s ease;
+
+  :not(:first-child) {
+    margin: ${({ button }) => (button ? '1rem 0 0 0' : '2rem 0 0 0')};
+  }
+  :last-child {
+    margin: ${({ button }) => (button ? '2rem 0 0 0' : '0')};
+  }
+
+  @media ${SCREEN.laptop} {
+    :first-child {
+      margin-top: 0;
+    }
+
+    :last-child {
+      margin: ${({ button }) => (button ? '2rem 0 0 0' : '0')};
+    }
+  }
 `;
 
 const Title = styled.span`
+  width: 100px;
   display: flex;
   margin-bottom: 0.7rem;
   align-items: center;
@@ -34,9 +60,12 @@ const Title = styled.span`
   .icon {
     margin-left: 0.4rem;
     color: ${COLORS.primaryTwo};
+  }
 
-    &:hover {
-      color: ${COLORS.primaryThree};
+  &:hover {
+    color: ${COLORS.primaryPoint};
+    .icon {
+      color: ${COLORS.primaryPoint};
     }
   }
 `;
@@ -99,44 +128,53 @@ const ChooseOptions = () => {
   };
 
   const getLevel = (e) => {
-    setThemeToPlay({ ...themeToPlay, levelToPlay: e.target.value });
+    setIsSelected(false);
+    setThemeToPlay({
+      ...themeToPlay,
+      typeToPlay: '',
+      levelToPlay: e.target.value,
+    });
   };
 
   const getType = (e) => {
     setThemeToPlay({ ...themeToPlay, typeToPlay: e.target.value });
+    setIsSelected(false);
     if (e.target.value === 'this-week') getByThisWeek();
   };
 
   const getYear = (e) => {
     setThemeToPlay({ ...themeToPlay, value: e.target.value });
+    setIsSelected(false);
     getByYear(e.target.value);
   };
 
-  const levelList = [
-    { name: '쉬움', value: '10', key: 'level-easy' },
-    { name: '보통', value: '50', key: 'level-normal' },
-    { name: '어려움', value: '100', key: 'level-hard' },
-  ];
-
-  const typeList = [
-    { name: '가수', value: 'artist', key: 'type-art' },
-    { name: '년도별', value: 'year', key: 'type-year' },
-    { name: '이번주', value: 'this-week', key: 'type-week' },
-  ];
-
-  const yearList = [
-    { name: '90년대', value: 1990, key: 'year90' },
-    { name: '00년대', value: 2000, key: 'year00' },
-    { name: '10년대', value: 2010, key: 'year10' },
-    { name: '20년도', value: 2020, key: 'year20' },
-  ];
+  const tips = (
+    <div style={{ padding: '.7rem' }}>
+      <ul
+        style={{
+          listStyle: 'none',
+          fontFamily: `${FONT.korean}`,
+          lineHeight: '25px',
+        }}
+      >
+        <li>쉬움은 top 10,</li>
+        <li>보통은 top 50, </li>
+        <li>어려움은 top 100에서 목록을 가져옵니다. </li>
+        <li>가져온 목록에서 랜덤으로 10곡을 뽑아,</li>
+        <li>순서를 셔플합니다.</li>
+      </ul>
+    </div>
+  );
 
   return (
-    <div>
+    <CleanCard options>
       <Wrapper onClick={getLevel}>
-        <Title>
-          난이도 조절 <BsQuestionCircle className='icon' />
-        </Title>
+        <Tippy content={tips}>
+          <Title>
+            난이도
+            <BsQuestionCircle className='icon' />
+          </Title>
+        </Tippy>
         <RadioRowContainer>
           {levelList.map((level) => (
             <RadioContainer key={level.key}>
@@ -174,7 +212,7 @@ const ChooseOptions = () => {
       {themeToPlay.typeToPlay === 'artist' && (
         <Wrapper onSubmit={getByArtist} row>
           <TextInput
-            placeholder='가수 이름으로 플레이하기'
+            placeholder='아티스트 찾기'
             type='string'
             value={inputArtist}
             onChange={changeArtist}
@@ -188,8 +226,8 @@ const ChooseOptions = () => {
       {themeToPlay.typeToPlay === 'year' && (
         <Wrapper onClick={getYear}>
           <RadioRowContainer year>
-            {yearList.map((year, index) => (
-              <RadioContainer key={index}>
+            {yearList.map((year) => (
+              <RadioContainer key={year.key}>
                 <Radio
                   type='radio'
                   value={year.value}
@@ -209,14 +247,16 @@ const ChooseOptions = () => {
         {!isSelected ? (
           <div></div>
         ) : isSelected && isLoading ? (
-          <Wrapper center>
+          <Wrapper button>
             <Spinner />
           </Wrapper>
         ) : (
-          <LinkButton links='/start'>start</LinkButton>
+          <Wrapper button>
+            <LinkButton links='/start'>start</LinkButton>
+          </Wrapper>
         )}
       </Wrapper>
-    </div>
+    </CleanCard>
   );
 };
 export default ChooseOptions;
