@@ -69,7 +69,7 @@ const ChooseOptions = () => {
     setIsLoading(false);
     setIsSelected(true);
 
-    const themeToGo = { variable, theme };
+    const themeToGo = { ...variable, theme: theme };
 
     saveTrackList(trackList, themeToGo);
   };
