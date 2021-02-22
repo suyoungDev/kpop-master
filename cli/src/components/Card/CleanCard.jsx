@@ -85,10 +85,33 @@ const mailCardStyle = css`
   border-radius: ${SIZES.radiusBig};
 
   ${borderAndShadow};
-  ${hoverStyle}
+  ${hoverStyle};
 
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutWidth};
+  }
+`;
+
+const optionsStyle = css`
+  width: 90%;
+  max-width: 450px;
+  height: auto;
+  border-radius: ${SIZES.radiusSmall};
+
+  padding: 1.5rem;
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+
+  transition: all 0.3s ease;
+  ${borderAndShadow};
+  ${hoverStyle}
+
+  @media ${SCREEN.laptop} {
+    margin-top: 0;
   }
 `;
 
@@ -101,6 +124,9 @@ const getCardStyles = (props) => {
   }
   if (props.mail) {
     return mailCardStyle;
+  }
+  if (props.options) {
+    return optionsStyle;
   }
   return props.savingRecord && savingCardStyle;
 };

@@ -53,7 +53,6 @@ const LinkContainer = styled(Link)`
 
   padding: 0.75em 2.7em;
   border-radius: ${SIZES.radiusMini};
-  margin: 1rem 0;
 
   font-family: ${FONT.englishButton};
   font-weight: 400;
@@ -66,7 +65,6 @@ const LinkContainer = styled(Link)`
   @media ${SCREEN.tablet} {
     font-size: 1.6rem;
     align-self: ${({ outro }) => (outro ? 'center' : 'flex-start)')};
-    margin: 0 0 2rem 0;
     padding: 0.5em 2.7em;
   }
 

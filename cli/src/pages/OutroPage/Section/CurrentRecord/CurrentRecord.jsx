@@ -16,14 +16,6 @@ const TableContainer = styled.table`
   text-align: center;
 `;
 
-const Tablehead = styled.th`
-  color: black;
-  padding: 10px;
-  height: 1rem;
-  font-weight: bold;
-  font-size: 16px;
-`;
-
 const TableContext = styled.td`
   color: ${({ isWorng }) => (isWorng === 'correct' ? 'black' : 'red')};
   font-weight: 200;

@@ -1,18 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SCREEN, SIZES } from '../../constants/theme';
 
-const Row = styled.div`
-  width: 100%;
-  padding: ${({ main }) => (main ? '0 2rem 2rem 2rem' : '1rem 0 0 0')};
-
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: ${({ main }) => (main ? 'space-between' : 'center')};
+const mainStyles = css`
+  width: 80%;
+  padding: 0 0 2rem 0;
+  justify-content: space-between;
 
   img {
     display: none;
-    transition: width 1s ease;
   }
 
   @media ${SCREEN.tablet} {
@@ -28,8 +23,10 @@ const Row = styled.div`
   }
 
   @media ${SCREEN.laptop} {
-    width: ${({ main }) => (main ? '80%' : '85%')};
+    width: 85%;
     max-width: ${SIZES.laptopWidth};
+    justify-content: space-between;
+
     align-items: center;
 
     img {
@@ -37,6 +34,36 @@ const Row = styled.div`
       width: auto;
     }
   }
+`;
+
+const mainCardStyles = css`
+  flex-direction: column;
+  align-items: center;
+
+  @media ${SCREEN.laptop} {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 80%;
+    max-width: ${SIZES.laptopWidth};
+  }
+`;
+
+const getStyles = (props) => {
+  if (props.main) return mainStyles;
+  if (props.mainCard) return mainCardStyles;
+};
+
+const Row = styled.div`
+  width: 100%;
+  padding: 1rem 0 0 0;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+
+  ${getStyles};
 `;
 
 export default Row;

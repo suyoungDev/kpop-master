@@ -1,8 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FONT, COLORS, SIZES, SCREEN } from '../../../../../constants/theme';
 
 export const RadioLabel = styled.label`
-  width: ${({ year }) => (year ? '155px' : '100px')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,27 +33,17 @@ export const Radio = styled.input`
 `;
 export const RadioContainer = styled.div``;
 
-const yearStyles = css`
-  grid-template-rows: 1fr 1fr;
-`;
-
-const getStyles = (props) => {
-  if (props.year) return yearStyles;
-};
-
 export const RadioRowContainer = styled.div`
-  width: 320px;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: column;
   align-items: center;
+  justify-content: space-between;
 
   @media ${SCREEN.tablet} {
     grid-auto-flow: column;
   }
-
-  ${getStyles}
 `;
 
 export const TextInput = styled.input`
