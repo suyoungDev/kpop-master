@@ -3,21 +3,24 @@ import React, { useContext } from 'react';
 import GameLayout from '../GameLayout/GameLayout';
 import OutroPage from '../OutroPage/OutroPage';
 
-import { blackpinkData } from '../../data/blackpink';
-
 import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
+import { TrackListToPlayContext } from '../../context/TrackListToPlayContext/TrackListToPlayContext';
 
 const Start = () => {
   // eslint-disable-next-line
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
+  // eslint-disable-next-line
+  const [trackListToPlay, setTrackListToPlay] = useContext(
+    TrackListToPlayContext
+  );
 
-  const result = blackpinkData.sort(() => Math.random() - 0.5).slice(0, 10);
+  console.log(trackListToPlay);
 
   if (isGameEnd) {
     return <OutroPage />;
   }
 
-  return <GameLayout trackList={result} />;
+  return <GameLayout />;
 };
 
 export default Start;

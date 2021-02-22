@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
@@ -19,69 +18,35 @@ import {
   typeList,
   yearList,
 } from '../LevelStructureList/LevelStructureList';
+import { Form, Title, Wrapper } from './Form/Form';
 
 import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
-import { COLORS, FONT, SCREEN } from '../../../../constants/theme';
+import { FONT } from '../../../../constants/theme';
 
-const Form = styled.form`
-  display: flex;
-  align-items: ${({ center }) => (center ? 'center' : '')};
-  justify-content: center;
-  flex-direction: ${({ row }) => (row ? 'row' : 'column')};
-  transition: all 0.5s linear;
-
-  :not(:first-child) {
-    margin: 2rem 0 0 0;
-  }
-  :last-child {
-    margin: 0;
-  }
-
-  @media ${SCREEN.laptop} {
-    :first-child {
-      margin-top: 0;
-    }
-  }
-`;
-
-const Title = styled.span`
-  width: 100px;
-  display: flex;
-  margin-bottom: 0.7rem;
-  align-items: center;
-  font-family: ${FONT.korean};
-  font-weight: 200;
-  color: ${COLORS.headingDarkGray};
-  cursor: ${({ tippy }) => (tippy ? 'help' : 'default')};
-
-  .icon {
-    margin-left: 0.4rem;
-    color: ${COLORS.primaryTwo};
-  }
-
-  &:hover {
-    color: ${({ tippy }) => (tippy ? `${COLORS.primaryPoint}` : '')};
-    .icon {
-      color: ${COLORS.primaryPoint};
-    }
-  }
-`;
-const Wrapper = styled.div`
-  margin: 2rem 0 0 0;
-`;
+import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext/TrackListToPlayContext';
 
 const ChooseOptions = () => {
+  // eslint-disable-next-line
+  const [trackListToPlay, setTrackListToPlay] = useContext(
+    TrackListToPlayContext
+  );
+
   const [isSelected, setIsSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [inputArtist, setInputArtist] = useState('');
-  const [themeToPlay, setThemeToPlay] = useState({
-    levelToPlay: '',
-    typeToPlay: '',
-    value: '',
-  });
+
+  const [levelToGo, setLevelToGo] = useState('');
+  const [typeToGo, setTypeToGo] = useState('');
 
   const changeArtist = (event) => {
     setInputArtist(event.target.value);
+  };
+
+  const saveTrackList = (trackList, theme) => {
+    setTrackListToPlay({
+      trackList: trackList,
+      theme: theme,
+    });
   };
 
   const getList = async (variable, theme) => {
@@ -91,8 +56,6 @@ const ChooseOptions = () => {
     if (theme === 'artist') endPoint = 'getBySinger';
     if (theme === 'year') endPoint = 'getByYear';
     if (theme === 'weekly') endPoint = 'getByWeek';
-
-    console.log(variable);
 
     const response = await axios.post(`/api/chart/${endPoint}`, variable);
     const trackList = response.data.shuffled;
@@ -104,51 +67,42 @@ const ChooseOptions = () => {
     }
 
     setIsLoading(false);
+    setIsSelected(true);
+
+    const themeToGo = { variable, theme };
+
+    saveTrackList(trackList, themeToGo);
   };
 
   const getByArtist = (event) => {
     event.preventDefault();
-
-    const limit = themeToPlay.levelToPlay;
-    const variable = { artist: inputArtist, limit: limit };
-
+    const variable = { artist: inputArtist, limit: levelToGo };
     getList(variable, 'artist');
-    setIsSelected(true);
   };
 
   const getByYear = (year) => {
-    const limit = themeToPlay.levelToPlay;
-    const variable = { year: year, limit: limit };
-
+    const variable = { year: year, limit: levelToGo };
     getList(variable, 'year');
-    setIsSelected(true);
   };
 
   const getByThisWeek = () => {
-    const limit = themeToPlay.levelToPlay;
-    const variable = { limit: limit };
-
+    const variable = { limit: levelToGo };
     getList(variable, 'weekly');
-    setIsSelected(true);
   };
 
   const getLevel = (e) => {
+    setTypeToGo('');
     setIsSelected(false);
-    setThemeToPlay({
-      ...themeToPlay,
-      typeToPlay: '',
-      levelToPlay: e.target.value,
-    });
+    setLevelToGo(e.target.value);
   };
 
   const getType = (e) => {
-    setThemeToPlay({ ...themeToPlay, typeToPlay: e.target.value });
+    setTypeToGo(e.target.value);
     setIsSelected(false);
     if (e.target.value === 'this-week') getByThisWeek();
   };
 
   const getYear = (e) => {
-    setThemeToPlay({ ...themeToPlay, value: e.target.value });
     setIsSelected(false);
     getByYear(e.target.value);
   };
@@ -165,8 +119,8 @@ const ChooseOptions = () => {
         <li>쉬움은 멜론 top 10,</li>
         <li>보통은 멜론 top 50, </li>
         <li>어려움은 멜론 top 100에서 목록을 가져옵니다. </li>
-        <li>가져온 목록에서 랜덤으로 10곡을 뽑아,</li>
-        <li>순서를 셔플합니다.</li>
+        <li>가져온 목록에서 무작위로 10곡을 뽑아,</li>
+        <li>순서를 섞은 뒤, 게임을 시작합니다.</li>
       </ul>
     </div>
   );
@@ -195,7 +149,7 @@ const ChooseOptions = () => {
         </RadioRowContainer>
       </Form>
 
-      {themeToPlay.levelToPlay && (
+      {levelToGo && (
         <Form onClick={getType}>
           <Title>주제 고르기</Title>
           <RadioRowContainer>
@@ -214,7 +168,7 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      {themeToPlay.typeToPlay === 'artist' && (
+      {typeToGo === 'artist' && (
         <Form onSubmit={getByArtist} row>
           <TextInput
             placeholder='아티스트 찾기'
@@ -228,7 +182,7 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      {themeToPlay.typeToPlay === 'year' && (
+      {typeToGo === 'year' && (
         <Form onClick={getYear}>
           <RadioRowContainer year>
             {yearList.map((year) => (

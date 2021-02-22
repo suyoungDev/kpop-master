@@ -11,20 +11,23 @@ import RankPage from './pages/RankPage/RankPage';
 
 import { GameResultProvider } from './context/GameResultContext/GameResultContext';
 import { GameEndProvider } from './context/GamEndContext/GameEndContext';
+import { TrackListToPlayProvider } from './context/TrackListToPlayContext/TrackListToPlayContext';
 
 function App() {
   return (
     <GameEndProvider>
       <GameResultProvider>
-        <BrowserRouter>
-          <NavBar />
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/start' component={Start} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/rank' component={RankPage} />
-          </Switch>
-        </BrowserRouter>
+        <TrackListToPlayProvider>
+          <BrowserRouter>
+            <NavBar />
+            <Switch>
+              <Route exact path='/' component={LandingPage} />
+              <Route exact path='/start' component={Start} />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/rank' component={RankPage} />
+            </Switch>
+          </BrowserRouter>
+        </TrackListToPlayProvider>
       </GameResultProvider>
     </GameEndProvider>
   );
