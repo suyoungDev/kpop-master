@@ -5,7 +5,7 @@ export const RadioLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1rem;
 
   border-radius: ${SIZES.radiusMini};
   border: 1px solid ${COLORS.shadowLight};
@@ -15,6 +15,7 @@ export const RadioLabel = styled.label`
   color: ${COLORS.contentGrayLight};
   cursor: pointer;
   transition: all 0.3s ease;
+  word-break: keep-all;
 
   :hover {
     border: 1px solid ${COLORS.primaryTwo};
