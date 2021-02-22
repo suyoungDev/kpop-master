@@ -23,7 +23,7 @@ import {
 import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
 import { COLORS, FONT, SCREEN } from '../../../../constants/theme';
 
-const Wrapper = styled.form`
+const Form = styled.form`
   display: flex;
   align-items: ${({ center }) => (center ? 'center' : '')};
   justify-content: center;
@@ -31,19 +31,15 @@ const Wrapper = styled.form`
   transition: all 0.3s ease;
 
   :not(:first-child) {
-    margin: ${({ button }) => (button ? '1rem 0 0 0' : '2rem 0 0 0')};
+    margin: 2rem 0 0 0;
   }
   :last-child {
-    margin: ${({ button }) => (button ? '2rem 0 0 0' : '0')};
+    margin: 0;
   }
 
   @media ${SCREEN.laptop} {
     :first-child {
       margin-top: 0;
-    }
-
-    :last-child {
-      margin: ${({ button }) => (button ? '2rem 0 0 0' : '0')};
     }
   }
 `;
@@ -69,6 +65,9 @@ const Title = styled.span`
     }
   }
 `;
+const Wrapper = styled.div`
+  margin: 2rem 0 0 0;
+`;
 
 const ChooseOptions = () => {
   const [isSelected, setIsSelected] = useState(false);
@@ -84,46 +83,51 @@ const ChooseOptions = () => {
     setInputArtist(event.target.value);
   };
 
-  const getByArtist = (event) => {
-    event.preventDefault();
-    const getList = async () => {
-      setIsLoading(true);
-      const limit = themeToPlay.levelToPlay;
-      const variable = { artist: inputArtist, limit: limit };
-      const response = await axios.post('/api/chart/getBySinger', variable);
-      const trackList = response.data.shuffled;
-      setIsLoading(false);
+  const getList = async (variable, theme) => {
+    setIsLoading(true);
+
+    let endPoint;
+    if (theme === 'artist') endPoint = 'getBySinger';
+    if (theme === 'year') endPoint = 'getByYear';
+    if (theme === 'weekly') endPoint = 'getByWeek';
+
+    console.log(variable);
+
+    const response = await axios.post(`/api/chart/${endPoint}`, variable);
+    const trackList = response.data.shuffled;
+
+    if (theme === 'artist') {
       if (!trackList.length) {
         alert('찾는 가수가 없습니다. 다시 입력해주세요.');
       }
-    };
-    getList();
+    }
+
+    setIsLoading(false);
+  };
+
+  const getByArtist = (event) => {
+    event.preventDefault();
+
+    const limit = themeToPlay.levelToPlay;
+    const variable = { artist: inputArtist, limit: limit };
+
+    getList(variable, 'artist');
     setIsSelected(true);
   };
 
   const getByYear = (year) => {
-    const getList = async () => {
-      setIsLoading(true);
-      const limit = themeToPlay.levelToPlay;
-      const variable = { year: year, limit: limit };
-      const response = await axios.post('/api/chart/getByYear', variable);
-      const trackList = response.data.shuffled;
-      setIsLoading(false);
-    };
-    getList();
+    const limit = themeToPlay.levelToPlay;
+    const variable = { year: year, limit: limit };
+
+    getList(variable, 'year');
     setIsSelected(true);
   };
 
   const getByThisWeek = () => {
-    const getList = async () => {
-      setIsLoading(true);
-      const limit = themeToPlay.levelToPlay;
-      const variable = { limit: limit };
-      const response = await axios.post('/api/chart/getByWeek', variable);
-      const trackList = response.data.shuffled;
-      setIsLoading(false);
-    };
-    getList();
+    const limit = themeToPlay.levelToPlay;
+    const variable = { limit: limit };
+
+    getList(variable, 'weekly');
     setIsSelected(true);
   };
 
@@ -168,7 +172,7 @@ const ChooseOptions = () => {
 
   return (
     <CleanCard options>
-      <Wrapper onClick={getLevel}>
+      <Form onClick={getLevel}>
         <Tippy content={tips}>
           <Title>
             난이도
@@ -188,10 +192,10 @@ const ChooseOptions = () => {
             </RadioContainer>
           ))}
         </RadioRowContainer>
-      </Wrapper>
+      </Form>
 
       {themeToPlay.levelToPlay && (
-        <Wrapper onClick={getType}>
+        <Form onClick={getType}>
           <Title>주제 고르기</Title>
           <RadioRowContainer>
             {typeList.map((type) => (
@@ -206,11 +210,11 @@ const ChooseOptions = () => {
               </RadioContainer>
             ))}
           </RadioRowContainer>
-        </Wrapper>
+        </Form>
       )}
 
       {themeToPlay.typeToPlay === 'artist' && (
-        <Wrapper onSubmit={getByArtist} row>
+        <Form onSubmit={getByArtist} row>
           <TextInput
             placeholder='아티스트 찾기'
             type='string'
@@ -220,11 +224,11 @@ const ChooseOptions = () => {
           <button type='submit'>
             <BsSearch />
           </button>
-        </Wrapper>
+        </Form>
       )}
 
       {themeToPlay.typeToPlay === 'year' && (
-        <Wrapper onClick={getYear}>
+        <Form onClick={getYear}>
           <RadioRowContainer year>
             {yearList.map((year) => (
               <RadioContainer key={year.key}>
@@ -240,22 +244,22 @@ const ChooseOptions = () => {
               </RadioContainer>
             ))}
           </RadioRowContainer>
-        </Wrapper>
+        </Form>
       )}
 
-      <Wrapper>
+      <Form>
         {!isSelected ? (
           <div></div>
         ) : isSelected && isLoading ? (
-          <Wrapper button>
+          <Wrapper>
             <Spinner />
           </Wrapper>
         ) : (
-          <Wrapper button>
+          <Wrapper>
             <LinkButton links='/start'>start</LinkButton>
           </Wrapper>
         )}
-      </Wrapper>
+      </Form>
     </CleanCard>
   );
 };
