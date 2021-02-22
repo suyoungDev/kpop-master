@@ -1,15 +1,52 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
 import LinkButton from '../../../../components/LinkButton/LinkButton';
-import { BsSearch } from 'react-icons/bs';
 import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
+import {
+  Radio,
+  RadioLabel,
+  RadioContainer,
+  RadioRowContainer,
+  TextInput,
+} from './Radio/Radio';
+
+import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
+import { COLORS, FONT } from '../../../../constants/theme';
+
+const Wrapper = styled.form`
+  display: flex;
+  align-items: ${({ center }) => (center ? 'center' : '')};
+  justify-content: center;
+  flex-direction: ${({ row }) => (row ? 'row' : 'column')};
+  margin-top: ${({ center }) => (center ? '' : '2rem')};
+`;
+
+const Title = styled.span`
+  display: flex;
+  margin-bottom: 0.7rem;
+  align-items: center;
+  font-family: ${FONT.korean};
+  font-weight: 200;
+  color: ${COLORS.headingDark};
+
+  .icon {
+    margin-left: 0.4rem;
+    color: ${COLORS.primaryTwo};
+
+    &:hover {
+      color: ${COLORS.primaryThree};
+    }
+  }
+`;
 
 const ChooseOptions = () => {
   const [isSelected, setIsSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [inputArtist, setInputArtist] = useState('');
   const [themeToPlay, setThemeToPlay] = useState({
-    levelToPlay: 0,
+    levelToPlay: '',
     typeToPlay: '',
     value: '',
   });
@@ -27,7 +64,6 @@ const ChooseOptions = () => {
       const response = await axios.post('/api/chart/getBySinger', variable);
       const trackList = response.data.shuffled;
       setIsLoading(false);
-      console.log(trackList);
       if (!trackList.length) {
         alert('찾는 가수가 없습니다. 다시 입력해주세요.');
       }
@@ -43,7 +79,6 @@ const ChooseOptions = () => {
       const variable = { year: year, limit: limit };
       const response = await axios.post('/api/chart/getByYear', variable);
       const trackList = response.data.shuffled;
-      console.log(trackList);
       setIsLoading(false);
     };
     getList();
@@ -57,7 +92,6 @@ const ChooseOptions = () => {
       const variable = { limit: limit };
       const response = await axios.post('/api/chart/getByWeek', variable);
       const trackList = response.data.shuffled;
-      console.log(trackList);
       setIsLoading(false);
     };
     getList();
@@ -78,38 +112,68 @@ const ChooseOptions = () => {
     getByYear(e.target.value);
   };
 
+  const levelList = [
+    { name: '쉬움', value: '10', key: 'level-easy' },
+    { name: '보통', value: '50', key: 'level-normal' },
+    { name: '어려움', value: '100', key: 'level-hard' },
+  ];
+
+  const typeList = [
+    { name: '가수', value: 'artist', key: 'type-art' },
+    { name: '년도별', value: 'year', key: 'type-year' },
+    { name: '이번주', value: 'this-week', key: 'type-week' },
+  ];
+
   const yearList = [
-    { name: '90년대', value: 1990 },
-    { name: '00년대', value: 2000 },
-    { name: '10년대', value: 2010 },
-    { name: '20년도', value: 2020 },
+    { name: '90년대', value: 1990, key: 'year90' },
+    { name: '00년대', value: 2000, key: 'year00' },
+    { name: '10년대', value: 2010, key: 'year10' },
+    { name: '20년도', value: 2020, key: 'year20' },
   ];
 
   return (
     <div>
-      <form onClick={getLevel}>
-        <p>난이도 조절</p>
-        <input type='radio' value='10' id='easy' name='level' />
-        <label htmlFor='easy'>easy</label>
-        <input type='radio' value='50' id='normal' name='level' />
-        <label htmlFor='normal'>normal</label>
-        <input type='radio' value='100' id='hard' name='level' />
-        <label htmlFor='hard'>hard</label>
-      </form>
+      <Wrapper onClick={getLevel}>
+        <Title>
+          난이도 조절 <BsQuestionCircle className='icon' />
+        </Title>
+        <RadioRowContainer>
+          {levelList.map((level) => (
+            <RadioContainer key={level.key}>
+              <Radio
+                type='radio'
+                value={level.value}
+                id={level.value}
+                name='level'
+              />
+              <RadioLabel htmlFor={level.value}>{level.name}</RadioLabel>
+            </RadioContainer>
+          ))}
+        </RadioRowContainer>
+      </Wrapper>
 
-      <form onClick={getType}>
-        <p>주제 고르기</p>
-        <input type='radio' value='artist' id='artist' name='theme' />
-        <label htmlFor='artist'>가수명</label>
-        <input type='radio' value='year' id='year' name='theme' />
-        <label htmlFor='year'>년도별</label>
-        <input type='radio' value='this-week' id='this-week' name='theme' />
-        <label htmlFor='this-week'>이번주</label>
-      </form>
+      {themeToPlay.levelToPlay && (
+        <Wrapper onClick={getType}>
+          <Title>주제 고르기</Title>
+          <RadioRowContainer>
+            {typeList.map((type) => (
+              <RadioContainer key={type.key}>
+                <Radio
+                  type='radio'
+                  value={type.value}
+                  id={type.value}
+                  name='type'
+                />
+                <RadioLabel htmlFor={type.value}>{type.name}</RadioLabel>
+              </RadioContainer>
+            ))}
+          </RadioRowContainer>
+        </Wrapper>
+      )}
 
       {themeToPlay.typeToPlay === 'artist' && (
-        <form onSubmit={getByArtist}>
-          <input
+        <Wrapper onSubmit={getByArtist} row>
+          <TextInput
             placeholder='가수 이름으로 플레이하기'
             type='string'
             value={inputArtist}
@@ -118,32 +182,40 @@ const ChooseOptions = () => {
           <button type='submit'>
             <BsSearch />
           </button>
-        </form>
+        </Wrapper>
       )}
 
       {themeToPlay.typeToPlay === 'year' && (
-        <form onClick={getYear}>
-          {yearList.map((year, index) => (
-            <div key={index}>
-              <input
-                type='radio'
-                value={year.value}
-                id={year.value}
-                name='year'
-              />
-              <label htmlFor='year'>{year.name}</label>
-            </div>
-          ))}
-        </form>
+        <Wrapper onClick={getYear}>
+          <RadioRowContainer year>
+            {yearList.map((year, index) => (
+              <RadioContainer key={index}>
+                <Radio
+                  type='radio'
+                  value={year.value}
+                  id={year.value}
+                  name='year'
+                />
+                <RadioLabel htmlFor={year.value} year>
+                  {year.name}
+                </RadioLabel>
+              </RadioContainer>
+            ))}
+          </RadioRowContainer>
+        </Wrapper>
       )}
 
-      {!isSelected ? (
-        <div></div>
-      ) : isSelected && isLoading ? (
-        <Spinner></Spinner>
-      ) : (
-        <LinkButton links={'/start'}>start</LinkButton>
-      )}
+      <Wrapper>
+        {!isSelected ? (
+          <div></div>
+        ) : isSelected && isLoading ? (
+          <Wrapper center>
+            <Spinner />
+          </Wrapper>
+        ) : (
+          <LinkButton links='/start'>start</LinkButton>
+        )}
+      </Wrapper>
     </div>
   );
 };
