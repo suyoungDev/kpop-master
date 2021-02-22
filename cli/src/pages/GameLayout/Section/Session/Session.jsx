@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { COLORS, SCREEN, SIZES } from '../../../../constants/theme';
 
-import { GameResultContext } from '../../../../context/GameResultContext/GameResultContext';
+import { GameResultContext } from '../../../../context/GameResultContext';
 
 const Wrapper = styled.div`
   width: 100%;

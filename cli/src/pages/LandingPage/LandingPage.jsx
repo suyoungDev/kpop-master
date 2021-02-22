@@ -8,8 +8,8 @@ import GameTitle from '../../components/GameTitle/GameTitle';
 import ChooseOptions from './section/ChooseOptions/ChooseOptions';
 import HowToPlay from './section/HowToPlay/HowToPlay';
 
-import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
-import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
+import { GameEndContext } from '../../context/GameEndContext';
+import { GameResultContext } from '../../context/GameResultContext';
 
 import { COLORS } from '../../constants/theme';
 const LandingPage = () => {

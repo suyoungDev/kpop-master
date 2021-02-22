@@ -6,7 +6,7 @@ import Confetti from 'react-confetti';
 
 import { SIZES } from '../../constants/theme';
 
-import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
+import { GameResultContext } from '../../context/GameResultContext';
 
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
 import PreviousRecord from './Section/PreviousRecord/PreviousRecord';

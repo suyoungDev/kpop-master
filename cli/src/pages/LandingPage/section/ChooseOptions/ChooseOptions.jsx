@@ -23,7 +23,7 @@ import { Form, Title, Wrapper } from './Form/Form';
 import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
 import { FONT } from '../../../../constants/theme';
 
-import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext/TrackListToPlayContext';
+import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
 
 const ChooseOptions = () => {
   // eslint-disable-next-line

@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import GameLayout from '../GameLayout/GameLayout';
 import OutroPage from '../OutroPage/OutroPage';
 
-import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
-import { TrackListToPlayContext } from '../../context/TrackListToPlayContext/TrackListToPlayContext';
+import { GameEndContext } from '../../context/GameEndContext';
+import { TrackListToPlayContext } from '../../context/TrackListToPlayContext';
 
 const Start = () => {
   // eslint-disable-next-line
@@ -14,13 +14,11 @@ const Start = () => {
     TrackListToPlayContext
   );
 
-  console.log(trackListToPlay);
-
   if (isGameEnd) {
     return <OutroPage />;
   }
 
-  return <GameLayout />;
+  return <GameLayout trackList={trackListToPlay.trackList} />;
 };
 
 export default Start;

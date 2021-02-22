@@ -8,25 +8,30 @@ import Start from './pages/Start/Start';
 import NavBar from './pages/NavBar/NavBar';
 import About from './pages/About/About';
 import RankPage from './pages/RankPage/RankPage';
+import Test from './pages/LandingPage/Test';
 
-import { GameResultProvider } from './context/GameResultContext/GameResultContext';
-import { GameEndProvider } from './context/GamEndContext/GameEndContext';
-import { TrackListToPlayProvider } from './context/TrackListToPlayContext/TrackListToPlayContext';
+import { GameResultProvider } from './context/GameResultContext';
+import { GameEndProvider } from './context/GameEndContext';
+import { TrackListToPlayProvider } from './context/TrackListToPlayContext';
+import { GamePlayProvider } from './context/GamePlayContext';
 
 function App() {
   return (
     <GameEndProvider>
       <GameResultProvider>
         <TrackListToPlayProvider>
-          <BrowserRouter>
-            <NavBar />
-            <Switch>
-              <Route exact path='/' component={LandingPage} />
-              <Route exact path='/start' component={Start} />
-              <Route exact path='/about' component={About} />
-              <Route exact path='/rank' component={RankPage} />
-            </Switch>
-          </BrowserRouter>
+          <GamePlayProvider>
+            <BrowserRouter>
+              <NavBar />
+              <Switch>
+                <Route exact path='/' component={LandingPage} />
+                <Route exact path='/start' component={Start} />
+                <Route exact path='/about' component={About} />
+                <Route exact path='/rank' component={RankPage} />
+                <Route exact path='/test' component={Test} />
+              </Switch>
+            </BrowserRouter>
+          </GamePlayProvider>
         </TrackListToPlayProvider>
       </GameResultProvider>
     </GameEndProvider>
