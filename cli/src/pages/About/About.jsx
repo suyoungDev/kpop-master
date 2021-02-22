@@ -40,7 +40,10 @@ const About = () => {
       <GameTitle about>mocha</GameTitle>
       <Content bottom>
         <p>
-          안녕하세요! 재밋게 즐기셨나요? <span role='img'>😙</span>
+          안녕하세요! 재밋게 즐기셨나요?{' '}
+          <span role='img' aria-labelledby='smile'>
+            😙
+          </span>
         </p>
         <p>문의사항이나 건의사항이 있다면 아래의 메일로 보내주세요.</p>
         <Content>
