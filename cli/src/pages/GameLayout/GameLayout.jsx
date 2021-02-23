@@ -44,23 +44,16 @@ const GameLayout = ({ trackList }) => {
     setStartTime(Date.now());
     setShowHints(false);
 
-    console.log(trackList);
-
     const getUrl = async () => {
       const variable = { trackName: trackList[currentRound].trackName };
-      console.log(variable);
-      const response = await axios.post(
-        '/api/youtube/getId',
-        JSON.parse(variable)
-      );
+      const response = await axios.post('/api/youtube/getId', variable);
+      console.log(response.data.result);
 
-      const videoId = response.data.items[0].id.videoId;
-      console.log(videoId);
-      setUrl(videoId);
+      // const videoId = response.data.items[0].id.videoId;
+      // console.log(videoId);
     };
 
     getUrl();
-    console.log(url);
 
     const giveHints = setTimeout(() => {
       setShowHints(true);
@@ -132,7 +125,7 @@ const GameLayout = ({ trackList }) => {
 
     if (currentRound === 4) {
       setIsGameEnd(true);
-      return setUrl('');
+      setUrl('');
     }
 
     setCurrentRound(currentRound + 1);
