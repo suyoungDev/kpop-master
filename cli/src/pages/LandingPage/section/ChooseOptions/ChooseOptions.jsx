@@ -60,7 +60,7 @@ const ChooseOptions = () => {
     if (theme === 'weekly') endPoint = 'getByWeek';
 
     const response = await axios.post(`/api/chart/${endPoint}`, variable);
-    const trackList = response.data.shuffled;
+    const trackList = response.data.result;
 
     if (theme === 'artist') {
       if (!trackList.length) {
@@ -208,7 +208,7 @@ const ChooseOptions = () => {
         {!isSelected ? (
           <div></div>
         ) : isSelected && isLoading ? (
-          <Wrapper>
+          <Wrapper center>
             <Spinner />
           </Wrapper>
         ) : (

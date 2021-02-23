@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 var melon = require('melon-chart-parser');
 
+const regex = /[(]/g;
+
 router.post('/getByArtist', async (req, res) => {
   var opts = {
     limit: req.body.limit,
@@ -21,8 +23,10 @@ router.post('/getByArtist', async (req, res) => {
     });
 
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 10);
-
-  res.status(200).json({ success: true, shuffled });
+  const filtered = shuffled.map((song) => ({
+    trackName: song.trackName.split(regex)[0],
+  }));
+  res.status(200).json({ success: true, result: filtered });
 });
 
 router.post('/getByYear', async (req, res) => {
@@ -53,8 +57,12 @@ router.post('/getByYear', async (req, res) => {
   }
 
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 10);
+  const filtered = shuffled.map((song) => ({
+    trackName: song.trackName.split(regex)[0],
+    artist: song.artistName,
+  }));
 
-  res.status(200).json({ success: true, shuffled });
+  res.status(200).json({ success: true, result: filtered });
 });
 
 router.post('/getByWeek', async (req, res) => {
@@ -76,7 +84,11 @@ router.post('/getByWeek', async (req, res) => {
     });
 
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 10);
+  const filtered = shuffled.map((song) => ({
+    trackName: song.trackName.split(regex)[0],
+    artist: song.artistName,
+  }));
 
-  res.status(200).json({ success: true, shuffled });
+  res.status(200).json({ success: true, result: filtered });
 });
 module.exports = router;
