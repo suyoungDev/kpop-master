@@ -46,5 +46,9 @@ export const Title = styled.span`
 `;
 
 export const Wrapper = styled.div`
+  display: ${({ center }) => (center ? 'flex' : '')};
+  justify-content: ${({ center }) => (center ? 'center' : '')};
+  align-items: ${({ center }) => (center ? 'center' : '')};
+
   margin: 2rem 0 0 0;
 `;
