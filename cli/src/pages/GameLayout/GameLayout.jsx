@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import axios from 'axios';
 import useSound from 'use-sound';
 import checkImg from '../../constants/image/checkImg.svg';
 
@@ -44,33 +43,33 @@ const GameLayout = ({ trackList }) => {
     setStartTime(Date.now());
     setShowHints(false);
 
-    const getUrl = async () => {
-      const variable = { trackName: trackList[currentRound].trackName };
-      console.log(variable);
-      const response = await axios.post('/api/youtube/getId', variable);
-      console.log(response.data.items);
-      const videoId = response.data.items[0].id.videoId;
-      console.log(videoId);
-      setUrl(videoId);
-    };
+    // const getUrl = async () => {
+    //   const variable = { trackName: trackList[currentRound].trackName };
+    //   console.log(variable);
+    //   const response = await axios.post('/api/youtube/getId', variable);
+    //   console.log(response.data.items);
+    //   const videoId = response.data.items[0].id.videoId;
+    //   console.log(videoId);
+    //   setUrl(videoId);
+    // };
 
-    getUrl();
+    // getUrl();
 
     const giveHints = setTimeout(() => {
       setShowHints(true);
-    }, 10000);
+    }, 5000);
 
     const timer = setTimeout(() => {
       setInputValue('');
       setTimeOver(true);
-    }, 20000);
+    }, 10000);
 
     const setOver = setTimeout(() => {
       setTimeOver(false);
       if (!isGameEnd) {
         goNextRound();
       }
-    }, 23000);
+    }, 13000);
 
     return () => {
       clearTimeout(timer);
@@ -172,6 +171,7 @@ const GameLayout = ({ trackList }) => {
             showHints={showHints}
             timeOver={timeOver}
             className='inputWrapper'
+            artist={trackList[currentRound].artistName}
           />
         </RoundContainer>
       </CleanCard>

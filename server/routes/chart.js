@@ -16,6 +16,7 @@ router.post('/getByArtist', async (req, res) => {
     .then(function (res) {
       return res.map((song) => ({
         trackName: song.trackName,
+        artistName: artistName,
       }));
     })
     .catch(function (err) {
@@ -25,6 +26,7 @@ router.post('/getByArtist', async (req, res) => {
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
+    artistName: song.artistName,
   }));
   res.status(200).json({ success: true, result: filtered });
 });
@@ -47,7 +49,7 @@ router.post('/getByYear', async (req, res) => {
       .then((res) => {
         const eachYearData = res.map((song) => ({
           trackName: song.trackName,
-          artist: song.artistName,
+          artistName: song.artistName,
         }));
         return eachYearData;
       })
@@ -59,7 +61,7 @@ router.post('/getByYear', async (req, res) => {
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
-    artist: song.artistName,
+    artistName: song.artistName,
   }));
 
   res.status(200).json({ success: true, result: filtered });
@@ -74,9 +76,10 @@ router.post('/getByWeek', async (req, res) => {
   var result = await melon
     .parse(opts)
     .then(function (res) {
+      console.log(res);
       return res.map((song) => ({
         trackName: song.trackName,
-        artist: song.artistName,
+        artistName: song.artistName,
       }));
     })
     .catch(function (err) {
@@ -86,7 +89,7 @@ router.post('/getByWeek', async (req, res) => {
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
-    artist: song.artistName,
+    artistName: song.artistName,
   }));
 
   res.status(200).json({ success: true, result: filtered });

@@ -55,9 +55,11 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  display: flex;
   width: ${SIZES.gameLayoutMediumWidth};
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -75,6 +77,19 @@ const Content = styled.div`
   }
 `;
 
+const ArtistName = styled.span`
+  font-size: 12px;
+  color: ${COLORS.contentGrayLight};
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 200;
+  letter-spacing: 0;
+
+  @media ${SCREEN.tablet} {
+    margin-top: 1rem;
+  }
+`;
+
 const HintContainer = ({ children, hint, showHints }) => {
   return (
     <TextContainer>
@@ -89,15 +104,21 @@ const HintContainer = ({ children, hint, showHints }) => {
   );
 };
 
-const ShowHintOrAnswer = ({ trackName, showHints, timeOver }) => {
+const ShowHintOrAnswer = ({ trackName, artist, showHints, timeOver }) => {
   return (
     <Wrapper>
       {showHints && !timeOver && (
         <HintContainer hint showHints>
           <Hint trackName={trackName} />
+          <ArtistName>{artist}</ArtistName>
         </HintContainer>
       )}
-      {timeOver && <HintContainer>{trackName}</HintContainer>}
+      {timeOver && (
+        <HintContainer>
+          {trackName}
+          <ArtistName>{artist}</ArtistName>
+        </HintContainer>
+      )}
     </Wrapper>
   );
 };
