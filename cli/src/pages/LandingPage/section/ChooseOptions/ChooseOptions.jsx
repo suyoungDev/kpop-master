@@ -94,12 +94,10 @@ const ChooseOptions = () => {
     setVariablesToPlay({ ...variablesToPlay, type: '' });
     setIsReady(false);
     setVariablesToPlay({ ...variablesToPlay, level: e.target.value });
-    console.log(variablesToPlay);
   };
 
   const getType = (e) => {
     setVariablesToPlay({ ...variablesToPlay, type: e.target.value });
-    console.log(variablesToPlay);
 
     setIsReady(false);
     if (e.target.value === 'this-week') getByThisWeek();

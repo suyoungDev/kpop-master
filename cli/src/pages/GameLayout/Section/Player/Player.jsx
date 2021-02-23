@@ -11,11 +11,9 @@ const Wrapper = styled.div`
 
 const Player = ({ url }) => {
   return (
-    <React.Fragment>
-      <Wrapper>
-        <ReactPlayer url={url} playing />
-      </Wrapper>
-    </React.Fragment>
+    <Wrapper>
+      <ReactPlayer url={`https://www.youtube.com/watch?v=${url}`} playing />
+    </Wrapper>
   );
 };
 

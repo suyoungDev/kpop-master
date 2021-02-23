@@ -46,11 +46,12 @@ const GameLayout = ({ trackList }) => {
 
     const getUrl = async () => {
       const variable = { trackName: trackList[currentRound].trackName };
+      console.log(variable);
       const response = await axios.post('/api/youtube/getId', variable);
-      console.log(response.data.result);
-
-      // const videoId = response.data.items[0].id.videoId;
-      // console.log(videoId);
+      console.log(response.data.items);
+      const videoId = response.data.items[0].id.videoId;
+      console.log(videoId);
+      setUrl(videoId);
     };
 
     getUrl();
@@ -143,7 +144,7 @@ const GameLayout = ({ trackList }) => {
   };
 
   return (
-    <Center bgcolor={`${COLORS.primaryDark}`} inGame>
+    <Center bgcolor={`${COLORS.primaryTwo}`} inGame>
       <Player url={url} />
 
       <Session id='first' />

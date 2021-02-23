@@ -17,7 +17,7 @@ const Start = () => {
   if (isGameEnd) {
     return <OutroPage />;
   }
-
+  console.log(trackListToPlay.trackList);
   return <GameLayout trackList={trackListToPlay.trackList} />;
 };
 

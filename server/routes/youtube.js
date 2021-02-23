@@ -14,7 +14,7 @@ router.post('/getId', async (req, res) => {
       console.log(error);
     } else {
       const data = JSON.stringify(result, null, 1);
-      res.status(200).json({ success: true, result: data });
+      res.status(200).send(data);
     }
   });
 });
