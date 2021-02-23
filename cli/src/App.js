@@ -1,7 +1,5 @@
 import React from 'react';
-
-import './App.css';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, useLocation } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage/LandingPage';
 import Start from './pages/Start/Start';
@@ -14,6 +12,18 @@ import { GameResultProvider } from './context/GameResultContext';
 import { GameEndProvider } from './context/GameEndContext';
 import { TrackListToPlayProvider } from './context/TrackListToPlayContext';
 import { GamePlayProvider } from './context/GamePlayContext';
+
+import './App.css';
+
+function NoMatch() {
+  let location = useLocation();
+  return (
+    <div>
+      <h3>일치하는 주소가 없습니다</h3>
+      <p>{location.pathname}</p>
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -29,6 +39,7 @@ function App() {
                 <Route exact path='/about' component={About} />
                 <Route exact path='/rank' component={RankPage} />
                 <Route exact path='/test' component={Test} />
+                <Route component={NoMatch} />
               </Switch>
             </BrowserRouter>
           </GamePlayProvider>
