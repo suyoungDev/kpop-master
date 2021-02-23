@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import axios from 'axios';
 import useSound from 'use-sound';
 import checkImg from '../../constants/image/checkImg.svg';
 
@@ -15,8 +16,9 @@ import AnswerCard from './Section/AnswerCard/AnswerCard';
 import correctSfx from '../../constants/sounds/correct.mp3';
 import wrongSfx from '../../constants/sounds/wrong1.mp3';
 
-import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
-import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
+import { GameEndContext } from '../../context/GameEndContext';
+import { GameResultContext } from '../../context/GameResultContext';
+
 import { COLORS } from '../../constants/theme';
 
 const GameLayout = ({ trackList }) => {
@@ -40,8 +42,25 @@ const GameLayout = ({ trackList }) => {
   useEffect(() => {
     focusedInput.current.focus();
     setStartTime(Date.now());
-    setUrl(trackList[currentRound].url);
     setShowHints(false);
+
+    console.log(trackList);
+
+    const getUrl = async () => {
+      const variable = { trackName: trackList[currentRound].trackName };
+      console.log(variable);
+      const response = await axios.post(
+        '/api/youtube/getId',
+        JSON.parse(variable)
+      );
+
+      const videoId = response.data.items[0].id.videoId;
+      console.log(videoId);
+      setUrl(videoId);
+    };
+
+    getUrl();
+    console.log(url);
 
     const giveHints = setTimeout(() => {
       setShowHints(true);
@@ -80,7 +99,6 @@ const GameLayout = ({ trackList }) => {
 
     let givenAnswer = answer;
     let correct = trackList[currentRound].trackName;
-    let alterCorrect = trackList[currentRound].alterTrackName;
 
     englishRegex.test(answer)
       ? (givenAnswer = answer.toLowerCase().replace(regex, ''))
@@ -90,11 +108,7 @@ const GameLayout = ({ trackList }) => {
       ? (correct = correct.toLowerCase().replace(regex, ''))
       : (correct = correct.replace(regex, ''));
 
-    englishRegex.test(alterCorrect)
-      ? (alterCorrect = alterCorrect.toLowerCase().replace(regex, ''))
-      : (alterCorrect = alterCorrect.replace(regex, ''));
-
-    if (givenAnswer === correct || givenAnswer === alterCorrect) {
+    if (givenAnswer === correct) {
       playCorrect();
       let answerResult = 'correct';
       goNextRound(answerResult);
@@ -105,16 +119,18 @@ const GameLayout = ({ trackList }) => {
 
   const goNextRound = (answerResult) => {
     const newResult = {
-      id: Math.random().toString(36).substr(2, 4),
+      id: Math.random()
+        .toString(36)
+        .substr(2, 4),
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
-      responseTime: answerResult === 'correct' ? timeOut() : 10000,
+      responseTime: answerResult === 'correct' ? timeOut() : 20000,
     };
 
     setGameResult([...gameResult, newResult]);
 
-    if (currentRound === 9) {
+    if (currentRound === 4) {
       setIsGameEnd(true);
       return setUrl('');
     }

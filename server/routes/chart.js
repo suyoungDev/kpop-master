@@ -22,7 +22,7 @@ router.post('/getByArtist', async (req, res) => {
       console.log(err);
     });
 
-  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 10);
+  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
   }));
@@ -56,7 +56,7 @@ router.post('/getByYear', async (req, res) => {
     result.push(...data);
   }
 
-  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 10);
+  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
     artist: song.artistName,
@@ -83,7 +83,7 @@ router.post('/getByWeek', async (req, res) => {
       console.log(err);
     });
 
-  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 10);
+  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
     artist: song.artistName,
