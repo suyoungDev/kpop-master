@@ -25,12 +25,12 @@ const Wrapper = styled.div`
 `;
 
 const SessionBox = styled.div`
-  width: 10%;
+  width: 20%;
   height: 100%;
-  border-right: 2px solid rgba(255, 255, 255, 0.45);
+  border-right: 2px solid rgba(255, 255, 255, 0.5);
 
   &.correct {
-    background-color: ${COLORS.secondaryDark};
+    background-color: ${COLORS.secondaryTwo};
   }
   &.wrong {
     background-color: ${COLORS.headingDarkGray};
@@ -46,6 +46,7 @@ const SessionBox = styled.div`
 const Session = () => {
   // eslint-disable-next-line
   const [gameResult, setGameResult] = useContext(GameResultContext);
+
   return (
     <Wrapper>
       {gameResult.map((item) => (
