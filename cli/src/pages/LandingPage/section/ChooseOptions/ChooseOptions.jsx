@@ -30,11 +30,9 @@ const ChooseOptions = () => {
   const [trackListToPlay, setTrackListToPlay] = useContext(
     TrackListToPlayContext
   );
-
-  const [isSelected, setIsSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isReady, setIsReady] = useState(false);
   const [inputArtist, setInputArtist] = useState('');
-
   const [variablesToPlay, setVariablesToPlay] = useState({
     level: '',
     type: '',
@@ -69,7 +67,7 @@ const ChooseOptions = () => {
     }
 
     setIsLoading(false);
-    setIsSelected(true);
+    setIsReady(true);
 
     const themeToGo = { ...variable, theme: theme };
 
@@ -94,18 +92,21 @@ const ChooseOptions = () => {
 
   const getLevel = (e) => {
     setVariablesToPlay({ ...variablesToPlay, type: '' });
-    setIsSelected(false);
+    setIsReady(false);
     setVariablesToPlay({ ...variablesToPlay, level: e.target.value });
+    console.log(variablesToPlay);
   };
 
   const getType = (e) => {
     setVariablesToPlay({ ...variablesToPlay, type: e.target.value });
-    setIsSelected(false);
+    console.log(variablesToPlay);
+
+    setIsReady(false);
     if (e.target.value === 'this-week') getByThisWeek();
   };
 
   const getYear = (e) => {
-    setIsSelected(false);
+    setIsReady(false);
     getByYear(e.target.value);
   };
 
@@ -121,8 +122,8 @@ const ChooseOptions = () => {
         <li>쉬움은 멜론 top 10,</li>
         <li>보통은 멜론 top 50, </li>
         <li>어려움은 멜론 top 100에서 목록을 가져옵니다. </li>
-        <li>가져온 목록에서 무작위로 10곡을 뽑아,</li>
-        <li>순서를 섞은 뒤, 게임을 시작합니다.</li>
+        <li>가져온 목록에서 무작위로 5곡을 뽑은 뒤,</li>
+        <li>게임을 시작합니다.</li>
       </ul>
     </div>
   );
@@ -204,10 +205,10 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      <Form>
-        {!isSelected ? (
+      <div>
+        {!isReady ? (
           <div></div>
-        ) : isSelected && isLoading ? (
+        ) : isReady && isLoading ? (
           <Wrapper center>
             <Spinner />
           </Wrapper>
@@ -216,7 +217,7 @@ const ChooseOptions = () => {
             <LinkButton links='/start'>start</LinkButton>
           </Wrapper>
         )}
-      </Form>
+      </div>
     </CleanCard>
   );
 };
