@@ -35,8 +35,10 @@ const ChooseOptions = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [inputArtist, setInputArtist] = useState('');
 
-  const [levelToGo, setLevelToGo] = useState('');
-  const [typeToGo, setTypeToGo] = useState('');
+  const [variablesToPlay, setVariablesToPlay] = useState({
+    level: '',
+    type: '',
+  });
 
   const changeArtist = (event) => {
     setInputArtist(event.target.value);
@@ -76,28 +78,28 @@ const ChooseOptions = () => {
 
   const getByArtist = (event) => {
     event.preventDefault();
-    const variable = { artist: inputArtist, limit: levelToGo };
+    const variable = { artist: inputArtist, limit: variablesToPlay.level };
     getList(variable, 'artist');
   };
 
   const getByYear = (year) => {
-    const variable = { year: year, limit: levelToGo };
+    const variable = { year: year, limit: variablesToPlay.level };
     getList(variable, 'year');
   };
 
   const getByThisWeek = () => {
-    const variable = { limit: levelToGo };
+    const variable = { limit: variablesToPlay.level };
     getList(variable, 'weekly');
   };
 
   const getLevel = (e) => {
-    setTypeToGo('');
+    setVariablesToPlay({ ...variablesToPlay, type: '' });
     setIsSelected(false);
-    setLevelToGo(e.target.value);
+    setVariablesToPlay({ ...variablesToPlay, level: e.target.value });
   };
 
   const getType = (e) => {
-    setTypeToGo(e.target.value);
+    setVariablesToPlay({ ...variablesToPlay, type: e.target.value });
     setIsSelected(false);
     if (e.target.value === 'this-week') getByThisWeek();
   };
@@ -149,7 +151,7 @@ const ChooseOptions = () => {
         </RadioRowContainer>
       </Form>
 
-      {levelToGo && (
+      {variablesToPlay.level && (
         <Form onClick={getType}>
           <Title>주제 고르기</Title>
           <RadioRowContainer>
@@ -168,7 +170,7 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      {typeToGo === 'artist' && (
+      {variablesToPlay.type === 'artist' && (
         <Form onSubmit={getByArtist} row>
           <TextInput
             placeholder='아티스트 찾기'
@@ -182,7 +184,7 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      {typeToGo === 'year' && (
+      {variablesToPlay.type === 'year' && (
         <Form onClick={getYear}>
           <RadioRowContainer year>
             {yearList.map((year) => (
