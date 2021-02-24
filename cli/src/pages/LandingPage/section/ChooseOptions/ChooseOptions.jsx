@@ -17,36 +17,38 @@ import {
   levelList,
   typeList,
   yearList,
-} from '../LevelStructureList/LevelStructureList';
+} from '../themeStructureList/themeStructureList';
 import { Form, Title, Wrapper } from './Form/Form';
 
 import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
 import { FONT } from '../../../../constants/theme';
 
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
+import { GameResultContext } from '../../../../context/GameResultContext';
+
+import useInput from '../../../../hook/useInput';
 
 const ChooseOptions = () => {
   // eslint-disable-next-line
   const [trackListToPlay, setTrackListToPlay] = useContext(
     TrackListToPlayContext
   );
+  // eslint-disable-next-line
+  const [gameResult, setGameResult] = useContext(GameResultContext);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isReady, setIsReady] = useState(false);
-  const [inputArtist, setInputArtist] = useState('');
+  const [inputArtist, setInputArtist] = useInput('');
   const [variablesToPlay, setVariablesToPlay] = useState({
     level: '',
     type: '',
   });
 
-  const changeArtist = (event) => {
-    setInputArtist(event.target.value);
-  };
-
   const saveTrackList = (trackList, theme) => {
-    setTrackListToPlay({
-      trackList: trackList,
-      theme: theme,
-    });
+    setTrackListToPlay(trackList);
+    setGameResult({ ...gameResult, theme: theme });
+    console.log(trackListToPlay);
+    console.log(gameResult);
   };
 
   const getList = async (variable, theme) => {
@@ -76,28 +78,45 @@ const ChooseOptions = () => {
 
   const getByArtist = (event) => {
     event.preventDefault();
-    const variable = { artist: inputArtist, limit: variablesToPlay.level };
+    const variable = {
+      artist: inputArtist,
+      limit: variablesToPlay.level,
+    };
     getList(variable, 'artist');
   };
 
   const getByYear = (year) => {
-    const variable = { year: year, limit: variablesToPlay.level };
+    const variable = {
+      year: year,
+      limit: variablesToPlay.level,
+    };
     getList(variable, 'year');
   };
 
   const getByThisWeek = () => {
-    const variable = { limit: variablesToPlay.level };
+    const variable = {
+      limit: variablesToPlay.level,
+    };
     getList(variable, 'weekly');
   };
 
   const getLevel = (e) => {
-    setVariablesToPlay({ ...variablesToPlay, type: '' });
+    setVariablesToPlay({
+      ...variablesToPlay,
+      type: '',
+    });
     setIsReady(false);
-    setVariablesToPlay({ ...variablesToPlay, level: e.target.value });
+    setVariablesToPlay({
+      ...variablesToPlay,
+      level: e.target.value,
+    });
   };
 
   const getType = (e) => {
-    setVariablesToPlay({ ...variablesToPlay, type: e.target.value });
+    setVariablesToPlay({
+      ...variablesToPlay,
+      type: e.target.value,
+    });
 
     setIsReady(false);
     if (e.target.value === 'this-week') getByThisWeek();
@@ -175,7 +194,7 @@ const ChooseOptions = () => {
             placeholder='아티스트 찾기'
             type='string'
             value={inputArtist}
-            onChange={changeArtist}
+            onChange={setInputArtist}
           />
           <button type='submit'>
             <BsSearch />

@@ -7,10 +7,12 @@ import SavingWrapper from '../SavingWrapper/SavingWrapper';
 import SavingInputcontainer from '../SavingInputcontainer/SavingInputcontainer';
 import './SavingMyRecord.scss';
 
+import useInput from '../../../../hook/useInput';
+
 // 이전 데이터가 있으면 이거 자체가 안보이게
 // 이전 데이터가 없으면 이름 입력 & db와 로컬에 기록 저장
 const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useInput('');
   const [alreadySavedName, setAlreadySavedName] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -18,10 +20,6 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
     const saved = localStorage.getItem('_userName');
     setAlreadySavedName(saved);
   }, []);
-
-  const update = (event) => {
-    setName(event.target.value);
-  };
 
   const addName = (event) => {
     event.preventDefault();
@@ -73,9 +71,9 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
                 placeholder='이름'
                 type='text'
                 value={name}
-                onChange={update}
-                minLength='3'
-                maxLength='15'
+                onChange={setName}
+                minLength='2'
+                maxLength='10'
                 autoComplete='off'
                 required
                 disabled={isSaving}
