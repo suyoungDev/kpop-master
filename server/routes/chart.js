@@ -16,7 +16,7 @@ router.post('/getByArtist', async (req, res) => {
     .then(function (res) {
       return res.map((song) => ({
         trackName: song.trackName,
-        artistName: artistName,
+        artistName: song.artistName,
       }));
     })
     .catch(function (err) {
@@ -76,7 +76,6 @@ router.post('/getByWeek', async (req, res) => {
   var result = await melon
     .parse(opts)
     .then(function (res) {
-      console.log(res);
       return res.map((song) => ({
         trackName: song.trackName,
         artistName: song.artistName,
