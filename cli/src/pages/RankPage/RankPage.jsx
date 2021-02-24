@@ -13,9 +13,9 @@ const RankPage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    axios.get('/api/user/getRecords').then((res) => {
+    axios.get('/api/game/getRecords').then((res) => {
       if (res.data.success) {
-        setUserRankList(res.data.userRecordList);
+        setUserRankList(res.data.gameRecordList);
         setIsLoading(false);
       }
     });

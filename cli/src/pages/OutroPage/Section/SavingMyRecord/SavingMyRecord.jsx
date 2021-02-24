@@ -7,6 +7,8 @@ import SavingWrapper from '../SavingWrapper/SavingWrapper';
 import SavingInputcontainer from '../SavingInputcontainer/SavingInputcontainer';
 import './SavingMyRecord.scss';
 
+import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
+
 import useInput from '../../../../hook/useInput';
 
 // 이전 데이터가 있으면 이거 자체가 안보이게
@@ -15,6 +17,9 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
   const [name, setName] = useInput('');
   const [alreadySavedName, setAlreadySavedName] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [trackListToPlay, setTrackListToPlay] = useContext(
+    TrackListToPlayContext
+  );
 
   useEffect(() => {
     const saved = localStorage.getItem('_userName');
@@ -42,15 +47,16 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
       .filter((game) => game.result === 'wrong')
       .map((song) => song.trackName);
 
-    const userData = {
+    const gameData = {
       userName: user,
       record: averageResponseTime,
       correctTrackName: correctAnswers,
       wrongTrackName: wrongAnswers,
       gameResult: gameResult,
+      theme: trackListToPlay.theme,
     };
 
-    axios.post('/api/user/upload', userData);
+    axios.post('/api/game/upload', gameData);
   };
 
   return (

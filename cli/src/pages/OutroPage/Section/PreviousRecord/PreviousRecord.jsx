@@ -76,15 +76,16 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
       .filter((game) => game.result === 'wrong')
       .map((song) => song.trackName);
 
-    const userData = {
+    const gameData = {
       userName: user,
       record: averageResponseTime,
       correctTrackName: correctAnswers,
       wrongTrackName: wrongAnswers,
       gameResult: gameResult,
+      theme: trackListToPlay.theme,
     };
 
-    axios.post('/api/user/upload', userData);
+    axios.post('/api/game/upload', gameData);
   };
 
   const uploadRecordToLocal = (currentRecord) => {
