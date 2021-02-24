@@ -30,10 +30,7 @@ const Descript = styled.div`
 const Description = ({ averageResponseTime }) => {
   const [myLevel, setMyLevel] = useState('');
   const [myLimit, setMyLimit] = useState('');
-  // eslint-disable-next-line
-  const [trackListToPlay, setTrackListToPlay] = useContext(
-    TrackListToPlayContext
-  );
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
 
   const getMyLevel = () => {
     if (averageResponseTime < 5) {

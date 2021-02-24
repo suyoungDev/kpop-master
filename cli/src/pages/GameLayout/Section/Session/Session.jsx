@@ -44,8 +44,7 @@ const SessionBox = styled.div`
 `;
 
 const Session = () => {
-  // eslint-disable-next-line
-  const [gameResult, setGameResult] = useContext(GameResultContext);
+  const [gameResult] = useContext(GameResultContext);
 
   return (
     <Wrapper>

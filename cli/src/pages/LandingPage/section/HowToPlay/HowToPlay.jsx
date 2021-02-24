@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Card from '../../../../components/Card/Card';
-import { COLORS, FONT, SIZES } from '../../../../constants/theme';
+import { COLORS } from '../../../../constants/theme';
 
 const Block = styled.span`
   background-color: ${COLORS.lightSkyGray};

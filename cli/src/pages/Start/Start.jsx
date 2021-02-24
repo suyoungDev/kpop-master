@@ -8,12 +8,8 @@ import { GameEndContext } from '../../context/GameEndContext';
 import { TrackListToPlayContext } from '../../context/TrackListToPlayContext';
 
 const Start = () => {
-  // eslint-disable-next-line
-  const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
-  // eslint-disable-next-line
-  const [trackListToPlay, setTrackListToPlay] = useContext(
-    TrackListToPlayContext
-  );
+  const [isGameEnd] = useContext(GameEndContext);
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
 
   useEffect(() => {
     window.addEventListener('beforeunload', alertUser);
@@ -22,6 +18,8 @@ const Start = () => {
       window.removeEventListener('beforeunload', alertUser);
     };
   }, []);
+
+  console.log(trackListToPlay);
 
   const alertUser = (e) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { RiSave2Fill } from 'react-icons/ri';
 
@@ -17,9 +17,8 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
   const [name, setName] = useInput('');
   const [alreadySavedName, setAlreadySavedName] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [trackListToPlay, setTrackListToPlay] = useContext(
-    TrackListToPlayContext
-  );
+  // eslint-disable-next-line
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
 
   useEffect(() => {
     const saved = localStorage.getItem('_userName');

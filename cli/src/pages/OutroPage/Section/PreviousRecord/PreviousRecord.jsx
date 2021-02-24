@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONT } from '../../../../constants/theme';
 import { BiRocket } from 'react-icons/bi';
+import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -43,6 +44,7 @@ const Bold = styled.span`
 const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   const [existingUserName, setExistingUserName] = useState('');
   const [existingUserRecord, setExistingUserRecord] = useState('');
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
 
   useEffect(() => {
     const userName = localStorage.getItem('_userName');

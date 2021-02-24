@@ -29,8 +29,7 @@ const ContentWrapper = styled.div`
 `;
 
 const OutroPage = () => {
-  // eslint-disable-next-line
-  const [gameResult, setGameResult] = useContext(GameResultContext);
+  const [gameResult] = useContext(GameResultContext);
   const { width, height } = useWindowSize();
 
   const [userRankList, setUserRankList] = useState();
