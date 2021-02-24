@@ -138,6 +138,11 @@ const GameLayout = ({ trackList }) => {
   const answerSubmit = (event) => {
     event.preventDefault();
     setGivenAnswersList([inputValue, ...givenAnswersList]);
+
+    if (inputValue === '!ㅂ' || '!q') {
+      goNextRound();
+    }
+
     isCorrect(inputValue);
     setInputValue('');
   };
