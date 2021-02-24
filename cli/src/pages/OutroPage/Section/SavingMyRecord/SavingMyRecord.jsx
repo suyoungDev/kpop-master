@@ -26,7 +26,6 @@ const SavingMyRecord = ({ averageResponseTime, gameResult }) => {
     uploadRecordToLocal(name);
     uploadRecordToDB(name);
     setIsSaving(true);
-    setName('');
   };
 
   const uploadRecordToLocal = (userName) => {
