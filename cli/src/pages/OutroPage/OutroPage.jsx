@@ -38,12 +38,17 @@ const OutroPage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    axios.get('/api/game/getRecords').then((res) => {
-      if (res.data.success) {
-        setUserRankList(res.data.gameRecordList);
+    const getResult = async () => {
+      const response = await axios.get('/api/game/getRecords');
+      const data = response.data.gameRecordList;
+      setUserRankList(data);
+
+      if (data.length) {
         setIsLoading(false);
       }
-    });
+    };
+
+    getResult();
     // eslint-disable-next-line
   }, []);
 
