@@ -4,11 +4,14 @@ export default (initalValue = null) => {
   const [input, setInput] = useState(initalValue);
 
   const handler = useCallback(
-    (e) => {
-      const { value } = e.target;
+    (event) => {
+      const { value } = event.target;
       setInput(value);
     },
     [input]
   );
-  return [input, handler];
+
+  const resetInput = useCallback(() => setInput(initalValue), [initalValue]);
+
+  return [input, handler, resetInput];
 };

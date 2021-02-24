@@ -17,6 +17,7 @@ import wrongSfx from '../../constants/sounds/wrong1.mp3';
 
 import { GameEndContext } from '../../context/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext';
+import useInput from '../../hook/useInput';
 
 import { COLORS } from '../../constants/theme';
 
@@ -24,7 +25,7 @@ const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, onChange, resetInput] = useInput('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
 
   const [currentRound, setCurrentRound] = useState(0);
@@ -60,7 +61,7 @@ const GameLayout = ({ trackList }) => {
     }, 5000);
 
     const timer = setTimeout(() => {
-      setInputValue('');
+      resetInput();
       setTimeOver(true);
     }, 10000);
 
@@ -131,10 +132,6 @@ const GameLayout = ({ trackList }) => {
     setCurrentRound(currentRound + 1);
   };
 
-  const onChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
   const answerSubmit = (event) => {
     event.preventDefault();
     setGivenAnswersList([inputValue, ...givenAnswersList]);
@@ -144,7 +141,7 @@ const GameLayout = ({ trackList }) => {
     }
 
     isCorrect(inputValue);
-    setInputValue('');
+    resetInput();
   };
 
   return (
