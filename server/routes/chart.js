@@ -8,7 +8,7 @@ router.post('/getByArtist', async (req, res) => {
   var opts = {
     limit: req.body.limit,
     type: 'artist',
-    term: req.body.artist,
+    term: req.body.value,
   };
 
   var result = await melon
@@ -33,8 +33,8 @@ router.post('/getByArtist', async (req, res) => {
 
 router.post('/getByYear', async (req, res) => {
   let result = [];
-  let year = Number(req.body.year);
-  let finallYear = year === 2020 ? 2020 : Number(req.body.year) + 9;
+  let year = Number(req.body.value);
+  let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 9;
 
   for (let i = year; i <= finallYear; i++) {
     var opts = {

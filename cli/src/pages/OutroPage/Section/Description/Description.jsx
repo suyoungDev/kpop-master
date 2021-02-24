@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { SIZES } from '../../../../constants/theme';
 
 import levelImage from '../../../../constants/image/outroImage/level';
+
+import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,8 +29,13 @@ const Descript = styled.div`
 
 const Description = ({ averageResponseTime }) => {
   const [myLevel, setMyLevel] = useState('');
+  const [myLimit, setMyLimit] = useState('');
+  // eslint-disable-next-line
+  const [trackListToPlay, setTrackListToPlay] = useContext(
+    TrackListToPlayContext
+  );
 
-  useEffect(() => {
+  const getMyLevel = () => {
     if (averageResponseTime < 5) {
       setMyLevel('five');
     } else if (averageResponseTime < 8) {
@@ -42,7 +49,21 @@ const Description = ({ averageResponseTime }) => {
     } else {
       setMyLevel('zero');
     }
+  };
 
+  const getMyLimit = () => {
+    if (trackListToPlay.theme.limit === 10) {
+      setMyLimit('쉬운');
+    } else if (trackListToPlay.theme.limit === 50) {
+      setMyLimit('보통의');
+    } else {
+      setMyLimit('어려운');
+    }
+  };
+
+  useEffect(() => {
+    getMyLevel();
+    getMyLimit();
     // eslint-disable-next-line
   }, []);
 
@@ -67,6 +88,24 @@ const Description = ({ averageResponseTime }) => {
         alt='해당 레벨을 설명하는 그림'
         width='300'
       />
+      <span>{myLimit} 난이도로</span>
+
+      {trackListToPlay.theme.theme === 'year' && (
+        <span>
+          {trackListToPlay.theme.value}년대 음악이라면 잘 알고있다고 게임을
+          즐겼어요.
+        </span>
+      )}
+
+      {trackListToPlay.theme.theme === 'artist' && (
+        <span>
+          {trackListToPlay.theme.value}의 음악이라면 내가 다 알고 있다!
+        </span>
+      )}
+
+      {trackListToPlay.theme.theme === 'weekly' && (
+        <span> 트렌드에 승부를 걸겠다! 이번주 노래로 게임을 즐겼어요.</span>
+      )}
       <Descript>{levelDescription[myLevel]}</Descript>
     </Wrapper>
   );

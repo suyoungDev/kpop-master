@@ -72,7 +72,7 @@ const ChooseOptions = () => {
   const getByArtist = (event) => {
     event.preventDefault();
     const variable = {
-      artist: inputArtist,
+      value: inputArtist,
       limit: variablesToPlay.level,
     };
     getList(variable, 'artist');
@@ -80,7 +80,7 @@ const ChooseOptions = () => {
 
   const getByYear = (year) => {
     const variable = {
-      year: year,
+      value: year,
       limit: variablesToPlay.level,
     };
     getList(variable, 'year');
