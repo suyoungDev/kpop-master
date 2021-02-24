@@ -27,10 +27,10 @@ const Wrapper = styled.div`
 const SessionBox = styled.div`
   width: 20%;
   height: 100%;
-  border-right: 2px solid rgba(255, 255, 255, 0.5);
+  border-right: 4px solid rgba(255, 255, 255, 0.5);
 
   &.correct {
-    background-color: ${COLORS.secondaryTwo};
+    background-color: ${COLORS.secondary};
   }
   &.wrong {
     background-color: ${COLORS.headingDarkGray};
@@ -49,10 +49,10 @@ const Session = () => {
 
   return (
     <Wrapper>
-      {gameResult.map((item) => (
+      {gameResult.map((round) => (
         <SessionBox
-          className={`${item.result === 'correct' ? 'correct' : 'wrong'}`}
-          key={item.id}
+          className={`${round.result === 'correct' ? 'correct' : 'wrong'}`}
+          key={round.id}
         />
       ))}
     </Wrapper>

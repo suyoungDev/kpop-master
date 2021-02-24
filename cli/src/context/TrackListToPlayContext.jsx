@@ -5,6 +5,7 @@ export const TrackListToPlayContext = createContext();
 export const TrackListToPlayProvider = (props) => {
   const [trackListToPlay, setTrackListToPlay] = useState({
     trackList: [],
+    theme: [],
   });
 
   return (

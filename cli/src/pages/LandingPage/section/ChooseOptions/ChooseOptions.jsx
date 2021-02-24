@@ -24,7 +24,6 @@ import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
 import { FONT } from '../../../../constants/theme';
 
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
-import { GameResultContext } from '../../../../context/GameResultContext';
 
 import useInput from '../../../../hook/useInput';
 
@@ -33,9 +32,6 @@ const ChooseOptions = () => {
   const [trackListToPlay, setTrackListToPlay] = useContext(
     TrackListToPlayContext
   );
-  // eslint-disable-next-line
-  const [gameResult, setGameResult] = useContext(GameResultContext);
-
   const [isLoading, setIsLoading] = useState(true);
   const [isReady, setIsReady] = useState(false);
   const [inputArtist, setInputArtist] = useInput('');
@@ -45,10 +41,7 @@ const ChooseOptions = () => {
   });
 
   const saveTrackList = (trackList, theme) => {
-    setTrackListToPlay(trackList);
-    setGameResult({ ...gameResult, theme: theme });
-    console.log(trackListToPlay);
-    console.log(gameResult);
+    setTrackListToPlay({ trackList, theme });
   };
 
   const getList = async (variable, theme) => {
