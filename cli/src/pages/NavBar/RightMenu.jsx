@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SIZES } from '../../constants/theme';
 import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';
+import { FiPower } from 'react-icons/fi';
 import StyledLink from '../../components/StyledLink/StyledLink';
 
 const LinkContainer = styled.div`
@@ -44,6 +45,9 @@ const RightMenu = ({ open }) => {
       <StyledLink to='/about'>
         <GiBalloonDog className='icon' />
         About
+      </StyledLink>
+      <StyledLink to='/register'>
+        <FiPower className='icon' />
       </StyledLink>
     </LinkContainer>
   );

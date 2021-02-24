@@ -7,6 +7,7 @@ import NavBar from './pages/NavBar/NavBar';
 import About from './pages/About/About';
 import RankPage from './pages/RankPage/RankPage';
 import Test from './pages/LandingPage/Test';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 
 import { GameResultProvider } from './context/GameResultContext';
 import { GameEndProvider } from './context/GameEndContext';
@@ -29,6 +30,7 @@ function App() {
                 <Route exact path='/about' component={About} />
                 <Route exact path='/rank' component={RankPage} />
                 <Route exact path='/test' component={Test} />
+                <Route exact path='/register' component={RegisterPage} />
                 <Route path='*'>
                   <Redirect to='/' />
                 </Route>
