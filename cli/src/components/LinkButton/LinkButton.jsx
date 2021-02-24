@@ -23,25 +23,7 @@ const primaryStyle = css`
   }
 `;
 
-const secondaryStyle = css`
-  font-size: 1.2rem;
-  color: ${COLORS.primaryDark};
-
-  background: linear-gradient(20deg, #fff3d6 0%, ${COLORS.secondaryDark} 100%);
-
-  :hover {
-    background: ${COLORS.secondaryDark};
-  }
-
-  @media ${SCREEN.tablet} {
-    margin-bottom: 1rem;
-  }
-`;
-
 const getStyles = (props) => {
-  if (props.secondary) {
-    return secondaryStyle;
-  }
   return primaryStyle;
 };
 
@@ -71,12 +53,8 @@ const LinkContainer = styled(Link)`
   ${getStyles};
 `;
 
-const LinkButton = ({ children, links, ...otherprops }) => {
-  return (
-    <LinkContainer to={links} {...otherprops}>
-      {children}
-    </LinkContainer>
-  );
+const LinkButton = ({ children, links }) => {
+  return <LinkContainer to={links}>{children}</LinkContainer>;
 };
 
 export default LinkButton;
