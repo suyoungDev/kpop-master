@@ -88,24 +88,16 @@ const GameLayout = ({ trackList }) => {
   };
 
   const isCorrect = (answer) => {
-    const regex = /[ '"-_]+/g;
-    const englishRegex = /\w/g;
+    const regex = /[^\w가-힣]/g;
 
-    let givenAnswer = answer;
-    let correct = trackList[currentRound].trackName;
-
-    englishRegex.test(answer)
-      ? (givenAnswer = answer.toLowerCase().replace(regex, ''))
-      : (givenAnswer = answer.replace(regex, ''));
-
-    englishRegex.test(correct)
-      ? (correct = correct.toLowerCase().replace(regex, ''))
-      : (correct = correct.replace(regex, ''));
+    let givenAnswer = answer.toLowerCase().replace(regex, '');
+    let correct = trackList[currentRound].trackName
+      .toLowerCase()
+      .replace(regex, '');
 
     if (givenAnswer === correct) {
       playCorrect();
-      let answerResult = 'correct';
-      goNextRound(answerResult);
+      goNextRound('correct');
     } else {
       playWrong();
     }
@@ -136,7 +128,7 @@ const GameLayout = ({ trackList }) => {
     event.preventDefault();
     setGivenAnswersList([inputValue, ...givenAnswersList]);
 
-    if (inputValue === '!ㅂ' || '!q') {
+    if (inputValue === '!ㅂ' || inputValue === '!q') {
       goNextRound();
     }
 
