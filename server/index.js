@@ -23,7 +23,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use('/api/chart', require('./routes/chart'));
-app.use('/api/user', require('./routes/user'));
+app.use('/api/game', require('./routes/game'));
 app.use('/api/youtube', require('./routes/youtube'));
 
 if (process.env.NODE_ENV === 'production') {
