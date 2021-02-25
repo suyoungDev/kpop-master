@@ -6,7 +6,7 @@ import Register from './Section/Register';
 
 const Wrapper = styled.div`
   width: 90%;
-  margin: 20px 20px;
+  margin: 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;

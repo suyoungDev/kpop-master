@@ -25,14 +25,14 @@ const invertedButtonStyles = css`
 `;
 
 const googleButtonStyles = css`
-  background-color: ${COLORS.primaryTwo};
-  color: white;
-  border: none;
+  background-color: white;
+  color: ${COLORS.primaryTwo};
+  border: 1px solid ${COLORS.primaryTwo};
 
   &:hover {
-    background-color: white;
-    color: ${COLORS.primaryTwo};
-    border: 1px solid ${COLORS.primaryTwo};
+    background-color: ${COLORS.primaryTwo};
+    color: white;
+    border: none;
   }
 `;
 
@@ -51,20 +51,27 @@ export const CustomButtonContainer = styled.button`
   padding: 0 20px;
   display: flex;
   justify-content: center;
-  
-  font-size: 15px;
-  letter-spacing: 0.5px;
+
+  font-size: 13px;
+  letter-spacing: 0;
   line-height: 50px;
   font-family: ${FONT.english};
   text-transform: uppercase;
   font-weight: bolder;
-  
+  overflow: hidden;
   cursor: pointer;
 
   ${getButtonStyles}
 
-  @media ${SCREEN.tablet}{
-  min-width: 120px;
-  padding: 0 10px;
+  @media ${SCREEN.tablet} {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+
+    min-width: 120px;
+    padding: 0 20px;
+  }
+
+  @media ${SCREEN.laptop} {
+    min-width: 165px;
   }
 `;

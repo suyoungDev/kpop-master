@@ -33,7 +33,24 @@ export const Title = styled.h2`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+
+  button:first-child {
+    margin-right: 1.4rem;
+  }
+
+  @media ${SCREEN.tablet} {
+    justify-content: space-between;
+    button:first-child {
+      margin-right: 0.2rem;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    flex-direction: column;
+    button:first-child {
+      margin: 0 0 1rem 0;
+    }
+  }
 `;
 
 export const Span = styled.span`
