@@ -216,9 +216,7 @@ const ChooseOptions = () => {
       )}
 
       <div>
-        {!isReady ? (
-          <div></div>
-        ) : isReady && isLoading ? (
+        {!isReady ? null : isReady && isLoading ? (
           <Wrapper center>
             <Spinner />
           </Wrapper>

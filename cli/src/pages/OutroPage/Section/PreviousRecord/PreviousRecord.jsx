@@ -102,7 +102,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
   };
 
   if (!existingUserName) {
-    return <div></div>;
+    return null;
   }
 
   return (
