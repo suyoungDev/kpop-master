@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
+import { Container, Title, Span } from './LogIn.styles';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -31,9 +32,9 @@ const Register = () => {
   const { displayName, email, password, confirmPassword } = inputs;
 
   return (
-    <div>
-      <h2>회원가입</h2>
-      <span>메일주소와 비밀번호로 회원가입합니다.</span>
+    <Container>
+      <Title>회원가입</Title>
+      <Span>메일주소와 비밀번호로 회원가입합니다.</Span>
 
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -41,7 +42,7 @@ const Register = () => {
           name='displayName'
           value={displayName}
           onChange={handleChange}
-          label='display name'
+          label='닉네임'
           require
         />
 
@@ -50,7 +51,7 @@ const Register = () => {
           name='email'
           value={email}
           onChange={handleChange}
-          label='email'
+          label='이메일'
           require
         />
 
@@ -74,7 +75,7 @@ const Register = () => {
 
         <CustomButton type='submit'>가입하기</CustomButton>
       </form>
-    </div>
+    </Container>
   );
 };
 

@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
-import { COLORS, FONT } from '../../constants/theme';
+import { COLORS, FONT, SCREEN } from '../../constants/theme';
 
 const buttonStyles = css`
-  background-color: ${COLORS.primaryTwo};
+  background-color: ${COLORS.headingDarkGray};
   color: white;
   border: none;
 
   &:hover {
     background-color: white;
-    color: ${COLORS.primaryTwo};
-    border: 1px solid ${COLORS.primaryTwo};
+    color: ${COLORS.headingDarkGray};
+    border: 1px solid ${COLORS.headingDarkGray};
   }
 `;
 
@@ -25,12 +25,14 @@ const invertedButtonStyles = css`
 `;
 
 const googleButtonStyles = css`
-  background-color: #4285f4;
+  background-color: ${COLORS.primaryTwo};
   color: white;
   border: none;
 
   &:hover {
-    background-color: #357ae8;
+    background-color: white;
+    color: ${COLORS.primaryTwo};
+    border: 1px solid ${COLORS.primaryTwo};
   }
 `;
 
@@ -43,19 +45,26 @@ const getButtonStyles = (props) => {
 };
 
 export const CustomButtonContainer = styled.button`
+  width: auto;
+  min-width: 130px;
+  height: 50px;
+  padding: 0 20px;
   display: flex;
   justify-content: center;
-  min-width: 165px;
-  width: auto;
-  height: 50px;
+  
+  font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 50px;
-  padding: 0 35px 0 35px;
-  font-size: 15px;
-  text-transform: uppercase;
   font-family: ${FONT.english};
+  text-transform: uppercase;
   font-weight: bolder;
+  
   cursor: pointer;
 
   ${getButtonStyles}
+
+  @media ${SCREEN.tablet}{
+  min-width: 120px;
+  padding: 0 10px;
+  }
 `;
