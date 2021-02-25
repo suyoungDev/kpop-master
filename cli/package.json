@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.7.1",
     "@tippyjs/react": "^4.2.0",
     "axios": "^0.21.1",
+    "firebase": "^8.2.9",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-awesome-button": "^6.5.1",

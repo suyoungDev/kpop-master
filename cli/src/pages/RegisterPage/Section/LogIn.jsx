@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import { Container, ButtonContainer, Title, Span } from './LogIn.styles';
 import useMultiInputs from '../../../hook/useMultiInputs';
+import { signInWithGoogle } from '../../../firebase/firebase.utils';
 
 const LogIn = () => {
   const [inputs, handleChange] = useMultiInputs({
@@ -39,7 +40,7 @@ const LogIn = () => {
 
         <ButtonContainer>
           <CustomButton type='submit'>로그인</CustomButton>
-          <CustomButton type='button' isGoogleSignIn>
+          <CustomButton type='button' isGoogleSignIn onClick={signInWithGoogle}>
             구글 계정으로 로그인
           </CustomButton>
         </ButtonContainer>
