@@ -5,8 +5,9 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import { Container, ButtonContainer, Title, Span } from './LogIn.styles';
 import useMultiInputs from '../../../hook/useMultiInputs';
 import { signInWithGoogle } from '../../../firebase/firebase.utils';
+import { withRouter } from 'react-router-dom';
 
-const LogIn = () => {
+const LogIn = (props) => {
   const [inputs, handleChange] = useMultiInputs({
     email: '',
     password: '',
@@ -22,6 +23,8 @@ const LogIn = () => {
       alert('존재하지 않는 이메일입니다.');
     } else if (response.data.errorCode === 'password') {
       alert('비밀번호가 틀립니다.');
+    } else {
+      props.history.push('/');
     }
   };
 
@@ -60,4 +63,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default withRouter(LogIn);
