@@ -61,6 +61,10 @@ export const CustomButtonContainer = styled.button`
   overflow: hidden;
   cursor: pointer;
 
+  :focus {
+    outline: none;
+  }
+
   ${getButtonStyles}
 
   @media ${SCREEN.tablet} {

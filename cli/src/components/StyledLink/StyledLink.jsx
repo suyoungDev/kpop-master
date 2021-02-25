@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { COLORS, FONT } from '../../constants/theme';
 
 const LinkContainer = styled(Link)`
+  text-transform: capitalize;
   text-decoration: none;
+  cursor: pointer;
 
   &:focus,
   &:hover,
@@ -18,10 +20,10 @@ const LinkContainer = styled(Link)`
   display: flex;
   align-items: center;
   margin: 0 28px 0 0;
-  font-family: ${FONT.korean};
-  font-weight: 400;
+  font-family: ${FONT.english};
+  font-weight: 300;
   color: ${COLORS.contentGray};
-  font-size: 1.1rem;
+  font-size: 1rem;
   position: relative;
 
   .icon {
@@ -46,7 +48,7 @@ const LinkContainer = styled(Link)`
   }
 
   :hover {
-    color: ${COLORS.headingDarkGray};
+    color: ${COLORS.primaryTwo};
     transition: color 0.2s ease-in-out;
 
     ::before {
@@ -56,7 +58,7 @@ const LinkContainer = styled(Link)`
 
   @media (max-width: 1023px) {
     color: ${COLORS.headingDarkGray};
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin: 1rem 0;
 
     ::before {
