@@ -2,22 +2,15 @@ import React, { useState, useCallback } from 'react';
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import { Container, Title, Span } from './LogIn.styles';
+import useMultiInputs from '../../../hook/useMultiInputs';
 
 const Register = () => {
-  const [inputs, setInputs] = useState({
+  const [inputs, handleChange] = useMultiInputs({
     displayName: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
-  const handleChange = useCallback(
-    (event) => {
-      const { name, value } = event.target;
-      setInputs({ ...inputs, [name]: value });
-    },
-    [inputs]
-  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();

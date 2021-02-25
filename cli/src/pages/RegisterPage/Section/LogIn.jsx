@@ -3,21 +3,15 @@ import React, { useState, useCallback } from 'react';
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import { Container, ButtonContainer, Title, Span } from './LogIn.styles';
+import useMultiInputs from '../../../hook/useMultiInputs';
 
 const LogIn = () => {
-  const [inputs, setInputs] = useState({
+  const [inputs, handleChange] = useMultiInputs({
     email: '',
     password: '',
   });
-  const { email, password } = inputs;
 
-  const handleChange = useCallback(
-    (event) => {
-      const { name, value } = event.target;
-      setInputs({ ...inputs, [name]: value });
-    },
-    [inputs]
-  );
+  const { email, password } = inputs;
 
   return (
     <Container>
