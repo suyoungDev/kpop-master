@@ -21,9 +21,6 @@ const userSchema = mongoose.Schema(
 );
 
 userSchema.pre('save', function (next) {
-  var exist = User.findOne({ email: user.email });
-  if (exist) return next();
-
   var user = this;
   bcrypt.genSalt(saltRounds, function (error, salt) {
     if (error) return next(error);

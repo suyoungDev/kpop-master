@@ -6,8 +6,8 @@ const { auth } = require('../middleware/auth');
 
 router.post('/register', (req, res) => {
   const newUser = new User(req.body);
-  newUser.save((err, doc) => {
-    if (err) return res.json({ DBsuccess: false, err });
+  newUser.save((error, doc) => {
+    if (error) return res.json({ DBsuccess: false, error });
     return res.status(200).json({ DBsuccess: true });
   });
 });
