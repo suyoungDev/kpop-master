@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { User } = require('../model/User');
+const { auth } = require('../middleware/auth');
 
 router.post('/register', (req, res) => {
   const newUser = new User(req.body);
@@ -37,6 +38,23 @@ router.post('/login', (req, res) => {
           .json({ loginSuccess: true, userId: user._id });
       });
     });
+  });
+});
+
+router.get('/auth', auth, (req, res) => {
+  res.status(200).json({
+    _id: req.user._id,
+    isAuth: true,
+    email: req.user.email,
+    displayName: req.user.displayName,
+  });
+});
+
+router.get('/logout', auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+
+    return res.status(200).json({ success: true });
   });
 });
 

@@ -18,10 +18,10 @@ userSchema.pre('save', function (next) {
   var user = this;
 
   if (user.isModified('password')) {
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-      if (err) return next(err);
-      bcrypt.hash(user.password, salt, function (err, hash) {
-        if (err) return next(err);
+    bcrypt.genSalt(saltRounds, function (error, salt) {
+      if (error) return next(error);
+      bcrypt.hash(user.password, salt, function (error, hash) {
+        if (error) return next(error);
         user.password = hash;
         next();
       });
@@ -32,8 +32,8 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.comparePassword = function (plainPassword, callback) {
-  bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
-    if (err) callback(err);
+  bcrypt.compare(plainPassword, this.password, function (error, isMatch) {
+    if (error) callback(error);
     callback(null, isMatch);
   });
 };
@@ -43,9 +43,20 @@ userSchema.methods.generateToken = function (callback) {
   const token = jwt.sign(user._id.toHexString(), 'secretToken');
   user.token = token;
 
-  user.save(function (err, user) {
-    if (err) return callback(err);
+  user.save(function (error, user) {
+    if (error) return callback(error);
     callback(null, user);
+  });
+};
+
+userSchema.statics.findByToken = function (token, callback) {
+  var user = this;
+
+  jwt.verify(token, 'secretToken', function (error, decoded) {
+    user.findOne({ _id: decoded, token: token }, function (error, user) {
+      if (error) return callback(error);
+      callback(null, user);
+    });
   });
 };
 
