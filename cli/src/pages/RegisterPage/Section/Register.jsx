@@ -1,8 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
-import { Container, Title, Span } from './LogIn.styles';
 import useMultiInputs from '../../../hook/useMultiInputs';
+import { Container, Title, Span } from './LogIn.styles';
 
 const Register = () => {
   const [inputs, handleChange] = useMultiInputs({
@@ -14,12 +15,19 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { displayName, email, password, confirmPassword } = inputs;
+    const { password, confirmPassword } = inputs;
 
     if (password !== confirmPassword) {
       alert('비밀번호를 확인해 주세요');
       return;
     }
+
+    const registerUser = async () => {
+      const response = await axios.post('/api/user/register', inputs);
+      console.log(response);
+    };
+
+    registerUser();
   };
 
   const { displayName, email, password, confirmPassword } = inputs;
