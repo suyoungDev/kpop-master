@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { SIZES } from '../../constants/theme';
 import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';
 import { FiPower } from 'react-icons/fi';
 import StyledLink from '../../components/StyledLink/StyledLink';
+import { auth } from '../../firebase/firebase.utils';
 
 const LinkContainer = styled.div`
   display: flex;
@@ -31,24 +32,20 @@ const LinkContainer = styled.div`
   }
 `;
 
-const RightMenu = ({ open }) => {
+const RightMenu = ({ open, currentUser }) => {
   return (
     <LinkContainer open={open}>
-      <StyledLink to='/'>
-        <GiBarracksTent className='icon' />
-        첫화면으로
-      </StyledLink>
-      <StyledLink to='/rank'>
-        <GiRank3 className='icon' />
-        순위
-      </StyledLink>
-      <StyledLink to='/about'>
-        <GiBalloonDog className='icon' />
-        About
-      </StyledLink>
-      <StyledLink to='/register'>
-        <FiPower className='icon' />
-      </StyledLink>
+      <StyledLink to='/'>home</StyledLink>
+      <StyledLink to='/rank'>Rank</StyledLink>
+      <StyledLink to='/about'>About</StyledLink>
+
+      {currentUser ? (
+        <StyledLink as='div' onClick={() => auth.signOut()}>
+          Sign Out
+        </StyledLink>
+      ) : (
+        <StyledLink to='/register'>SIGN IN</StyledLink>
+      )}
     </LinkContainer>
   );
 };
