@@ -23,8 +23,16 @@ const Register = () => {
     }
 
     const registerUser = async () => {
-      const response = await axios.post('/api/user/register', inputs);
-      console.log(response);
+      const newUser = {
+        displayName: inputs.displayName,
+        email: inputs.email,
+        password: inputs.password,
+      };
+
+      const response = await axios.post('/api/user/register', newUser);
+      if (response.data.DBsuccess === false) {
+        alert('이미 존재하는 메일입니다.');
+      }
     };
 
     registerUser();

@@ -6,29 +6,34 @@ const saltRounds = 10;
 
 const userSchema = mongoose.Schema(
   {
-    email: { type: String, trim: true, unique: true },
-    password: { type: String, minlength: 5 },
-    displayName: { type: String, unique: true, minLength: 2, maxLength: 10 },
-    token: String,
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowerCase: true,
+      unique: true,
+    },
+    password: { type: String, minlength: 5, required: true, trim: true },
+    displayName: { type: String, minLength: 2, maxLength: 10 },
+    token: { type: String },
   },
   { timestamps: true }
 );
 
 userSchema.pre('save', function (next) {
-  var user = this;
+  var exist = User.findOne({ email: user.email });
+  if (exist) return next();
 
-  if (user.isModified('password')) {
-    bcrypt.genSalt(saltRounds, function (error, salt) {
+  var user = this;
+  bcrypt.genSalt(saltRounds, function (error, salt) {
+    if (error) return next(error);
+
+    bcrypt.hash(user.password, salt, function (error, hash) {
       if (error) return next(error);
-      bcrypt.hash(user.password, salt, function (error, hash) {
-        if (error) return next(error);
-        user.password = hash;
-        next();
-      });
+      user.password = hash;
+      next();
     });
-  } else {
-    next();
-  }
+  });
 });
 
 userSchema.methods.comparePassword = function (plainPassword, callback) {

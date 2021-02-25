@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { SIZES } from '../../constants/theme';
 import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';

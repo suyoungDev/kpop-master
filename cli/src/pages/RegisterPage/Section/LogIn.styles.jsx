@@ -26,6 +26,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
+  margin-bottom: 0.4rem;
   @media ${SCREEN.tablet} {
     width: 300px;
   }
