@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export default (initalValue = null) => {
+const useMultiInputs = (initalValue = null) => {
   const [input, setInput] = useState(initalValue);
 
   const handler = useCallback(
@@ -18,3 +18,5 @@ export default (initalValue = null) => {
 
   return [input, handler, resetInput];
 };
+
+export default useMultiInputs;
