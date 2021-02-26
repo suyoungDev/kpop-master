@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { SIZES } from '../../constants/theme';
-import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';
-import { FiPower } from 'react-icons/fi';
+// import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';
+// import { FiPower } from 'react-icons/fi';
 import StyledLink from '../../components/StyledLink/StyledLink';
 import { auth } from '../../firebase/firebase.utils';
 
@@ -41,10 +41,10 @@ const RightMenu = ({ open, currentUser }) => {
 
       {currentUser ? (
         <StyledLink as='div' onClick={() => auth.signOut()}>
-          Sign Out
+          로그아웃
         </StyledLink>
       ) : (
-        <StyledLink to='/register'>SIGN IN</StyledLink>
+        <StyledLink to='/register'>회원가입 / 로그인</StyledLink>
       )}
     </LinkContainer>
   );
