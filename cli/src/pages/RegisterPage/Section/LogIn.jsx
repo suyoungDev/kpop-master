@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import { Container, ButtonContainer, Title, Span } from './LogIn.styles';
+
 import useMultiInputs from '../../../hook/useMultiInputs';
 import { signInWithGoogle } from '../../../firebase/firebase.utils';
-import { withRouter } from 'react-router-dom';
 
 const LogIn = (props) => {
   const [inputs, handleChange] = useMultiInputs({
@@ -17,15 +19,10 @@ const LogIn = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const response = await axios.post('/api/user/login', inputs);
-    console.log(response.data);
-    if (response.data.errorCode === 'email') {
-      alert('존재하지 않는 이메일입니다.');
-    } else if (response.data.errorCode === 'password') {
-      alert('비밀번호가 틀립니다.');
-    } else {
-      props.history.push('/');
-    }
+    if (!response.data.loginSuccess) return alert(response.data.message);
+    props.history.push('/');
   };
 
   return (

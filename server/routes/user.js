@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const { User } = require('../model/User');
 const { auth } = require('../middleware/auth');
@@ -12,33 +15,34 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.post('/login', (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (!user) {
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (!existingUser)
       return res.json({
         loginSuccess: false,
-        errorCode: 'email',
+        message: '존재하지 않는 메일입니다. 다시 확인해주세요.',
       });
-    }
 
-    user.comparePassword(req.body.password, (err, isMatch) => {
-      if (!isMatch)
-        return res.json({
-          loginSuccess: false,
-          errorCode: 'password',
-        });
-
-      user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
-
-        res.cookie('_auth', user.token, { httpOnly: true }).status(200).json({
-          loginSuccess: true,
-          userId: user._id,
-          displayName: user.displayName,
-        });
+    const isCorrect = await bcrypt.compare(password, existingUser.password);
+    if (!isCorrect)
+      return res.json({
+        loginSuccess: false,
+        message: '비밀번호가 틀립니다. 다시 확인해주세요.',
       });
+
+    const token = jwt.sign({ user: existingUser._id }, process.env.TOKEN_KEY);
+    res.cookie('token', token, { httpOnly: true }).status(200).json({
+      loginSuccess: true,
+      userId: existingUser._id,
+      displayName: existingUser.displayName,
     });
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
 });
 
 router.get('/auth', auth, (req, res) => {

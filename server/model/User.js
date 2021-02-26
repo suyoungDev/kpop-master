@@ -34,24 +34,6 @@ userSchema.pre('save', function (next) {
   });
 });
 
-userSchema.methods.comparePassword = function (plainPassword, callback) {
-  bcrypt.compare(plainPassword, this.password, function (error, isMatch) {
-    if (error) callback(error);
-    callback(null, isMatch);
-  });
-};
-
-userSchema.methods.generateToken = function (callback) {
-  var user = this;
-  const token = jwt.sign(user._id.toHexString(), process.env.TOKEN_KEY);
-  user.token = token;
-
-  user.save(function (error, user) {
-    if (error) return callback(error);
-    callback(null, user);
-  });
-};
-
 userSchema.statics.findByToken = function (token, callback) {
   var user = this;
 

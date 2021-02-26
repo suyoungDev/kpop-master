@@ -6,7 +6,7 @@ import useMultiInputs from '../../../hook/useMultiInputs';
 import { Container, Title, Span } from './LogIn.styles';
 
 const Register = () => {
-  const [inputs, handleChange] = useMultiInputs({
+  const [inputs, handleChange, resetInput] = useMultiInputs({
     displayName: '',
     email: '',
     password: '',
@@ -27,6 +27,9 @@ const Register = () => {
       console.log(response);
       if (response.data.DBsuccess === false) {
         alert('이미 존재하는 메일입니다.');
+      } else {
+        resetInput();
+        alert('가입 완료');
       }
     };
 
