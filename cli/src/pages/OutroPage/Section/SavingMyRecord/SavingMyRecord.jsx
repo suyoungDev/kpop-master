@@ -5,7 +5,7 @@ import { RiSave2Fill } from 'react-icons/ri';
 import CleanCard from '../../../../components/Card/CleanCard';
 import SavingWrapper from '../SavingWrapper/SavingWrapper';
 import SavingInputcontainer from '../SavingInputcontainer/SavingInputcontainer';
-import './SavingMyRecord.scss';
+import './SavingMyRecord.css';
 
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
 
