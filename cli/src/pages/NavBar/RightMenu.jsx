@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+
 import { SIZES } from '../../constants/theme';
-// import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';
-// import { FiPower } from 'react-icons/fi';
 import StyledLink from '../../components/StyledLink/StyledLink';
-import { auth } from '../../firebase/firebase.utils';
+
+import { AuthContext } from '../../context/AuthContext';
+import { withRouter } from 'react-router-dom';
 
 const LinkContainer = styled.div`
   display: flex;
@@ -32,15 +34,23 @@ const LinkContainer = styled.div`
   }
 `;
 
-const RightMenu = ({ open, currentUser }) => {
+const RightMenu = ({ open, history }) => {
+  const [loggedIn, getLoggedIn] = useContext(AuthContext);
+
+  const logOut = async () => {
+    await axios.get('/api/user/logout');
+    getLoggedIn();
+    history.push('/');
+  };
+
   return (
     <LinkContainer open={open}>
       <StyledLink to='/'>home</StyledLink>
       <StyledLink to='/rank'>Rank</StyledLink>
       <StyledLink to='/about'>About</StyledLink>
 
-      {currentUser ? (
-        <StyledLink as='div' onClick={() => auth.signOut()}>
+      {loggedIn ? (
+        <StyledLink as='div' onClick={logOut}>
           로그아웃
         </StyledLink>
       ) : (
@@ -50,4 +60,4 @@ const RightMenu = ({ open, currentUser }) => {
   );
 };
 
-export default RightMenu;
+export default withRouter(RightMenu);

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
@@ -7,8 +7,12 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import { Container, ButtonContainer, Title, Span } from './LogIn.styles';
 
 import useMultiInputs from '../../../hook/useMultiInputs';
+import { AuthContext } from '../../../context/AuthContext';
 
 const LogIn = (props) => {
+  // eslint-disable-next-line
+  const [loggedin, getLoggedIn] = useContext(AuthContext);
+
   const [inputs, handleChange] = useMultiInputs({
     email: '',
     password: '',
@@ -21,6 +25,7 @@ const LogIn = (props) => {
 
     const response = await axios.post('/api/user/login', inputs);
     if (!response.data.loginSuccess) return alert(response.data.message);
+    await getLoggedIn();
     props.history.push('/');
   };
 

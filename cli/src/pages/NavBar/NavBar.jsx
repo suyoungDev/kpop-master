@@ -20,10 +20,10 @@ const Nav = styled.div`
   }
 `;
 
-const NavBar = ({ currentUser }) => {
+const NavBar = () => {
   return (
     <Nav>
-      <Burger currentUser={currentUser} />
+      <Burger />
     </Nav>
   );
 };

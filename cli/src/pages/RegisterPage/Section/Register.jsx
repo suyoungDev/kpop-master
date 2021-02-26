@@ -24,7 +24,6 @@ const Register = () => {
 
     const registerUser = async () => {
       const response = await axios.post('/api/user/register', inputs);
-      console.log(response);
       if (response.data.DBsuccess === false) {
         alert('이미 존재하는 메일입니다.');
       } else {

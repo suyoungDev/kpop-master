@@ -46,7 +46,7 @@ const StyledBurger = styled.div`
   }
 `;
 
-const Burger = ({ currentUser }) => {
+const Burger = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -66,7 +66,6 @@ const Burger = ({ currentUser }) => {
         onFocus={() => {
           console.log('hi');
         }}
-        currentUser={currentUser}
       />
     </>
   );
