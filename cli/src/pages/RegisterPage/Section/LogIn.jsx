@@ -11,7 +11,7 @@ import useMultiInputs from '../../../hook/useMultiInputs';
 import { AuthContext } from '../../../context/AuthContext';
 
 const LogIn = (props) => {
-  const [loggedIn, getLoggedIn] = useContext(AuthContext);
+  const [isLoggedIn, getIsLoggedIn] = useContext(AuthContext);
   const [inputs, handleChange] = useMultiInputs({
     email: '',
     password: '',
@@ -29,7 +29,7 @@ const LogIn = (props) => {
         return alert(res.payload.message);
       }
       props.history.push('/');
-      getLoggedIn();
+      getIsLoggedIn();
     });
   };
 

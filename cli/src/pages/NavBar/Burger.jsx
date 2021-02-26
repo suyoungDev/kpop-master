@@ -61,12 +61,7 @@ const Burger = () => {
         <div />
         <div />
       </StyledBurger>
-      <RightMenu
-        open={open}
-        onFocus={() => {
-          console.log('hi');
-        }}
-      />
+      <RightMenu open={open} />
     </>
   );
 };

@@ -4,19 +4,19 @@ import axios from 'axios';
 export const AuthContext = createContext();
 
 export function AuthProvider(props) {
-  const [loggedIn, setLoggedIn] = useState(undefined);
+  const [isLoggedIn, setIsLoggedIn] = useState(undefined);
 
-  async function getLoggedIn() {
-    const loggedInResponse = await axios.get('/api/user/auth');
-    setLoggedIn(loggedInResponse.data);
+  async function getIsLoggedIn() {
+    const response = await axios.get('/api/user/auth');
+    setIsLoggedIn(response.data.isAuth);
   }
 
   useEffect(() => {
-    getLoggedIn();
+    getIsLoggedIn();
   }, []);
 
   return (
-    <AuthContext.Provider value={[loggedIn, getLoggedIn]}>
+    <AuthContext.Provider value={[isLoggedIn, getIsLoggedIn]}>
       {props.children}
     </AuthContext.Provider>
   );

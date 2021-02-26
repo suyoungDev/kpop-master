@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -6,7 +7,6 @@ import { SIZES } from '../../constants/theme';
 import StyledLink from '../../components/StyledLink/StyledLink';
 
 import { AuthContext } from '../../context/AuthContext';
-import { withRouter } from 'react-router-dom';
 
 const LinkContainer = styled.div`
   display: flex;
@@ -35,11 +35,11 @@ const LinkContainer = styled.div`
 `;
 
 const RightMenu = ({ open, history }) => {
-  const [loggedIn, getLoggedIn] = useContext(AuthContext);
+  const [isLoggedIn, getIsLoggedIn] = useContext(AuthContext);
 
   const logOut = async () => {
     await axios.get('/api/user/logout');
-    getLoggedIn();
+    getIsLoggedIn();
     history.push('/');
   };
 
@@ -49,7 +49,7 @@ const RightMenu = ({ open, history }) => {
       <StyledLink to='/rank'>Rank</StyledLink>
       <StyledLink to='/about'>About</StyledLink>
 
-      {loggedIn ? (
+      {isLoggedIn ? (
         <StyledLink as='div' onClick={logOut}>
           로그아웃
         </StyledLink>
