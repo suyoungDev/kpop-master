@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const saltRounds = 10;
 
@@ -42,7 +43,7 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 
 userSchema.methods.generateToken = function (callback) {
   var user = this;
-  const token = jwt.sign(user._id.toHexString(), 'secretToken');
+  const token = jwt.sign(user._id.toHexString(), process.env.TOKEN_KEY);
   user.token = token;
 
   user.save(function (error, user) {
@@ -54,7 +55,7 @@ userSchema.methods.generateToken = function (callback) {
 userSchema.statics.findByToken = function (token, callback) {
   var user = this;
 
-  jwt.verify(token, 'secretToken', function (error, decoded) {
+  jwt.verify(token, process.env.TOKEN_KEY, function (error, decoded) {
     user.findOne({ _id: decoded, token: token }, function (error, user) {
       if (error) return callback(error);
       callback(null, user);
