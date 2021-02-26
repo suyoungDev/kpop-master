@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../../_actions/user_action';
+
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import useMultiInputs from '../../../hook/useMultiInputs';
@@ -13,26 +15,23 @@ const Register = () => {
     confirmPassword: '',
   });
 
-  const handleSubmit = async (event) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     const { password, confirmPassword } = inputs;
-
     if (password !== confirmPassword) {
-      alert('비밀번호를 확인해 주세요');
-      return;
+      return alert('비밀번호를 확인해 주세요');
     }
 
-    const registerUser = async () => {
-      const response = await axios.post('/api/user/register', inputs);
-      if (response.data.DBsuccess === false) {
-        alert('이미 존재하는 메일입니다.');
+    dispatch(registerUser(inputs)).then((res) => {
+      if (!res.payload.success) {
+        return alert('이미 존재하는 메일입니다.');
       } else {
         resetInput();
         alert('가입 완료');
       }
-    };
-
-    registerUser();
+    });
   };
 
   const { displayName, email, password, confirmPassword } = inputs;

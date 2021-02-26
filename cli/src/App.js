@@ -13,6 +13,7 @@ import { GameResultProvider } from './context/GameResultContext';
 import { GameEndProvider } from './context/GameEndContext';
 import { TrackListToPlayProvider } from './context/TrackListToPlayContext';
 import { AuthProvider } from './context/AuthContext';
+import Auth from './hoc/auth';
 
 import './App.css';
 
@@ -25,12 +26,16 @@ function App() {
             <BrowserRouter>
               <NavBar />
               <Switch>
-                <Route exact path='/' component={LandingPage} />
-                <Route exact path='/start' component={Start} />
-                <Route exact path='/about' component={About} />
-                <Route exact path='/rank' component={RankPage} />
+                <Route exact path='/' component={Auth(LandingPage, null)} />
+                <Route exact path='/start' component={Auth(Start, null)} />
+                <Route exact path='/about' component={Auth(About, null)} />
+                <Route exact path='/rank' component={Auth(RankPage, null)} />
                 <Route exact path='/test' component={Test} />
-                <Route exact path='/register' component={RegisterPage} />
+                <Route
+                  exact
+                  path='/register'
+                  component={Auth(RegisterPage, false)}
+                />
                 <Route path='*'>
                   <Redirect to='/' />
                 </Route>

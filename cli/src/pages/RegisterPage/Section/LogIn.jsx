@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
 
 import FormInput from '../../../components/FormInput/FormInput';
 import CustomButton from '../../../components/CustomButton/CustomButton';
@@ -10,9 +11,7 @@ import useMultiInputs from '../../../hook/useMultiInputs';
 import { AuthContext } from '../../../context/AuthContext';
 
 const LogIn = (props) => {
-  // eslint-disable-next-line
-  const [loggedin, getLoggedIn] = useContext(AuthContext);
-
+  const [loggedIn, getLoggedIn] = useContext(AuthContext);
   const [inputs, handleChange] = useMultiInputs({
     email: '',
     password: '',
@@ -20,13 +19,18 @@ const LogIn = (props) => {
 
   const { email, password } = inputs;
 
-  const handleSubmit = async (event) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    const response = await axios.post('/api/user/login', inputs);
-    if (!response.data.loginSuccess) return alert(response.data.message);
-    await getLoggedIn();
-    props.history.push('/');
+    dispatch(loginUser(inputs)).then((res) => {
+      if (!res.payload.success) {
+        return alert(res.payload.message);
+      }
+      props.history.push('/');
+      getLoggedIn();
+    });
   };
 
   return (
