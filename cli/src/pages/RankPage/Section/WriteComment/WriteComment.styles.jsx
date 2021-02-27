@@ -9,7 +9,7 @@ export const Form = styled.form`
 
 export const Button = styled.button`
   width: 100px;
-
+  height: ${({ reply }) => reply && '30px'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,11 @@ export const Button = styled.button`
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 0.9px;
-  margin-right: ${({ cancel }) => (cancel ? '.4rem' : '')};
+
+  :first-child {
+    margin-right: ${({ cancel }) => cancel && '.4rem'};
+    margin-bottom: ${({ reply }) => reply && '.4rem'};
+  }
 
   :hover {
     background-color: ${({ cancel }) =>
@@ -41,6 +45,6 @@ export const CommentBox = styled.textarea`
   padding: 0.7rem 0.7rem;
   margin-right: 0.7rem;
   outline: none;
-  border: 1px solid ${COLORS.shadowDark};
+  border: 1px solid ${COLORS.lightSkyGray};
   border-radius: ${SIZES.radiusMini};
 `;

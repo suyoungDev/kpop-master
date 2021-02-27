@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import useInput from '../../../../hook/useInput';
-import { Form, Button, CommentBox } from './Comment.styles';
+import { Form, Button, CommentBox } from './WriteComment.styles';
 
 const Comment = ({ getComments }) => {
   const [inputValue, onChange, resetInput] = useInput('');

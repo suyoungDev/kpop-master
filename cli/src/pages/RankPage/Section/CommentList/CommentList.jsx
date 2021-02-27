@@ -15,6 +15,7 @@ const CommentList = ({ commentListData, getComments }) => {
                 toWhom={comment._id}
                 key={comment._id}
                 getComments={getComments}
+                commentListData={commentListData}
               />
             )
         )}

@@ -16,14 +16,18 @@ export const ReplyButton = styled.button`
   border: none;
   padding: 0.3rem 0.7rem;
   border-radius: ${SIZES.radiusMini};
-  background-color: ${COLORS.lightSkyGray};
+  background-color: transparent;
   align-self: baseline;
+  color: ${COLORS.primaryPoint};
+  font-family: ${FONT.korean};
+  font-weight: 600;
   cursor: pointer;
 `;
 
 export const Writer = styled.span`
   font-size: 15px;
   font-weight: bold;
+  font-family: ${FONT.korean};
   color: ${COLORS.headingDarkGray};
 `;
 
@@ -47,7 +51,8 @@ export const RowBox = styled.div`
 export const When = styled.span`
   font-size: 12px;
   font-weight: 200;
-  color: ${COLORS.contentGray};
+  color: ${COLORS.contentGrayLight};
+  font-family: ${FONT.korean};
   margin-left: 0.5rem;
 `;
 
@@ -75,4 +80,24 @@ export const SeeMore = styled.button`
   .icon {
     margin-right: 0.2rem;
   }
+`;
+
+export const ReplyContainer = styled.div`
+  width: 450px;
+  display: flex;
+  margin-top: 0.4rem;
+  flex-direction: ${({ column }) => column && 'column'};
+  border: 1px solid ${COLORS.lightSkyGray};
+  padding: 0.6rem;
+  border-radius: ${SIZES.radiusMini};
+  margin-left: 2rem;
+`;
+
+export const CommentWrapper = styled.div`
+  width: 500px;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
-import { BiChevronDown } from 'react-icons/bi';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 
 import useInput from '../../../../hook/useInput';
-import { Form, Button, CommentBox } from '../Comment/Comment.styles';
+import { Form, Button, CommentBox } from '../WriteComment/WriteComment.styles';
 import {
   ColumnWrapper,
   ReplyButton,
@@ -18,10 +18,22 @@ import {
   RowContainer,
   Likes,
   SeeMore,
+  ReplyContainer,
+  CommentWrapper,
+  Column,
 } from './SingleComment.styles';
+import ReplyCommentList from '../ReplyCommentList/ReplyCommentList';
 
-const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
+const SingleComment = ({
+  content,
+  writer,
+  createdAt,
+  toWhom,
+  getComments,
+  commentListData,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOkayToShowMoreReplies, setIsOkayToShowMoreReplies] = useState(false);
   const [inputValue, onChange, resetInput] = useInput('');
   const user = useSelector((state) => state.user);
 
@@ -38,6 +50,7 @@ const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
     console.log(response.data);
     resetInput();
     getComments();
+    setIsOpen(!isOpen);
   };
 
   const cancelToReply = () => {
@@ -58,8 +71,12 @@ const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
     await axios.post('/api/comment/delete', deleteOne);
   };
 
+  const showMoreReplies = () => {
+    setIsOkayToShowMoreReplies(!isOkayToShowMoreReplies);
+  };
+
   return (
-    <div>
+    <CommentWrapper>
       <RowContainer>
         <ColumnWrapper likes>
           <FiChevronUp />
@@ -82,17 +99,33 @@ const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
             <Content>{content}</Content>
           </RowBox>
           <RowBox>
-            <SeeMore>
-              <BiChevronDown className='icon' />
-              댓글 더 보기
-            </SeeMore>
-            <ReplyButton onClick={accordian}>답글</ReplyButton>
+            {isOkayToShowMoreReplies ? (
+              <SeeMore onClick={showMoreReplies}>
+                <BiChevronUp className='icon' />
+                답글 숨기기
+              </SeeMore>
+            ) : (
+              <SeeMore onClick={showMoreReplies}>
+                <BiChevronDown className='icon' />
+                답글 더 보기
+              </SeeMore>
+            )}
+
+            <ReplyButton onClick={accordian}>답글쓰기</ReplyButton>
           </RowBox>
         </ColumnWrapper>
       </RowContainer>
 
+      {isOkayToShowMoreReplies && (
+        <ReplyCommentList
+          parrentId={toWhom}
+          commentListData={commentListData}
+          currentUser={user.userData._id}
+        />
+      )}
+
       {isOpen && (
-        <div>
+        <ReplyContainer>
           <Form onSubmit={submit}>
             <CommentBox
               value={inputValue}
@@ -100,14 +133,18 @@ const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
               placeholder='답글 추가...'
               required
             />
-            <Button as='div' cancel onClick={cancelToReply}>
-              취소
-            </Button>
-            <Button type='submit'>답글</Button>
+            <Column>
+              <Button as='div' cancel onClick={cancelToReply} reply>
+                취소
+              </Button>
+              <Button type='submit' reply>
+                답글
+              </Button>
+            </Column>
           </Form>
-        </div>
+        </ReplyContainer>
       )}
-    </div>
+    </CommentWrapper>
   );
 };
 

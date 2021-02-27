@@ -6,7 +6,7 @@ import Center from '../../components/Center/Center';
 import Spinner from '../OutroPage/Section/Spinner/Spinner';
 import RankingTable from './Section/RankingTable/RankingTable';
 import CommentList from './Section/CommentList/CommentList';
-import Comment from './Section/Comment/Comment';
+import WriteComment from './Section/WriteComment/WriteComment';
 
 const RankPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +42,9 @@ const RankPage = () => {
       ) : !userRankList.length ? null : (
         <RankingTable userRecords={userRankList} />
       )}
-      <Comment getComments={getComments} />
+
+      <WriteComment getComments={getComments} />
+
       {isCommentLoading ? (
         <Spinner />
       ) : (
