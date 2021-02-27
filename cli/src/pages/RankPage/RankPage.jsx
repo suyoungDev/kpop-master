@@ -5,6 +5,7 @@ import GameTitle from '../../components/GameTitle/GameTitle';
 import Center from '../../components/Center/Center';
 import Spinner from '../OutroPage/Section/Spinner/Spinner';
 import RankingTable from './Section/RankingTable/RankingTable';
+import Comment from './Section/Comment/Comment';
 
 const RankPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +25,12 @@ const RankPage = () => {
   return (
     <Center>
       <GameTitle about>Rank</GameTitle>
-      {isLoading ? <Spinner /> : <RankingTable userRecords={userRankList} />}
+      {isLoading ? (
+        <Spinner />
+      ) : !userRankList.length ? null : (
+        <RankingTable userRecords={userRankList} />
+      )}
+      <Comment />
     </Center>
   );
 };
