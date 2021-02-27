@@ -26,12 +26,12 @@ import {
 } from './SingleComment.styles';
 import ReplyCommentList from '../ReplyCommentList/ReplyCommentList';
 
-const SingleComment = ({ content, writer, createdAt, toWhom }) => {
+const SingleComment = ({ content, writer, createdAt, toWhat }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOkayToShowMoreReplies, setIsOkayToShowMoreReplies] = useState(false);
   const [inputValue, onChange, resetInput] = useInput('');
   const user = useSelector((state) => state.user);
-  const [getCommentAll] = useContext(CommentContext);
+  const [getCommentAll, commnetList] = useContext(CommentContext);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const SingleComment = ({ content, writer, createdAt, toWhom }) => {
     const variables = {
       content: inputValue,
       writer: user.userData._id,
-      toWhom: toWhom,
+      toWhom: toWhat,
     };
 
     await axios.post('/api/comment/saveComment', variables);
@@ -47,6 +47,7 @@ const SingleComment = ({ content, writer, createdAt, toWhom }) => {
 
     resetInput();
     setIsOpen(!isOpen);
+    console.log(commnetList);
   };
 
   const cancelToReply = () => {
@@ -60,7 +61,7 @@ const SingleComment = ({ content, writer, createdAt, toWhom }) => {
 
   const deleteComment = async () => {
     const deleteOne = {
-      item: toWhom,
+      item: toWhat,
       user: user.userData._id,
       writer: writer._id,
     };
@@ -96,25 +97,28 @@ const SingleComment = ({ content, writer, createdAt, toWhom }) => {
             <Content>{content}</Content>
           </RowBox>
           <RowBox>
-            {isOkayToShowMoreReplies ? (
-              <SeeMore onClick={showMoreReplies}>
-                <BiChevronUp className='icon' />
-                답글 숨기기
-              </SeeMore>
-            ) : (
-              <SeeMore onClick={showMoreReplies}>
-                <BiChevronDown className='icon' />
-                답글 더 보기
-              </SeeMore>
-            )}
-
             <ReplyButton onClick={accordian}>답글쓰기</ReplyButton>
+            {commnetList.filter((item) => item.toWhom === toWhat).length ? (
+              isOkayToShowMoreReplies ? (
+                <SeeMore onClick={showMoreReplies}>
+                  <BiChevronUp className='icon' />
+                  답글 숨기기
+                </SeeMore>
+              ) : (
+                <SeeMore onClick={showMoreReplies}>
+                  <BiChevronDown className='icon' />
+                  답글{' '}
+                  {commnetList.filter((item) => item.toWhom === toWhat).length}
+                  개 더 보기
+                </SeeMore>
+              )
+            ) : null}
           </RowBox>
         </ColumnWrapper>
       </RowContainer>
 
       {isOkayToShowMoreReplies && (
-        <ReplyCommentList parrentId={toWhom} currentUser={user.userData._id} />
+        <ReplyCommentList parrentId={toWhat} currentUser={user.userData._id} />
       )}
 
       {isOpen && (

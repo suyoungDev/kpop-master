@@ -12,9 +12,8 @@ const CommentList = ({ commentListData }) => {
                 content={comment.content}
                 createdAt={comment.createdAt}
                 writer={comment.writer}
-                toWhom={comment._id}
+                toWhat={comment._id}
                 key={comment._id}
-                commentListData={commentListData}
               />
             )
         )}
