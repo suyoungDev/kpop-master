@@ -125,13 +125,14 @@ const SingleComment = ({
       )}
 
       {isOpen && (
-        <ReplyContainer>
-          <Form onSubmit={submit}>
+        <ReplyContainer reply>
+          <Form reply onSubmit={submit}>
             <CommentBox
               value={inputValue}
               onChange={onChange}
               placeholder='답글 추가...'
               required
+              reply
             />
             <Column>
               <Button as='div' cancel onClick={cancelToReply} reply>

@@ -14,7 +14,7 @@ export const ColumnWrapper = styled.div`
 export const ReplyButton = styled.button`
   outline: none;
   border: none;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0;
   border-radius: ${SIZES.radiusMini};
   background-color: transparent;
   align-self: baseline;
@@ -57,10 +57,9 @@ export const When = styled.span`
 `;
 
 export const RowContainer = styled.div`
-  width: 500px;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  margin: 1rem 0 0 0;
 `;
 
 export const Likes = styled.span`
@@ -87,14 +86,22 @@ export const ReplyContainer = styled.div`
   display: flex;
   margin-top: 0.4rem;
   flex-direction: ${({ column }) => column && 'column'};
-  border: 1px solid ${COLORS.lightSkyGray};
-  padding: 0.6rem;
+  border: ${({ reply }) => (reply ? '' : `1px solid ${COLORS.lightSkyGray}`)};
+
+  padding: ${({ reply }) => (reply ? '' : '0.6rem')};
   border-radius: ${SIZES.radiusMini};
   margin-left: 2rem;
+  justify-content: space-between;
+  align-items: stretch;
 `;
 
 export const CommentWrapper = styled.div`
   width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 1rem;
+  padding: 0.4rem;
 `;
 
 export const Column = styled.div`

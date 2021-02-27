@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import { CgClose } from 'react-icons/cg';
 import {
-  ColumnWrapper,
   RowBox,
   Writer,
   When,

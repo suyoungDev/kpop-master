@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import useInput from '../../../../hook/useInput';
-import { Form, Button, CommentBox } from './WriteComment.styles';
+import {
+  Form,
+  Button,
+  CommentBox,
+  ButtonContainer,
+} from './WriteComment.styles';
 
 const Comment = ({ getComments }) => {
   const [inputValue, onChange, resetInput] = useInput('');
@@ -34,10 +39,12 @@ const Comment = ({ getComments }) => {
           placeholder='댓글 추가...'
           required
         />
-        <Button as='div' cancel onClick={resetInput}>
-          취소
-        </Button>
-        <Button type='submit'>댓글</Button>
+        <ButtonContainer>
+          <Button as='div' cancel onClick={resetInput}>
+            취소
+          </Button>
+          <Button type='submit'>댓글</Button>
+        </ButtonContainer>
       </Form>
     </div>
   );

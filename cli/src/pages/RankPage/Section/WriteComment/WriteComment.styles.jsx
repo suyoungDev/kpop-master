@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { COLORS, SIZES } from '../../../../constants/theme';
 
 export const Form = styled.form`
-  width: 500px;
+  width: ${({ reply }) => (reply ? '450px' : '500px')};
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const Button = styled.button`
@@ -25,11 +26,6 @@ export const Button = styled.button`
   font-weight: bold;
   letter-spacing: 0.9px;
 
-  :first-child {
-    margin-right: ${({ cancel }) => cancel && '.4rem'};
-    margin-bottom: ${({ reply }) => reply && '.4rem'};
-  }
-
   :hover {
     background-color: ${({ cancel }) =>
       cancel ? `${COLORS.shadowLight}` : `${COLORS.secondary}`};
@@ -38,6 +34,16 @@ export const Button = styled.button`
   :focus {
     outline: none;
   }
+
+  :first-child {
+    margin: ${({ reply }) => (reply ? '0 0 .4rem 0' : '0 .4rem 0 0')};
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 150px;
 `;
 
 export const CommentBox = styled.textarea`
@@ -47,4 +53,5 @@ export const CommentBox = styled.textarea`
   outline: none;
   border: 1px solid ${COLORS.lightSkyGray};
   border-radius: ${SIZES.radiusMini};
+  background-color: ${({ reply }) => reply && `${COLORS.lightSkyGray}`};
 `;
