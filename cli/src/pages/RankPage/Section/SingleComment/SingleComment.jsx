@@ -4,6 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import { BiChevronDown } from 'react-icons/bi';
+import { CgClose } from 'react-icons/cg';
 
 import useInput from '../../../../hook/useInput';
 import { Form, Button, CommentBox } from '../Comment/Comment.styles';
@@ -48,6 +49,15 @@ const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
     setIsOpen(!isOpen);
   };
 
+  const deleteComment = async () => {
+    const deleteOne = {
+      item: toWhom,
+      user: user.userData._id,
+      writer: writer._id,
+    };
+    await axios.post('/api/comment/delete', deleteOne);
+  };
+
   return (
     <div>
       <RowContainer>
@@ -57,9 +67,16 @@ const SingleComment = ({ content, writer, createdAt, toWhom, getComments }) => {
           <FiChevronDown />
         </ColumnWrapper>
         <ColumnWrapper>
-          <RowBox start='true'>
-            <Writer>{writer.displayName}</Writer>
-            <When>{moment(createdAt).locale('ko').fromNow()}</When>
+          <RowBox>
+            <RowBox start='true'>
+              <Writer>{writer.displayName}</Writer>
+              <When>{moment(createdAt).locale('ko').fromNow()}</When>
+            </RowBox>
+            {user.userData._id === writer._id && (
+              <SeeMore onClick={deleteComment}>
+                <CgClose />
+              </SeeMore>
+            )}
           </RowBox>
           <RowBox>
             <Content>{content}</Content>

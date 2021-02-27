@@ -26,4 +26,16 @@ router.get('/getComments', (req, res) => {
     });
 });
 
+router.post('/delete', (req, res) => {
+  const { writer, user, item } = req.body;
+
+  if (writer === user) {
+    Comment.findOneAndDelete({ _id: item }, (err) =>
+      err ? console.log(err) : console.log('delete complete')
+    );
+  } else {
+    console.log('cant delete');
+  }
+});
+
 module.exports = router;
