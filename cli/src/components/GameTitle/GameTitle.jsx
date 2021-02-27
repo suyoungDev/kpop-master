@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styled, { css } from 'styled-components';
 import { COLORS, SCREEN, FONT } from '../../constants/theme';
 
@@ -40,4 +42,8 @@ const TitleWrapper = styled.div`
   }
 `;
 
-export default TitleWrapper;
+const GameTitle = ({ children, ...props }) => {
+  return <TitleWrapper {...props}>{children}</TitleWrapper>;
+};
+
+export default GameTitle;
