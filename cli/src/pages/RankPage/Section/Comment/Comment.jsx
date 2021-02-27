@@ -5,7 +5,7 @@ import axios from 'axios';
 import useInput from '../../../../hook/useInput';
 import { Form, Button, CommentBox } from './Comment.styles';
 
-const Comment = () => {
+const Comment = ({ getComments }) => {
   const [inputValue, onChange, resetInput] = useInput('');
   const user = useSelector((state) => state.user);
 
@@ -18,8 +18,10 @@ const Comment = () => {
     };
 
     const response = await axios.post('/api/comment/saveComment', variables);
-    console.log(response.data);
-    resetInput();
+    if (response.data.success) {
+      getComments();
+      resetInput();
+    }
   };
 
   return (
@@ -29,13 +31,13 @@ const Comment = () => {
         <CommentBox
           value={inputValue}
           onChange={onChange}
-          placeholder='답글 추가...'
+          placeholder='댓글 추가...'
           required
         />
-        <Button cancel onClick={resetInput}>
+        <Button as='div' cancel onClick={resetInput}>
           취소
         </Button>
-        <Button type='submit'>답글</Button>
+        <Button type='submit'>댓글</Button>
       </Form>
     </div>
   );

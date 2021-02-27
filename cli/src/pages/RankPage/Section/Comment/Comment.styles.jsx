@@ -10,6 +10,10 @@ export const Form = styled.form`
 export const Button = styled.button`
   width: 100px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: none;
   border-radius: ${SIZES.radiusMini};
 
@@ -17,8 +21,9 @@ export const Button = styled.button`
     cancel ? `${COLORS.lightSkyGray}` : `${COLORS.secondaryDark}`};
 
   color: ${COLORS.primaryDark};
+  font-size: 14px;
   font-weight: bold;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.9px;
   margin-right: ${({ cancel }) => (cancel ? '.4rem' : '')};
 
   :hover {
