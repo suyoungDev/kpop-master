@@ -5,6 +5,7 @@ import Snippet from '../Snippet/Snippet';
 
 const Container = styled.div`
   width: 90%;
+  min-width: 380px;
   max-width: 450px;
   border-radius: ${SIZES.radiusSmall};
   padding: 1.2rem;
@@ -38,6 +39,9 @@ const Container = styled.div`
   @media ${SCREEN.laptop} {
     width: 400px;
     height: 300px;
+    :first-child {
+      margin-right: 1.5rem;
+    }
   }
 `;
 
