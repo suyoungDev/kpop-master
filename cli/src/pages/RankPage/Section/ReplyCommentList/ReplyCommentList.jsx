@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReplyComment from '../ReplyComment/ReplyComment';
+import { CommentContext } from '../../../../context/CommentContext';
 
-const ReplyCommentList = ({ parrentId, commentListData, currentUser }) => {
+const ReplyCommentList = ({ parrentId, currentUser }) => {
+  // eslint-disable-next-line
+  const [getCommentAll, commnetList] = useContext(CommentContext);
+
   return (
     <div>
-      {commentListData.map(
+      {commnetList.map(
         (comment, index) =>
           comment.toWhom === parrentId && (
             <ReplyComment

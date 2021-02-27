@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleComment from '../SingleComment/SingleComment';
 
-const CommentList = ({ commentListData, getComments }) => {
+const CommentList = ({ commentListData }) => {
   return (
     <>
       {commentListData &&
@@ -14,7 +14,6 @@ const CommentList = ({ commentListData, getComments }) => {
                 writer={comment.writer}
                 toWhom={comment._id}
                 key={comment._id}
-                getComments={getComments}
                 commentListData={commentListData}
               />
             )

@@ -31,7 +31,7 @@ router.post('/delete', (req, res) => {
 
   if (writer === user) {
     Comment.findOneAndDelete({ _id: item }, (err) =>
-      err ? console.log(err) : console.log('delete complete')
+      err ? console.log(err) : res.status(200).send({ success: true })
     );
   } else {
     console.log('cant delete');

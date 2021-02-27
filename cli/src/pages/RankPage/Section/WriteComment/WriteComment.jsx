@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -9,10 +9,12 @@ import {
   CommentBox,
   ButtonContainer,
 } from './WriteComment.styles';
+import { CommentContext } from '../../../../context/CommentContext';
 
-const Comment = ({ getComments }) => {
+const Comment = () => {
   const [inputValue, onChange, resetInput] = useInput('');
   const user = useSelector((state) => state.user);
+  const [getCommentAll] = useContext(CommentContext);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -24,8 +26,8 @@ const Comment = ({ getComments }) => {
 
     const response = await axios.post('/api/comment/saveComment', variables);
     if (response.data.success) {
-      getComments();
       resetInput();
+      getCommentAll();
     }
   };
 

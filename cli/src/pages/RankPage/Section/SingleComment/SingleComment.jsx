@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
+
+import { CommentContext } from '../../../../context/CommentContext';
 
 import useInput from '../../../../hook/useInput';
 import { Form, Button, CommentBox } from '../WriteComment/WriteComment.styles';
@@ -24,18 +26,12 @@ import {
 } from './SingleComment.styles';
 import ReplyCommentList from '../ReplyCommentList/ReplyCommentList';
 
-const SingleComment = ({
-  content,
-  writer,
-  createdAt,
-  toWhom,
-  getComments,
-  commentListData,
-}) => {
+const SingleComment = ({ content, writer, createdAt, toWhom }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOkayToShowMoreReplies, setIsOkayToShowMoreReplies] = useState(false);
   const [inputValue, onChange, resetInput] = useInput('');
   const user = useSelector((state) => state.user);
+  const [getCommentAll] = useContext(CommentContext);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -46,10 +42,10 @@ const SingleComment = ({
       toWhom: toWhom,
     };
 
-    const response = await axios.post('/api/comment/saveComment', variables);
-    console.log(response.data);
+    await axios.post('/api/comment/saveComment', variables);
+    getCommentAll();
+
     resetInput();
-    getComments();
     setIsOpen(!isOpen);
   };
 
@@ -69,6 +65,7 @@ const SingleComment = ({
       writer: writer._id,
     };
     await axios.post('/api/comment/delete', deleteOne);
+    getCommentAll();
   };
 
   const showMoreReplies = () => {
@@ -117,11 +114,7 @@ const SingleComment = ({
       </RowContainer>
 
       {isOkayToShowMoreReplies && (
-        <ReplyCommentList
-          parrentId={toWhom}
-          commentListData={commentListData}
-          currentUser={user.userData._id}
-        />
+        <ReplyCommentList parrentId={toWhom} currentUser={user.userData._id} />
       )}
 
       {isOpen && (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import axios from 'axios';
 import GameTitle from '../../components/GameTitle/GameTitle';
@@ -7,12 +7,13 @@ import Spinner from '../OutroPage/Section/Spinner/Spinner';
 import RankingTable from './Section/RankingTable/RankingTable';
 import CommentList from './Section/CommentList/CommentList';
 import WriteComment from './Section/WriteComment/WriteComment';
+import { CommentContext } from '../../context/CommentContext';
 
 const RankPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isCommentLoading, setIsCommentLoading] = useState(true);
   const [userRankList, setUserRankList] = useState();
-  const [commentListData, setCommentListData] = useState([]);
+  const [getCommentAll, commnetList] = useContext(CommentContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -23,16 +24,11 @@ const RankPage = () => {
         setIsLoading(false);
       }
     });
-    getComments();
+
+    getCommentAll();
+    setIsCommentLoading(false);
     // eslint-disable-next-line
   }, []);
-
-  const getComments = async () => {
-    const response = await axios.get('/api/comment/getComments');
-    setCommentListData(response.data.comments);
-    console.log(commentListData);
-    setIsCommentLoading(false);
-  };
 
   return (
     <Center center>
@@ -43,15 +39,12 @@ const RankPage = () => {
         <RankingTable userRecords={userRankList} />
       )}
 
-      <WriteComment getComments={getComments} />
+      <WriteComment />
 
       {isCommentLoading ? (
         <Spinner />
       ) : (
-        <CommentList
-          commentListData={commentListData}
-          getComments={getComments}
-        />
+        <CommentList commentListData={commnetList} />
       )}
     </Center>
   );

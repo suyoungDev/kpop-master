@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -11,8 +11,11 @@ import {
   SeeMore,
   ReplyContainer,
 } from '../SingleComment/SingleComment.styles';
+import { CommentContext } from '../../../../context/CommentContext';
 
 const ReplyComment = ({ data, currentUser }) => {
+  const [getCommentAll] = useContext(CommentContext);
+
   const deleteComment = async () => {
     const deleteOne = {
       item: data._id,
@@ -20,7 +23,9 @@ const ReplyComment = ({ data, currentUser }) => {
       writer: data.writer._id,
     };
     await axios.post('/api/comment/delete', deleteOne);
+    getCommentAll();
   };
+
   return (
     <ReplyContainer column>
       <RowBox>
