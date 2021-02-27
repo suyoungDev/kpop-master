@@ -23,19 +23,20 @@ const RankPage = () => {
         setIsLoading(false);
       }
     });
-
     getComments();
+    // eslint-disable-next-line
   }, []);
 
   const getComments = async () => {
     const response = await axios.get('/api/comment/getComments');
     setCommentListData(response.data.comments);
+    console.log(commentListData);
     setIsCommentLoading(false);
   };
 
   return (
-    <Center>
-      <GameTitle about>Rank</GameTitle>
+    <Center center>
+      <GameTitle center>Rank</GameTitle>
       {isLoading ? (
         <Spinner />
       ) : !userRankList.length ? null : (

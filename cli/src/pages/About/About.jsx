@@ -37,7 +37,7 @@ const Content = styled.div`
 const About = () => {
   return (
     <Center>
-      <GameTitle about>mocha</GameTitle>
+      <GameTitle center>mocha</GameTitle>
       <Content bottom>
         <p>
           안녕하세요! 재밋게 즐기셨나요?

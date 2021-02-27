@@ -15,14 +15,14 @@ const landingStyles = css`
   }
 `;
 
-const aboutStyles = css`
+const centerStyles = css`
   margin-top: 1rem;
   color: rgba(108, 99, 255, 0.8);
   text-shadow: 5px -5px 7px #fff, 0 0 0 ${COLORS.primaryDark};
 `;
 
 const getTitleStyles = (props) => {
-  if (props.about) return aboutStyles;
+  if (props.center) return centerStyles;
   if (props.landing) return landingStyles;
 };
 

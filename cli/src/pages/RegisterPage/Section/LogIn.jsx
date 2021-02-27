@@ -11,6 +11,7 @@ import useMultiInputs from '../../../hook/useMultiInputs';
 import { AuthContext } from '../../../context/AuthContext';
 
 const LogIn = (props) => {
+  // eslint-disable-next-line
   const [isLoggedIn, getIsLoggedIn] = useContext(AuthContext);
   const [inputs, handleChange] = useMultiInputs({
     email: '',
