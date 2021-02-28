@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import axios from 'axios';
 import useSound from 'use-sound';
 import checkImg from '../../constants/image/checkImg.svg';
 
@@ -44,33 +45,30 @@ const GameLayout = ({ trackList }) => {
     setStartTime(Date.now());
     setShowHints(false);
 
-    // const getUrl = async () => {
-    //   const variable = { trackName: trackList[currentRound].trackName };
-    //   console.log(variable);
-    //   const response = await axios.post('/api/youtube/getId', variable);
-    //   console.log(response.data.items);
-    //   const videoId = response.data.items[0].id.videoId;
-    //   console.log(videoId);
-    //   setUrl(videoId);
-    // };
+    const getUrl = async () => {
+      const variable = { trackName: trackList[currentRound].trackName };
+      const response = await axios.post('/api/youtube/getId', variable);
+      const videoId = response.data.items[0].id.videoId;
+      setUrl(videoId);
+    };
 
-    // getUrl();
+    getUrl();
 
     const giveHints = setTimeout(() => {
       setShowHints(true);
-    }, 5000);
+    }, 10000);
 
     const timer = setTimeout(() => {
       resetInput();
       setTimeOver(true);
-    }, 10000);
+    }, 20000);
 
     const setOver = setTimeout(() => {
       setTimeOver(false);
       if (!isGameEnd) {
         goNextRound();
       }
-    }, 13000);
+    }, 23000);
 
     return () => {
       clearTimeout(timer);
@@ -105,9 +103,7 @@ const GameLayout = ({ trackList }) => {
 
   const goNextRound = (answerResult) => {
     const newResult = {
-      id: Math.random()
-        .toString(36)
-        .substr(2, 4),
+      id: Math.random().toString(36).substr(2, 4),
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',

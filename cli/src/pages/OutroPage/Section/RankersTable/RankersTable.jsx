@@ -18,7 +18,7 @@ const TableContainer = styled.table`
   font-weight: 200;
   overflow: hidden;
   padding: 0 0 0.8rem 0;
-  border-bottom: 1px solid ${COLORS.contentGrayLight};
+  border-bottom: 1px solid ${COLORS.lightSkyGray};
 
   td {
     padding: 6px;
@@ -111,7 +111,7 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
                 <td className='myRecord'>
                   {userRankList
                     .map((user) => user.record.toFixed(2))
-                    .filter((record) => record < myRecord).length + 1}
+                    .filter((record) => record <= myRecord).length + 1}
                 </td>
                 <td className='myRecord'>{userName}</td>
                 {trackListToPlay.theme.theme === 'artist' ? (

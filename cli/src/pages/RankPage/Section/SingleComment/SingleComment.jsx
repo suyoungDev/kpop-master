@@ -24,6 +24,7 @@ import {
 } from './SingleComment.styles';
 import ReplyCommentList from '../ReplyCommentList/ReplyCommentList';
 import Heart from '../Heart/Heart';
+import { AuthContext } from '../../../../context/AuthContext';
 
 const SingleComment = ({ content, writer, createdAt, toWhat }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
   const [inputValue, onChange, resetInput] = useInput('');
   const user = useSelector((state) => state.user);
   const [getCommentAll, commnetList] = useContext(CommentContext);
+  const [isLoggedIn] = useContext(AuthContext);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -82,19 +84,19 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
               <BsDot size='0.7rem' className='icon' />
               <When>{moment(createdAt).locale('ko').fromNow()}</When>
             </RowBox>
-            {user.userData._id === writer._id && (
-              <SeeMore onClick={deleteComment}>
-                <CgClose />
-              </SeeMore>
-            )}
+            {!isLoggedIn
+              ? null
+              : user.userData._id === writer._id && (
+                  <SeeMore onClick={deleteComment}>
+                    <CgClose />
+                  </SeeMore>
+                )}
           </RowBox>
           <RowBox>
             <Content>{content}</Content>
           </RowBox>
           <RowBox>
-            {user.userData.isAuth && (
-              <SeeMore onClick={accordian}>답글쓰기</SeeMore>
-            )}
+            {isLoggedIn && <SeeMore onClick={accordian}>답글쓰기</SeeMore>}
             {commnetList.filter((item) => item.toWhom === toWhat).length ? (
               isOkayToShowMoreReplies ? (
                 <SeeMore onClick={showMoreReplies}>

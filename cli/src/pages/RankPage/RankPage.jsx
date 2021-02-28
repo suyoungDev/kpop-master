@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
 
 import axios from 'axios';
 import GameTitle from '../../components/GameTitle/GameTitle';
@@ -9,23 +8,26 @@ import RankingTable from './Section/RankingTable/RankingTable';
 import CommentList from './Section/CommentList/CommentList';
 import WriteComment from './Section/WriteComment/WriteComment';
 import { CommentContext } from '../../context/CommentContext';
+import { AuthContext } from '../../context/AuthContext';
 
 const RankPage = () => {
-  const user = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
   const [userRankList, setUserRankList] = useState();
   const [getCommentAll, commnetList, isCommentLoading] = useContext(
     CommentContext
   );
+  const [isLoggedIn] = useContext(AuthContext);
 
   useEffect(() => {
     setIsLoading(true);
+
     axios.get('/api/game/getRecords').then((res) => {
       if (res.data.success) {
         setUserRankList(res.data.gameRecordList);
         setIsLoading(false);
       }
     });
+
     getCommentAll();
     // eslint-disable-next-line
   }, []);
@@ -33,13 +35,13 @@ const RankPage = () => {
   return (
     <Center center>
       <GameTitle center>Rank</GameTitle>
-      {isLoading ? (
+      {!userRankList && isLoading ? (
         <Spinner />
-      ) : !userRankList ? null : (
+      ) : !userRankList && isLoading ? null : (
         <RankingTable userRecords={userRankList} />
       )}
 
-      {!user.userData.isAuth ? null : <WriteComment />}
+      {!isLoggedIn ? null : <WriteComment />}
 
       {isCommentLoading ? (
         <Spinner />

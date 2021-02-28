@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONT } from '../../../../constants/theme';
 import { BiRocket } from 'react-icons/bi';
+import { AuthContext } from '../../../../context/AuthContext';
+import { BsXCircle } from 'react-icons/bs';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 2.5rem;
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,6 +27,10 @@ const Title = styled.span`
   display: flex;
   align-items: center;
   color: ${COLORS.contentGrayLight};
+
+  .icon {
+    margin-right: 7px;
+  }
 `;
 
 const Content = styled.span`
@@ -41,22 +47,33 @@ const Bold = styled.span`
 `;
 
 const PreviousRecord = ({ userRankList, userName, userId }) => {
-  const [myBestRecord, setMyBestRecord] = useState();
+  const [isLoggedIn] = useContext(AuthContext);
+  const [myBestRecord, setMyBestRecord] = useState(null);
 
   useEffect(() => {
-    const filtered = userRankList.filter((record) => record._id === userId)[0]
-      .record;
-    setMyBestRecord(filtered);
+    if (isLoggedIn) {
+      const filtered = userRankList.filter((record) => record._id === userId)[0]
+        .record;
+      setMyBestRecord(filtered);
+    }
     // eslint-disable-next-line
   }, []);
 
   return (
     <Wrapper>
       <Title>
-        <BiRocket /> <Bold>{userName}</Bold>
-        님의 이전 최고 기록
+        {!userId ? (
+          <Title>
+            <BsXCircle className='icon' /> 로그인 하지 않으면 기록이 저장되지
+            않습니다.
+          </Title>
+        ) : (
+          <Title>
+            <BiRocket className='icon' /> <Bold>{userName}</Bold> 님의 최고 기록
+          </Title>
+        )}
       </Title>
-      <Content>{myBestRecord} 초</Content>
+      <Content>{!userId ? null : `${myBestRecord} 초`}</Content>
     </Wrapper>
   );
 };

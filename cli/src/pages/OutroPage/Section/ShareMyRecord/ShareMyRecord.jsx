@@ -21,7 +21,12 @@ const ShareTitle = styled.h3`
 `;
 
 const Highlight = styled.span`
-  color: ${COLORS.primaryThree};
+  background: -webkit-linear-gradient(
+    ${COLORS.primaryOne},
+    ${COLORS.primaryTwo}
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const ShareList = styled.div`

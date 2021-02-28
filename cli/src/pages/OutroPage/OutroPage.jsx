@@ -9,6 +9,7 @@ import { SIZES } from '../../constants/theme';
 
 import { GameResultContext } from '../../context/GameResultContext';
 import { TrackListToPlayContext } from '../../context/TrackListToPlayContext';
+import { AuthContext } from '../../context/AuthContext';
 
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
 import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
@@ -32,6 +33,7 @@ const ContentWrapper = styled.div`
 const OutroPage = () => {
   const [gameResult] = useContext(GameResultContext);
   const [trackListToPlay] = useContext(TrackListToPlayContext);
+  const [isLoggedIn] = useContext(AuthContext);
 
   const { width, height } = useWindowSize();
 
@@ -50,8 +52,11 @@ const OutroPage = () => {
       setIsLoading(false);
     };
 
-    uploadRecordToDB();
     getAllGameRecords();
+
+    if (isLoggedIn) {
+      uploadRecordToDB();
+    }
 
     // eslint-disable-next-line
   }, []);
@@ -96,7 +101,9 @@ const OutroPage = () => {
           <Description averageResponseTime={averageResponseTime} />
           <LinkButton links='/'>play again</LinkButton>
           <ContentWrapper>
-            {isLoading ? (
+            {!isLoggedIn ? (
+              <PreviousRecord />
+            ) : isLoggedIn && isLoading ? (
               <Spinner />
             ) : (
               <PreviousRecord
@@ -110,6 +117,7 @@ const OutroPage = () => {
               averageResponseTime={averageResponseTime}
               gameResult={gameResult}
             />
+
             {isLoading ? (
               <Spinner />
             ) : (
