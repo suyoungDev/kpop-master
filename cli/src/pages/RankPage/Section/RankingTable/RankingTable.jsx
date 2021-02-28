@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import CleanCard from '../../../../components/Card/CleanCard';
 import { COLORS, FONT } from '../../../../constants/theme';
 import RankersTable from '../../../OutroPage/Section/RankersTable/RankersTable';
 import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
+import { AuthContext } from '../../../../context/AuthContext';
+import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
 
 const MyRecordButton = styled.button`
   outline: none;
@@ -33,35 +35,50 @@ const MyRecordButton = styled.button`
   }
 `;
 
+const NoDataSpan = styled.span`
+  color: ${COLORS.contentGrayLight};
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+`;
+
 const RankingTable = ({ userRecords }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [recordsToShow, setRecordsToShow] = useState(userRecords);
+  const [showMyRecord, setShowMyRecord] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [nullData, setNullData] = useState(false);
+  const [usersRecords] = useState(userRecords);
+  const [recordsToShow, setRecordsToShow] = useState(userRecords);
   const user = useSelector((state) => state.user);
+  const [isLoggedIn] = useContext(AuthContext);
 
   useEffect(() => {
-    if (isOpen === true) {
+    if (showMyRecord) {
       setIsLoading(true);
+
       const filteredResult = userRecords.filter(
         (record) => record._id === user.userData._id
       );
 
-      setRecordsToShow(filteredResult);
-      setIsLoading(false);
-    } else {
-      setRecordsToShow(userRecords);
+      if (filteredResult.length) {
+        setRecordsToShow(filteredResult);
+        setIsLoading(false);
+      } else {
+        setNullData(true);
+        setIsLoading(false);
+      }
     }
 
     // eslint-disable-next-line
-  }, [isOpen]);
+  }, [showMyRecord]);
 
   const clickHandle = () => {
-    setIsOpen(!isOpen);
+    setShowMyRecord(!showMyRecord);
   };
 
   return (
     <CleanCard rank>
-      {!user.userData.isAuth ? null : isOpen ? (
+      {!isLoggedIn ? null : showMyRecord ? (
         <MyRecordButton onClick={clickHandle}>
           <RiBookmarkFill className='icon' />
           전체 기록 보기
@@ -72,7 +89,13 @@ const RankingTable = ({ userRecords }) => {
         </MyRecordButton>
       )}
 
-      {isLoading ? null : (
+      {isLoading ? (
+        <Spinner />
+      ) : !showMyRecord ? (
+        <RankersTable userRankList={usersRecords} quantityToShow={10} />
+      ) : nullData ? (
+        <NoDataSpan>데이터가 없습니다. 게임을 시작해주세요.</NoDataSpan>
+      ) : (
         <RankersTable userRankList={recordsToShow} quantityToShow={10} />
       )}
     </CleanCard>
