@@ -21,14 +21,12 @@ router.get('/getRecords', (req, res) => {
       .sort((a, b) => {
         return a.record - b.record;
       })
-      .map(
-        ({ userName: userName, record: record, _id: _id, theme: theme }) => ({
-          userName,
-          record,
-          _id,
-          theme,
-        })
-      );
+      .map(({ player: player, record: record, _id: _id, theme: theme }) => ({
+        player,
+        record,
+        _id,
+        theme,
+      }));
 
     return res.status(200).json({ success: true, gameRecordList });
   });

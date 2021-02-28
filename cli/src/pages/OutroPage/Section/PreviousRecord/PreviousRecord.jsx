@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { COLORS, SIZES, FONT } from '../../../../constants/theme';
 import { BiRocket } from 'react-icons/bi';
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
+import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -39,37 +40,16 @@ const Bold = styled.span`
   margin-left: 0.3rem;
 `;
 
-// 이전 기록이 있을 경우, 자동으로 DB에 저장하기
-// 이전 기록과 비교해서 지금이 더 나으면 local에 저장하기
-const PreviousRecord = ({ averageResponseTime, gameResult }) => {
-  const [existingUserName, setExistingUserName] = useState('');
-  const [existingUserRecord, setExistingUserRecord] = useState('');
+const PreviousRecord = ({ averageResponseTime, gameResult, myBestRecord }) => {
   const [trackListToPlay] = useContext(TrackListToPlayContext);
+  const user = useSelector((state) => state.user);
+  const [userId] = useState(user.userData._id);
 
   useEffect(() => {
-    const userName = localStorage.getItem('_userName');
-
-    if (userName) {
-      if (averageResponseTime > 0) {
-        uploadRecordToDB(userName);
-        setExistingUserName(userName);
-
-        const previousRecord = localStorage.getItem('_personalRecord');
-        setExistingUserRecord(previousRecord);
-
-        const comparedResult = compareRecord(
-          previousRecord,
-          averageResponseTime
-        );
-        if (comparedResult === 'better now') {
-          uploadRecordToLocal(averageResponseTime);
-        }
-      }
-    }
-    // eslint-disable-next-line
+    uploadRecordToDB();
   }, []);
 
-  const uploadRecordToDB = (user) => {
+  const uploadRecordToDB = async () => {
     const correctAnswers = gameResult
       .filter((game) => game.result === 'correct')
       .map((song) => song.trackName);
@@ -79,7 +59,7 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
       .map((song) => song.trackName);
 
     const gameData = {
-      userName: user,
+      player: userId,
       record: averageResponseTime,
       correctTrackName: correctAnswers,
       wrongTrackName: wrongAnswers,
@@ -87,31 +67,16 @@ const PreviousRecord = ({ averageResponseTime, gameResult }) => {
       theme: trackListToPlay.theme,
     };
 
-    axios.post('/api/game/upload', gameData);
+    await axios.post('/api/game/upload', gameData);
   };
-
-  const uploadRecordToLocal = (currentRecord) => {
-    localStorage.setItem('_personalRecord', currentRecord);
-  };
-
-  const compareRecord = (previousRecord, currentRecord) => {
-    if (previousRecord > currentRecord) {
-      return 'better now';
-    }
-    return 'not better';
-  };
-
-  if (!existingUserName) {
-    return null;
-  }
 
   return (
     <Wrapper>
       <Title>
-        <BiRocket /> <Bold>{existingUserName}</Bold>
+        <BiRocket /> <Bold>{user.userData.displayName}</Bold>
         님의 이전 최고 기록
       </Title>
-      <Content>{existingUserRecord}초</Content>
+      <Content>{myBestRecord}초</Content>
     </Wrapper>
   );
 };

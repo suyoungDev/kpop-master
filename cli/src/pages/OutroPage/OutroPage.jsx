@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti';
+import { useSelector } from 'react-redux';
 
 import { SIZES } from '../../constants/theme';
 
@@ -31,24 +32,35 @@ const ContentWrapper = styled.div`
 const OutroPage = () => {
   const [gameResult] = useContext(GameResultContext);
   const { width, height } = useWindowSize();
+  const user = useSelector((state) => state.user);
 
   const [userRankList, setUserRankList] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [myBestRecord, setMyBestRecord] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
 
-    const getResult = async () => {
+    const findMyRecords = () => {
+      const result = userRankList.find(
+        (record) => record.player === user.userData._id
+      );
+      setMyBestRecord(result);
+    };
+
+    const getAllGameRecords = async () => {
       const response = await axios.get('/api/game/getRecords');
       const data = response.data.gameRecordList;
       setUserRankList(data);
 
       if (data.length) {
         setIsLoading(false);
+        findMyRecords();
       }
     };
 
-    getResult();
+    getAllGameRecords();
+
     // eslint-disable-next-line
   }, []);
 
@@ -71,14 +83,13 @@ const OutroPage = () => {
           <Description averageResponseTime={averageResponseTime} />
           <LinkButton links='/'>play again</LinkButton>
           <ContentWrapper>
-            <PreviousRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
-            />
-            <SavingMyRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
-            />
+            {!myRecords.length && (
+              <PreviousRecord
+                averageResponseTime={averageResponseTime}
+                gameResult={gameResult}
+                myBestRecord={myBestRecord}
+              />
+            )}
             <CurrentRecord
               averageResponseTime={averageResponseTime}
               gameResult={gameResult}

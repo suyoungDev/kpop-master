@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import Accordion from '../Accordion/Accordion';
 import RankersTable from '../RankersTable/RankersTable';
 import RankersTableTitle from '../RankersTableTitle/RankersTableTitle';
 
 const RankersRecord = ({ userRankList, myRecord }) => {
-  const [existingUserName, setexistingUserName] = useState();
+  const [currentUserName, setCurrentUserName] = useState('');
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    const userName = localStorage.getItem('_userName');
-    setexistingUserName(userName);
+    setCurrentUserName(user.userData.displayName);
   }, []);
 
   const title = (
@@ -18,9 +19,9 @@ const RankersRecord = ({ userRankList, myRecord }) => {
 
   const content = (
     <RankersTable
-      userRecords={userRankList}
+      userRankList={userRankList}
       myRecord={myRecord}
-      userName={existingUserName}
+      userName={currentUserName}
       quantityToShow={3}
     />
   );

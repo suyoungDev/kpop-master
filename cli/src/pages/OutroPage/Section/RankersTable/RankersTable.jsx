@@ -39,20 +39,21 @@ const TableContainer = styled.table`
   }
 `;
 
-const RankersTable = ({ userRecords, myRecord, userName, quantityToShow }) => {
+const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
   return (
     <Wrapper>
       <TableContainer>
         <tbody>
-          {userRecords
+          {userRankList
             .filter((userRecord, index) => index < `${quantityToShow}`)
             .map((userRecord, index) => (
               <tr key={userRecord._id}>
                 <td id='ranking'>{index + 1}위</td>
-                <td id='name'>{userRecord.userName}</td>
+                <td id='name'>{userRecord.player}</td>
                 <td id='record'>{userRecord.record} 초</td>
               </tr>
             ))}
+
           {myRecord && (
             <>
               <tr>
@@ -63,12 +64,12 @@ const RankersTable = ({ userRecords, myRecord, userName, quantityToShow }) => {
 
               <tr>
                 <td id='myRecord'>
-                  {userRecords
+                  {userRankList
                     .map((user) => user.record)
                     .filter((record) => record < myRecord).length + 1}
                   위
                 </td>
-                <td id='myRecord'>{userName ? userName : '내 순위'}</td>
+                <td id='myRecord'>내 순위</td>
                 <td id='record'>{myRecord} 초</td>
               </tr>
             </>
@@ -76,7 +77,7 @@ const RankersTable = ({ userRecords, myRecord, userName, quantityToShow }) => {
         </tbody>
       </TableContainer>
 
-      <UserAverageData userRecords={userRecords} />
+      <UserAverageData userRecords={userRankList} />
     </Wrapper>
   );
 };

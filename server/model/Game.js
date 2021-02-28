@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const gameSchema = mongoose.Schema(
   {
-    displayName: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    player: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     record: Number,
     correctTrackName: Array,
     wrongTrackName: Array,
