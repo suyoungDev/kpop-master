@@ -29,6 +29,7 @@ app.use('/api/game', require('./routes/game'));
 app.use('/api/youtube', require('./routes/youtube'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/comment', require('./routes/comment'));
+app.use('/api/heart', require('./routes/heart'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('cli/build'));

@@ -32,23 +32,20 @@ const Comment = () => {
   };
 
   return (
-    <div>
-      Commnet
-      <Form onSubmit={submit}>
-        <CommentBox
-          value={inputValue}
-          onChange={onChange}
-          placeholder='댓글 추가...'
-          required
-        />
-        <ButtonContainer>
-          <Button as='div' cancel onClick={resetInput}>
-            취소
-          </Button>
-          <Button type='submit'>댓글</Button>
-        </ButtonContainer>
-      </Form>
-    </div>
+    <Form onSubmit={submit} origin>
+      <CommentBox
+        value={inputValue}
+        onChange={onChange}
+        placeholder='댓글 추가...'
+        required
+      />
+      <ButtonContainer>
+        <Button as='div' cancel onClick={resetInput}>
+          취소
+        </Button>
+        <Button type='submit'>댓글</Button>
+      </ButtonContainer>
+    </Form>
   );
 };
 

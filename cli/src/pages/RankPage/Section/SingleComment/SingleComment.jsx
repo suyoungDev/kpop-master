@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
-import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+import { BsDot } from 'react-icons/bs';
 import { CgClose } from 'react-icons/cg';
 
 import { CommentContext } from '../../../../context/CommentContext';
@@ -12,19 +12,18 @@ import useInput from '../../../../hook/useInput';
 import { Form, Button, CommentBox } from '../WriteComment/WriteComment.styles';
 import {
   ColumnWrapper,
-  ReplyButton,
   Writer,
   Content,
   RowBox,
   When,
   RowContainer,
-  Likes,
   SeeMore,
   ReplyContainer,
   CommentWrapper,
   Column,
 } from './SingleComment.styles';
 import ReplyCommentList from '../ReplyCommentList/ReplyCommentList';
+import Heart from '../Heart/Heart';
 
 const SingleComment = ({ content, writer, createdAt, toWhat }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +36,8 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
     e.preventDefault();
 
     const variables = {
-      content: inputValue,
       writer: user.userData._id,
+      content: inputValue,
       toWhom: toWhat,
     };
 
@@ -47,7 +46,6 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
 
     resetInput();
     setIsOpen(!isOpen);
-    console.log(commnetList);
   };
 
   const cancelToReply = () => {
@@ -76,15 +74,12 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
   return (
     <CommentWrapper>
       <RowContainer>
-        <ColumnWrapper likes>
-          <FiChevronUp />
-          <Likes>0</Likes>
-          <FiChevronDown />
-        </ColumnWrapper>
+        <Heart toWhat={toWhat} />
         <ColumnWrapper>
           <RowBox>
             <RowBox start='true'>
               <Writer>{writer.displayName}</Writer>
+              <BsDot size='0.7rem' className='icon' />
               <When>{moment(createdAt).locale('ko').fromNow()}</When>
             </RowBox>
             {user.userData._id === writer._id && (
@@ -97,7 +92,7 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
             <Content>{content}</Content>
           </RowBox>
           <RowBox>
-            <ReplyButton onClick={accordian}>답글쓰기</ReplyButton>
+            <SeeMore onClick={accordian}>답글쓰기</SeeMore>
             {commnetList.filter((item) => item.toWhom === toWhat).length ? (
               isOkayToShowMoreReplies ? (
                 <SeeMore onClick={showMoreReplies}>
