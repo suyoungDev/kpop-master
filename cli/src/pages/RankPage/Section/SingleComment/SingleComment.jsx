@@ -92,19 +92,21 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
             <Content>{content}</Content>
           </RowBox>
           <RowBox>
-            <SeeMore onClick={accordian}>답글쓰기</SeeMore>
+            {user.userData.isAuth && (
+              <SeeMore onClick={accordian}>답글쓰기</SeeMore>
+            )}
             {commnetList.filter((item) => item.toWhom === toWhat).length ? (
               isOkayToShowMoreReplies ? (
                 <SeeMore onClick={showMoreReplies}>
-                  <BiChevronUp className='icon' />
                   답글 숨기기
+                  <BiChevronUp className='icon' />
                 </SeeMore>
               ) : (
                 <SeeMore onClick={showMoreReplies}>
-                  <BiChevronDown className='icon' />
                   답글{' '}
                   {commnetList.filter((item) => item.toWhom === toWhat).length}
                   개 더 보기
+                  <BiChevronDown className='icon' />
                 </SeeMore>
               )
             ) : null}
@@ -116,7 +118,7 @@ const SingleComment = ({ content, writer, createdAt, toWhat }) => {
         <ReplyCommentList parrentId={toWhat} currentUser={user.userData._id} />
       )}
 
-      {isOpen && (
+      {isOpen && user.userData.isAuth && (
         <ReplyContainer reply>
           <Form reply onSubmit={submit}>
             <CommentBox
