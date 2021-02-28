@@ -41,7 +41,7 @@ const mainCardStyles = css`
   align-items: center;
 
   @media ${SCREEN.laptop} {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
     width: 80%;

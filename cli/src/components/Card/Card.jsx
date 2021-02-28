@@ -35,6 +35,10 @@ const Container = styled.div`
     box-shadow: 0 8px 16px 0 ${COLORS.shadowDark};
   }
 
+  :first-child {
+    margin-bottom: 1rem;
+  }
+
   @media ${SCREEN.laptop} {
     width: 400px;
     :first-child {

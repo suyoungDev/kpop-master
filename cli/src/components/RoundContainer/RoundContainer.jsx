@@ -14,8 +14,11 @@ const RoundContainer = styled.div`
   padding-top: 1.2rem;
 
   @media ${SCREEN.tablet} {
+    width: 85%;
+    max-width: 916px;
     height: ${({ main }) => (main ? '' : '210px')};
-
+    flex-direction: row;
+    align-items: baseline;
     #three {
       order: 3;
     }

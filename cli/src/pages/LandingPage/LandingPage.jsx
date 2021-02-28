@@ -7,6 +7,7 @@ import Row from '../../components/Row/Row';
 import GameTitle from '../../components/GameTitle/GameTitle';
 import ChooseOptions from './section/ChooseOptions/ChooseOptions';
 import HowToPlay from './section/HowToPlay/HowToPlay';
+import Notice from './section/Notice/Notice';
 
 import { GameEndContext } from '../../context/GameEndContext';
 import { GameResultContext } from '../../context/GameResultContext';
@@ -39,8 +40,9 @@ const LandingPage = () => {
       <RoundContainer main>
         <Row mainCard>
           <HowToPlay />
-          <ChooseOptions />
+          <Notice />
         </Row>
+        <ChooseOptions />
       </RoundContainer>
     </Center>
   );
