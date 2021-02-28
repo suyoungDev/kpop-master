@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { COLORS, FONT } from '../../../../constants/theme';
 
 const UsersAverageDataContainer = styled.div`
-  width: 90%;
+  width: 96%;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(0, 0, 0, 0.4);
   padding: 0.5rem 0;
 `;
 const UsersData = styled.div`

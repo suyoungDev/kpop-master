@@ -66,11 +66,15 @@ const savingCardStyle = css`
 const rankCardStyle = css`
   width: 90%;
   max-width: ${SIZES.gameLayoutWidth};
-  margin-top: 2rem;
+  margin: 1.5rem 0;
   border-radius: ${SIZES.radiusSmall};
-  padding: 1rem;
+  padding: 0.5rem;
   ${borderAndShadow};
   ${hoverStyle}
+
+  @media ${SCREEN.tablet} {
+    padding: 1rem;
+  }
 `;
 
 const mailCardStyle = css`
@@ -134,7 +138,7 @@ const getCardStyles = (props) => {
 const CleanCard = styled.div`
   width: 100%;
   height: 100%;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 
   ${getCardStyles}
 `;

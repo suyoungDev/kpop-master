@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+
 import UserAverageData from '../UsersAverageData/UserAverageData';
+
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
-import { COLORS, FONT, SIZES } from '../../../../constants/theme';
+import { COLORS, FONT, SCREEN, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,26 +15,31 @@ const Wrapper = styled.div`
 const TableContainer = styled.table`
   width: 100%;
   font-family: ${FONT.korean};
-  font-size: 16px;
   font-weight: 200;
   overflow: hidden;
-  padding: 0 0 1rem 0;
+  padding: 0 0 0.8rem 0;
+  border-bottom: 1px solid ${COLORS.contentGrayLight};
 
   td {
     padding: 6px;
     text-align: center;
+    font-size: 14px;
   }
 
   .ranking {
-    width: 12%;
+    width: 7%;
     text-align: center;
+    color: ${COLORS.contentGray};
   }
   .name {
     width: 40%;
+    color: ${COLORS.contentGray};
   }
   .record {
-    width: 15%;
+    width: 20%;
     text-align: right;
+    font-size: 13px;
+    color: ${COLORS.headingDarkGray};
   }
 
   .myRecord {
@@ -41,12 +48,21 @@ const TableContainer = styled.table`
   }
 
   .value {
-    width: 14%;
+    width: 16%;
     background-color: ${COLORS.lightSkyGray};
     color: ${COLORS.primaryThree};
-    padding: 4px;
+    padding: 0 4px;
     border-radius: ${SIZES.radiusSmall};
-    font-size: 13px;
+    font-size: 11px;
+  }
+
+  @media ${SCREEN.tablet} {
+    td {
+      font-size: 15px;
+    }
+    .record {
+      width: 12%;
+    }
   }
 `;
 
@@ -61,7 +77,7 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
             .filter((userRecord, index) => index < `${quantityToShow}`)
             .map((userRecord, index) => (
               <tr key={userRecord.docId}>
-                <td className='ranking'>{index + 1}위</td>
+                <td className='ranking'>{index + 1}</td>
                 <td className='name'>{userRecord.player}</td>
                 {userRecord.theme === 'artist' ? (
                   <td className='value'>{userRecord.value}</td>
@@ -77,7 +93,7 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
                 ) : (
                   <td className='value'>어려움</td>
                 )}
-                <td className='record'>{userRecord.record.toFixed(2)} 초</td>
+                <td className='record'>{userRecord.record.toFixed(2)}</td>
               </tr>
             ))}
 
@@ -96,7 +112,6 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
                   {userRankList
                     .map((user) => user.record.toFixed(2))
                     .filter((record) => record < myRecord).length + 1}
-                  위
                 </td>
                 <td className='myRecord'>{userName}</td>
                 {trackListToPlay.theme.theme === 'artist' ? (
@@ -117,7 +132,7 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
                     ? '보통'
                     : '어려움'}
                 </td>
-                <td className='myRecord record'>{myRecord} 초</td>
+                <td className='myRecord record'>{myRecord}</td>
               </tr>
             </>
           )}

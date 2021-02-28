@@ -46,7 +46,7 @@ const RightMenu = ({ open, history }) => {
   return (
     <LinkContainer open={open}>
       <StyledLink to='/'>home</StyledLink>
-      <StyledLink to='/rank'>Rank</StyledLink>
+      <StyledLink to='/rank'>명예의 전당</StyledLink>
       <StyledLink to='/about'>About</StyledLink>
 
       {isLoggedIn ? (
