@@ -31,6 +31,7 @@ const Heart = ({ toWhat }) => {
   const [numberOfDislikes, setNumberOfDislikes] = useState(0);
 
   const user = useSelector((state) => state.user);
+
   const [variables] = useState({
     fromWhom: user.userData._id,
     toWhat: toWhat,
@@ -59,34 +60,46 @@ const Heart = ({ toWhat }) => {
       });
     },
     // eslint-disable-next-line
-    [isLike, isDislike]
+    []
   );
 
   const goLike = async () => {
     if (isLike === null) {
-      await axios.post('/api/heart/upLike', variables);
-      setIsLike('yes');
-
       if (isDislike !== null) {
+        await axios.post('/api/heart/upLike', variables);
         setIsDislike(null);
+        setNumberOfDislikes(numberOfDislikes - 1);
+        setNumberOfLikes(numberOfLikes + 1);
+        setIsLike('yes');
+      } else {
+        await axios.post('/api/heart/upLike', variables);
+        setNumberOfLikes(numberOfLikes + 1);
+        setIsLike('yes');
       }
     } else {
-      await axios.post('/api/heart/DownLike', variables);
+      await axios.post('/api/heart/downLike', variables);
+      setNumberOfLikes(numberOfLikes - 1);
       setIsLike(null);
     }
   };
 
   const goDislike = async () => {
     if (isDislike === null) {
-      await axios.post('/api/heart/upDislike', variables);
-      setIsDislike('yes');
-
       if (isLike !== null) {
         setIsLike(null);
+        await axios.post('/api/heart/upDislike', variables);
+        setNumberOfLikes(numberOfLikes - 1);
+        setNumberOfDislikes(numberOfDislikes + 1);
+        setIsDislike('yes');
+      } else {
+        await axios.post('/api/heart/upDislike', variables);
+        setNumberOfDislikes(numberOfDislikes + 1);
+        setIsDislike('yes');
       }
     } else {
       await axios.post('/api/heart/downDislike', variables);
       setIsDislike(null);
+      setNumberOfDislikes(numberOfDislikes - 1);
     }
   };
 
@@ -100,6 +113,7 @@ const Heart = ({ toWhat }) => {
           <BsChevronUp size='1.1rem' />
         </UpDownButton>
       )}
+
       <Likes>{numberOfLikes - numberOfDislikes}</Likes>
 
       {!user.userData.isAuth ? null : (
