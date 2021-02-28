@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
-// import axios from 'axios';
+import axios from 'axios';
 import GameTitle from '../../components/GameTitle/GameTitle';
 import Center from '../../components/Center/Center';
 import Spinner from '../OutroPage/Section/Spinner/Spinner';
@@ -19,14 +19,13 @@ const RankPage = () => {
   );
 
   useEffect(() => {
-    // setIsLoading(true);
-    // axios.get('/api/game/getRecords').then((res) => {
-    //   if (res.data.success) {
-    //     setUserRankList(res.data.gameRecordList);
-    //     setIsLoading(false);
-    //   }
-    // });
-    // setIsLoading(false);
+    setIsLoading(true);
+    axios.get('/api/game/getRecords').then((res) => {
+      if (res.data.success) {
+        setUserRankList(res.data.gameRecordList);
+        setIsLoading(false);
+      }
+    });
     getCommentAll();
     // eslint-disable-next-line
   }, []);
@@ -39,6 +38,7 @@ const RankPage = () => {
       ) : !userRankList ? null : (
         <RankingTable userRecords={userRankList} />
       )}
+
       {!user.userData.isAuth ? null : <WriteComment />}
 
       {isCommentLoading ? (
