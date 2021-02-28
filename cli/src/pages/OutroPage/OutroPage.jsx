@@ -8,10 +8,10 @@ import { useSelector } from 'react-redux';
 import { SIZES } from '../../constants/theme';
 
 import { GameResultContext } from '../../context/GameResultContext';
+import { TrackListToPlayContext } from '../../context/TrackListToPlayContext';
 
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
 import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
-import SavingMyRecord from './Section/SavingMyRecord/SavingMyRecord';
 import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
 import Description from './Section/Description/Description';
@@ -31,43 +31,56 @@ const ContentWrapper = styled.div`
 
 const OutroPage = () => {
   const [gameResult] = useContext(GameResultContext);
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
+
   const { width, height } = useWindowSize();
+
   const user = useSelector((state) => state.user);
 
   const [userRankList, setUserRankList] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [myBestRecord, setMyBestRecord] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-
-    const findMyRecords = () => {
-      const result = userRankList.find(
-        (record) => record.player === user.userData._id
-      );
-      setMyBestRecord(result);
-    };
 
     const getAllGameRecords = async () => {
       const response = await axios.get('/api/game/getRecords');
       const data = response.data.gameRecordList;
       setUserRankList(data);
-
-      if (data.length) {
-        setIsLoading(false);
-        findMyRecords();
-      }
+      setIsLoading(false);
     };
 
+    uploadRecordToDB();
     getAllGameRecords();
 
     // eslint-disable-next-line
   }, []);
 
+  const uploadRecordToDB = async () => {
+    const correctAnswers = gameResult
+      .filter((game) => game.result === 'correct')
+      .map((song) => song.trackName);
+
+    const wrongAnswers = gameResult
+      .filter((game) => game.result === 'wrong')
+      .map((song) => song.trackName);
+
+    const gameData = {
+      player: user.userData._id,
+      record: averageResponseTime,
+      correctTrackName: correctAnswers,
+      wrongTrackName: wrongAnswers,
+      gameResult: gameResult,
+      theme: trackListToPlay.theme,
+    };
+
+    await axios.post('/api/game/upload', gameData);
+  };
+
   const totalResponseTime = gameResult
     .map((item) => item.responseTime)
     .reduce((previous, currrent) => previous + currrent, 0);
-  const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
+  const averageResponseTime = (totalResponseTime / 5000).toFixed(2);
 
   return (
     <>
@@ -83,13 +96,16 @@ const OutroPage = () => {
           <Description averageResponseTime={averageResponseTime} />
           <LinkButton links='/'>play again</LinkButton>
           <ContentWrapper>
-            {!myRecords.length && (
+            {isLoading ? (
+              <Spinner />
+            ) : (
               <PreviousRecord
-                averageResponseTime={averageResponseTime}
-                gameResult={gameResult}
-                myBestRecord={myBestRecord}
+                userName={user.userData.displayName}
+                userId={user.userData._id}
+                userRankList={userRankList}
               />
             )}
+
             <CurrentRecord
               averageResponseTime={averageResponseTime}
               gameResult={gameResult}

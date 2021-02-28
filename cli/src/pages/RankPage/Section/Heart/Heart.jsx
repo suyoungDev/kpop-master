@@ -41,6 +41,7 @@ const Heart = ({ toWhat }) => {
       axios.post('/api/heart/getLike', variables).then((res) => {
         if (res.data.success) {
           setNumberOfLikes(res.data.likes.length);
+          // eslint-disable-next-line
           res.data.likes.map((like) => {
             like.fromWhom === variables.fromWhom && setIsLike('yes');
           });
@@ -50,7 +51,7 @@ const Heart = ({ toWhat }) => {
       axios.post('/api/heart/getDislike', variables).then((res) => {
         if (res.data.success) {
           setNumberOfDislikes(res.data.dislikes.length);
-
+          // eslint-disable-next-line
           res.data.dislikes.map((dislike) => {
             dislike.fromWhom === variables.fromWhom && setIsDislike('yes');
           });

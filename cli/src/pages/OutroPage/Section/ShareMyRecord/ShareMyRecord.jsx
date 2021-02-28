@@ -21,19 +21,7 @@ const ShareTitle = styled.h3`
 `;
 
 const Highlight = styled.span`
-  background-image: linear-gradient(
-    120deg,
-    ${COLORS.primaryShaodw} 0%,
-    ${COLORS.primaryMiddle} 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 0.4em;
-  background-position: 0 100%;
-  transition: background-size 0.25s ease-in;
-
-  &:hover {
-    background-size: 100% 88%;
-  }
+  color: ${COLORS.primaryThree};
 `;
 
 const ShareList = styled.div`

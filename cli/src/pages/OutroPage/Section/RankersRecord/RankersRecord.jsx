@@ -11,6 +11,7 @@ const RankersRecord = ({ userRankList, myRecord }) => {
 
   useEffect(() => {
     setCurrentUserName(user.userData.displayName);
+    // eslint-disable-next-line
   }, []);
 
   const title = (

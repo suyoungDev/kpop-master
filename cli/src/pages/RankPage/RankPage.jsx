@@ -19,19 +19,18 @@ const RankPage = () => {
   );
 
   useEffect(() => {
-    setIsLoading(true);
-
+    // setIsLoading(true);
     // axios.get('/api/game/getRecords').then((res) => {
     //   if (res.data.success) {
     //     setUserRankList(res.data.gameRecordList);
     //     setIsLoading(false);
     //   }
     // });
-    setIsLoading(false);
-
+    // setIsLoading(false);
     getCommentAll();
     // eslint-disable-next-line
   }, []);
+
   return (
     <Center center>
       <GameTitle center>Rank</GameTitle>

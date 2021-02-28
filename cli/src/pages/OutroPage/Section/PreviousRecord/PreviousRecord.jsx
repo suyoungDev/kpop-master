@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONT } from '../../../../constants/theme';
 import { BiRocket } from 'react-icons/bi';
-import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
-import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -27,56 +24,39 @@ const Title = styled.span`
   font-family: ${FONT.korean};
   display: flex;
   align-items: center;
+  color: ${COLORS.contentGrayLight};
 `;
 
 const Content = styled.span`
   font-size: 16px;
-  color: black;
-  font-family: ${FONT.korean};
+  color: ${COLORS.primaryThree};
+  font-family: ${FONT.english};
+  font-weight: bold;
 `;
 
 const Bold = styled.span`
   font-weight: bold;
   margin-left: 0.3rem;
+  color: black;
 `;
 
-const PreviousRecord = ({ averageResponseTime, gameResult, myBestRecord }) => {
-  const [trackListToPlay] = useContext(TrackListToPlayContext);
-  const user = useSelector((state) => state.user);
-  const [userId] = useState(user.userData._id);
+const PreviousRecord = ({ userRankList, userName, userId }) => {
+  const [myBestRecord, setMyBestRecord] = useState();
 
   useEffect(() => {
-    uploadRecordToDB();
+    const filtered = userRankList.filter((record) => record._id === userId)[0]
+      .record;
+    setMyBestRecord(filtered);
+    // eslint-disable-next-line
   }, []);
-
-  const uploadRecordToDB = async () => {
-    const correctAnswers = gameResult
-      .filter((game) => game.result === 'correct')
-      .map((song) => song.trackName);
-
-    const wrongAnswers = gameResult
-      .filter((game) => game.result === 'wrong')
-      .map((song) => song.trackName);
-
-    const gameData = {
-      player: userId,
-      record: averageResponseTime,
-      correctTrackName: correctAnswers,
-      wrongTrackName: wrongAnswers,
-      gameResult: gameResult,
-      theme: trackListToPlay.theme,
-    };
-
-    await axios.post('/api/game/upload', gameData);
-  };
 
   return (
     <Wrapper>
       <Title>
-        <BiRocket /> <Bold>{user.userData.displayName}</Bold>
+        <BiRocket /> <Bold>{userName}</Bold>
         님의 이전 최고 기록
       </Title>
-      <Content>{myBestRecord}초</Content>
+      <Content>{myBestRecord} 초</Content>
     </Wrapper>
   );
 };

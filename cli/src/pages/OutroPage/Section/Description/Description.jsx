@@ -47,14 +47,19 @@ const Description = ({ averageResponseTime }) => {
       setMyLevel('zero');
     }
   };
-
   const getMyLimit = () => {
-    if (trackListToPlay.theme.limit === 10) {
-      setMyLimit('쉬운');
-    } else if (trackListToPlay.theme.limit === 50) {
-      setMyLimit('보통의');
-    } else {
-      setMyLimit('어려운');
+    switch (trackListToPlay.theme.limit) {
+      case '10':
+        return setMyLimit('쉬운');
+
+      case '50':
+        return setMyLimit('보통의');
+
+      case '100':
+        return setMyLimit('어려운');
+
+      default:
+        break;
     }
   };
 
