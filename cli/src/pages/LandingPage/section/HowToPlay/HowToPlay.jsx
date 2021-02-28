@@ -8,7 +8,6 @@ const Block = styled.span`
   background-color: ${COLORS.lightSkyGray};
   padding: 5px 7px;
   border-radius: 5px;
-  font-weight: bold;
 `;
 
 const HowToPlay = () => {
