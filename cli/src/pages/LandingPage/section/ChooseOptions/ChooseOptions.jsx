@@ -94,13 +94,8 @@ const ChooseOptions = () => {
   };
 
   const getLevel = (e) => {
-    setVariablesToPlay({
-      ...variablesToPlay,
-      type: '',
-    });
     setIsReady(false);
     setVariablesToPlay({
-      ...variablesToPlay,
       level: e.target.value,
     });
   };
