@@ -7,7 +7,7 @@ const ReplyCommentList = ({ parrentId, currentUser }) => {
   const [getCommentAll, commnetList] = useContext(CommentContext);
 
   return (
-    <div>
+    <>
       {commnetList.map(
         (comment, index) =>
           comment.toWhom === parrentId && (
@@ -18,7 +18,7 @@ const ReplyCommentList = ({ parrentId, currentUser }) => {
             />
           )
       )}
-    </div>
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ const Group = styled.div`
 const Input = styled.input`
   background: none;
   background-color: white;
-  color: ${COLORS.contentGray};
+  color: black;
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;

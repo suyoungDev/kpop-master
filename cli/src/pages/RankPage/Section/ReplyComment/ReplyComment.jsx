@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import { CgClose } from 'react-icons/cg';
+import { BsDot } from 'react-icons/bs';
 import {
   RowBox,
   Writer,
@@ -27,10 +28,11 @@ const ReplyComment = ({ data, currentUser }) => {
   };
 
   return (
-    <ReplyContainer column>
+    <ReplyContainer column rereply>
       <RowBox>
         <RowBox start='true'>
           <Writer>{data.writer.displayName}</Writer>
+          <BsDot size='0.7rem' className='icon' />
           <When>{moment(data.createdAt).locale('ko').fromNow()}</When>
         </RowBox>
         {data.writer._id === currentUser && (

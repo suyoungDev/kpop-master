@@ -16,7 +16,7 @@ const mainStyles = css`
     padding: 0;
 
     img {
-      display: block;
+      display: none;
       position: relative;
       width: 200px;
     }
