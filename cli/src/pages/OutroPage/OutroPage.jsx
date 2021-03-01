@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import useWindowSize from 'react-use/lib/useWindowSize';
-import Confetti from 'react-confetti';
 import { useSelector } from 'react-redux';
 
 import { SIZES } from '../../constants/theme';
@@ -34,8 +32,6 @@ const OutroPage = () => {
   const [gameResult] = useContext(GameResultContext);
   const [trackListToPlay] = useContext(TrackListToPlayContext);
   const [isLoggedIn] = useContext(AuthContext);
-
-  const { width, height } = useWindowSize();
 
   const user = useSelector((state) => state.user);
 
@@ -89,13 +85,6 @@ const OutroPage = () => {
 
   return (
     <>
-      <Confetti
-        width={width}
-        height={height}
-        gravity={0.03}
-        recycle={false}
-        numberOfPieces={500}
-      />
       <Center>
         <PageWrapper>
           <Description averageResponseTime={averageResponseTime} />
