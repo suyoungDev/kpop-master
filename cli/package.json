@@ -12,7 +12,6 @@
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-awesome-button": "^6.5.1",
-    "react-confetti": "^6.0.0",
     "react-dom": "^17.0.1",
     "react-google-recaptcha": "^2.1.0",
     "react-icons": "^4.2.0",
