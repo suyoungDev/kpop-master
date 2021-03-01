@@ -30,10 +30,13 @@ router.post('/login', async (req, res) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        res.cookie('token', user.token).status(200).json({
-          success: true,
-          userId: user._id,
-        });
+        res
+          .cookie('token', user.token, { httpOnly: true, secure: true })
+          .status(200)
+          .json({
+            success: true,
+            userId: user._id,
+          });
       });
     });
   });
