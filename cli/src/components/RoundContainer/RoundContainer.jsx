@@ -14,7 +14,7 @@ const RoundContainer = styled.div`
   padding-top: 1.2rem;
 
   @media ${SCREEN.tablet} {
-    width: 85%;
+    width: 100%;
     max-width: 916px;
     height: ${({ main }) => (main ? '' : '210px')};
     flex-direction: row;

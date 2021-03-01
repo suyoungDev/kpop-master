@@ -64,8 +64,8 @@ const PreviousRecord = ({ userRankList, userName, userId }) => {
       <Title>
         {!userId ? (
           <Title>
-            <BsXCircle className='icon' /> 로그인 하지 않으면 기록이 저장되지
-            않습니다.
+            <BsXCircle className='icon' />
+            미접속 시 기록이 저장되지않습니다.
           </Title>
         ) : (
           <Title>

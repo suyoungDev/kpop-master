@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { SIZES } from '../../../../constants/theme';
+import { COLORS, FONT, SIZES } from '../../../../constants/theme';
 
 import levelImage from '../../../../constants/image/outroImage/level';
 
@@ -11,6 +11,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
+
+  span {
+    width: 80%;
+    color: ${COLORS.primaryThree};
+    font-family: ${FONT.korean};
+    text-align: center;
+  }
 `;
 
 const Descript = styled.div`
@@ -21,7 +28,7 @@ const Descript = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 16px;
-  color: black;
+  color: ${COLORS.headingDarkGray};
   line-height: 23px;
   text-align: center;
   font-family: 'nanum gothic';
@@ -90,23 +97,26 @@ const Description = ({ averageResponseTime }) => {
         alt='해당 레벨을 설명하는 그림'
         width='300'
       />
-      <span>{myLimit} 난이도로</span>
 
       {trackListToPlay.theme.theme === 'year' && (
         <span>
-          {trackListToPlay.theme.value}년대 음악이라면 잘 알고있다고 게임을
-          즐겼어요.
+          {myLimit}난이도로 {trackListToPlay.theme.value}년대 음악이라면 잘
+          알고있다고 게임을 즐겼어요.
         </span>
       )}
 
       {trackListToPlay.theme.theme === 'artist' && (
         <span>
-          {trackListToPlay.theme.value}의 음악이라면 내가 다 알고 있다!
+          {myLimit}난이도로 {trackListToPlay.theme.value}의 음악이라면 내가 다
+          알고 있다!
         </span>
       )}
 
       {trackListToPlay.theme.theme === 'weekly' && (
-        <span> 트렌드에 승부를 걸겠다! 이번주 노래로 게임을 즐겼어요.</span>
+        <span>
+          {myLimit}난이도로 트렌드에 승부를 걸겠다! 이번주 노래로 게임을
+          즐겼어요.
+        </span>
       )}
       <Descript>{levelDescription[myLevel]}</Descript>
     </Wrapper>

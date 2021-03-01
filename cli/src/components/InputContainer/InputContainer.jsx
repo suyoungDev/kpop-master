@@ -13,7 +13,8 @@ const InputContainer = styled.div`
   input {
     font-size: 1rem;
     padding: 1.3rem;
-    width: 360px;
+    width: 90%;
+    min-width: 340px;
     height: 1.5rem;
     border: none;
     border-radius: ${SIZES.radiusBig};

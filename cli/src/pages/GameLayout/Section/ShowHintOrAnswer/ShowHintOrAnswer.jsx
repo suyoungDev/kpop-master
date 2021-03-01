@@ -9,7 +9,7 @@ import Snippet from '../../../../components/Snippet/Snippet';
 import { COLORS, FONT, SCREEN, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
-  width: 360px;
+  width: 90%;
   height: 100%;
 
   display: flex;
@@ -46,7 +46,7 @@ const Title = styled.div`
   width: 100%;
   height: 36px;
   align-items: flex-start;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.1rem;
 
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutMediumWidth};
@@ -55,9 +55,8 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  width: ${SIZES.gameLayoutMediumWidth};
   height: 100%;
-
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,6 +72,7 @@ const Content = styled.div`
   color: ${COLORS.headingDarkGray};
 
   @media ${SCREEN.tablet} {
+    width: ${SIZES.gameLayoutMediumWidth};
     font-size: 1.7rem;
   }
 `;

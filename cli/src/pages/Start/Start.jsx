@@ -19,8 +19,6 @@ const Start = () => {
     };
   }, []);
 
-  console.log(trackListToPlay);
-
   const alertUser = (e) => {
     e.preventDefault();
     e.returnValue = '';

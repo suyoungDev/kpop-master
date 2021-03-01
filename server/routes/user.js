@@ -43,7 +43,6 @@ router.get('/auth', auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAuth: true,
-    email: req.user.email,
     displayName: req.user.displayName,
   });
 });
