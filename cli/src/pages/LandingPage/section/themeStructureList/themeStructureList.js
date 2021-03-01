@@ -7,7 +7,7 @@ export const levelList = [
 export const typeList = [
   { name: '가수', value: 'artist', key: 'type-art' },
   { name: '년도별', value: 'year', key: 'type-year' },
-  { name: '이번주', value: 'this-week', key: 'type-week' },
+  { name: '이번주', value: 'weekly', key: 'type-week' },
 ];
 
 export const yearList = [

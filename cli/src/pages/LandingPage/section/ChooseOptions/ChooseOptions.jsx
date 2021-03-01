@@ -24,7 +24,6 @@ import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
 import { FONT } from '../../../../constants/theme';
 
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
-
 import useInput from '../../../../hook/useInput';
 
 const ChooseOptions = () => {
@@ -40,33 +39,29 @@ const ChooseOptions = () => {
     type: '',
   });
 
-  const saveTrackList = (trackList, theme) => {
-    setTrackListToPlay({ trackList, theme });
-  };
-
-  const getList = async (variable, theme) => {
-    setIsLoading(true);
-
+  const getList = async (variable) => {
     let endPoint;
-    if (theme === 'artist') endPoint = 'getByArtist';
-    if (theme === 'year') endPoint = 'getByYear';
-    if (theme === 'weekly') endPoint = 'getByWeek';
+    if (variable.type === 'artist') endPoint = 'getByArtist';
+    if (variable.type === 'year') endPoint = 'getByYear';
+    if (variable.type === 'weekly') endPoint = 'getByWeek';
 
     const response = await axios.post(`/api/chart/${endPoint}`, variable);
     const trackList = response.data.result;
 
-    if (theme === 'artist') {
+    setIsReady(true);
+
+    if (variable.type === 'artist') {
       if (!trackList.length) {
-        alert('찾는 가수가 없습니다. 다시 입력해주세요.');
+        alert(`찾는 가수 ${inputArtist}가 없습니다. 다시 입력해주세요.`);
+        setIsReady(false);
       }
     }
 
-    setIsLoading(false);
-    setIsReady(true);
+    setTrackListToPlay({ trackList, variable });
 
-    const themeToGo = { ...variable, theme: theme };
-
-    saveTrackList(trackList, themeToGo);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 700);
   };
 
   const getByArtist = (event) => {
@@ -74,30 +69,28 @@ const ChooseOptions = () => {
     const variable = {
       value: inputArtist,
       limit: variablesToPlay.level,
+      type: 'artist',
     };
-    getList(variable, 'artist');
-  };
 
-  const getByYear = (year) => {
-    const variable = {
-      value: year,
-      limit: variablesToPlay.level,
-    };
-    getList(variable, 'year');
+    getList(variable);
   };
 
   const getByThisWeek = () => {
     const variable = {
       limit: variablesToPlay.level,
+      type: 'weekly',
     };
-    getList(variable, 'weekly');
+    getList(variable);
   };
 
-  const getLevel = (e) => {
+  const getYear = (e) => {
     setIsReady(false);
-    setVariablesToPlay({
-      level: e.target.value,
-    });
+
+    const variable = {
+      value: e.target.value,
+      ...variablesToPlay,
+    };
+    getList(variable);
   };
 
   const getType = (e) => {
@@ -107,12 +100,14 @@ const ChooseOptions = () => {
     });
 
     setIsReady(false);
-    if (e.target.value === 'this-week') getByThisWeek();
+    if (e.target.value === 'weekly') getByThisWeek();
   };
 
-  const getYear = (e) => {
+  const getLevel = (e) => {
     setIsReady(false);
-    getByYear(e.target.value);
+    setVariablesToPlay({
+      level: e.target.value,
+    });
   };
 
   const tipsForLevel = (
@@ -211,7 +206,7 @@ const ChooseOptions = () => {
       )}
 
       <div>
-        {!isReady ? null : isReady && isLoading ? (
+        {!isReady ? null : isLoading ? (
           <Wrapper center>
             <Spinner />
           </Wrapper>

@@ -7,7 +7,7 @@ const regex = /[(]/g;
 router.post('/getByArtist', async (req, res) => {
   var opts = {
     limit: req.body.limit,
-    type: 'artist',
+    type: req.body.type,
     term: req.body.value,
   };
 
@@ -39,7 +39,7 @@ router.post('/getByYear', async (req, res) => {
   for (let i = year; i <= finallYear; i++) {
     var opts = {
       limit: req.body.limit,
-      type: 'year',
+      type: req.body.type,
       genre: 'KPOP',
       year: i,
     };
@@ -70,7 +70,7 @@ router.post('/getByYear', async (req, res) => {
 router.post('/getByWeek', async (req, res) => {
   var opts = {
     limit: req.body.limit,
-    type: 'weekly',
+    type: req.body.type,
   };
 
   var result = await melon
