@@ -26,7 +26,7 @@ router.post('/getByArtist', async (req, res) => {
   const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
   const filtered = shuffled.map((song) => ({
     trackName: song.trackName.split(regex)[0],
-    artistName: song.artistName,
+    artistName: song.artistName.split(regex)[0],
   }));
   res.status(200).json({ success: true, result: filtered });
 });

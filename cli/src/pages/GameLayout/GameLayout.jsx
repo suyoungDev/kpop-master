@@ -46,7 +46,9 @@ const GameLayout = ({ trackList }) => {
     setShowHints(false);
 
     const getUrl = async () => {
-      const variable = { trackName: trackList[currentRound].trackName };
+      const variable = {
+        trackName: `${trackList[currentRound].trackName} ${trackList[currentRound].artistName}`,
+      };
       const response = await axios.post('/api/youtube/getId', variable);
       const videoId = response.data.items[0].id.videoId;
       setUrl(videoId);
@@ -85,15 +87,27 @@ const GameLayout = ({ trackList }) => {
     return diff;
   };
 
-  const isCorrect = (answer) => {
+  const isCorrect = (givenAnswer) => {
     const regex = /[^\w가-힣]/g;
+    const dotSpliter = /[.]/g;
 
-    let givenAnswer = answer.toLowerCase().replace(regex, '');
-    let correct = trackList[currentRound].trackName
-      .toLowerCase()
-      .replace(regex, '');
+    const modifiedGivenAnswer = givenAnswer.toLowerCase().replace(regex, '');
 
-    if (givenAnswer === correct) {
+    const correctTrackName = trackList[currentRound].trackName;
+    let modifiedCorrectTrackName;
+
+    if (correctTrackName.match(dotSpliter)) {
+      modifiedCorrectTrackName = correctTrackName
+        .toLowerCase()
+        .split(dotSpliter)[0]
+        .replace(regex, '');
+    } else {
+      modifiedCorrectTrackName = correctTrackName
+        .toLowerCase()
+        .replace(regex, '');
+    }
+
+    if (modifiedGivenAnswer === modifiedCorrectTrackName) {
       playCorrect();
       goNextRound('correct');
     } else {

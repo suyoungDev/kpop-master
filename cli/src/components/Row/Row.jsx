@@ -40,6 +40,10 @@ const mainCardStyles = css`
   flex-direction: column;
   align-items: center;
 
+  @media ${SCREEN.tablet} {
+    margin-bottom: 2rem;
+  }
+
   @media ${SCREEN.laptop} {
     flex-direction: column;
     justify-content: space-around;
