@@ -9,7 +9,7 @@ import Snippet from '../../../../components/Snippet/Snippet';
 import { COLORS, FONT, SCREEN, SIZES } from '../../../../constants/theme';
 
 const Wrapper = styled.div`
-  width: 360px;
+  width: 90%;
   height: 100%;
 
   display: flex;
@@ -46,7 +46,7 @@ const Title = styled.div`
   width: 100%;
   height: 36px;
   align-items: flex-start;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.1rem;
 
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutMediumWidth};
@@ -55,23 +55,38 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  display: flex;
-  width: ${SIZES.gameLayoutMediumWidth};
   height: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
   font-family: ${FONT.english};
   font-size: 1.6rem;
   font-weight: 800;
   text-align: center;
   letter-spacing: 2px;
   flex-wrap: nowrap;
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
 
   @media ${SCREEN.tablet} {
+    width: ${SIZES.gameLayoutMediumWidth};
     font-size: 1.7rem;
+  }
+`;
+
+const ArtistName = styled.span`
+  font-size: 12px;
+  color: ${COLORS.contentGrayLight};
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 200;
+  letter-spacing: 0;
+
+  @media ${SCREEN.tablet} {
+    margin-top: 1rem;
   }
 `;
 
@@ -89,15 +104,21 @@ const HintContainer = ({ children, hint, showHints }) => {
   );
 };
 
-const ShowHintOrAnswer = ({ trackName, showHints, timeOver }) => {
+const ShowHintOrAnswer = ({ trackName, artist, showHints, timeOver }) => {
   return (
     <Wrapper>
       {showHints && !timeOver && (
         <HintContainer hint showHints>
           <Hint trackName={trackName} />
+          <ArtistName>{artist}</ArtistName>
         </HintContainer>
       )}
-      {timeOver && <HintContainer>{trackName}</HintContainer>}
+      {timeOver && (
+        <HintContainer>
+          {trackName}
+          <ArtistName>{artist}</ArtistName>
+        </HintContainer>
+      )}
     </Wrapper>
   );
 };

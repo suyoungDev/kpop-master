@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useSelector } from 'react-redux';
 
+import { AuthContext } from '../../../../context/AuthContext';
 import Accordion from '../Accordion/Accordion';
 import RankersTable from '../RankersTable/RankersTable';
 import RankersTableTitle from '../RankersTableTitle/RankersTableTitle';
 
 const RankersRecord = ({ userRankList, myRecord }) => {
-  const [existingUserName, setexistingUserName] = useState();
+  const [currentUserName, setCurrentUserName] = useState('내 기록');
+  const user = useSelector((state) => state.user);
+
+  const [isLoggedIn] = useContext(AuthContext);
 
   useEffect(() => {
-    const userName = localStorage.getItem('_userName');
-    setexistingUserName(userName);
+    isLoggedIn && setCurrentUserName(user.userData.displayName);
+    // eslint-disable-next-line
   }, []);
 
   const title = (
@@ -18,9 +23,9 @@ const RankersRecord = ({ userRankList, myRecord }) => {
 
   const content = (
     <RankersTable
-      userRecords={userRankList}
+      userRankList={userRankList}
       myRecord={myRecord}
-      userName={existingUserName}
+      userName={currentUserName}
       quantityToShow={3}
     />
   );

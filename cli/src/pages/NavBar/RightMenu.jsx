@@ -1,69 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
-import { COLORS, FONT, SIZES } from '../../constants/theme';
-import { GiRank3, GiBalloonDog, GiBarracksTent } from 'react-icons/gi';
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
+import { SIZES } from '../../constants/theme';
+import StyledLink from '../../components/StyledLink/StyledLink';
 
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-
-  display: flex;
-  align-items: center;
-  margin: 0 28px 0 0;
-  font-family: ${FONT.korean};
-  font-weight: 500;
-  color: ${COLORS.textMid};
-  font-size: 1.1rem;
-  position: relative;
-
-  .icon {
-    margin-right: 10px;
-  }
-
-  ::before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    border-radius: 5px;
-    bottom: -15px;
-    background: linear-gradient(
-      to right,
-      ${COLORS.primaryLight} 0%,
-      ${COLORS.primaryMiddle} 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  :hover {
-    color: black;
-    transition: color 0.2s ease-in-out;
-
-    ::before {
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: 1023px) {
-    color: ${COLORS.textBlack};
-    font-size: 1.3rem;
-    margin: 1rem 0;
-
-    ::before {
-      bottom: -10px;
-    }
-  }
-`;
+import { AuthContext } from '../../context/AuthContext';
 
 const LinkContainer = styled.div`
   display: flex;
@@ -91,23 +34,30 @@ const LinkContainer = styled.div`
   }
 `;
 
-const RightMenu = ({ open }) => {
+const RightMenu = ({ open, history }) => {
+  const [isLoggedIn, getIsLoggedIn] = useContext(AuthContext);
+
+  const logOut = async () => {
+    await axios.get('/api/user/logout');
+    getIsLoggedIn();
+    history.push('/');
+  };
+
   return (
     <LinkContainer open={open}>
-      <StyledLink to='/'>
-        <GiBarracksTent className='icon' />
-        첫화면으로
-      </StyledLink>
-      <StyledLink to='/rank'>
-        <GiRank3 className='icon' />
-        순위
-      </StyledLink>
-      <StyledLink to='/about'>
-        <GiBalloonDog className='icon' />
-        About
-      </StyledLink>
+      <StyledLink to='/'>home</StyledLink>
+      <StyledLink to='/rank'>명예의 전당</StyledLink>
+      <StyledLink to='/about'>About</StyledLink>
+
+      {isLoggedIn ? (
+        <StyledLink as='div' onClick={logOut}>
+          로그아웃
+        </StyledLink>
+      ) : (
+        <StyledLink to='/register'>회원가입 / 로그인</StyledLink>
+      )}
     </LinkContainer>
   );
 };
 
-export default RightMenu;
+export default withRouter(RightMenu);

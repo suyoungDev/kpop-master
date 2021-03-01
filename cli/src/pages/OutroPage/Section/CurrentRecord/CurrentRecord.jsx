@@ -6,6 +6,7 @@ import { FiCheckCircle } from 'react-icons/fi';
 import { FiX } from 'react-icons/fi';
 
 import Accordion from '../Accordion/Accordion';
+import { COLORS } from '../../../../constants/theme';
 
 const TableContainer = styled.table`
   width: 100%;
@@ -14,18 +15,12 @@ const TableContainer = styled.table`
   margin-top: -0.2rem;
   border-radius: 10px;
   text-align: center;
-`;
-
-const Tablehead = styled.th`
-  color: black;
-  padding: 10px;
-  height: 1rem;
-  font-weight: bold;
-  font-size: 16px;
+  color: ${COLORS.headingDarkGray};
 `;
 
 const TableContext = styled.td`
-  color: ${({ isWorng }) => (isWorng === 'correct' ? 'black' : 'red')};
+  color: ${({ isWorng }) =>
+    isWorng === 'correct' ? `${COLORS.headingDarkGray}` : 'red'};
   font-weight: 200;
   overflow: hidden;
   padding: 0.3rem 1rem;
@@ -54,6 +49,12 @@ const TitleList = styled.li`
   flex-direction: row;
   align-items: center;
   font-weight: 200;
+  color: ${COLORS.headingDarkGray};
+
+  .icon {
+    color: ${COLORS.contentGrayLight};
+    margin-right: 7px;
+  }
 `;
 
 const CurrentRecord = ({ gameResult, averageResponseTime }) => {
@@ -74,15 +75,15 @@ const CurrentRecord = ({ gameResult, averageResponseTime }) => {
     <TitleContainer>
       <ul id='list-container'>
         <TitleList>
-          <FiCheckCircle id='icon' />
+          <FiCheckCircle className='icon' />
           {quantityOfCorrect}개
         </TitleList>
         <TitleList>
-          <FiX id='icon' />
+          <FiX className='icon' />
           {quantityOfWrong}개
         </TitleList>
         <TitleList>
-          <RiTimer2Line id='icon' />
+          <RiTimer2Line className='icon' />
           평균 {averageResponseTime}초
         </TitleList>
       </ul>

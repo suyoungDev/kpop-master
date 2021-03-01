@@ -5,9 +5,10 @@ import Snippet from '../Snippet/Snippet';
 
 const Container = styled.div`
   width: 90%;
+  max-width: 450px;
   border-radius: ${SIZES.radiusSmall};
   padding: 1.2rem;
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
 
   display: flex;
   flex-direction: column;
@@ -17,50 +18,32 @@ const Container = styled.div`
 
   font-family: ${FONT.korean};
   font-weight: 200;
-  color: ${COLORS.textDark};
 
   background: white;
-  border: 1px solid ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
   transition: 0.3s ease;
-
-  &:nth-child(1) {
-    margin: 0 0 1rem 0;
-
-    @media ${SCREEN.tablet} {
-      margin: 0 1rem 0 0;
-    }
-  }
 
   ul {
     margin: 0.5rem 0;
     font-size: 14px;
-    line-height: 1.4rem;
+    line-height: 1.7rem;
     list-style: none;
-
-    #tip {
-      color: ${COLORS.grayDeepDark};
-      padding-left: 0.4rem;
-
-      span {
-        color: ${COLORS.textDark};
-        background: ${COLORS.primaryShaodw};
-        padding: 2px 4px;
-      }
-    }
+    color: ${COLORS.headingDarkGray};
   }
 
   :hover {
-    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
+    box-shadow: 0 8px 16px 0 ${COLORS.shadowDark};
   }
 
-  @media ${SCREEN.tablet} {
-    width: 300px;
-    height: 330px;
+  :first-child {
+    margin-bottom: 1rem;
   }
 
   @media ${SCREEN.laptop} {
-    width: 450px;
-    height: 280px;
+    width: 400px;
+    :first-child {
+      margin-right: 1.5rem;
+    }
   }
 `;
 
@@ -70,7 +53,7 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: ${COLORS.grayDeepDark};
+  color: ${COLORS.contentGrayLight};
   margin-bottom: 0.6rem;
   font-size: 14px;
 `;
@@ -78,7 +61,7 @@ const Header = styled.div`
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  color: ${COLORS.textDark};
+  color: ${COLORS.headingDarkGray};
   font-size: 15px;
   padding-left: 0.7rem;
 `;

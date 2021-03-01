@@ -37,7 +37,7 @@ const StyledBurger = styled.div`
   @media ${SCREEN.tablet} {
     div {
       background-color: ${({ open }) =>
-        open ? `${COLORS.textDark}` : `${COLORS.primaryDark}`};
+        open ? `${COLORS.contentGrayLight}` : `${COLORS.primaryTwo}`};
     }
   }
 
@@ -61,12 +61,7 @@ const Burger = () => {
         <div />
         <div />
       </StyledBurger>
-      <RightMenu
-        open={open}
-        onFocus={() => {
-          console.log('hi');
-        }}
-      />
+      <RightMenu open={open} />
     </>
   );
 };

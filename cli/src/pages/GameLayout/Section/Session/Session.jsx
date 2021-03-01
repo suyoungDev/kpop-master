@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { COLORS, SCREEN, SIZES } from '../../../../constants/theme';
 
-import { GameResultContext } from '../../../../context/GameResultContext/GameResultContext';
+import { GameResultContext } from '../../../../context/GameResultContext';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -14,44 +14,44 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: ${COLORS.primaryMiddle};
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 
   @media ${SCREEN.tablet} {
     max-width: ${SIZES.gameLayoutWidth};
-    background-color: ${COLORS.grayMiddle};
+    background-color: ${COLORS.shadowLight};
     height: 0.7rem;
     margin-bottom: 0;
   }
 `;
 
 const SessionBox = styled.div`
-  width: 10%;
+  width: 20%;
   height: 100%;
-  border-right: 2px solid rgba(255, 255, 255, 0.45);
+  border-right: 4px solid rgba(255, 255, 255, 0.5);
 
   &.correct {
-    background-color: ${COLORS.secondaryDark};
+    background-color: ${COLORS.secondary};
   }
   &.wrong {
-    background-color: ${COLORS.textBlack};
+    background-color: ${COLORS.headingDarkGray};
   }
 
   @media ${SCREEN.tablet} {
     &.wrong {
-      background-color: ${COLORS.grayDeepDark};
+      background-color: ${COLORS.contentGrayLight};
     }
   }
 `;
 
 const Session = () => {
-  // eslint-disable-next-line
-  const [gameResult, setGameResult] = useContext(GameResultContext);
+  const [gameResult] = useContext(GameResultContext);
+
   return (
     <Wrapper>
-      {gameResult.map((item) => (
+      {gameResult.map((round) => (
         <SessionBox
-          className={`${item.result === 'correct' ? 'correct' : 'wrong'}`}
-          key={item.id}
+          className={`${round.result === 'correct' ? 'correct' : 'wrong'}`}
+          key={round.id}
         />
       ))}
     </Wrapper>

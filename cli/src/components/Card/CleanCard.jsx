@@ -4,13 +4,13 @@ import { COLORS, FONT, SIZES, SCREEN } from '../../constants/theme';
 
 const hoverStyle = css`
   :hover {
-    box-shadow: 0 8px 16px 0 ${COLORS.grayDark};
+    box-shadow: 0 8px 16px 0 ${COLORS.shadowDark};
   }
 `;
 
 const borderAndShadow = css`
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
 `;
 
 const inGameCardStyle = css`
@@ -30,7 +30,7 @@ const inGameCardStyle = css`
 
     font-family: ${FONT.korean};
     font-weight: 200;
-    color: ${COLORS.textDark};
+    color: ${COLORS.headingDarkGray};
 
     #four {
       grid-area: answer;
@@ -66,11 +66,15 @@ const savingCardStyle = css`
 const rankCardStyle = css`
   width: 90%;
   max-width: ${SIZES.gameLayoutWidth};
-  margin-top: 2rem;
+  margin: 1.5rem 0;
   border-radius: ${SIZES.radiusSmall};
-  padding: 1rem;
+  padding: 0.5rem;
   ${borderAndShadow};
   ${hoverStyle}
+
+  @media ${SCREEN.tablet} {
+    padding: 1rem;
+  }
 `;
 
 const mailCardStyle = css`
@@ -85,10 +89,33 @@ const mailCardStyle = css`
   border-radius: ${SIZES.radiusBig};
 
   ${borderAndShadow};
-  ${hoverStyle}
+  ${hoverStyle};
 
   @media ${SCREEN.tablet} {
     width: ${SIZES.gameLayoutWidth};
+  }
+`;
+
+const optionsStyle = css`
+  width: 90%;
+  max-width: 450px;
+  height: auto;
+  border-radius: ${SIZES.radiusSmall};
+
+  padding: 1.5rem;
+  margin: 2rem 0 4rem 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+
+  transition: all 0.3s ease;
+  ${borderAndShadow};
+  ${hoverStyle}
+
+  @media ${SCREEN.laptop} {
+    margin-top: 0;
   }
 `;
 
@@ -102,13 +129,16 @@ const getCardStyles = (props) => {
   if (props.mail) {
     return mailCardStyle;
   }
+  if (props.options) {
+    return optionsStyle;
+  }
   return props.savingRecord && savingCardStyle;
 };
 
 const CleanCard = styled.div`
   width: 100%;
   height: 100%;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 
   ${getCardStyles}
 `;

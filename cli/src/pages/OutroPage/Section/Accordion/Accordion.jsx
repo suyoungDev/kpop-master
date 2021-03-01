@@ -16,8 +16,8 @@ const Wrapper = styled.div`
   font-size: 16px;
   color: #2c2c2c;
 
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
 `;
 
 const Title = styled.button`

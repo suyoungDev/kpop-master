@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { COLORS, SIZES, FONT } from '../../../../constants/theme';
 import { BiRocket } from 'react-icons/bi';
+import { AuthContext } from '../../../../context/AuthContext';
+import { BsXCircle } from 'react-icons/bs';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 2.5rem;
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  border: 1px solid ${COLORS.grayMiddle};
-  box-shadow: 0 4px 8px 0 ${COLORS.grayMiddle};
+  border: 1px solid ${COLORS.shadowLight};
+  box-shadow: 0 4px 8px 0 ${COLORS.shadowLight};
   border-radius: ${SIZES.radiusSmall};
 `;
 
@@ -25,90 +26,54 @@ const Title = styled.span`
   font-family: ${FONT.korean};
   display: flex;
   align-items: center;
+  color: ${COLORS.contentGrayLight};
+
+  .icon {
+    margin-right: 7px;
+  }
 `;
 
 const Content = styled.span`
   font-size: 16px;
-  color: black;
-  font-family: ${FONT.korean};
+  color: ${COLORS.primaryThree};
+  font-family: ${FONT.english};
+  font-weight: bold;
 `;
 
 const Bold = styled.span`
   font-weight: bold;
   margin-left: 0.3rem;
+  color: black;
 `;
 
-// 이전 기록이 있을 경우, 자동으로 DB에 저장하기
-// 이전 기록과 비교해서 지금이 더 나으면 local에 저장하기
-const PreviousRecord = ({ averageResponseTime, gameResult }) => {
-  const [existingUserName, setExistingUserName] = useState('');
-  const [existingUserRecord, setExistingUserRecord] = useState('');
+const PreviousRecord = ({ userRankList, userName, userId }) => {
+  const [isLoggedIn] = useContext(AuthContext);
+  const [myBestRecord, setMyBestRecord] = useState(null);
 
   useEffect(() => {
-    const userName = localStorage.getItem('_userName');
-
-    if (userName) {
-      if (averageResponseTime > 0) {
-        uploadRecordToDB(userName);
-        setExistingUserName(userName);
-
-        const previousRecord = localStorage.getItem('_personalRecord');
-        setExistingUserRecord(previousRecord);
-
-        const comparedResult = compareRecord(
-          previousRecord,
-          averageResponseTime
-        );
-        if (comparedResult === 'better now') {
-          uploadRecordToLocal(averageResponseTime);
-        }
-      }
+    if (isLoggedIn) {
+      const filtered = userRankList.filter((record) => record._id === userId)[0]
+        .record;
+      setMyBestRecord(filtered);
     }
     // eslint-disable-next-line
   }, []);
 
-  const uploadRecordToDB = (user) => {
-    const correctAnswers = gameResult
-      .filter((game) => game.result === 'correct')
-      .map((song) => song.trackName);
-
-    const wrongAnswers = gameResult
-      .filter((game) => game.result === 'wrong')
-      .map((song) => song.trackName);
-
-    const userData = {
-      userName: user,
-      record: averageResponseTime,
-      correctTrackName: correctAnswers,
-      wrongTrackName: wrongAnswers,
-      gameResult: gameResult,
-    };
-
-    axios.post('/api/user/upload', userData);
-  };
-
-  const uploadRecordToLocal = (currentRecord) => {
-    localStorage.setItem('_personalRecord', currentRecord);
-  };
-
-  const compareRecord = (previousRecord, currentRecord) => {
-    if (previousRecord > currentRecord) {
-      return 'better now';
-    }
-    return 'not better';
-  };
-
-  if (!existingUserName) {
-    return <div></div>;
-  }
-
   return (
     <Wrapper>
       <Title>
-        <BiRocket /> <Bold>{existingUserName}</Bold>
-        님의 이전 최고 기록
+        {!userId ? (
+          <Title>
+            <BsXCircle className='icon' />
+            미접속 시 기록이 저장되지않습니다.
+          </Title>
+        ) : (
+          <Title>
+            <BiRocket className='icon' /> <Bold>{userName}</Bold> 님의 최고 기록
+          </Title>
+        )}
       </Title>
-      <Content>{existingUserRecord}초</Content>
+      <Content>{!userId ? null : `${myBestRecord} 초`}</Content>
     </Wrapper>
   );
 };

@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { SIZES } from '../../../../constants/theme';
+import { COLORS, FONT, SIZES } from '../../../../constants/theme';
 
 import levelImage from '../../../../constants/image/outroImage/level';
+
+import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
+
+  span {
+    width: 80%;
+    color: ${COLORS.primaryThree};
+    font-family: ${FONT.korean};
+    text-align: center;
+  }
 `;
 
 const Descript = styled.div`
@@ -19,7 +28,7 @@ const Descript = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 16px;
-  color: black;
+  color: ${COLORS.headingDarkGray};
   line-height: 23px;
   text-align: center;
   font-family: 'nanum gothic';
@@ -27,8 +36,10 @@ const Descript = styled.div`
 
 const Description = ({ averageResponseTime }) => {
   const [myLevel, setMyLevel] = useState('');
+  const [myLimit, setMyLimit] = useState('');
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
 
-  useEffect(() => {
+  const getMyLevel = () => {
     if (averageResponseTime < 5) {
       setMyLevel('five');
     } else if (averageResponseTime < 8) {
@@ -42,23 +53,41 @@ const Description = ({ averageResponseTime }) => {
     } else {
       setMyLevel('zero');
     }
+  };
+  const getMyLimit = () => {
+    switch (trackListToPlay.theme.limit) {
+      case '10':
+        return setMyLimit('쉬운');
 
+      case '50':
+        return setMyLimit('보통의');
+
+      case '100':
+        return setMyLimit('어려운');
+
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    getMyLevel();
+    getMyLimit();
     // eslint-disable-next-line
   }, []);
 
   const levelDescription = {
     zero:
-      '블랙핑크의 노래를 정말 아무것도 모르시군요! 이번 기회에 블랙핑크 노래를 들어보는 건 어때요?',
+      '가요를 정말 아무것도 모르시군요! 이번 기회에 한번 들어보는 건 어때요?',
     one:
-      '블랙핑크의 유명한 타이틀곡을 조금은 알고는 있지만, 힌트가 주어져야 간신히 눈치채는 머글이에요!',
+      '유명한 노래는 조금은 알고는 있지만, 힌트가 주어져야 간신히 눈치채는 머글이에요!',
     two:
-      '블랙핑크의 앨범을 찾아서 들어 볼 정도로 관심은 있지만, 대표곡이 아닌 수록곡은 잘 모르는 입덕 초기 머글이에요!',
+      '가요에 관심이 있긴 하지만, 잘 알고 있는 편은 아니에요. 듣는 곡만 듣는 편인거 같군요',
     three:
-      '블랙핑크의 노래에 푹 빠져있어요. 대표곡도 수록곡도 대부분 알고 있고, 더 알고 싶어 하는 팬심도 가지고 있죠!',
-    four:
-      '진정한 블링크로 임명합니다! 당신은 모든 노래를 알고 있어요. 부족한 건 타이핑 속도뿐!',
+      '가요에 푹 빠져있어요. 유명한 곡은 수십번 들어봤을 정도로 관심도 많고, 더 알고 싶어 하는 팬심도 가지고 있죠!',
+    four: '당신은 모든 노래를 알고 있어요. 부족한 건 타이핑 속도뿐!',
     five:
-      '당신은 모든 노래를 거의 첫음만 듣고 알아챌 정도로 알고 있군요! 혹시 블랙핑크 본인이신가요?',
+      '당신은 모든 노래를 거의 첫음만 듣고 알아챌 정도로 알고 있군요! 혹시 업계 종사자이신가요?',
   };
 
   return (
@@ -68,6 +97,27 @@ const Description = ({ averageResponseTime }) => {
         alt='해당 레벨을 설명하는 그림'
         width='300'
       />
+
+      {trackListToPlay.theme.theme === 'year' && (
+        <span>
+          {myLimit}난이도로 {trackListToPlay.theme.value}년대 음악이라면 잘
+          알고있다고 게임을 즐겼어요.
+        </span>
+      )}
+
+      {trackListToPlay.theme.theme === 'artist' && (
+        <span>
+          {myLimit}난이도로 {trackListToPlay.theme.value}의 음악이라면 내가 다
+          알고 있다!
+        </span>
+      )}
+
+      {trackListToPlay.theme.theme === 'weekly' && (
+        <span>
+          {myLimit}난이도로 트렌드에 승부를 걸겠다! 이번주 노래로 게임을
+          즐겼어요.
+        </span>
+      )}
       <Descript>{levelDescription[myLevel]}</Descript>
     </Wrapper>
   );

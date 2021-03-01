@@ -1,33 +1,56 @@
 const express = require('express');
 const router = express.Router();
+require('dotenv').config();
 
 const { User } = require('../model/User');
+const { auth } = require('../middleware/auth');
 
-router.post('/upload', (req, res) => {
-  const userData = new User(req.body);
-  userData.save((err, doc) => {
-    if (err) return res.json({ DBsuccess: false, err });
-    return res.status(200).json({ DBsuccess: true });
+router.post('/register', (req, res) => {
+  const newUser = new User(req.body);
+  newUser.save((error, doc) => {
+    if (error) return res.json({ success: false, error });
+    return res.status(200).json({ success: true });
   });
 });
 
-router.get('/getRecords', (req, res) => {
-  let userRecordList = [];
+router.post('/login', async (req, res) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (!user)
+      return res.json({
+        success: false,
+        message: '해당하는 이메일이 없습니다.',
+      });
 
-  User.find().exec((err, userData) => {
-    if (err) return res.status(400).send(err);
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (!isMatch)
+        return res.json({
+          success: false,
+          message: '비밀번호가 틀립니다. 다시 확인해주세요.',
+        });
 
-    userRecordList = userData
-      .sort((a, b) => {
-        return a.record - b.record;
-      })
-      .map(({ userName: userName, record: record, _id: _id }) => ({
-        userName,
-        record,
-        _id,
-      }));
+      user.generateToken((err, user) => {
+        if (err) return res.status(400).send(err);
+        res.cookie('token', user.token).status(200).json({
+          success: true,
+          userId: user._id,
+        });
+      });
+    });
+  });
+});
 
-    return res.status(200).json({ success: true, userRecordList });
+router.get('/auth', auth, (req, res) => {
+  res.status(200).json({
+    _id: req.user._id,
+    isAuth: true,
+    displayName: req.user.displayName,
+  });
+});
+
+router.get('/logout', auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({ success: true });
   });
 });
 

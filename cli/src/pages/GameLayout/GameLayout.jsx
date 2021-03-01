@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import axios from 'axios';
 import useSound from 'use-sound';
 import checkImg from '../../constants/image/checkImg.svg';
 
@@ -15,15 +16,17 @@ import AnswerCard from './Section/AnswerCard/AnswerCard';
 import correctSfx from '../../constants/sounds/correct.mp3';
 import wrongSfx from '../../constants/sounds/wrong1.mp3';
 
-import { GameEndContext } from '../../context/GamEndContext/GameEndContext';
-import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
+import { GameEndContext } from '../../context/GameEndContext';
+import { GameResultContext } from '../../context/GameResultContext';
+import useInput from '../../hook/useInput';
+
 import { COLORS } from '../../constants/theme';
 
 const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, onChange, resetInput] = useInput('');
   const [givenAnswersList, setGivenAnswersList] = useState([]);
 
   const [currentRound, setCurrentRound] = useState(0);
@@ -40,15 +43,23 @@ const GameLayout = ({ trackList }) => {
   useEffect(() => {
     focusedInput.current.focus();
     setStartTime(Date.now());
-    setUrl(trackList[currentRound].url);
     setShowHints(false);
+
+    const getUrl = async () => {
+      const variable = { trackName: trackList[currentRound].trackName };
+      const response = await axios.post('/api/youtube/getId', variable);
+      const videoId = response.data.items[0].id.videoId;
+      setUrl(videoId);
+    };
+
+    getUrl();
 
     const giveHints = setTimeout(() => {
       setShowHints(true);
     }, 10000);
 
     const timer = setTimeout(() => {
-      setInputValue('');
+      resetInput();
       setTimeOver(true);
     }, 20000);
 
@@ -75,29 +86,16 @@ const GameLayout = ({ trackList }) => {
   };
 
   const isCorrect = (answer) => {
-    const regex = /[ '"-_]+/g;
-    const englishRegex = /\w/g;
+    const regex = /[^\w가-힣]/g;
 
-    let givenAnswer = answer;
-    let correct = trackList[currentRound].trackName;
-    let alterCorrect = trackList[currentRound].alterTrackName;
+    let givenAnswer = answer.toLowerCase().replace(regex, '');
+    let correct = trackList[currentRound].trackName
+      .toLowerCase()
+      .replace(regex, '');
 
-    englishRegex.test(answer)
-      ? (givenAnswer = answer.toLowerCase().replace(regex, ''))
-      : (givenAnswer = answer.replace(regex, ''));
-
-    englishRegex.test(correct)
-      ? (correct = correct.toLowerCase().replace(regex, ''))
-      : (correct = correct.replace(regex, ''));
-
-    englishRegex.test(alterCorrect)
-      ? (alterCorrect = alterCorrect.toLowerCase().replace(regex, ''))
-      : (alterCorrect = alterCorrect.replace(regex, ''));
-
-    if (givenAnswer === correct || givenAnswer === alterCorrect) {
+    if (givenAnswer === correct) {
       playCorrect();
-      let answerResult = 'correct';
-      goNextRound(answerResult);
+      goNextRound('correct');
     } else {
       playWrong();
     }
@@ -109,32 +107,33 @@ const GameLayout = ({ trackList }) => {
       roundIndex: currentRound,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
-      responseTime: answerResult === 'correct' ? timeOut() : 10000,
+      responseTime: answerResult === 'correct' ? timeOut() : 20000,
     };
 
     setGameResult([...gameResult, newResult]);
 
-    if (currentRound === 9) {
+    if (currentRound === 4) {
       setIsGameEnd(true);
-      return setUrl('');
+      setUrl('');
     }
 
     setCurrentRound(currentRound + 1);
   };
 
-  const onChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
   const answerSubmit = (event) => {
     event.preventDefault();
     setGivenAnswersList([inputValue, ...givenAnswersList]);
+
+    if (inputValue === '!ㅂ' || inputValue === '!q') {
+      goNextRound();
+    }
+
     isCorrect(inputValue);
-    setInputValue('');
+    resetInput();
   };
 
   return (
-    <Center bgcolor={`${COLORS.primaryDark}`} inGame>
+    <Center bgcolor={`${COLORS.primaryTwo}`} inGame>
       <Player url={url} />
 
       <Session id='first' />
@@ -162,6 +161,7 @@ const GameLayout = ({ trackList }) => {
             showHints={showHints}
             timeOver={timeOver}
             className='inputWrapper'
+            artist={trackList[currentRound].artistName}
           />
         </RoundContainer>
       </CleanCard>

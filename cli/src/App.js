@@ -1,30 +1,53 @@
-import './App.css';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage/LandingPage';
 import Start from './pages/Start/Start';
 import NavBar from './pages/NavBar/NavBar';
 import About from './pages/About/About';
 import RankPage from './pages/RankPage/RankPage';
+import Test from './pages/LandingPage/Test';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 
-import { GameResultProvider } from './context/GameResultContext/GameResultContext';
-import { GameEndProvider } from './context/GamEndContext/GameEndContext';
+import { GameResultProvider } from './context/GameResultContext';
+import { GameEndProvider } from './context/GameEndContext';
+import { TrackListToPlayProvider } from './context/TrackListToPlayContext';
+import { AuthProvider } from './context/AuthContext';
+import { CommenttProvider } from './context/CommentContext';
+import Auth from './hoc/auth';
+
+import './App.css';
 
 function App() {
   return (
-    <GameEndProvider>
-      <GameResultProvider>
-        <BrowserRouter>
-          <NavBar />
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/start' component={Start} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/rank' component={RankPage} />
-          </Switch>
-        </BrowserRouter>
-      </GameResultProvider>
-    </GameEndProvider>
+    <AuthProvider>
+      <CommenttProvider>
+        <GameEndProvider>
+          <GameResultProvider>
+            <TrackListToPlayProvider>
+              <BrowserRouter>
+                <NavBar />
+                <Switch>
+                  <Route exact path='/' component={Auth(LandingPage, null)} />
+                  <Route exact path='/start' component={Auth(Start, null)} />
+                  <Route exact path='/about' component={Auth(About, null)} />
+                  <Route exact path='/rank' component={Auth(RankPage, null)} />
+                  <Route exact path='/test' component={Test} />
+                  <Route
+                    exact
+                    path='/register'
+                    component={Auth(RegisterPage, false)}
+                  />
+                  <Route path='*'>
+                    <Redirect to='/' />
+                  </Route>
+                </Switch>
+              </BrowserRouter>
+            </TrackListToPlayProvider>
+          </GameResultProvider>
+        </GameEndProvider>
+      </CommenttProvider>
+    </AuthProvider>
   );
 }
 

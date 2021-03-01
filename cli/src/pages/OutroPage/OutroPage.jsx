@@ -3,14 +3,16 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti';
+import { useSelector } from 'react-redux';
 
 import { SIZES } from '../../constants/theme';
 
-import { GameResultContext } from '../../context/GameResultContext/GameResultContext';
+import { GameResultContext } from '../../context/GameResultContext';
+import { TrackListToPlayContext } from '../../context/TrackListToPlayContext';
+import { AuthContext } from '../../context/AuthContext';
 
 import ShareMyRecord from './Section/ShareMyRecord/ShareMyRecord';
 import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
-import SavingMyRecord from './Section/SavingMyRecord/SavingMyRecord';
 import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
 import Description from './Section/Description/Description';
@@ -29,9 +31,13 @@ const ContentWrapper = styled.div`
 `;
 
 const OutroPage = () => {
-  // eslint-disable-next-line
-  const [gameResult, setGameResult] = useContext(GameResultContext);
+  const [gameResult] = useContext(GameResultContext);
+  const [trackListToPlay] = useContext(TrackListToPlayContext);
+  const [isLoggedIn] = useContext(AuthContext);
+
   const { width, height } = useWindowSize();
+
+  const user = useSelector((state) => state.user);
 
   const [userRankList, setUserRankList] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -39,18 +45,47 @@ const OutroPage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    axios.get('/api/user/getRecords').then((res) => {
-      if (res.data.success) {
-        setUserRankList(res.data.userRecordList);
-        setIsLoading(false);
-      }
-    });
+    const getAllGameRecords = async () => {
+      const response = await axios.get('/api/game/getRecords');
+      const data = response.data.gameRecordList;
+      setUserRankList(data);
+      setIsLoading(false);
+    };
+
+    getAllGameRecords();
+
+    if (isLoggedIn) {
+      uploadRecordToDB();
+    }
+
+    // eslint-disable-next-line
   }, []);
+
+  const uploadRecordToDB = async () => {
+    const correctAnswers = gameResult
+      .filter((game) => game.result === 'correct')
+      .map((song) => song.trackName);
+
+    const wrongAnswers = gameResult
+      .filter((game) => game.result === 'wrong')
+      .map((song) => song.trackName);
+
+    const gameData = {
+      player: user.userData._id,
+      record: averageResponseTime,
+      correctTrackName: correctAnswers,
+      wrongTrackName: wrongAnswers,
+      gameResult: gameResult,
+      theme: trackListToPlay.theme,
+    };
+
+    await axios.post('/api/game/upload', gameData);
+  };
 
   const totalResponseTime = gameResult
     .map((item) => item.responseTime)
     .reduce((previous, currrent) => previous + currrent, 0);
-  const averageResponseTime = (totalResponseTime / 10000).toFixed(2);
+  const averageResponseTime = (totalResponseTime / 5000).toFixed(2);
 
   return (
     <>
@@ -64,22 +99,25 @@ const OutroPage = () => {
       <Center>
         <PageWrapper>
           <Description averageResponseTime={averageResponseTime} />
-          <LinkButton links='/' secondary outro>
-            play again
-          </LinkButton>
+          <LinkButton links='/'>play again</LinkButton>
           <ContentWrapper>
-            <PreviousRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
-            />
-            <SavingMyRecord
-              averageResponseTime={averageResponseTime}
-              gameResult={gameResult}
-            />
+            {!isLoggedIn ? (
+              <PreviousRecord />
+            ) : isLoggedIn && isLoading ? (
+              <Spinner />
+            ) : (
+              <PreviousRecord
+                userName={user.userData.displayName}
+                userId={user.userData._id}
+                userRankList={userRankList}
+              />
+            )}
+
             <CurrentRecord
               averageResponseTime={averageResponseTime}
               gameResult={gameResult}
             />
+
             {isLoading ? (
               <Spinner />
             ) : (
