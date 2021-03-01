@@ -57,13 +57,13 @@ const Description = ({ averageResponseTime }) => {
   const getMyLimit = () => {
     switch (trackListToPlay.theme.limit) {
       case '10':
-        return setMyLimit('쉬운');
+        return setMyLimit('히트 쳤던');
 
       case '50':
-        return setMyLimit('보통의');
+        return setMyLimit('대중성 있는');
 
       case '100':
-        return setMyLimit('어려운');
+        return setMyLimit('남들은 잘 몰라도 나라면');
 
       default:
         break;
@@ -77,14 +77,13 @@ const Description = ({ averageResponseTime }) => {
   }, []);
 
   const levelDescription = {
-    zero:
-      '가요를 정말 아무것도 모르시군요! 이번 기회에 한번 들어보는 건 어때요?',
+    zero: '정말 아무것도 모르시군요! 이번 기회에 한번 들어보는 건 어때요?',
     one:
       '유명한 노래는 조금은 알고는 있지만, 힌트가 주어져야 간신히 눈치채는 머글이에요!',
     two:
-      '가요에 관심이 있긴 하지만, 잘 알고 있는 편은 아니에요. 듣는 곡만 듣는 편인거 같군요',
+      '관심이 있긴 하지만, 잘 알고 있는 편은 아니에요. 듣는 곡만 듣는 편인거 같군요',
     three:
-      '가요에 푹 빠져있어요. 유명한 곡은 수십번 들어봤을 정도로 관심도 많고, 더 알고 싶어 하는 팬심도 가지고 있죠!',
+      '유명한 곡은 수십번 들어봤을 정도로 관심도 많고, 더 알고 싶어 하는 팬심도 가지고 있죠!',
     four: '당신은 모든 노래를 알고 있어요. 부족한 건 타이핑 속도뿐!',
     five:
       '당신은 모든 노래를 거의 첫음만 듣고 알아챌 정도로 알고 있군요! 혹시 업계 종사자이신가요?',
@@ -100,23 +99,18 @@ const Description = ({ averageResponseTime }) => {
 
       {trackListToPlay.theme.theme === 'year' && (
         <span>
-          {myLimit}난이도로 {trackListToPlay.theme.value}년대 음악이라면 잘
-          알고있다고 게임을 즐겼어요.
+          {myLimit} {trackListToPlay.theme.value}년대 음악은 잘 알고 있다!
         </span>
       )}
 
       {trackListToPlay.theme.theme === 'artist' && (
         <span>
-          {myLimit}난이도로 {trackListToPlay.theme.value}의 음악이라면 내가 다
-          알고 있다!
+          {myLimit} {trackListToPlay.theme.value}의 음악은 다 알고 있다!
         </span>
       )}
 
       {trackListToPlay.theme.theme === 'weekly' && (
-        <span>
-          {myLimit}난이도로 트렌드에 승부를 걸겠다! 이번주 노래로 게임을
-          즐겼어요.
-        </span>
+        <span>{myLimit} 이번주 노래는 잘 알고있다!</span>
       )}
       <Descript>{levelDescription[myLevel]}</Descript>
     </Wrapper>
