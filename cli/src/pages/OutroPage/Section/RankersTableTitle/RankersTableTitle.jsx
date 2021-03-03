@@ -49,7 +49,7 @@ const RankersTableTitle = ({ myRecord, userRankList }) => {
       <RiCake3Line id='icon' />
       {userRankList
         .map((user) => user.record)
-        .filter((record) => record < myRecord).length + 1}
+        .filter((record) => record <= myRecord).length + 1}
       등 <span className='total'>(총 {userRankList.length}명)</span>
       <MyTier>
         {tier} {percentage}%

@@ -35,7 +35,7 @@ const ChooseOptions = () => {
   const [isReady, setIsReady] = useState(false);
   const [inputArtist, setInputArtist] = useInput('');
   const [variablesToPlay, setVariablesToPlay] = useState({
-    level: '',
+    limit: '',
     theme: '',
   });
 
@@ -67,7 +67,7 @@ const ChooseOptions = () => {
     event.preventDefault();
     const variable = {
       value: inputArtist,
-      limit: variablesToPlay.level,
+      limit: variablesToPlay.limit,
       theme: 'artist',
     };
 
@@ -76,7 +76,7 @@ const ChooseOptions = () => {
 
   const getByThisWeek = () => {
     const variable = {
-      limit: variablesToPlay.level,
+      limit: variablesToPlay.limit,
       theme: 'weekly',
     };
     getList(variable);
