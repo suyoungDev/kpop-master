@@ -7,7 +7,7 @@ const regex = /[(]/g;
 router.post('/getByArtist', async (req, res) => {
   var opts = {
     limit: req.body.limit,
-    type: req.body.type,
+    type: req.body.theme,
     term: req.body.value,
   };
 
@@ -33,17 +33,16 @@ router.post('/getByArtist', async (req, res) => {
 
 router.post('/getByYear', async (req, res) => {
   let result = [];
-  let year = Number(req.body.value);
-  let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 9;
+  let year = parseInt(req.body.value, 10);
+  let finallYear = year === 2020 ? 2020 : parseInt(req.body.value, 10) + 9;
 
   for (let i = year; i <= finallYear; i++) {
     var opts = {
       limit: req.body.limit,
-      type: req.body.type,
+      type: req.body.theme,
       genre: 'KPOP',
       year: i,
     };
-
     const data = await melon
       .parse(opts)
       .then((res) => {
@@ -70,7 +69,7 @@ router.post('/getByYear', async (req, res) => {
 router.post('/getByWeek', async (req, res) => {
   var opts = {
     limit: req.body.limit,
-    type: req.body.type,
+    type: req.body.theme,
   };
 
   var result = await melon

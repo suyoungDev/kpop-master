@@ -36,27 +36,27 @@ const ChooseOptions = () => {
   const [inputArtist, setInputArtist] = useInput('');
   const [variablesToPlay, setVariablesToPlay] = useState({
     level: '',
-    type: '',
+    theme: '',
   });
 
   const getList = async (variable) => {
     setIsReady(true);
     let endPoint;
-    if (variable.type === 'artist') endPoint = 'getByArtist';
-    if (variable.type === 'year') endPoint = 'getByYear';
-    if (variable.type === 'weekly') endPoint = 'getByWeek';
+    if (variable.theme === 'artist') endPoint = 'getByArtist';
+    if (variable.theme === 'year') endPoint = 'getByYear';
+    if (variable.theme === 'weekly') endPoint = 'getByWeek';
 
     const response = await axios.post(`/api/chart/${endPoint}`, variable);
     const trackList = response.data.result;
 
-    if (variable.type === 'artist') {
-      if (!trackList.length) {
+    if (!trackList.length) {
+      if (variable.theme === 'artist') {
         alert(`찾는 가수 ${inputArtist}가 없습니다. 다시 입력해주세요.`);
         setIsReady(false);
       }
     }
 
-    setTrackListToPlay({ trackList, variable });
+    setTrackListToPlay({ trackList, theme: variable });
 
     setTimeout(() => {
       setIsLoading(false);
@@ -68,7 +68,7 @@ const ChooseOptions = () => {
     const variable = {
       value: inputArtist,
       limit: variablesToPlay.level,
-      type: 'artist',
+      theme: 'artist',
     };
 
     getList(variable);
@@ -77,7 +77,7 @@ const ChooseOptions = () => {
   const getByThisWeek = () => {
     const variable = {
       limit: variablesToPlay.level,
-      type: 'weekly',
+      theme: 'weekly',
     };
     getList(variable);
   };
@@ -95,7 +95,7 @@ const ChooseOptions = () => {
   const getType = (e) => {
     setVariablesToPlay({
       ...variablesToPlay,
-      type: e.target.value,
+      theme: e.target.value,
     });
 
     setIsReady(false);
@@ -105,7 +105,7 @@ const ChooseOptions = () => {
   const getLevel = (e) => {
     setIsReady(false);
     setVariablesToPlay({
-      level: e.target.value,
+      limit: e.target.value,
     });
   };
 
@@ -151,7 +151,7 @@ const ChooseOptions = () => {
         </RadioRowContainer>
       </Form>
 
-      {variablesToPlay.level && (
+      {variablesToPlay.limit && (
         <Form onClick={getType}>
           <Title>주제 고르기</Title>
           <RadioRowContainer>
@@ -170,7 +170,7 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      {variablesToPlay.type === 'artist' && (
+      {variablesToPlay.theme === 'artist' && (
         <Form onSubmit={getByArtist} row>
           <TextInput
             placeholder='아티스트 찾기'
@@ -184,7 +184,7 @@ const ChooseOptions = () => {
         </Form>
       )}
 
-      {variablesToPlay.type === 'year' && (
+      {variablesToPlay.theme === 'year' && (
         <Form onClick={getYear}>
           <RadioRowContainer year>
             {yearList.map((year) => (

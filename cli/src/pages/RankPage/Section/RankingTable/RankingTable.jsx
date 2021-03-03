@@ -47,7 +47,6 @@ const RankingTable = ({ userRecords }) => {
   const [showMyRecord, setShowMyRecord] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [nullData, setNullData] = useState(false);
-  const [usersRecords] = useState(userRecords);
   const [recordsToShow, setRecordsToShow] = useState(userRecords);
   const user = useSelector((state) => state.user);
   const [isLoggedIn] = useContext(AuthContext);
@@ -92,7 +91,7 @@ const RankingTable = ({ userRecords }) => {
       {isLoading ? (
         <Spinner />
       ) : !showMyRecord ? (
-        <RankersTable userRankList={usersRecords} quantityToShow={10} />
+        <RankersTable userRankList={userRecords} quantityToShow={10} />
       ) : nullData ? (
         <NoDataSpan>데이터가 없습니다. 게임을 시작해주세요.</NoDataSpan>
       ) : (
