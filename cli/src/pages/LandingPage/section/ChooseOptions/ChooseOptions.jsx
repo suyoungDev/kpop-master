@@ -40,6 +40,7 @@ const ChooseOptions = () => {
   });
 
   const getList = async (variable) => {
+    setIsReady(true);
     let endPoint;
     if (variable.type === 'artist') endPoint = 'getByArtist';
     if (variable.type === 'year') endPoint = 'getByYear';
@@ -47,8 +48,6 @@ const ChooseOptions = () => {
 
     const response = await axios.post(`/api/chart/${endPoint}`, variable);
     const trackList = response.data.result;
-
-    setIsReady(true);
 
     if (variable.type === 'artist') {
       if (!trackList.length) {
@@ -61,7 +60,7 @@ const ChooseOptions = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 700);
+    }, 1000);
   };
 
   const getByArtist = (event) => {
