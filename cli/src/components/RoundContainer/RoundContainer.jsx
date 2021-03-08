@@ -18,7 +18,7 @@ const RoundContainer = styled.div`
     max-width: 916px;
     height: ${({ main }) => (main ? '' : '210px')};
     flex-direction: row;
-    align-items: baseline;
+    align-items: flex-start;
     #three {
       order: 3;
     }

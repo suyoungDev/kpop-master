@@ -103,7 +103,10 @@ const optionsStyle = css`
   border-radius: ${SIZES.radiusSmall};
 
   padding: 1.5rem;
-  margin: 2rem 0 4rem 0;
+
+  :not(:first-child) {
+    margin: 2rem 0 4rem 0;
+  }
 
   display: flex;
   flex-direction: column;

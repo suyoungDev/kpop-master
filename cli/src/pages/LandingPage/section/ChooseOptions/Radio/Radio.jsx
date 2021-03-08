@@ -32,12 +32,14 @@ export const Radio = styled.input`
     font-weight: bold;
   }
 `;
+
 export const RadioContainer = styled.div``;
 
 export const RadioRowContainer = styled.div`
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${({ getWith }) =>
+    getWith ? '1fr 1fr' : '1fr 1fr 1fr'};
   grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
