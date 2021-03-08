@@ -23,7 +23,15 @@ const primaryStyle = css`
   }
 `;
 
+const withStyles = css`
+  display: flex;
+  align-self: center;
+  margin: 2rem 0 0 0;
+  ${primaryStyle}
+`;
+
 const getStyles = (props) => {
+  if (props.with) return withStyles;
   return primaryStyle;
 };
 
@@ -53,8 +61,12 @@ const LinkContainer = styled(Link)`
   ${getStyles};
 `;
 
-const LinkButton = ({ children, links }) => {
-  return <LinkContainer to={links}>{children}</LinkContainer>;
+const LinkButton = ({ children, links, ...props }) => {
+  return (
+    <LinkContainer to={links} {...props}>
+      {children}
+    </LinkContainer>
+  );
 };
 
 export default LinkButton;

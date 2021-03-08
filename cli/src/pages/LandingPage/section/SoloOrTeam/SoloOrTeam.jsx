@@ -7,20 +7,19 @@ import {
 } from '../ChooseOptions/Radio/Radio';
 import { Form } from '../ChooseOptions/Form/Form';
 
-const SoloOrTeam = ({ onSubmit }) => {
+const SoloOrTeam = ({ getWithWhom }) => {
   const getWith = (e) => {
-    // console.log(e.target.value);
-    onSubmit(e.target.value);
+    getWithWhom(e.target.value);
   };
 
   return (
     <CleanCard options>
       <Form onClick={getWith}>
         <RadioRowContainer getWith>
-          <Radio type='radio' value='team' id='team' name='with' />
-          <RadioLabel htmlFor='team'>친구와 하기</RadioLabel>
           <Radio type='radio' value='solo' id='solo' name='with' />
           <RadioLabel htmlFor='solo'>혼자 하기</RadioLabel>
+          <Radio type='radio' value='team' id='team' name='with' />
+          <RadioLabel htmlFor='team'>친구와 하기</RadioLabel>
         </RadioRowContainer>
       </Form>
     </CleanCard>

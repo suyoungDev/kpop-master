@@ -41,9 +41,6 @@ const Container = styled.div`
 
   @media ${SCREEN.laptop} {
     width: 400px;
-    :first-child {
-      margin-right: 1.5rem;
-    }
   }
 `;
 

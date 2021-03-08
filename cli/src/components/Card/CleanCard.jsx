@@ -110,7 +110,7 @@ const optionsStyle = css`
 
   display: flex;
   flex-direction: column;
-  align-items: space-between;
+  align-self: center;
   justify-content: space-between;
 
   transition: all 0.3s ease;
@@ -119,6 +119,7 @@ const optionsStyle = css`
 
   @media ${SCREEN.laptop} {
     margin-top: 0;
+    align-self: center;
   }
 `;
 

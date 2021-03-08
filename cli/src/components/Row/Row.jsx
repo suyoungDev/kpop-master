@@ -50,7 +50,6 @@ const mainCardStyles = css`
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    width: 80%;
     max-width: ${SIZES.laptopWidth};
   }
 `;
