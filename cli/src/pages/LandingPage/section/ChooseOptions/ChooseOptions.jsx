@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -26,7 +26,7 @@ import { FONT } from '../../../../constants/theme';
 import { TrackListToPlayContext } from '../../../../context/TrackListToPlayContext';
 import useInput from '../../../../hook/useInput';
 
-const ChooseOptions = () => {
+const ChooseOptions = ({ multi }) => {
   // eslint-disable-next-line
   const [trackListToPlay, setTrackListToPlay] = useContext(
     TrackListToPlayContext
@@ -38,6 +38,12 @@ const ChooseOptions = () => {
     limit: '',
     theme: '',
   });
+  const [startUrl, setStartUrl] = useState('');
+
+  useEffect(() => {
+    console.log(multi);
+    multi ? setStartUrl('/playMulti') : setStartUrl('/start');
+  }, []);
 
   const getList = async (variable) => {
     setIsReady(true);
@@ -174,7 +180,7 @@ const ChooseOptions = () => {
         <Form onSubmit={getByArtist} row>
           <TextInput
             placeholder='아티스트 찾기'
-            type='string'
+            type='text'
             value={inputArtist}
             onChange={setInputArtist}
           />
@@ -211,7 +217,7 @@ const ChooseOptions = () => {
           </Wrapper>
         ) : (
           <Wrapper>
-            <LinkButton links='/start'>start</LinkButton>
+            <LinkButton links={startUrl}>start</LinkButton>
           </Wrapper>
         )}
       </div>

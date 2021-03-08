@@ -7,6 +7,8 @@ import NavBar from './pages/NavBar/NavBar';
 import About from './pages/About/About';
 import RankPage from './pages/RankPage/RankPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import Lobby from './pages/Lobby/Lobby';
+import playMulti from './pages/Chat/Chat';
 
 import { GameResultProvider } from './context/GameResultContext';
 import { GameEndProvider } from './context/GameEndContext';
@@ -31,6 +33,12 @@ function App() {
                   <Route exact path='/start' component={Auth(Start, null)} />
                   <Route exact path='/about' component={Auth(About, null)} />
                   <Route exact path='/rank' component={Auth(RankPage, null)} />
+                  <Route exact path='/lobby' component={Auth(Lobby, null)} />
+                  <Route
+                    exact
+                    path='/playMulti'
+                    component={Auth(playMulti, null)}
+                  />
                   <Route
                     exact
                     path='/register'

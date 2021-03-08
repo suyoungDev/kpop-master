@@ -8,18 +8,18 @@ import {
 import { Form } from '../ChooseOptions/Form/Form';
 
 const SoloOrTeam = ({ getWithWhom }) => {
-  const getWith = (e) => {
+  const getMulti = (e) => {
     getWithWhom(e.target.value);
   };
 
   return (
     <CleanCard options>
-      <Form onClick={getWith}>
-        <RadioRowContainer getWith>
+      <Form onClick={getMulti}>
+        <RadioRowContainer multi>
           <Radio type='radio' value='solo' id='solo' name='with' />
           <RadioLabel htmlFor='solo'>혼자 하기</RadioLabel>
-          <Radio type='radio' value='team' id='team' name='with' />
-          <RadioLabel htmlFor='team'>친구와 하기</RadioLabel>
+          <Radio type='radio' value='multi' id='multi' name='with' />
+          <RadioLabel htmlFor='multi'>친구와 하기</RadioLabel>
         </RadioRowContainer>
       </Form>
     </CleanCard>
