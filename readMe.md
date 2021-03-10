@@ -8,11 +8,10 @@
   - [구현 화면](#구현-화면)
   - [폴더 구조](#폴더-구조)
 - [🔥 문제 해결 경험](#-문제-해결-경험)
+  - [상태가 뒤늦게 useContext로 전달되는 문제](#상태가-뒤늦게-usecontext로-전달되는-문제)
   - [리팩토링 할 때 가장 중요한 건 변수명을 수정 하지 않는 것!](#리팩토링-할-때-가장-중요한-건-변수명을-수정-하지-않는-것)
   - [좋아요 싫어요 기능](#좋아요-싫어요-기능)
   - [Authentication 기능](#authentication-기능)
-    - [작성한 authContext 코드](#작성한-authcontext-코드)
-    - [적용 모습](#적용-모습)
   - [custom hook으로 input을 사용할 때 에러](#custom-hook으로-input을-사용할-때-에러)
   - [모바일의 키보드에 화면이 가려지는 문제](#모바일의-키보드에-화면이-가려지는-문제)
 - [🌼 후기](#-후기)
@@ -84,246 +83,111 @@ React의 상태관리는 React Hook과 Redux를 사용하였습니다.
 
 # 🔥 문제 해결 경험
 
+## 상태가 뒤늦게 useContext로 전달되는 문제
+
+- **문제**
+  - 유저가 선택한 옵션들을 useState에 저장하고, 그 state를 그대로 useContext에 넣어 다음 페이지에서 저장된 옵션들에 맞게 페이지를 구현하였는데, 다음 페이지에서 계속 상태를 전달 받지 못해 에러가 남.
+- **원인**
+  - 옵션들이 다 State에 저장되어있는 것을 콘솔로도 확인했음에도 불구하고 `useContext`에 전달된 state는 첫 두개 뿐이었고, 마지막 옵션이 저장되지 않은 채로 다음 페이지로 넘겨온 것이었음.
+- **측정**
+  - 이 문제를 해결하지 못하면, 프로젝트의 핵심 기능인 '전주만 듣고 노래제목 맞추기'가 불가능한 상황이었음.
+- **해결과정**
+  1. 옵션을 선택할 때마다 콘솔에서 확인하여 제대로 옵션값이 전달된 것인지 파악을 시도.
+  2. `console.log`보다 한발 늦게 useState에 값이 전달되어 undefined으로 떠서 파악이 힘듦
+  3. 혹시 그것 때문일까 싶어, 마지막 값은 새로이 변수선언 및 할당하여 useContext에 넣음
+  4. 문제가 해결됨.
+- **평가**
+  - useState은 비동기적으로 이루어진다는 것에 대해 알게 된 계기가 됨.
+
 ## 리팩토링 할 때 가장 중요한 건 변수명을 수정 하지 않는 것!
 
-리팩토링 도중에 '그때는 이 변수명을 왜 이렇게 쓴거지? 이게 더 나은 변수명인거 같다'며 변수명을 고쳤고, 그 변수명을 사용하는 모든 파일을 최대한 수정했습니다. 잘 작동되는 것을 파악하고 배포를 했습니다. 하지만 다음날 한 사용자가 오류 리포트를 했습니다. 원인을 파악해보니 mongoDB에 올라간 모든 데이터가 수정 전의 변수명을 쓰고 있었습니다. 그래서 새로 데이터를 기록할때마다, 그 수정된 변수명의 데이터는 기록이 되지 않았던 거였습니다. 이번 케이스를 토대로 한번 작성한 변수명은 절대 변경하지 않는게 좋다는 걸 깨달았습니다.
+- **문제**
+  - 리팩토링 후, `년도별`로 옵션 선택 시, 데이터를 못받아와서 게임이 진행이 안됨. `명예의 전당`페이지에서도 새로운 데이터를 받아올 수 없음.
+- **원인**
+
+  - 리팩토링 할 때, 더 나은 변수명이라고 생각하여 변수명을 변경했으나 모든 파일에 걸쳐 수정된 변수명을 수정하지 못함.
+
+- **해결 과정**
+
+  1. 어떤 상황에서 에러가 발생한 것인지 유저에게 물어보고, 그 상황을 유도하여 원인을 파악함.
+  2. 원인을 파악해 보니 리팩토링한 파일에서만 변수명을 수정하였슴.
+  3. mongoDB에 올라간 모든 데이터가 수정 전의 변수명을 쓰고 있었으며, 또한 mongoDB에 쓰이는 스키마도 여전히 수정 전의 변수명을 쓰고 있었슴.
+  4. 그래서 새로 데이터를 기록할때마다, 그 수정된 변수명의 데이터는 기록이 되지 않았던 거였슴.
+  5. mongoDB에 저장된 데이터를 수정 하는 것 보다는 원래의 변수명으로 쓰는 것이 더 간단할 것이라고 판단.
+  6. 원래의 변수명으로 수정하여 에러를 해결함.
+
+- **평가**
+  - 이번 케이스를 토대로 한번 작성한 변수명은 최대한 변경하지 않는게 좋다는 걸 깨달았음.
+  - 변수명을 변경할 수 밖에 없다면, 최대한 테스트 케이스를 많이 만들어 테스트를 여러 방면으로 돌리는 것이 좋다는 것도 깨달았습니다.
 
 ## 좋아요 싫어요 기능
 
-`mongoDB`에 좋아요와 싫어요의 데이터를 저장하는 코드를 작성하고 구현이 잘 된 것을 확인했습니다. 하지만 실제 테스트에서 계속 이상한 에러가 발생했습니다. 좋아요 싫어요 숫자가 마구 날뛰는 것이었습니다.
-
-도저히 원인을 파악할 수 없어서, 제가 혹시 구현을 잘못한건 아닐까 혼란이 들어서 기능구현 흐름의 다이어그램도 작성해봤습니다. 하지만 이렇게 했음에도 파악을 못했습니다.
-
-![like-dislike-diagram](https://user-images.githubusercontent.com/71932072/109436382-94fe2780-7a62-11eb-95a5-e8e8df068fa0.png)
-
-아래는 그 문제의 코드입니다.
-
-```js
-const Heart = ({ toWhat }) => {
-  const [isLike, setIsLike] = useState(null);
-  const [isDislike, setIsDislike] = useState(null);
-
-  const [numberOfLikes, setNumberOfLikes] = useState(0);
-  const [numberOfDislikes, setNumberOfDislikes] = useState(0);
-
-  const user = useSelector((state) => state.user);
-  const [variables] = useState({
-    fromWhom: user.userData._id,
-    toWhat: toWhat,
-  });
-
-  useEffect(
-    () => {
-      axios.post('/api/heart/getLike', variables).then((res) => {
-        if (res.data.success) {
-          setNumberOfLikes(res.data.likes.length);
-          res.data.likes.map((like) => {
-            like.fromWhom === variables.fromWhom && setIsLike('yes');
-          });
-        }
-      });
-
-      axios.post('/api/heart/getDislike', variables).then((res) => {
-        if (res.data.success) {
-          setNumberOfDislikes(res.data.dislikes.length);
-
-          res.data.dislikes.map((dislike) => {
-            dislike.fromWhom === variables.fromWhom && setIsDislike('yes');
-          });
-        }
-      });
-    },
-    // eslint-disable-next-line
-    [isLike, isDislike]
-  );
-
-  const goLike = async () => {
-    if (isLike === null) {
-      await axios.post('/api/heart/upLike', variables);
-      setIsLike('yes');
-
-      if (isDislike !== null) {
-        setIsDislike(null);
-      }
-    } else {
-      await axios.post('/api/heart/DownLike', variables);
-      setIsLike(null);
-    }
-  };
-
-  const goDislike = async () => {
-    if (isDislike === null) {
-      await axios.post('/api/heart/upDislike', variables);
-      setIsDislike('yes');
-
-      if (isLike !== null) {
-        setIsLike(null);
-      }
-    } else {
-      await axios.post('/api/heart/downDislike', variables);
-      setIsDislike(null);
-    }
-  };
-
-  return (
-    <ColumnWrapper likes>
-      {!user.userData.isAuth ? null : (
-        <UpDownButton
-          onClick={goLike}
-          className={`${isLike === 'yes' && 'selected'}`}
-        >
-          <BsChevronUp size='1.1rem' />
-        </UpDownButton>
-      )}
-      <Likes>{numberOfLikes - numberOfDislikes}</Likes>
-
-      {!user.userData.isAuth ? null : (
-        <UpDownButton
-          onClick={goDislike}
-          className={`${isDislike === 'yes' && 'selected'}`}
-        >
-          <BsChevronDown size='1.1rem' />
-        </UpDownButton>
-      )}
-    </ColumnWrapper>
-  );
-};
-```
-
-원인은 바로 http통신을 너무 자주했기 때문이었습니다. `좋아요`와 `싫어요`를 누를 때마다, 해당 유저 정보와 해당 코멘트 정보를 DB에 업로드 해야했고, 동시에 DB에서 새로운 정보를 받아와야 했습니다. 그러니 숫자가 꼬일 수 밖에 없었습니다. 😭
-
-아래와 같이 수정하여 해결하였습니다.
-
-1. `useEffect`로 화면 첫로드에만 `좋아요`와 `싫어요`의 정보를 가져오고,
-2. `좋아요`와 `싫어요` 버튼을 누를 때에만 업로드만 하고, 정보를 가져오진 않았습니다.
-3. `좋아요`와 `싫어요` 버튼을 누를 때 나타나는 +1, -1 같은 값의 변화는 `useState`로 업데이트 해줬습니다.
+- **문제**
+  - `mongoDB`에 좋아요와 싫어요의 데이터를 저장하는 코드를 작성하고 구현이 잘 된 것을 확인했지만, 실제 테스트에서 계속 이상한 에러가 발생함. 좋아요 싫어요 숫자가 마구 날뛰는 것.
+- **원인**
+  - http통신을 동시에 했기 때문.
+  - `좋아요`나 `싫어요`를 누를 때마다, 해당 유저 정보와 해당 코멘트 정보를 DB에 업로드하고, 동시에 DB에서 새로운 정보를 받아왔는데 이런 과정에서 더 빨리 받아온 정보로 순차적으로 화면에 렌더링하느라 숫자가 왔다갔다 했던 것.
+- **문제 해결**
+  1. `useEffect`로 화면 첫로드에만 `좋아요`와 `싫어요`의 정보를 가져옴.
+  2. `좋아요`와 `싫어요` 버튼을 누를 때에만 업로드만 하고, 정보를 가져오진 않게 수정함.
+  3. `좋아요`와 `싫어요` 버튼을 누를 때 나타나는 +1, -1 같은 값의 변화는 `useState`로 업데이트 함.
+- **평가**
+  - 데이터를 가져오는데에는 시간이 걸린다는 것을 인지하지 못해서 벌어진 문제였음.
+  - 비록 그게 논리적으로 맞는 기능이라고 할지라도, 로딩에 시간이 걸린다면 동시에 DB에 업로드하고, DB를 받아오는 것은 지양해야한다는 것을 깨달음.
+  - 만약 한다고해도 그게 동시에 가능한 web socket이나 실시간으로 주고받을수 있는 firebase의 realtime database를 이용해야 함을 알게 되었음.
 
 ## Authentication 기능
 
-**로그인 유무에 따라 회원가입 혹은 로그아웃 버튼이 보이게** 하고 싶었습니다.
+- **문제**
+  - 접속 회원인지 아닌지 쿠키에 저장된 token을 유저DB와 비교하여, `회원가입/로그인` 또는 `로그아웃`버튼이 보이게 하고 싶었으나, 미가입 유저일 경우 token이 없기때문에 계속 에러로 값이 리턴되어 화면이 렌더링되지않는 에러가 발생함.
+- **원인**
+  - 미접속 회원일 때, 에러를 리턴하기 때문
+- **문제 해결**
 
-일단은 기존에 사용하던 `리덕스`를 활용하기로 했습니다. `HOC`를 활용하여 웹 브라우저에 접속 시 쿠키에 토큰이 있는가 판별 후, 유저인지 아닌지를 판별해서 회원가입 혹은 로그아웃 버튼이 보이게 만들었습니다. 하지만 미접속 회원은 토큰을 애초에 갖고있지 않기때문에 에러로 값이 리턴되었고, 에러가 계속 발생했습니다.
+  1. 해당하는 token을 가진 유저가 DB에 없을 경우, error를 리턴하는 것이 아니라 `isAuth: false`만 리턴하는 것으로 수정
+  2. 해결안됨
+  3. 로그인한 유저를 로그인페이지에 접근 불가능하게 하기 위한 HOC때문에, 매번 새로운 페이지가 랜더링 될 때마다 auth 판별을 하여 유저정보를 가져옴.
+  4. 리덕스로 유저의 로그인 유무를 판별하는 것을 포기하고 똑같은 전역상태관리인 `useContext`로 유저유무를 판별하는 것을 시도.
+  5. 리덕스와 다르게 `AuthContext`에는 기본값으로 `undefined`으로 설정했음.
+  6. `AuthContext`는 단순히 로그인과 로그아웃 할 때만 auth판별을 하여 `boolean`으로 전달.
+  7. `undefined`일 경우만 `회원가입/로그인` 메뉴가 보이게 수정함.
+  8. 문제 해결
 
-두번째로 전역으로 상태관리를 해주는 `useContext`를 이용해보았습니다. 기본적으론 리덕스와 동일한 api를 사용했습니다. 하지만 기본값으로 `undefined`으로 설정했고, 토큰이 없을 경우에도 `undefined`이었기에, 미가입 유저일 경우에도 에러가 발생하지 않았습니다. 로그인과 로그아웃 할 때마다 `context`값을 업데이트해줬습니다.
-
-### 작성한 authContext 코드
-
-```js
-export const AuthContext = createContext();
-
-export function AuthProvider(props) {
-  const [isLoggedIn, setIsLoggedIn] = useState(undefined);
-
-  async function getIsLoggedIn() {
-    const response = await axios.get('/api/user/auth');
-    setIsLoggedIn(response.data.isAuth);
-  }
-
-  useEffect(() => {
-    getIsLoggedIn();
-  }, []);
-
-  return (
-    <AuthContext.Provider value={[isLoggedIn, getIsLoggedIn]}>
-      {props.children}
-    </AuthContext.Provider>
-  );
-}
-```
-
-### 적용 모습
-
-```js
-import React, { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-
-const RightMenu = ({ open, history }) => {
-  const [isLoggedIn, getIsLoggedIn] = useContext(AuthContext);
-
-  const logOut = async () => {
-    await axios.get('/api/user/logout');
-    getIsLoggedIn();
-    history.push('/');
-  };
-
-  return (
-    <LinkContainer open={open}>
-      <StyledLink to='/'>home</StyledLink>
-      <StyledLink to='/rank'>Rank</StyledLink>
-      <StyledLink to='/about'>About</StyledLink>
-
-      {isLoggedIn ? (
-        <StyledLink as='div' onClick={logOut}>
-          로그아웃
-        </StyledLink>
-      ) : (
-        <StyledLink to='/register'>회원가입 / 로그인</StyledLink>
-      )}
-    </LinkContainer>
-  );
-};
-
-export default withRouter(RightMenu);
-```
+- **평가**
+  - 뭔가 더 좋은 방법이 있을 것이라고 생각은 되지만, 떠오르는 방법이 없어서 아쉬움이 남음.
 
 ## custom hook으로 input을 사용할 때 에러
 
-`input`을 `custom hook`으로 `useInput`을 만들어서 사용했습니다. 그런데 다른 페이지에선 오류가 없었으나 `gameLayout`페이지에서 에러가 발생했습니다.
+- **문제**
 
-문제가 일어난 `gameLayout`페이지에서는 `input`을 초기화 하는 기능이 있습니다.
+  - `custom hook`으로 `useInput`을 만들어서 사용함. 그런데 다른 페이지에선 오류가 없었으나 `gameLayout`페이지에서 에러가 발생함
 
-> 1. 주어진 시간이 지나면 input value를 초기화함.
-> 2. input 입력 시, 초기화함.
+- **원인**
 
-이때 그냥 `input value 초기화`를 단순히 `setInput('')`으로 했기 때문에 `event`가 없어서 에러가 발생한 것이었습니다.
-`setInput(value)`의 value를 `event.target.value`로 받아왔기 때문입니다.
+  - input의 `onChange`에 할당한 `onChange` hook이 event를 사용한다는 점을 잊고, `onChange('')` 으로 초기화를 시도하여 발생한 버그.
 
-```js
-const { value } = event.target;
-setInput(value);
-```
-
-이후에 `reset function`을 만들어서 `useInput custom hook`에 추가하였고,
-`input value 초기화` 할때마다 `reset function`을 사용하여 문제를 해결하였습니다.
-
-```js
-export default (initalValue = null) => {
-  const [input, setInput] = useState(initalValue);
-
-  const handler = useCallback(
-    (event) => {
-      const { value } = event.target;
-      setInput(value);
-    },
-    [input]
-  );
-
-  // 아래의 resetInput을 추가하여 문제를 해결했습니다.
-  const resetInput = useCallback(() => setInput(initalValue), [initalValue]);
-
-  return [input, handler, resetInput];
-};
-```
+- **해결 과정**
+  1. `gameLayout`페이지에서 사용하는 input은 다른 페이지와 다른 점이 무엇인가 파악함.
+  2. 다른 페이지는 입력만 하면 끝이지만, 해당 페이지에서는 input을 초기화하는 기능이 존재함.
+  3. 생성한 `onChange('')` 훅은 `event.target.value`를 받는데, `onChange('')`으로 초기화를 시도하면 event가 없기 때문에 발생한 버그.
+  4. `resetInput()` 훅을 만들어서 대체하여 해결함.
+- **평가**
+  - 앞으로 event를 사용하는 hook을 만들 때, reset을 할 가능성이 있는 hook이라면 reset기능을 추가적으로 만들어야 함을 알게됨.
 
 ## 모바일의 키보드에 화면이 가려지는 문제
 
-이번 토이프로젝트는 모바일로 사용 시, 문제가 두개가 있습니다.
-
-1. youtube화면은 안보여도 갤럭시에서는 영상으로 인식해서 화면 확대 아이콘이 뜸
-2. 모바일의 키보드에서 화면이 반 정도 가려짐
-
-`1번`은 솔직히 어쩔 수 없다고 생각되서... 넘어가고요😥..
-(안드로이드 브라우저를 고칠 수는 없으니까요 😥)
-
-`2번`을 고치면서 번거로운 일이 계속 발생했습니다.
-
-`firefox`나 다른 웹 브라우저에서 제공하는 `responsive design mode`에서는 화상 키보드를 구현하지 않습니다. 개발 당시, 키보드의 존재를 감안하여 공간을 충분히 넉넉하게 할당했음에도 불구하고, 키보드에 의해 **힌트 카드가 가려지는 문제**가 있음을 발견하게 됐습니다.
-
-그래서 배포 후, 수정하고, 다시 배포 후, 수정하는 바보같은 일이 반복 되었습니다. 😞
-
-가상머신을 이용해야하는 걸까요?
-
-이 문제는 배포 후 수정의 반복 말고는 정답이 없는 문제인 것 같아 아쉽습니다.
+- **문제**
+  1. youtube화면은 안보여도 갤럭시에서는 영상으로 인식해서 화면 확대 아이콘이 뜨기때문에, 사용자가 마음만 먹으면 정답을 확인 할 수 있음.
+  2. 모바일의 키보드에서 화면이 반 정도 가려지기 때문에, 플레이 도중에 주어지는 힌트가 가려지는 문제
+- **원인**
+  - 1번: 모바일 디바이스 자체의 브라우저에서 지원하는 기능이며, 동시에 유튜브를 이용하는 프로젝트였기 때문에 벌어지는 문제.
+  - 2번: `firefox`나 다른 웹 브라우저에서 제공하는 `responsive design mode`에서는 화상 키보드를 구현하지 않기 때문에, 개발 기간 동안 그사실을 감안하여 공간을 넉넉하게 할당해도 정확히 판단하기 힘듦
+- **해결 과정**
+  - 1번은 웹개발자가 해결가능한 부분이 아니므로 포기함.
+  - 2번은 배포 후, 디자인을 수정하고 다시 배포 후, 수정하여 해결하였음.
+- **평가**
+  1. 가상머신을 이용하여 키보드가 가려지는 영역을 파악하는 방법이 있지 않을까 뒤늦게 후회함.
+  2. 디바이스 자체에서 최대 몇퍼센트까지만 가려진다는 규칙이 있지 않을까 싶음. 다음에 이런 케이스가 있다면 규칙유무를 찾아볼 것 같음.
 
 # 🌼 후기
 
