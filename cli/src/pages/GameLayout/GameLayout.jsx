@@ -40,18 +40,57 @@ const GameLayout = ({ trackList }) => {
   const [playCorrect] = useSound(correctSfx, { volume: 0.15 });
   const [playWrong] = useSound(wrongSfx, { volume: 0.15 });
 
+  const saveUrl = async (props) => {
+    try {
+      const variable = {
+        trackName: trackList[currentRound].trackName,
+        artistName: trackList[currentRound].artistName,
+        videoId: props,
+      };
+      await axios.post('/api/youtube/saveUrl', variable);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const downloadUrl = async () => {
+    try {
+      const variable = {
+        trackName: trackList[currentRound].trackName,
+        artistName: trackList[currentRound].artistName,
+      };
+      const response = await axios.post('/api/youtube/getUrl', variable);
+      const videoId = response.data.doc[0].videoId;
+      return videoId;
+    } catch (err) {
+      return false;
+    }
+  };
+
   useEffect(() => {
     focusedInput.current.focus();
     setStartTime(Date.now());
     setShowHints(false);
 
     const getUrl = async () => {
-      const variable = {
-        trackName: `${trackList[currentRound].trackName} ${trackList[currentRound].artistName}`,
-      };
-      const response = await axios.post('/api/youtube/getId', variable);
-      const videoId = response.data.items[0].id.videoId;
-      setUrl(videoId);
+      const downloadedUrl = await downloadUrl();
+      if (downloadedUrl) {
+        setUrl(downloadedUrl);
+      } else {
+        const variable = {
+          trackName: `${trackList[currentRound].trackName} ${trackList[currentRound].artistName}`,
+        };
+        axios
+          .post('/api/youtube/getId', variable)
+          .then((response) => {
+            const videoId = response.data.items[0].id.videoId;
+            setUrl(videoId);
+            return videoId;
+          })
+          .then((videoId) => {
+            saveUrl(videoId);
+          });
+      }
     };
 
     getUrl();
