@@ -66,7 +66,7 @@ router.post('/downDislike', (req, res) => {
 
 router.post('/getLike', (req, res) => {
   const { toWhat } = req.body;
-  Like.find({ toWhat: toWhat }).exec((err, likes) => {
+  Like.find({ toWhat }).exec((err, likes) => {
     if (err) return res.status(400).send(err);
     res.status(200).json({ success: true, likes });
   });
@@ -75,7 +75,7 @@ router.post('/getLike', (req, res) => {
 router.post('/getDislike', (req, res) => {
   const { toWhat } = req.body;
 
-  Dislike.find({ toWhat: toWhat }).exec((err, dislikes) => {
+  Dislike.find({ toWhat }).exec((err, dislikes) => {
     if (err) return res.status(400).send(err);
 
     res.status(200).json({ success: true, dislikes });

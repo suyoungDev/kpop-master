@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
-const httpServer = require('http').createServer(app);
-const io = require('socket.io')(httpServer);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 require('dotenv').config();
 
@@ -28,6 +28,20 @@ mongoose
   .then(() => console.log('MongoDB Connected...🌼'))
   .catch((err) => console.log(err));
 
+io.on('connection', (socket) => {
+  console.log('a user connected...🙆‍♀️');
+
+  socket.on('join', () => {
+    console.log('hi');
+  });
+
+  socket.on('chat message', (msg) => console.log('message: ' + msg));
+
+  socket.on('disconnect', () => {
+    console.log('user has left');
+  });
+});
+
 app.use('/api/chart', require('./routes/chart'));
 app.use('/api/game', require('./routes/game'));
 app.use('/api/youtube', require('./routes/youtube'));
@@ -43,17 +57,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-io.on('connection', (socket) => {
-  console.log('a user connected...🙆‍♀️');
-  socket.on('disconnect', () => {
-    console.log('user has left');
-  });
-});
-
-httpServer.listen(PORTSOCKET, () => {
+http.listen(PORT, () => {
   console.log(`socket.io is running on ${PORTSOCKET}...✨`);
 });
 
-app.listen(PORT, () => {
-  console.log(`running on ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`running on ${PORT}`);
+// });
