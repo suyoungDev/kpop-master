@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
+import { BsChevronUp, BsChevronDown, BsHeartFill } from 'react-icons/bs';
+
 import { ColumnWrapper, Likes } from './../SingleComment/SingleComment.styles';
 import styled from 'styled-components';
 import { COLORS } from '../../../../constants/theme';
@@ -114,7 +115,10 @@ const Heart = ({ toWhat }) => {
         </UpDownButton>
       )}
 
-      <Likes>{numberOfLikes - numberOfDislikes}</Likes>
+      <Likes>
+        <BsHeartFill className='heartfill' size='1.1rem' />
+        {numberOfLikes - numberOfDislikes}
+      </Likes>
 
       {!user.userData.isAuth ? null : (
         <UpDownButton

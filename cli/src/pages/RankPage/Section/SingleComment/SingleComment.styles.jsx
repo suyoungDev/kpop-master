@@ -61,9 +61,20 @@ export const RowContainer = styled.div`
 `;
 
 export const Likes = styled.span`
-  font-size: 14px;
-  font-weight: 200;
-  color: ${COLORS.contentGray};
+  font-size: 9px;
+  font-weight: bold;
+  color: ${COLORS.headingDarkGray};
+  position: relative;
+  display: flex;
+  width: 25px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+
+  .heartfill {
+    color: rgba(184, 193, 211, 0.24);
+    position: absolute;
+  }
 `;
 
 export const SeeMore = styled.button`
