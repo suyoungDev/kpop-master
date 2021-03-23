@@ -77,7 +77,7 @@ const RankingTable = ({ userRecords }) => {
 
   return (
     <CleanCard rank>
-      {!isLoggedIn ? null : showMyRecord ? (
+      {showMyRecord ? (
         <MyRecordButton onClick={clickHandle}>
           <RiBookmarkFill className='icon' />
           전체 기록 보기
