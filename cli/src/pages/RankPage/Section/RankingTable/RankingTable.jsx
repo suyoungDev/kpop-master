@@ -5,7 +5,7 @@ import CleanCard from '../../../../components/Card/CleanCard';
 import { COLORS, FONT } from '../../../../constants/theme';
 import RankersTable from '../../../OutroPage/Section/RankersTable/RankersTable';
 import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
-import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
+import Spinner from '../../../../components/Spinner/Spinner';
 
 const MyRecordButton = styled.button`
   outline: none;

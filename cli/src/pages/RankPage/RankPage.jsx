@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import GameTitle from '../../components/GameTitle/GameTitle';
 import Center from '../../components/Center/Center';
-import Spinner from '../OutroPage/Section/Spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner';
 import RankingTable from './Section/RankingTable/RankingTable';
 import CommentList from './Section/CommentList/CommentList';
 import WriteComment from './Section/WriteComment/WriteComment';
