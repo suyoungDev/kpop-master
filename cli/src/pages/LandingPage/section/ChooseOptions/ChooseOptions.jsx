@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import LinkButton from '../../../../components/LinkButton/LinkButton';
-import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
+import Spinner from '../../../../components/Spinner/Spinner';
 import {
   Radio,
   RadioLabel,

@@ -5,8 +5,7 @@ import CleanCard from '../../../../components/Card/CleanCard';
 import { COLORS, FONT } from '../../../../constants/theme';
 import RankersTable from '../../../OutroPage/Section/RankersTable/RankersTable';
 import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
-import { AuthContext } from '../../../../context/AuthContext';
-import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
+import Spinner from '../../../../components/Spinner/Spinner';
 
 const MyRecordButton = styled.button`
   outline: none;
@@ -49,7 +48,6 @@ const RankingTable = ({ userRecords }) => {
   const [nullData, setNullData] = useState(false);
   const [recordsToShow, setRecordsToShow] = useState(userRecords);
   const user = useSelector((state) => state.user);
-  const [isLoggedIn] = useContext(AuthContext);
 
   useEffect(() => {
     if (showMyRecord) {
@@ -77,7 +75,7 @@ const RankingTable = ({ userRecords }) => {
 
   return (
     <CleanCard rank>
-      {!isLoggedIn ? null : showMyRecord ? (
+      {showMyRecord ? (
         <MyRecordButton onClick={clickHandle}>
           <RiBookmarkFill className='icon' />
           전체 기록 보기

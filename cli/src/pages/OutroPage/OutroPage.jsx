@@ -14,7 +14,7 @@ import PreviousRecord from './Section/PreviousRecord/PreviousRecord';
 import RankersRecord from './Section/RankersRecord/RankersRecord';
 import CurrentRecord from './Section/CurrentRecord/CurrentRecord';
 import Description from './Section/Description/Description';
-import Spinner from './Section/Spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import Center from '../../components/Center/Center';
 import PageWrapper from './Section/PageWrapper/PageWrapper';

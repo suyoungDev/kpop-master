@@ -19,8 +19,7 @@ const HowToPlay = () => {
         <li>대소문자 구분과 공백, 특수문자는 무시합니다.</li>
         <li>총 라운드는 5회입니다.</li>
         <li>
-          <Block>!q</Block> 혹은 <Block>!ㅂ</Block>을 치면, 다음 라운드로
-          넘어갑니다.
+          <Block>!!</Block> 을 입력하면, 다음 라운드로 넘어갑니다.
         </li>
       </ul>
     </Card>
