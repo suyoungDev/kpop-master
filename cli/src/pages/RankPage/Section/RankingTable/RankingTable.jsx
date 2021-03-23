@@ -5,7 +5,6 @@ import CleanCard from '../../../../components/Card/CleanCard';
 import { COLORS, FONT } from '../../../../constants/theme';
 import RankersTable from '../../../OutroPage/Section/RankersTable/RankersTable';
 import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
-import { AuthContext } from '../../../../context/AuthContext';
 import Spinner from '../../../OutroPage/Section/Spinner/Spinner';
 
 const MyRecordButton = styled.button`
@@ -49,7 +48,6 @@ const RankingTable = ({ userRecords }) => {
   const [nullData, setNullData] = useState(false);
   const [recordsToShow, setRecordsToShow] = useState(userRecords);
   const user = useSelector((state) => state.user);
-  const [isLoggedIn] = useContext(AuthContext);
 
   useEffect(() => {
     if (showMyRecord) {
