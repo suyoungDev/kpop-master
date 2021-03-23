@@ -177,7 +177,7 @@ const GameLayout = ({ trackList }) => {
     event.preventDefault();
     setGivenAnswersList([inputValue, ...givenAnswersList]);
 
-    if (inputValue === '!ㅂ' || inputValue === '!q') {
+    if (inputValue === '!!') {
       goNextRound();
     }
 
