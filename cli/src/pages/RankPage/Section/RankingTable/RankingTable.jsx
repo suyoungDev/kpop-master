@@ -1,46 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+
 import CleanCard from '../../../../components/Card/CleanCard';
-import { COLORS, FONT } from '../../../../constants/theme';
 import RankersTable from '../../../OutroPage/Section/RankersTable/RankersTable';
-import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
 import Spinner from '../../../../components/Spinner/Spinner';
-
-const MyRecordButton = styled.button`
-  outline: none;
-  border: none;
-  background-color: transparent;
-  font-size: 14px;
-  font-weight: bold;
-  font-family: ${FONT.korean};
-  color: ${COLORS.contentGrayLight};
-  letter-spacing: 1px;
-  cursor: pointer;
-
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 0.7rem;
-
-  .icon {
-    margin-right: 0.3rem;
-  }
-
-  :hover {
-    color: ${COLORS.primaryThree};
-    transition: all 0.3s ease;
-  }
-`;
-
-const NoDataSpan = styled.span`
-  color: ${COLORS.contentGrayLight};
-  width: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-`;
+import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
+import { NoDataSpan, MyRecordButton } from './RankingTable.styles';
 
 const RankingTable = ({ userRecords }) => {
   const [showMyRecord, setShowMyRecord] = useState(false);

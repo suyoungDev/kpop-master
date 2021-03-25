@@ -80,16 +80,22 @@ const GameLayout = ({ trackList }) => {
         const variable = {
           trackName: `${trackList[currentRound].trackName} ${trackList[currentRound].artistName}`,
         };
-        axios
-          .post('/api/youtube/getId', variable)
-          .then((response) => {
-            const videoId = response.data.items[0].id.videoId;
-            setUrl(videoId);
-            return videoId;
-          })
-          .then((videoId) => {
-            saveUrl(videoId);
-          });
+        try {
+          axios
+            .post('/api/youtube/getId', variable)
+            .then((response) => {
+              const videoId = response.data.items[0].id.videoId;
+              setUrl(videoId);
+              return videoId;
+            })
+            .then((videoId) => {
+              saveUrl(videoId);
+            });
+        } catch (err) {
+          alert(
+            '사용량 초과때문에 더이상 플레이하실 수 없습니다. 내일 다시 시도해주세요.'
+          );
+        }
       }
     };
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FONT, COLORS, SIZES, SCREEN } from '../../../../../constants/theme';
+import { FONT, COLORS, SIZES, SCREEN } from '../../../../constants/theme';
 
 export const RadioLabel = styled.label`
   display: flex;

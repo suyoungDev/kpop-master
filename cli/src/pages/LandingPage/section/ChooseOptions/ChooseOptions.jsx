@@ -11,14 +11,14 @@ import {
   RadioContainer,
   RadioRowContainer,
   TextInput,
-} from './Radio/Radio';
+} from './Radio.styles';
 import CleanCard from '../../../../components/Card/CleanCard';
 import {
   levelList,
   typeList,
   yearList,
 } from '../themeStructureList/themeStructureList';
-import { Form, Title, Wrapper } from './Form/Form';
+import { Form, Title, Wrapper } from './Form.styles';
 
 import { BsSearch, BsQuestionCircle } from 'react-icons/bs';
 import { FONT } from '../../../../constants/theme';
