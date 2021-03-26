@@ -15,7 +15,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CommenttProvider } from './context/CommentContext';
 import Auth from './hoc/auth';
 
-import './App.css';
+import { GlobalStyle } from './components/GlobalStyle';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           <GameResultProvider>
             <TrackListToPlayProvider>
               <BrowserRouter>
+                <GlobalStyle />
                 <NavBar />
                 <Switch>
                   <Route exact path='/' component={Auth(LandingPage, null)} />
