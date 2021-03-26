@@ -48,8 +48,8 @@ const GameLayout = ({ trackList }) => {
         videoId: props,
       };
       await axios.post('/api/youtube/saveUrl', variable);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -62,7 +62,7 @@ const GameLayout = ({ trackList }) => {
       const response = await axios.post('/api/youtube/getUrl', variable);
       const videoId = response.data.doc[0].videoId;
       return videoId;
-    } catch (err) {
+    } catch (error) {
       return false;
     }
   };
@@ -91,7 +91,7 @@ const GameLayout = ({ trackList }) => {
             .then((videoId) => {
               saveUrl(videoId);
             });
-        } catch (err) {
+        } catch (error) {
           alert(
             '사용량 초과때문에 더이상 플레이하실 수 없습니다. 내일 다시 시도해주세요.'
           );
