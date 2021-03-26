@@ -26,7 +26,7 @@ router.get('/getComments', (req, res) => {
     });
 });
 
-router.post('/delete', (req, res) => {
+router.delete('/delete', (req, res) => {
   const { writer, user, item } = req.body;
 
   if (writer === user) {
