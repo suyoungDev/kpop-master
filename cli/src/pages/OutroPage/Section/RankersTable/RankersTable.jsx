@@ -21,16 +21,16 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
                 {userRecord.theme === 'artist' ? (
                   <td className='value'>{userRecord.value}</td>
                 ) : userRecord.theme === 'weekly' ? (
-                  <td className='value'>이번주</td>
+                  <td className='value weekly'>이번주</td>
                 ) : (
                   <td className='value'>{userRecord.value}'s</td>
                 )}
                 {userRecord.level === '10' ? (
-                  <td className='value'>쉬움</td>
+                  <td className='value easy'>쉬움</td>
                 ) : userRecord.level === '50' ? (
                   <td className='value'>보통</td>
                 ) : (
-                  <td className='value'>어려움</td>
+                  <td className='value hard'>어려움</td>
                 )}
                 <td className='record'>{userRecord.record.toFixed(2)}</td>
               </tr>
@@ -40,8 +40,8 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
             <>
               <tr>
                 <td></td>
-                <td></td>
                 <td>...</td>
+                <td></td>
                 <td></td>
                 <td></td>
               </tr>
@@ -58,19 +58,21 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
                     {trackListToPlay.theme.value}
                   </td>
                 ) : trackListToPlay.theme.theme === 'weekly' ? (
-                  <td className='myRecord value'>이번주</td>
+                  <td className='myRecord value weekly'>이번주</td>
                 ) : (
                   <td className='myRecord value'>
                     {trackListToPlay.theme.value}'s
                   </td>
                 )}
-                <td className='myRecord value'>
-                  {trackListToPlay.theme.limit === '10'
-                    ? '쉬움'
-                    : trackListToPlay.theme.limit === '50'
-                    ? '보통'
-                    : '어려움'}
-                </td>
+
+                {trackListToPlay.theme.limit === '10' ? (
+                  <td className='myRecord value easy'>쉬움</td>
+                ) : trackListToPlay.theme.limit === '50' ? (
+                  <td className='myRecord value'>보통</td>
+                ) : (
+                  <td className='myRecord value hard'>어려움</td>
+                )}
+
                 <td className='myRecord record'>{myRecord}</td>
               </tr>
             </>

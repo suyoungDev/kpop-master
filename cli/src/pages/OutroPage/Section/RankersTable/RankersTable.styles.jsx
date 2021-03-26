@@ -51,6 +51,19 @@ export const TableContainer = styled.table`
     font-size: 11px;
   }
 
+  .weekly {
+    background-color: ${COLORS.secondary};
+  }
+
+  .easy {
+    background-color: ${COLORS.secondary};
+  }
+
+  .hard {
+    background-color: ${COLORS.primaryPoint};
+    color: white;
+  }
+
   @media ${SCREEN.tablet} {
     td {
       font-size: 15px;
