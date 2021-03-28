@@ -61,9 +61,10 @@ const ChooseOptions = () => {
     setTrackListToPlay({ trackList, theme: variable });
 
     if (variable.theme === 'year') {
+      console.log(trackList);
       setTimeout(() => {
         setIsLoading(false);
-      }, 3000);
+      }, 6000);
     } else {
       setTimeout(() => {
         setIsLoading(false);
