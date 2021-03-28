@@ -33,6 +33,7 @@ router.post('/getByArtist', async (req, res) => {
 
 router.post('/getByYear', async (req, res) => {
   let result = [];
+  console.log(req.body);
   let year = Number(req.body.value);
   let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 9;
   for (let i = year; i <= finallYear; i++) {
@@ -45,11 +46,7 @@ router.post('/getByYear', async (req, res) => {
     const data = await melon
       .parse(opts)
       .then((res) => {
-        const eachYearData = res.map((song) => ({
-          trackName: song.trackName,
-          artistName: song.artistName,
-        }));
-        return eachYearData;
+        return res;
       })
       .catch((err) => console.log(err));
 
