@@ -230,6 +230,7 @@ const GameLayout = ({ trackList }) => {
             timeOver={timeOver}
             className='inputWrapper'
             artist={trackList[currentRound].artistName}
+            currentRound={currentRound}
           />
         </RoundContainer>
       </CleanCard>
