@@ -54,7 +54,7 @@ const CurrentRecord = ({ gameResult, averageResponseTime }) => {
               {song.roundIndex + 1}
             </TableContext>
             <TableContext isWorng={song.result} id='trackName'>
-              {song.trackName}
+              {song.trackName} - {song.artistName}
             </TableContext>
             <TableContext isWorng={song.result}>
               {(song.responseTime / 1000).toFixed(2)}

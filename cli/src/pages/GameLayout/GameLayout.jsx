@@ -164,6 +164,7 @@ const GameLayout = ({ trackList }) => {
     const newResult = {
       id: Math.random().toString(36).substr(2, 4),
       roundIndex: currentRound,
+      artistName: trackList[currentRound].artistName,
       trackName: trackList[currentRound].trackName,
       result: answerResult === 'correct' ? 'correct' : 'wrong',
       responseTime: answerResult === 'correct' ? timeOut() : 20000,
