@@ -120,18 +120,10 @@ const optionsStyle = css`
 `;
 
 const getCardStyles = (props) => {
-  if (props.inGame) {
-    return inGameCardStyle;
-  }
-  if (props.rank) {
-    return rankCardStyle;
-  }
-  if (props.mail) {
-    return mailCardStyle;
-  }
-  if (props.options) {
-    return optionsStyle;
-  }
+  if (props.inGame) return inGameCardStyle;
+  if (props.rank) return rankCardStyle;
+  if (props.mail) return mailCardStyle;
+  if (props.options) return optionsStyle;
   return props.savingRecord && savingCardStyle;
 };
 
