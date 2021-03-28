@@ -22,6 +22,8 @@ import useInput from '../../hook/useInput';
 
 import { COLORS } from '../../constants/theme';
 
+const TOTAL_ROUND = 5;
+
 const GameLayout = ({ trackList }) => {
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
   const [gameResult, setGameResult] = useContext(GameResultContext);
@@ -107,20 +109,12 @@ const GameLayout = ({ trackList }) => {
 
     const timer = setTimeout(() => {
       resetInput();
-      setTimeOver(true);
+      showCorrectAnswer();
     }, 20000);
-
-    const setOver = setTimeout(() => {
-      setTimeOver(false);
-      if (!isGameEnd) {
-        goNextRound();
-      }
-    }, 23000);
 
     return () => {
       clearTimeout(timer);
       clearTimeout(giveHints);
-      clearTimeout(setOver);
     };
     // eslint-disable-next-line
   }, [currentRound]);
@@ -154,10 +148,24 @@ const GameLayout = ({ trackList }) => {
 
     if (modifiedGivenAnswer === modifiedCorrectTrackName) {
       playCorrect();
-      goNextRound('correct');
+      showCorrectAnswer('correct');
     } else {
       playWrong();
     }
+  };
+
+  const showCorrectAnswer = (isCorrect) => {
+    setTimeOver(true);
+    setTimeout(() => {
+      goNextRound(isCorrect);
+      setTimeOver(false);
+      if (currentRound < TOTAL_ROUND - 1) focusedInput.current.focus();
+    }, 3000);
+  };
+
+  const forceNextRound = () => {
+    resetInput();
+    showCorrectAnswer();
   };
 
   const goNextRound = (answerResult) => {
@@ -172,12 +180,12 @@ const GameLayout = ({ trackList }) => {
 
     setGameResult([...gameResult, newResult]);
 
-    if (currentRound === 4) {
+    if (currentRound === TOTAL_ROUND - 1) {
       setIsGameEnd(true);
       setUrl('');
+    } else {
+      setCurrentRound(currentRound + 1);
     }
-
-    setCurrentRound(currentRound + 1);
   };
 
   const answerSubmit = (event) => {
@@ -185,7 +193,7 @@ const GameLayout = ({ trackList }) => {
     setGivenAnswersList([inputValue, ...givenAnswersList]);
 
     if (inputValue === '!!') {
-      goNextRound();
+      forceNextRound();
     }
 
     isCorrect(inputValue);
