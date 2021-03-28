@@ -23,7 +23,7 @@ const ReplyComment = ({ data, currentUser }) => {
       user: currentUser,
       writer: data.writer._id,
     };
-    await axios.post('/api/comment/delete', deleteOne);
+    await axios.delete('/api/comment/delete', { data: deleteOne });
     getCommentAll();
   };
 
