@@ -39,13 +39,15 @@ const ChooseOptions = () => {
     theme: '',
   });
 
+  const getEndpoint = (theme) => {
+    if (theme === 'artist') return 'getByArtist';
+    if (theme === 'year') return 'getByYear';
+    if (theme === 'weekly') return 'getByWeek';
+  };
+
   const getList = async (variable) => {
     setIsReady(true);
-    let endPoint;
-    if (variable.theme === 'artist') endPoint = 'getByArtist';
-    if (variable.theme === 'year') endPoint = 'getByYear';
-    if (variable.theme === 'weekly') endPoint = 'getByWeek';
-
+    let endPoint = getEndpoint(variable.theme);
     const response = await axios.post(`/api/chart/${endPoint}`, variable);
     const trackList = response.data.result;
 
@@ -58,9 +60,15 @@ const ChooseOptions = () => {
 
     setTrackListToPlay({ trackList, theme: variable });
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    if (variable.theme === 'year') {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
   };
 
   const getByArtist = (event) => {
@@ -84,6 +92,7 @@ const ChooseOptions = () => {
 
   const getYear = (e) => {
     setIsReady(false);
+    setIsLoading(true);
 
     const variable = {
       value: e.target.value,
