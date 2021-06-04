@@ -37,8 +37,8 @@ router.post('/getByArtist', async (req, res) => {
 
 router.post('/getByYear', async (req, res) => {
   let result = [];
-  let year = parseInt(req.body.value, 10);
-  let finallYear = year === 2020 ? 2020 : parseInt(req.body.value, 10) + 9;
+  let year = Number(req.body.value);
+  let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 9;
 
   for (let i = year; i <= finallYear; i++) {
     const opts = {
