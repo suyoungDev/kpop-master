@@ -1,3 +1,5 @@
+//  saveMelonList로 저장한 데이터를 몽고디비에 올리기 위해 작성한 파일
+// 애플리케이션에 더이상 필요없는 코딩 파일임
 var melon = require('melon-chart-parser');
 var fs = require('fs');
 
@@ -20,9 +22,9 @@ const filtering = (data) => {
 
 const loggin = async () => {
   let result = {};
-  let finallYear = TARGET_YEAR === 2020 ? 2020 : Number(TARGET_YEAR) + 10;
+  let finallYear = TARGET_YEAR === 2020 ? 2020 : Number(TARGET_YEAR) + 9;
 
-  for (let i = TARGET_YEAR; i < finallYear; i++) {
+  for (let i = TARGET_YEAR; i <= finallYear; i++) {
     const opts = {
       limit: 100,
       type: 'year',
