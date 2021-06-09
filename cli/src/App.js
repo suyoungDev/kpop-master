@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage/LandingPage';
 import Start from './pages/Start/Start';
@@ -16,15 +16,16 @@ import { CommenttProvider } from './context/CommentContext';
 import Auth from './hoc/auth';
 
 import { GlobalStyle } from './components/GlobalStyle';
+import { IconContext } from 'react-icons/lib';
 
 function App() {
   return (
-    <AuthProvider>
-      <CommenttProvider>
-        <GameEndProvider>
-          <GameResultProvider>
-            <TrackListToPlayProvider>
-              <BrowserRouter>
+    <IconContext.Provider value={{ className: 'icon' }}>
+      <AuthProvider>
+        <CommenttProvider>
+          <GameEndProvider>
+            <GameResultProvider>
+              <TrackListToPlayProvider>
                 <GlobalStyle />
                 <NavBar />
                 <Switch>
@@ -41,12 +42,12 @@ function App() {
                     <Redirect to='/' />
                   </Route>
                 </Switch>
-              </BrowserRouter>
-            </TrackListToPlayProvider>
-          </GameResultProvider>
-        </GameEndProvider>
-      </CommenttProvider>
-    </AuthProvider>
+              </TrackListToPlayProvider>
+            </GameResultProvider>
+          </GameEndProvider>
+        </CommenttProvider>
+      </AuthProvider>
+    </IconContext.Provider>
   );
 }
 

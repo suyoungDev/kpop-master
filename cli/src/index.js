@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import promiseMiddleware from 'redux-promise';
+import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
+import promiseMiddleware from 'redux-promise';
 
 import Reducer from './_reducer';
 
@@ -23,7 +24,9 @@ ReactDOM.render(
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )}
   >
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
 
   document.getElementById('root')
