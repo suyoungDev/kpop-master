@@ -1,53 +1,51 @@
 import React, { useEffect, useState, useContext } from 'react';
-
 import axios from 'axios';
+
 import GameTitle from '../../components/GameTitle/GameTitle';
 import Center from '../../components/Center/Center';
-import Spinner from '../../components/Spinner/Spinner';
-import RankingTable from './Section/RankingTable/RankingTable';
-import CommentList from './Section/CommentList/CommentList';
-import WriteComment from './Section/WriteComment/WriteComment';
+
+import RankingTableContainer from './Section/RankingTable/RankingTableContainer';
+import CommentListContainer from './Section/CommentList/CommentListContainer';
+import WriteCommentContainer from './Section/WriteComment/WriteCommentContainer';
+
 import { CommentContext } from '../../context/CommentContext';
-import { AuthContext } from '../../context/AuthContext';
 
 const RankPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userRankList, setUserRankList] = useState();
-  const [getCommentAll, commnetList, isCommentLoading] = useContext(
-    CommentContext
-  );
-  const [isLoggedIn] = useContext(AuthContext);
+  const [getCommentAll, commnetList, isCommentLoading] =
+    useContext(CommentContext);
 
   useEffect(() => {
-    setIsLoading(true);
+    fetchGameRecords();
+    getCommentAll();
+  }, [getCommentAll, fetchGameRecords]);
 
-    axios.get('/api/game/getRecords').then((res) => {
-      if (res.data.success) {
+  const fetchGameRecords = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.get('/api/game/getRecords');
+      if (data.success) {
         setUserRankList(res.data.gameRecordList);
         setIsLoading(false);
       }
-    });
-
-    getCommentAll();
-    // eslint-disable-next-line
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   return (
-    <Center center>
+    <Center>
       <GameTitle center>Rank</GameTitle>
-      {!userRankList && isLoading ? (
-        <Spinner />
-      ) : !userRankList && isLoading ? null : (
-        <RankingTable userRecords={userRankList} />
-      )}
-
-      {!isLoggedIn ? null : <WriteComment />}
-
-      {isCommentLoading ? (
-        <Spinner />
-      ) : (
-        <CommentList commentListData={commnetList} />
-      )}
+      <RankingTableContainer
+        isLoading={isLoading}
+        userRankList={userRankList}
+      />
+      <WriteCommentContainer />
+      <CommentListContainer
+        commnetList={commnetList}
+        isCommentLoading={isCommentLoading}
+      />
     </Center>
   );
 };
