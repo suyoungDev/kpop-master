@@ -1,44 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { RiTimer2Line } from 'react-icons/ri';
-import { FiCheckCircle } from 'react-icons/fi';
-import { FiX } from 'react-icons/fi';
+import { FiCheckCircle, FiX } from 'react-icons/fi';
 
-import Accordion from '../Accordion/Accordion';
+import Accordion from '../../../../components/Accordion/Accordion';
 import {
   TableContainer,
   TableContext,
   TitleContainer,
   TitleList,
 } from './CurrentRecord.styles';
+import useOutroPage from '../../../../hook/useOutroPage';
 
-const CurrentRecord = ({ gameResult, averageResponseTime }) => {
-  const [quantityOfCorrect, setquantityOfCorrect] = useState(0);
-  const [quantityOfWrong, setQuantitiyOfWrong] = useState(0);
-
-  useEffect(() => {
-    const correct = gameResult.filter((game) => game.result === 'correct')
-      .length;
-    setquantityOfCorrect(correct);
-
-    const wrong = gameResult.filter((game) => game.result === 'wrong').length;
-    setQuantitiyOfWrong(wrong);
-    // eslint-disable-next-line
-  }, []);
+const CurrentRecord = ({ averageResponseTime }) => {
+  const { countAnswer } = useOutroPage();
+  const [gameResult] = useContext(GameResultContext);
 
   const title = (
     <TitleContainer>
       <ul id='list-container'>
         <TitleList>
-          <FiCheckCircle className='icon' />
-          {quantityOfCorrect}개
+          <FiCheckCircle />
+          {countAnswer.correct}개
         </TitleList>
         <TitleList>
-          <FiX className='icon' />
-          {quantityOfWrong}개
+          <FiX />
+          {countAnswer.wrong}개
         </TitleList>
         <TitleList>
-          <RiTimer2Line className='icon' />
+          <RiTimer2Line />
           평균 {averageResponseTime}초
         </TitleList>
       </ul>

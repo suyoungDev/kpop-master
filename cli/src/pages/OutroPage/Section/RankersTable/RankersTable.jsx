@@ -37,7 +37,7 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
             ))}
 
           {myRecord && (
-            <>
+            <React.Fragment>
               <tr>
                 <td></td>
                 <td>...</td>
@@ -75,7 +75,7 @@ const RankersTable = ({ userRankList, myRecord, userName, quantityToShow }) => {
 
                 <td className='myRecord record'>{myRecord}</td>
               </tr>
-            </>
+            </React.Fragment>
           )}
         </tbody>
       </TableContainer>
