@@ -4,6 +4,7 @@ var melon = require('melon-chart-parser');
 
 const regex = /[(]/g;
 
+// 랜덤한 5개의 곡을 뽑음
 const filtering = (data) => {
   const result = data
     .sort(() => Math.random() - 0.5)
@@ -16,31 +17,23 @@ const filtering = (data) => {
   return result;
 };
 
-router.post('/getByArtist', async (req, res) => {
-  const opts = {
-    limit: req.body.limit,
-    type: req.body.theme,
-    term: req.body.value,
-  };
-
-  let result;
-
+// options에 맞는 멜론 차트 리스트를 가져옴
+const fetchData = async (opts) => {
   try {
     let parsedData = await melon.parse(opts);
-    result = await filtering(parsedData);
+    let result = await filtering(parsedData);
+    return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-
-  res.status(200).json({ success: true, result });
-});
+};
 
 router.post('/getByYear', async (req, res) => {
   let result = [];
   let year = Number(req.body.value);
-  let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 9;
+  let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 10;
 
-  for (let i = year; i <= finallYear; i++) {
+  for (let i = year; i < finallYear; i++) {
     const opts = {
       limit: req.body.limit,
       type: req.body.theme,
@@ -52,7 +45,7 @@ router.post('/getByYear', async (req, res) => {
       const parsedData = await melon.parse(opts);
       result.push(...parsedData);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -62,20 +55,24 @@ router.post('/getByYear', async (req, res) => {
   res.status(200).json({ success: true, result: filtered });
 });
 
+router.post('/getByArtist', async (req, res) => {
+  const opts = {
+    limit: req.body.limit,
+    type: req.body.theme,
+    term: req.body.value,
+  };
+
+  let result = await fetchData(opts);
+  res.status(200).json({ success: true, result });
+});
+
 router.post('/getByWeek', async (req, res) => {
   const opts = {
     limit: req.body.limit,
     type: req.body.theme,
   };
 
-  let result;
-  try {
-    const parsedData = await melon.parse(opts);
-    result = filtering(parsedData);
-  } catch (error) {
-    console.log(error);
-  }
-
+  let result = await fetchData(opts);
   res.status(200).json({ success: true, result });
 });
 

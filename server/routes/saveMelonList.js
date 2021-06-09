@@ -1,37 +1,28 @@
 var melon = require('melon-chart-parser');
 var fs = require('fs');
 
-const regex = /[(]/g;
-
-const filtering = (data) => {
-  const result = data.map((song) => ({
-    trackName: song.trackName.split(regex)[0],
-    artistName: song.artistName.split(regex)[0],
-  }));
-
-  return result;
-};
+const TARGET_YEAR = 2020;
+const CUTTER = /[(]/g;
 
 const finished = () => {
   console.log('finished!');
 };
 
-const saveFile = async () => {
-  try {
-    const data = await loggin();
-    const string = JSON.stringify(data);
-    fs.writeFile('melonList1990.json', string, finished);
-  } catch (err) {
-    console.log(err);
-  }
+const filtering = (data) => {
+  const result = data.map((song) => ({
+    rank: song.rank,
+    trackName: song.trackName.split(CUTTER)[0],
+    artistName: song.artistName.split(CUTTER)[0],
+  }));
+
+  return result;
 };
 
 const loggin = async () => {
-  let result = [];
-  let year = 1990;
-  let finallYear = year === 2020 ? 2020 : Number(year) + 10;
+  let result = {};
+  let finallYear = TARGET_YEAR === 2020 ? 2020 : Number(TARGET_YEAR) + 10;
 
-  for (let i = year; i <= finallYear; i++) {
+  for (let i = TARGET_YEAR; i < finallYear; i++) {
     const opts = {
       limit: 100,
       type: 'year',
@@ -41,13 +32,23 @@ const loggin = async () => {
     try {
       const data = await melon.parse(opts);
       let filtered = await filtering(data);
-      result.push(...filtered);
+      result[i] = filtered;
     } catch (err) {
       console.log(err);
     }
   }
 
   return result;
+};
+
+const saveFile = async () => {
+  try {
+    const data = await loggin();
+    const dataJson = JSON.stringify(data);
+    fs.writeFile(`melonList_${TARGET_YEAR}.json`, dataJson, finished);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 saveFile();
