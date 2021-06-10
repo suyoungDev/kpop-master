@@ -25,6 +25,7 @@ import { COLORS } from '../../constants/theme';
 const TOTAL_ROUND = 5;
 
 const GameLayout = ({ trackList }) => {
+  // eslint-disable-next-line
   const [isGameEnd, setIsGameEnd] = useContext(GameEndContext);
   const [gameResult, setGameResult] = useContext(GameResultContext);
 
