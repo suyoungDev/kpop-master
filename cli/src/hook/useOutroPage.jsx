@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 
 import { useSelector } from 'react-redux';
-import { GameResultContext } from '../../context/GameResultContext';
-import { TrackListToPlayContext } from '../../context/TrackListToPlayContext';
-import { AuthContext } from '../../context/AuthContext';
+import { GameResultContext } from '../context/GameResultContext';
+import { TrackListToPlayContext } from '../context/TrackListToPlayContext';
+import { AuthContext } from '../context/AuthContext';
 
 const useOutroPage = () => {
   const [userRankList, setUserRankList] = useState();

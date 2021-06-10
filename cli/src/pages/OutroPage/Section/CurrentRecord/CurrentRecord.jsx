@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { RiTimer2Line } from 'react-icons/ri';
 import { FiCheckCircle, FiX } from 'react-icons/fi';
@@ -11,6 +11,7 @@ import {
   TitleList,
 } from './CurrentRecord.styles';
 import useOutroPage from '../../../../hook/useOutroPage';
+import { GameResultContext } from '../../../../context/GameResultContext';
 
 const CurrentRecord = ({ averageResponseTime }) => {
   const { countAnswer } = useOutroPage();

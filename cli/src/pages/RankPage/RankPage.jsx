@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import axios from 'axios';
 
 import GameTitle from '../../components/GameTitle/GameTitle';
@@ -19,14 +19,14 @@ const RankPage = () => {
   useEffect(() => {
     fetchGameRecords();
     getCommentAll();
-  }, [getCommentAll, fetchGameRecords]);
+  }, []);
 
   const fetchGameRecords = useCallback(async () => {
     setIsLoading(true);
     try {
       const { data } = await axios.get('/api/game/getRecords');
       if (data.success) {
-        setUserRankList(res.data.gameRecordList);
+        setUserRankList(data.gameRecordList);
         setIsLoading(false);
       }
     } catch (error) {

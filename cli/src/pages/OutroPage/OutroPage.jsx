@@ -8,7 +8,8 @@ import OutroContent from './OutroContent';
 import useOutroPage from '../../hook/useOutroPage';
 
 const OutroPage = () => {
-  const { isLoading, userRankList, isLoggedIn } = useOutroPage();
+  const { isLoading, userRankList, isLoggedIn, averageResponseTime } =
+    useOutroPage();
 
   return (
     <Center>
