@@ -18,16 +18,6 @@ const useOutroPage = () => {
   const [trackListToPlay] = useContext(TrackListToPlayContext);
   const [isLoggedIn] = useContext(AuthContext);
 
-  useEffect(() => {
-    getAllGameRecords();
-    getNumberOfAnswers();
-
-    if (isLoggedIn) {
-      uploadRecordToDB();
-      getMyBestRecord();
-    }
-  }, [isLoggedIn]);
-
   const getMyBestRecord = () => {
     if (!isLoggedIn) return;
     const myRecord = userRankList.filter(
@@ -94,6 +84,16 @@ const useOutroPage = () => {
 
     await axios.post('/api/game/upload', gameData);
   };
+
+  useEffect(() => {
+    getAllGameRecords();
+    getNumberOfAnswers();
+
+    if (isLoggedIn) {
+      uploadRecordToDB();
+      getMyBestRecord();
+    }
+  });
 
   return {
     isLoading,
