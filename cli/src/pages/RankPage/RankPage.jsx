@@ -16,11 +16,6 @@ const RankPage = () => {
   const [getCommentAll, commnetList, isCommentLoading] =
     useContext(CommentContext);
 
-  useEffect(() => {
-    fetchGameRecords();
-    getCommentAll();
-  }, []);
-
   const fetchGameRecords = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -33,6 +28,12 @@ const RankPage = () => {
       console.error(error);
     }
   }, []);
+
+  useEffect(() => {
+    fetchGameRecords();
+    getCommentAll();
+    // eslint-disable-next-line
+  }, [fetchGameRecords]);
 
   return (
     <Center>

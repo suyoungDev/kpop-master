@@ -1,22 +1,24 @@
 import React from 'react';
-import SingleComment from '../SingleComment/SingleComment';
+import SingleCommentContainer from '../SingleComment/SingleCommentContainer';
 
 const CommentList = ({ commentListData }) => {
+  if (!commentListData) return null;
+
+  // 답글말고 오리지널 댓글만 보여줌 (toWhom이 없는 것)
   return (
     <>
-      {commentListData &&
-        commentListData.map(
-          (comment) =>
-            !comment.toWhom && (
-              <SingleComment
-                content={comment.content}
-                createdAt={comment.createdAt}
-                writer={comment.writer}
-                toWhat={comment._id}
-                key={comment._id}
-              />
-            )
-        )}
+      {commentListData.map(
+        (comment) =>
+          !comment.toWhom && (
+            <SingleCommentContainer
+              content={comment.content}
+              createdAt={comment.createdAt}
+              writer={comment.writer}
+              toWhat={comment._id}
+              key={comment._id}
+            />
+          )
+      )}
     </>
   );
 };

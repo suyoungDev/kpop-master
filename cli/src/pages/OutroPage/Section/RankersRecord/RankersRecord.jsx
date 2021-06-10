@@ -13,7 +13,7 @@ const RankersRecord = ({ userRankList, myRecord }) => {
 
   useEffect(() => {
     isLoggedIn && setCurrentUserName(user.userData.displayName);
-  }, [isLoggedIn]);
+  }, [isLoggedIn, user.userData.displayName]);
 
   const title = (
     <RankersTableTitle myRecord={myRecord} userRankList={userRankList} />
