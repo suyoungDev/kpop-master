@@ -4,7 +4,7 @@ K-pop의 전주만 듣고 노래제목을 맞추는 미니 게임 웹 어플리�
 
 ## 배포
 
-[플레이 하러 가기](https://kpopmaster.herokuapp.com/)
+**배포 중단**
 
 # ✨ 기획
 
