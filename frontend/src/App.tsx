@@ -1,12 +1,13 @@
 import React from 'react';
 import Main from '@P/Main';
+import GlobalStyle from './style/GlobalStyle';
 
 function App() {
   return (
-    <div className='App'>
-      hello world
+    <>
+      <GlobalStyle />
       <Main />
-    </div>
+    </>
   );
 }
 
