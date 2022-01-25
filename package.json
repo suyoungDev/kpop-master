@@ -4,8 +4,8 @@
   "description": "kpop master game with socket.io",
   "main": "./server/index.js",
   "engines": {
-    "node": "14.15.0",
-    "npm": "7.5.4"
+    "node": "14.17.4",
+    "npm": "7.20.5"
   },
   "scripts": {
     "start": "node server/index.js",
