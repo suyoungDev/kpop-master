@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@IMG/*": ["static/img/*"],
+      "@API/*": ["api/*", "api"],
+      "@RECOIL/*": ["recoil"],
+      "@DATA/*": ["data/*", "data"],
+      "@CONFIG/*": ["config/*", "config"],
+      "@FUNC/*": ["functions/*"],
+      "@HOOK/*": ["hooks/*"],
+      "@TS/*": ["types/*"],
+      "@C/*": ["components/container/*"],
+      "@F/*": ["components/foundation/*"],
+      "@P/*": ["components/page/*"],
+      "@/*": ["./*"]
+    }
+  }
+}
