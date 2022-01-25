@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import Main from '@P/Main';
 import { ThemeStyle } from '@TS/styles';
 import GlobalStyle from './style/GlobalStyle';
 import customTheme from './style/theme';
+import CustomRouter from './routes';
 
 function App() {
   const [theme, setTheme] = useState<ThemeStyle>('light');
@@ -13,12 +13,10 @@ function App() {
   }, []);
 
   return (
-    <>
-      <ThemeProvider theme={customTheme[theme]}>
-        <GlobalStyle />
-        <Main />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={customTheme[theme]}>
+      <GlobalStyle />
+      <CustomRouter />
+    </ThemeProvider>
   );
 }
 

@@ -4,14 +4,10 @@ to: src/components/page/<%= h.changeCase.pascalCase(name) %>/index.tsx
 import React from 'react';
 import * as S from './styles';
 
-export interface Props {
-  //...
-}
-
-const <%= h.changeCase.pascalCase(name) %> = ({}:Props): JSX.Element => {
+const <%= h.changeCase.pascalCase(name) %> = (): JSX.Element => {
   return (
     <S.Wrapper>
-      <%= h.changeCase.pascalCase(name) %> Foundation
+      <%= h.changeCase.pascalCase(name) %> Page
     </S.Wrapper>
   )
 };
