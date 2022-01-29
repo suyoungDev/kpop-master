@@ -14,7 +14,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   outline: none;
   width: 100%;
-  padding: 0.72rem 1.24rem;
+  padding: 0.72rem 1.25rem;
   color: ${({ theme }) => theme.ink.default};
   border: 1px solid ${({ theme }) => theme.ink.lighter};
   border-radius: 4px;

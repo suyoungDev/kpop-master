@@ -11,7 +11,7 @@ const light: Theme = {
   ink: {
     default: '#222222',
     light: '#D1D1D1',
-    lighter: '#E1E1E1',
+    lighter: '#f0f0f0',
     dark: '#666666',
     darker: '#444444',
   },
