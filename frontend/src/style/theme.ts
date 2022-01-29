@@ -1,5 +1,5 @@
 import media from './mediaQuery';
-import { Theme } from '@TS/styles';
+import { Theme } from '@emotion/react';
 
 const light: Theme = {
   colors: {
