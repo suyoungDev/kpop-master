@@ -1,4 +1,5 @@
 import { RecoilRoot } from 'recoil';
+import GlobalStyle from '../src/style/GlobalStyle';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -17,8 +18,9 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <RecoilRoot>
-      <Story />
-    </RecoilRoot>
+      <GlobalStyle />
+      <RecoilRoot>
+        <Story />
+      </RecoilRoot>
   ),
 ];
