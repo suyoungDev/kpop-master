@@ -9,11 +9,11 @@ const light: Theme = {
     warning: '#cd9500',
   },
   ink: {
-    default: '#222222',
-    light: '#D1D1D1',
-    lighter: '#f0f0f0',
-    dark: '#666666',
-    darker: '#444444',
+    lighter: '#c4c4c4',
+    light: '#a2a2a2',
+    default: '#828282',
+    dark: '#636363',
+    darker: '#464646',
   },
   background: {
     default: '#fff',
