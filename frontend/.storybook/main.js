@@ -14,6 +14,16 @@ module.exports = {
   },
 
   webpackFinal: async (config, { configType }) => {
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        plugins: ['emotion'],
+        presets: [['react-app', { flow: false, typescript: true }]],
+      },
+    });
+    config.resolve.extensions.push('.ts', '.tsx');
+
     return {
       ...config,
       resolve: {
@@ -33,6 +43,7 @@ module.exports = {
           '@P': path.resolve(__dirname, '../src/components/page/'),
           '@': path.resolve(__dirname, '../src'),
           '@emotion/core': toPath('node_modules/@emotion/react'),
+          '@emotion/styled': toPath('node_modules/@emotion/styled'),
         },
       },
     };

@@ -6,7 +6,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import <%= h.changeCase.pascalCase(name) %>, { Props } from './index';
 
 export default {
-  title: 'page/<%= h.changeCase.pascalCase(name) %>',
+  title: 'component/<%= h.changeCase.pascalCase(name) %>',
   components: <%= h.changeCase.pascalCase(name) %>,
 } as ComponentMeta<typeof <%= h.changeCase.pascalCase(name) %>>;
 

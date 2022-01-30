@@ -1,4 +1,4 @@
-wwwww---
+---
 to: src/components/container/<%= h.changeCase.pascalCase(name) %>/index.tsx
 ---
 import React from 'react';
