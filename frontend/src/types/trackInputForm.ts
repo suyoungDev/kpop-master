@@ -3,4 +3,5 @@ export interface trackInputsForm {
   placeholder: string;
   label: string;
   value: string;
+  required: boolean;
 }

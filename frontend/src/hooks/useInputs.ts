@@ -1,22 +1,38 @@
 import React, { useState, useCallback, ChangeEvent } from 'react';
 
-const useInputs = <T = string>(
-  initialValue: T,
-  resetValue?: T
-): [T, (e: ChangeEvent<unknown>) => void, () => void] => {
-  const [inputs, setInputs] = useState<T>(initialValue);
+const useInputs = <T = any>(
+  initialValue: T[],
+  resetValue: T,
+): {
+  inputs: T[];
+  setInputs: React.Dispatch<React.SetStateAction<T[]>>;
+  onChange: (idx: number) => (e: ChangeEvent<unknown>) => void;
+  onReset: (index: number) => void;
+} => {
+  const [inputs, setInputs] = useState<T[]>(initialValue);
 
-  const onChange = useCallback((e) => {
-    const { value, name } = e.target;
-    setInputs((prev) => ({ ...prev, [name]: value }));
+  const onChange = useCallback(
+    (index: number) => (e: any) => {
+      const temp = inputs.slice();
+      const { value, name } = e.target;
+
+      for (let i = 0; i < temp.length; i++) {
+        if (i === index) temp[i] = { ...temp[i], [name]: value };
+      }
+      setInputs(temp);
+    },
+    [inputs],
+  );
+
+  const onReset = useCallback((index: number) => {
+    const temp = inputs.slice();
+    for (let i = 0; i < temp.length; i++) {
+      if (i === index) temp[i] = resetValue;
+    }
+    setInputs(temp);
   }, []);
 
-  const onReset = useCallback(() => {
-    if (resetValue !== undefined) setInputs(resetValue);
-    else setInputs(initialValue);
-  }, []);
-
-  return [inputs, onChange, onReset];
+  return { inputs, onChange, onReset, setInputs };
 };
 
 export default useInputs;
