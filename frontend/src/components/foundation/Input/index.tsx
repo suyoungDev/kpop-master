@@ -6,14 +6,22 @@ export interface Props {
   label: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled: boolean;
+  placeholder?: string;
+  isLabelExist?: boolean;
+  disabled?: boolean;
 }
 
-const Input = ({ id, label, ...props }: Props): JSX.Element => {
+const Input = ({
+  id,
+  label,
+  disabled = false,
+  isLabelExist = false,
+  ...props
+}: Props): JSX.Element => {
   return (
     <S.Wrapper>
-      <S.Label htmlFor={id}>{label}</S.Label>
-      <S.Input type='text' id={id} {...props} />
+      {isLabelExist && <S.Label htmlFor={id}>{label}</S.Label>}
+      <S.Input type='text' name={id} id={id} disabled={disabled} {...props} />
     </S.Wrapper>
   );
 };

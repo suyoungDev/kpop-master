@@ -1,8 +1,8 @@
 import styled from '@emotion/styled/';
+import { row } from '@/style';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  ${row}
 `;
 
 export const Label = styled.label`
