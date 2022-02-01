@@ -9,6 +9,7 @@ const light: Theme = {
     warning: '#cd9500',
   },
   ink: {
+    buttonText: '#ffffff',
     lighter: '#c4c4c4',
     light: '#a2a2a2',
     default: '#828282',
@@ -43,6 +44,8 @@ const dark: Theme = {
     warning: '#cd9500',
   },
   ink: {
+    buttonText: '#ffffff',
+
     default: '#222222',
     light: '#D1D1D1',
     lighter: '#E1E1E1',
@@ -75,6 +78,7 @@ const oldSchool: Theme = {
     warning: '#cd9500',
   },
   ink: {
+    buttonText: '#ffffff',
     default: '#222222',
     light: '#D1D1D1',
     lighter: '#E1E1E1',

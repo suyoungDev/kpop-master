@@ -12,7 +12,7 @@ export const Button = styled.button`
   border-radius: 4px;
   background-color: ${({ theme }) => theme.primary.default};
 
-  color: ${({ theme }) => theme.ink.lighter};
+  color: ${({ theme }) => theme.ink.buttonText};
   transition: all 0.3s ease;
 
   cursor: pointer;
