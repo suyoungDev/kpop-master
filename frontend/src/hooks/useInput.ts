@@ -2,8 +2,13 @@ import React, { useState, useCallback, ChangeEvent } from 'react';
 
 const useInput = <T = string>(
   initialValue: T,
-  resetValue?: T
-): [T, (e: ChangeEvent<unknown>) => void, () => void] => {
+  resetValue?: T,
+): {
+  input: T;
+  onChange: (e: ChangeEvent<unknown>) => void;
+  onReset: () => void;
+  setInput: React.Dispatch<React.SetStateAction<T>>;
+} => {
   const [input, setInput] = useState<T>(initialValue);
 
   const onChange = useCallback((e) => {
@@ -15,7 +20,7 @@ const useInput = <T = string>(
     else setInput(initialValue);
   }, []);
 
-  return [input, onChange, onReset];
+  return { input, onChange, onReset, setInput };
 };
 
 export default useInput;

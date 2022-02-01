@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = (args: Props) => {
-  const [value, setValue] = useInput('');
+  const { input: value, onChange: setValue } = useInput('');
   return <Input {...args} value={value} onChange={setValue} />;
 };
 
