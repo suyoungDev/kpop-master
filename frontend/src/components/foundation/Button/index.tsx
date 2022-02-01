@@ -3,12 +3,18 @@ import * as S from './styles';
 
 export interface Props {
   label: string;
-  onClick: () => void;
-  disabled: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: 'submit' | 'button' | 'reset';
+  title?: 'string';
 }
 
-const Button = ({ label, ...props }: Props): JSX.Element => {
-  return <S.Button {...props}>{label}</S.Button>;
+const Button = ({ label, type = 'button', disabled = false, ...props }: Props): JSX.Element => {
+  return (
+    <S.Button {...props} disabled={disabled} type={type}>
+      {label}
+    </S.Button>
+  );
 };
 
 export default Button;
