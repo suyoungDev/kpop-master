@@ -7,9 +7,10 @@ import * as S from './styles';
 export interface Props {
   values: TrackInfo;
   setValues: (e: React.ChangeEvent<unknown>) => void;
+  children?: React.ReactNode;
 }
 
-const TrackForm = ({ values, setValues }: Props): JSX.Element => {
+const TrackForm = ({ values, setValues, children }: Props): JSX.Element => {
   const { trackName, artistName, videoId } = values;
 
   const TRACK_INPUTS_FORM: trackInputsForm[] = [
@@ -39,10 +40,9 @@ const TrackForm = ({ values, setValues }: Props): JSX.Element => {
   return (
     <S.Wrapper>
       {TRACK_INPUTS_FORM.map((trackInput) => (
-        <div key={trackInput.id}>
-          <Input {...trackInput} onChange={setValues} />
-        </div>
+        <Input {...trackInput} onChange={setValues} key={trackInput.id} />
       ))}
+      {children}
     </S.Wrapper>
   );
 };

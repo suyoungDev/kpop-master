@@ -8,6 +8,7 @@ const useInputs = <T = any>(
   setInputs: React.Dispatch<React.SetStateAction<T[]>>;
   onChange: (idx: number) => (e: ChangeEvent<unknown>) => void;
   onReset: (index: number) => void;
+  excludeByIndex: (index: number) => void;
 } => {
   const [inputs, setInputs] = useState<T[]>(initialValue);
 
@@ -24,15 +25,27 @@ const useInputs = <T = any>(
     [inputs],
   );
 
-  const onReset = useCallback((index: number) => {
-    const temp = inputs.slice();
-    for (let i = 0; i < temp.length; i++) {
-      if (i === index) temp[i] = resetValue;
-    }
-    setInputs(temp);
-  }, []);
+  const onReset = useCallback(
+    (index: number) => {
+      const temp = inputs.slice();
+      for (let i = 0; i < temp.length; i++) {
+        if (i === index) temp[i] = resetValue;
+      }
 
-  return { inputs, onChange, onReset, setInputs };
+      setInputs(temp);
+    },
+    [inputs],
+  );
+
+  const excludeByIndex = useCallback(
+    (index: number) => {
+      const temp = inputs.slice().filter((_, idx) => idx !== index);
+      setInputs(temp);
+    },
+    [inputs],
+  );
+
+  return { inputs, onChange, onReset, setInputs, excludeByIndex };
 };
 
 export default useInputs;

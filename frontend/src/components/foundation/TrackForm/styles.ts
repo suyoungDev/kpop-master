@@ -12,3 +12,7 @@ export const Wrapper = styled.div`
     }
   }
 `;
+
+export const ChildrenWrapper = styled.div`
+  ${row};
+`;
