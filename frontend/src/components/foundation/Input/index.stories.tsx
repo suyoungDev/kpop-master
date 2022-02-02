@@ -14,14 +14,14 @@ const Template: ComponentStory<typeof Input> = (args: Props) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {
-  id: 'test',
-  label: 'input test',
-};
+Default.args = {};
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  id: 'test',
-  label: 'input test',
   disabled: true,
+};
+
+export const UnderLine = Template.bind({});
+UnderLine.args = {
+  variant: 'underLine',
 };

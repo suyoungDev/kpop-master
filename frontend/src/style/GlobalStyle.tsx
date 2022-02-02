@@ -19,8 +19,11 @@ const GlobalStyle = () => {
         ul {
           list-style: none;
         }
-        button: {
+        button {
           font-family: inherit;
+        }
+        input {
+          outline: none;
         }
       `}
     />
