@@ -1,7 +1,13 @@
 import { column, row } from '@/style';
 import styled from '@emotion/styled/';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  form {
+    > button {
+      margin-top: 3rem;
+    }
+  }
+`;
 
 export const ListWrapper = styled.div`
   ${column};
