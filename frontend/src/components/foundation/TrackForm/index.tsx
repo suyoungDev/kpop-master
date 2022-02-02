@@ -39,9 +39,11 @@ const TrackForm = ({ values, setValues, children }: Props): JSX.Element => {
 
   return (
     <S.Wrapper>
-      {TRACK_INPUTS_FORM.map((trackInput) => (
-        <Input {...trackInput} onChange={setValues} key={trackInput.id} />
-      ))}
+      <S.InputWrapper>
+        {TRACK_INPUTS_FORM.map((trackInput) => (
+          <Input {...trackInput} onChange={setValues} key={trackInput.id} />
+        ))}
+      </S.InputWrapper>
       {children}
     </S.Wrapper>
   );

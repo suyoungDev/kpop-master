@@ -6,15 +6,14 @@ import { row } from '@/style';
 
 interface Props {
   title: string;
-  onClick: () => void;
   changeTitle: () => void;
 }
 
-const TitleModule = ({ title, onClick, changeTitle }: Props): JSX.Element => {
+const TitleModule = ({ title, changeTitle }: Props): JSX.Element => {
   return (
     <Wrapper onDoubleClick={changeTitle}>
       <h2>{title}</h2>
-      <IconButton onClick={onClick} title="작성하기">
+      <IconButton onClick={changeTitle} title="작성하기">
         <BiPencil />
       </IconButton>
     </Wrapper>
@@ -24,5 +23,20 @@ const TitleModule = ({ title, onClick, changeTitle }: Props): JSX.Element => {
 export default TitleModule;
 
 const Wrapper = styled.div`
-  ${row}
+  ${row};
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  h2 {
+    padding: 0 1.25rem;
+  }
+  :hover {
+    h2 {
+      color: ${({ theme }) => theme.ink.darker};
+    }
+    svg {
+      fill: ${({ theme }) => theme.primary.darker};
+    }
+  }
 `;

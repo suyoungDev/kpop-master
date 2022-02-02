@@ -6,12 +6,12 @@ export interface Props {
   onClick?: () => void;
   disabled?: boolean;
   type?: 'submit' | 'button' | 'reset';
-  title?: 'string';
+  title?: string;
 }
 
 const Button = ({ label, type = 'button', disabled = false, ...props }: Props): JSX.Element => {
   return (
-    <S.Button {...props} disabled={disabled} type={type}>
+    <S.Button disabled={disabled} type={type} {...props}>
       {label}
     </S.Button>
   );

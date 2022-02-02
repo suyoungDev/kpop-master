@@ -19,3 +19,7 @@ export const center = css`
 export const transition = css`
   transition: all ease 0.3s;
 `;
+export const spaceBetween = css`
+  display: flex;
+  justify-content: space-between;
+`;

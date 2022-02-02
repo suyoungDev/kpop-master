@@ -54,7 +54,7 @@ const TitleInput = ({}: Props): JSX.Element => {
           placeholder="플레이리스트 이름"
         />
       ) : (
-        <TitleModule title={title} onClick={changeTitle} changeTitle={changeTitle} />
+        <TitleModule title={title} changeTitle={changeTitle} />
       )}
     </S.Wrapper>
   );
