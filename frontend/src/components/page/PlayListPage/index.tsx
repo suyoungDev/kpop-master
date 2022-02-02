@@ -42,7 +42,7 @@ const PlayListPage = (): JSX.Element => {
       <form onSubmit={submitPlaylist}>
         <S.ListWrapper>
           {playlist.map((track, index) => (
-            <TrackForm values={track} setValues={changePlaylist(index)} key={`track_${index}`}>
+            <TrackForm track={track} setTrack={changePlaylist(index)} key={`track_${index}`}>
               <Button
                 label="취소"
                 type="reset"

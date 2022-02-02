@@ -5,13 +5,13 @@ import { trackInputsForm } from '@TS/trackInputForm';
 import * as S from './styles';
 
 export interface Props {
-  values: TrackInfo;
-  setValues: (e: React.ChangeEvent<unknown>) => void;
+  track: TrackInfo;
+  setTrack: (e: React.ChangeEvent<unknown>) => void;
   children?: React.ReactNode;
 }
 
-const TrackForm = ({ values, setValues, children }: Props): JSX.Element => {
-  const { trackName, artistName, videoId } = values;
+const TrackForm = ({ track, setTrack, children }: Props): JSX.Element => {
+  const { trackName, artistName, videoId } = track;
 
   const TRACK_INPUTS_FORM: trackInputsForm[] = [
     {
@@ -41,7 +41,7 @@ const TrackForm = ({ values, setValues, children }: Props): JSX.Element => {
     <S.Wrapper>
       <S.InputWrapper>
         {TRACK_INPUTS_FORM.map((trackInput) => (
-          <Input {...trackInput} onChange={setValues} key={trackInput.id} />
+          <Input {...trackInput} onChange={setTrack} key={trackInput.id} />
         ))}
       </S.InputWrapper>
       {children}

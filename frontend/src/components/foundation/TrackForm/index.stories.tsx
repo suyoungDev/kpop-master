@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof TrackForm> = (args: Props) => {
   return (
     <div>
       {inputs.map((input, idx) => (
-        <TrackForm values={input} setValues={onChange(idx)} key={idx} />
+        <TrackForm track={input} setTrack={onChange(idx)} key={idx} />
       ))}
     </div>
   );
