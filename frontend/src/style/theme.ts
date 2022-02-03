@@ -1,6 +1,12 @@
 import media from './mediaQuery';
 import { Theme } from '@emotion/react';
 
+const fontSize = {
+  default: 'font-size: 1rem;',
+  small: 'font-size: 0.8rem; font-weight: 300;',
+  big: 'font-size: 1.25rem;',
+};
+
 const light: Theme = {
   colors: {
     success: '#67c23a',
@@ -34,6 +40,9 @@ const light: Theme = {
     default: '#82cbcb',
     dark: '#69beaf',
     darker: '#5cb08d',
+  },
+  font: {
+    ...fontSize,
   },
 };
 
@@ -73,6 +82,9 @@ const dark: Theme = {
     dark: '#69beaf',
     darker: '#5cb08d',
   },
+  font: {
+    ...fontSize,
+  },
 };
 const oldSchool: Theme = {
   colors: {
@@ -107,6 +119,9 @@ const oldSchool: Theme = {
     default: '#82cbcb',
     dark: '#69beaf',
     darker: '#5cb08d',
+  },
+  font: {
+    ...fontSize,
   },
 };
 
