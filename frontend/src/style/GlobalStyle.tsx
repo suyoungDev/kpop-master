@@ -20,7 +20,10 @@ const GlobalStyle = () => {
           list-style: none;
         }
         button {
-          font-family: inherit;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          padding: 0;
         }
         input {
           outline: none;
