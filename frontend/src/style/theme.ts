@@ -22,16 +22,18 @@ const light: Theme = {
     modal: 'rgba(0,0,0,0.5)',
   },
   primary: {
-    default: '#868BFF',
-    light: '#6C63FF',
-    lighter: '#E1E3FE',
-    dark: '#4F53C5',
-    darker: '#8d8dff',
+    lighter: '#e1e3fe',
+    light: '#b3b7ff',
+    default: '#868bff',
+    dark: '#6569d4',
+    darker: '#4448ab',
   },
   secondary: {
-    default: '#FFEBB5',
-    light: '#FFEBB5',
-    dark: '#FFD978',
+    lighter: '#c4e2ef',
+    light: '#a2d6e1',
+    default: '#82cbcb',
+    dark: '#69beaf',
+    darker: '#5cb08d',
   },
 };
 
@@ -65,9 +67,11 @@ const dark: Theme = {
     darker: '#8d8dff',
   },
   secondary: {
-    default: '#FFEBB5',
-    light: '#FFEBB5',
-    dark: '#FFD978',
+    lighter: '#c4e2ef',
+    light: '#a2d6e1',
+    default: '#82cbcb',
+    dark: '#69beaf',
+    darker: '#5cb08d',
   },
 };
 const oldSchool: Theme = {
@@ -98,9 +102,11 @@ const oldSchool: Theme = {
     darker: '#8d8dff',
   },
   secondary: {
-    default: '#FFEBB5',
-    light: '#FFEBB5',
-    dark: '#FFD978',
+    lighter: '#c4e2ef',
+    light: '#a2d6e1',
+    default: '#82cbcb',
+    dark: '#69beaf',
+    darker: '#5cb08d',
   },
 };
 

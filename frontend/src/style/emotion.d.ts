@@ -7,6 +7,6 @@ declare module '@emotion/react' {
     ink: { [k in Dim]: string } & { buttonText: string };
     background: { [k in Extract<Dim, 'default' | 'light'> | 'modal']: string };
     primary: { [k in Dim]: string };
-    secondary: { [k in Extract<Dim, 'default' | 'light' | 'dark'>]: string };
+    secondary: { [k in Dim]: string };
   }
 }
