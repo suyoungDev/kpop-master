@@ -1,15 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import * as S from './styles';
 import Tag from '@F/Tag';
 
 export interface Props {
-  //...
+  tags: string[];
+  setTags: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const DIVIDING_KEYWORD = [',', 'Enter'];
-const TagInputs = ({}: Props): JSX.Element => {
-  const [tags, setTags] = useState<string[]>([]);
+const TagInputs = ({ tags, setTags }: Props): JSX.Element => {
   const [input, setInput] = useState('');
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const catchTags = useCallback(
     (e: React.KeyboardEvent<unknown>) => {
@@ -36,12 +37,16 @@ const TagInputs = ({}: Props): JSX.Element => {
     setTags((prev) => prev.filter((_, idx) => idx !== index));
   }, []);
 
+  const focusOnInput = useCallback(() => {
+    if (inputRef && inputRef.current) inputRef.current.focus();
+  }, []);
+
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={focusOnInput}>
       {tags.map((tag, idx) => (
         <Tag key={tag} label={tag} deleteTag={() => deleteTag(idx)} />
       ))}
-      <S.Input value={input} onChange={typingTag} onKeyDown={catchTags} autoFocus />
+      <S.Input value={input} onChange={typingTag} onKeyDown={catchTags} ref={inputRef} />
     </S.Wrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import TrackForm from '@F/TrackForm';
 import PageTitle from '@F/PageTitle';
 import Button from '@F/Button';
@@ -9,6 +9,7 @@ import * as S from './styles';
 
 const MINIMUM_PLAYLIST_NUMBER = 5;
 const PlayListPage = (): JSX.Element => {
+  const [tags, setTags] = useState<string[]>([]);
   const {
     inputs: playlist,
     setInputs: setPlaylist,
@@ -45,7 +46,7 @@ const PlayListPage = (): JSX.Element => {
           <span title="태그로 쉽게 검색 할 수 있습니다.">#tag</span>
         </div>
         <section>
-          <TagInputs />
+          <TagInputs tags={tags} setTags={setTags} />
         </section>
       </S.TagListWrapper>
 

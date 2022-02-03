@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TagInputs, { Props } from './index';
 
@@ -7,7 +7,10 @@ export default {
   components: TagInputs,
 } as ComponentMeta<typeof TagInputs>;
 
-const Template: ComponentStory<typeof TagInputs> = (args: Props) => <TagInputs {...args} />;
+const Template: ComponentStory<typeof TagInputs> = (args: Props) => {
+  const [tags, setTags] = useState<string[]>([]);
+  return <TagInputs tags={tags} setTags={setTags} />;
+};
 
 export const Default = Template.bind({});
 Default.args = {

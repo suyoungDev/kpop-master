@@ -32,9 +32,11 @@ export const TagListWrapper = styled.div`
   margin-bottom: 2rem;
 
   > div {
+    cursor: default;
     padding: 0.3rem 0.8rem;
     grid-area: label;
     span {
+      user-select: none;
       color: ${({ theme }) => theme.ink.default};
       ${({ theme }) => theme.font.small};
     }
