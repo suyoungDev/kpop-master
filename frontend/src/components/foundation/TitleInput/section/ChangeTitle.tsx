@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styled from '@emotion/styled';
 import Button from '@F/Button';
 import { row } from '@/style';
@@ -7,7 +7,7 @@ import Input from '@F/Input';
 interface Props {
   title: string;
   placeholder: string;
-  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCancel: () => void;
   onSubmit: (e: React.FormEvent) => void;
 }
