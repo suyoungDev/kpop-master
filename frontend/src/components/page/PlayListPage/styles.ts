@@ -20,3 +20,23 @@ export const ListWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   ${row}
 `;
+
+export const TagListWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-areas: 'label tags';
+  grid-gap: 1rem;
+
+  border-bottom: 1px solid ${({ theme }) => theme.ink.lighter};
+  margin-bottom: 2rem;
+
+  > div {
+    padding: 0.3rem 0.8rem;
+    grid-area: label;
+    span {
+      color: ${({ theme }) => theme.ink.default};
+      ${({ theme }) => theme.font.small};
+    }
+  }
+`;

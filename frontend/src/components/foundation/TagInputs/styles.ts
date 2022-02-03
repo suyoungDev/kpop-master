@@ -13,11 +13,10 @@ export const Wrapper = styled.div`
   }
 
   padding-bottom: 0.2rem;
-  border-bottom: 1px solid ${({ theme }) => theme.secondary.light};
 `;
 
 export const Input = styled.input`
   margin-left: 0.2rem;
   padding: 0.4rem;
-  color: ${({ theme }) => theme.secondary.dark};
+  color: ${({ theme }) => theme.ink.default};
 `;

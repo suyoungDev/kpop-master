@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
 import TrackForm from '@F/TrackForm';
 import PageTitle from '@F/PageTitle';
-import * as S from './styles';
+import Button from '@F/Button';
+import TagInputs from '@F/TagInputs';
 import useInputs from '@HOOK/useInputs';
 import { TrackInfo } from '@TS/track';
-import Button from '@F/Button';
+import * as S from './styles';
 
 const MINIMUM_PLAYLIST_NUMBER = 5;
 const PlayListPage = (): JSX.Element => {
@@ -38,6 +39,15 @@ const PlayListPage = (): JSX.Element => {
       <PageTitle onButtonClick={appendPlaylist} buttonTitle="플레이리스트 추가">
         유저가 직접 만드는 플레이리스트
       </PageTitle>
+
+      <S.TagListWrapper>
+        <div>
+          <span title="태그로 쉽게 검색 할 수 있습니다.">#tag</span>
+        </div>
+        <section>
+          <TagInputs />
+        </section>
+      </S.TagListWrapper>
 
       <form onSubmit={submitPlaylist}>
         <S.ListWrapper>

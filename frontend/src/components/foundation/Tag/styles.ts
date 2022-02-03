@@ -10,8 +10,7 @@ export const Wrapper = styled.div`
   margin-bottom: 0.2rem;
 
   span {
-    font-weight: 300;
-    font-size: 0.8rem;
+    ${({ theme }) => theme.font.small};
     margin-right: 0.3rem;
     color: ${({ theme }) => theme.background.default};
   }
