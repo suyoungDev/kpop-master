@@ -16,15 +16,15 @@ const TrackForm = ({ track, setTrack, children }: Props): JSX.Element => {
   const TRACK_INPUTS_FORM: trackInputsForm[] = [
     {
       id: 'artistName',
-      placeholder: '가수 이름',
-      label: '가수 이름',
+      placeholder: '아티스트',
+      label: '아티스트',
       value: artistName,
       required: true,
     },
     {
       id: 'trackName',
-      placeholder: '노래제목',
-      label: '노래제목',
+      placeholder: '노래 제목',
+      label: '노래 제목',
       value: trackName,
       required: true,
     },
