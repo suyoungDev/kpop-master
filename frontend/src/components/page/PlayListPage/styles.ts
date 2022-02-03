@@ -1,4 +1,4 @@
-import { column, row } from '@/style';
+import { column, row, smallText } from '@/style';
 import styled from '@emotion/styled/';
 
 export const Wrapper = styled.div`
@@ -38,7 +38,7 @@ export const TagListWrapper = styled.div`
     span {
       user-select: none;
       color: ${({ theme }) => theme.ink.default};
-      ${({ theme }) => theme.font.small};
+      ${smallText}
     }
   }
 `;

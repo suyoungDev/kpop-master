@@ -1,4 +1,4 @@
-import { center, row, spaceBetween, transition } from '@/style';
+import { center, row, smallText, spaceBetween, transition } from '@/style';
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   margin-bottom: 0.2rem;
 
   span {
-    ${({ theme }) => theme.font.small};
+    ${smallText}
     margin-right: 0.3rem;
     color: ${({ theme }) => theme.background.default};
   }

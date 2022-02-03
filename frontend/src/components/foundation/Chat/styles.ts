@@ -1,10 +1,10 @@
 import { Props } from './index';
 import styled from '@emotion/styled';
-import { row } from '@/style';
+import { defaultText, row, smallText } from '@/style';
 
 export const Wrapper = styled.div<Pick<Props, 'isReceived'>>`
   ${row};
-  ${({ theme }) => theme.font.default};
+  ${defaultText};
   padding: 0.7rem;
   border-radius: 10px;
   border: 1px solid transparent;
@@ -19,7 +19,7 @@ export const Wrapper = styled.div<Pick<Props, 'isReceived'>>`
 
   span {
     margin-right: 0.8rem;
-    ${({ theme }) => theme.font.small};
+    ${smallText};
     color: ${({ theme }) => theme.ink.default};
   }
   p {

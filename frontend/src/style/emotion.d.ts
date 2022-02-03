@@ -8,6 +8,5 @@ declare module '@emotion/react' {
     background: { [k in Extract<Dim, 'default' | 'light'> | 'modal']: string };
     primary: { [k in Dim]: string };
     secondary: { [k in Dim]: string };
-    font: { [K in Size]: string };
   }
 }

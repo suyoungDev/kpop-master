@@ -24,3 +24,14 @@ export const spaceBetween = css`
   display: flex;
   justify-content: space-between;
 `;
+
+export const smallText = css`
+  font-size: 0.8rem;
+  font-weight: 300;
+`;
+export const defaultText = css`
+  font-size: 1rem;
+`;
+export const bigText = css`
+  font-size: 1.2rem;
+`;

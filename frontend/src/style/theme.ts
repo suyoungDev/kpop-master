@@ -1,12 +1,6 @@
 import media from './mediaQuery';
 import { Theme } from '@emotion/react';
 
-const fontSize = {
-  default: 'font-size: 1rem;',
-  small: 'font-size: 0.8rem; font-weight: 300;',
-  big: 'font-size: 1.25rem;',
-};
-
 const light: Theme = {
   colors: {
     success: '#67c23a',
@@ -41,9 +35,6 @@ const light: Theme = {
     dark: '#69beaf',
     darker: '#5cb08d',
   },
-  font: {
-    ...fontSize,
-  },
 };
 
 // TODO: dark, oldSchool은 다 light와 동일함. 나중에 수정할 것
@@ -56,7 +47,6 @@ const dark: Theme = {
   },
   ink: {
     buttonText: '#ffffff',
-
     default: '#222222',
     light: '#D1D1D1',
     lighter: '#E1E1E1',
@@ -81,9 +71,6 @@ const dark: Theme = {
     default: '#82cbcb',
     dark: '#69beaf',
     darker: '#5cb08d',
-  },
-  font: {
-    ...fontSize,
   },
 };
 const oldSchool: Theme = {
@@ -119,9 +106,6 @@ const oldSchool: Theme = {
     default: '#82cbcb',
     dark: '#69beaf',
     darker: '#5cb08d',
-  },
-  font: {
-    ...fontSize,
   },
 };
 
