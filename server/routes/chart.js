@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const melon = require('melon-chart-parser');
+const { successResponse, failResponse } = require('../function/response');
 
 const Song = require('../model/SongsOfYear.js');
 
@@ -37,17 +38,10 @@ router.get('/byTheme', async (req, res) => {
 
     const parsedData = await melon.parse(options);
     const result = getRandomSongs(parsedData, quantity);
-    return res.status(200).json({
-      success: true,
-      quantity,
-      level,
-      result,
-    });
+    return successResponse(res)({ quantity, level, result });
   } catch (error) {
     console.error(error);
-    return res
-      .status(400)
-      .json({ success: false, error: 'please fill the correct format' });
+    return failResponse(res, 'please fill the correct format');
   }
 });
 
@@ -62,39 +56,27 @@ router.get('/byYear', async (req, res) => {
         year: targetYear,
         genre: 'KPOP',
       };
+
       const parsedData = await melon.parse(options);
-      const result = getRandomSongs(parsedData, quantity);
-      return res.status(200).json({
-        success: true,
-        quantity,
-        level,
-        targetYear,
-        result,
-      });
+      const trackList = getRandomSongs(parsedData, quantity);
+
+      return successResponse(res)({ quantity, level, targetYear, trackList });
     } else {
       const targetEra = `year${targetYear}`;
       Song[targetEra].find().exec((err, song) => {
-        if (err) return res.status(400).send(err).json({ success: false });
+        if (err) return failResponse(res, err);
 
         const sortedByLevel = song
           .sort((a, b) => a.rank - b.rank)
           .slice(0, LEVEL[level]);
-        const result = getRandomSongs(sortedByLevel, quantity);
+        const trackList = getRandomSongs(sortedByLevel, quantity);
 
-        return res.status(200).json({
-          success: true,
-          quantity,
-          level,
-          targetYear,
-          result,
-        });
+        return successResponse(res)({ quantity, level, targetYear, trackList });
       });
     }
   } catch (error) {
     console.error(error);
-    return res
-      .status(400)
-      .json({ success: false, error: 'something went wrong' });
+    return failResponse(res, 'something went wrong');
   }
 });
 

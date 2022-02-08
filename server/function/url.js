@@ -1,4 +1,4 @@
-const { Url } = require('../model/YoutubeUrl');
+const { Url } = require('../model/Url');
 
 const getExistTrack = async (query) => {
   return await Url.find(query).exec();

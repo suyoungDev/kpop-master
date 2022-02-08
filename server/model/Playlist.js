@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const UrlSchema = require('./YoutubeUrl');
 
 const playlistSchema = new mongoose.Schema(
   {
