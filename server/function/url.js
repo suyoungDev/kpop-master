@@ -1,11 +1,12 @@
 const { Url } = require('../model/Url');
 
-const getExistTrack = async (query) => {
-  return await Url.find(query).exec();
+// TODO: regex로 검색하기
+const getExistTrack = (query) => {
+  return Url.find(query).exec();
 };
 
-const isExistTrack = async (query) => {
-  return await Url.exists(query);
+const isExistTrack = (query) => {
+  return Url.exists(query);
 };
 
 module.exports = { getExistTrack, isExistTrack };
