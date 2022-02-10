@@ -14,7 +14,9 @@ const TagInputs = ({ tags, setTags }: Props): JSX.Element => {
 
   const catchTags = useCallback(
     (e: React.KeyboardEvent<unknown>) => {
-      const key = e.key;
+      const key = e.nativeEvent.code;
+
+      if (e.nativeEvent.isComposing) return;
       if (DIVIDING_KEYWORD.includes(key)) {
         const lastTag = input.split(key).pop();
         if (!lastTag) return;
