@@ -7,7 +7,8 @@ import useInputs from '@HOOK/useInputs';
 import { TrackInfo } from '@TS/track';
 import * as S from './styles';
 
-const MINIMUM_PLAYLIST_NUMBER = 5;
+const MINIMUM_PLAYLIST = 10;
+const MAXIMUM_PLAYLIST = 100;
 const PlayListPage = (): JSX.Element => {
   const [tags, setTags] = useState<string[]>([]);
   const {
@@ -19,7 +20,7 @@ const PlayListPage = (): JSX.Element => {
   } = useInputs<TrackInfo>(FORM_ARRAY, FORM);
 
   const appendPlaylist = useCallback(() => {
-    setPlaylist((prev) => [...prev, FORM]);
+    setPlaylist((prev) => (prev.length <= MAXIMUM_PLAYLIST ? [...prev, FORM] : prev));
   }, []);
 
   const submitPlaylist = useCallback((event) => {
@@ -29,7 +30,7 @@ const PlayListPage = (): JSX.Element => {
 
   const deleteByIndex = useCallback(
     (index: number) => {
-      if (playlist.length > MINIMUM_PLAYLIST_NUMBER) excludeByIndex(index);
+      if (playlist.length > MINIMUM_PLAYLIST) excludeByIndex(index);
       // TODO: Error modal 띄우기
     },
     [playlist],
@@ -65,7 +66,9 @@ const PlayListPage = (): JSX.Element => {
           ))}
         </S.ListWrapper>
 
-        <Button label="저장" type="submit" title={`최소 ${MINIMUM_PLAYLIST_NUMBER}개이상은 해야합니다.`} />
+        {/* TODO: reCATCHA 설정하기 */}
+
+        <Button label="저장" type="submit" title={`최소 ${MINIMUM_PLAYLIST}개이상은 해야합니다.`} />
       </form>
     </S.Wrapper>
   );
@@ -74,4 +77,4 @@ const PlayListPage = (): JSX.Element => {
 export default PlayListPage;
 
 const FORM: TrackInfo = { trackName: '', artistName: '', videoId: '' };
-const FORM_ARRAY: TrackInfo[] = Array.from({ length: 5 }, () => FORM);
+const FORM_ARRAY: TrackInfo[] = Array.from({ length: MINIMUM_PLAYLIST }, () => FORM);
