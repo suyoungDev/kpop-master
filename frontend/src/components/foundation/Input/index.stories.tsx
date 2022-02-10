@@ -6,6 +6,13 @@ import useInput from '@HOOK/useInput';
 export default {
   title: 'foundation/Input',
   components: Input,
+  parameters: {
+    docs: {
+      description: {
+        component: '기본 인풋',
+      },
+    },
+  },
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = (args: Props) => {

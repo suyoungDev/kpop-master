@@ -7,6 +7,13 @@ import { TrackInfo } from '@TS/track';
 export default {
   title: 'foundation/TrackForm',
   components: TrackForm,
+  parameters: {
+    docs: {
+      description: {
+        component: 'custom theme에 쓰이는 컴포넌트',
+      },
+    },
+  },
 } as ComponentMeta<typeof TrackForm>;
 
 const FORM: TrackInfo = { trackName: '', artistName: '', videoId: '' };
