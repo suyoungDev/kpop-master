@@ -6,46 +6,42 @@ import useInput from '@HOOK/useInput';
 
 // TODO: chatList props 설정 & api
 export interface Props {
-  // ...
+	// ...
 }
 
 const ChatRoom = ({}: Props): JSX.Element => {
-  const { input, onChange, onReset } = useInput('');
-  const [buttonLabelIndex, setButtonLabelIndex] = useState(0);
+	const { input, onChange, onReset } = useInput('');
+	const [buttonLabelIndex, setButtonLabelIndex] = useState(0);
 
-  const sendingMessage = useCallback(() => {
-    // TODO: api 보내기
-    onReset();
-  }, []);
+	const sendingMessage = useCallback(() => {
+		// TODO: api 보내기
+		onReset();
+	}, []);
 
-  const generateRandomLabelIndex = useCallback(() => {
-    const length = RANDOM_LABEL.length;
-    const randomNumber = Math.floor(Math.random() * length);
-    setButtonLabelIndex((prev) =>
-      prev === randomNumber
-        ? randomNumber + 1 <= length
-          ? randomNumber + 1
-          : randomNumber - 1
-        : randomNumber,
-    );
-  }, []);
+	const generateRandomLabelIndex = useCallback(() => {
+		const length = RANDOM_LABEL.length;
+		const randomNumber = Math.floor(Math.random() * length);
+		setButtonLabelIndex((prev) =>
+			prev === randomNumber ? (randomNumber + 1 <= length ? randomNumber + 1 : randomNumber - 1) : randomNumber,
+		);
+	}, []);
 
-  return (
-    <>
-      {/* chatList 작성 */}
+	return (
+		<>
+			{/* chatList 작성 */}
 
-      <S.Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          sendingMessage();
-          generateRandomLabelIndex();
-        }}
-      >
-        <ChattingTextArea message={input} onChange={onChange} />
-        <button type="submit">{RANDOM_LABEL[buttonLabelIndex]}</button>
-      </S.Form>
-    </>
-  );
+			<S.Form
+				onSubmit={(e) => {
+					e.preventDefault();
+					sendingMessage();
+					generateRandomLabelIndex();
+				}}
+			>
+				<ChattingTextArea message={input} onChange={onChange} />
+				<button type="submit">{RANDOM_LABEL[buttonLabelIndex]}</button>
+			</S.Form>
+		</>
+	);
 };
 
 export default ChatRoom;
