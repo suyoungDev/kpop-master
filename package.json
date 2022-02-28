@@ -8,11 +8,10 @@
     "npm": "7.20.5"
   },
   "scripts": {
-    "start": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "frontend": "yarn start --prefix cli",
-    "dev": "concurrently \"yarn backend\" \"yarn start --prefix cli\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn add --prefix cli && yarn run build --prefix cli"
+    "frontend": "npm run start --prefix frontend",
+    "start": "concurrently \"yarn backend\" \"yarn frontend\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn add --prefix frontend && yarn run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
