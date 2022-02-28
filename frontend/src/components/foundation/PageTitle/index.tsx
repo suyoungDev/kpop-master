@@ -9,11 +9,7 @@ export interface Props {
   buttonTitle: string;
 }
 
-const PageTitle = ({
-  children,
-  onButtonClick,
-  buttonTitle,
-}: Props): JSX.Element => {
+const PageTitle = ({ children, onButtonClick, buttonTitle }: Props): JSX.Element => {
   return (
     <S.Wrapper>
       <h1>{children}</h1>

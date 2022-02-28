@@ -55,12 +55,7 @@ const PlayListPage = (): JSX.Element => {
         <S.ListWrapper>
           {playlist.map((track, index) => (
             <TrackForm track={track} setTrack={changePlaylist(index)} key={`track_${index}`}>
-              <Button
-                label="취소"
-                type="reset"
-                onClick={() => onReset(index)}
-                title="입력한 내용을 지웁니다."
-              />
+              <Button label="취소" type="reset" onClick={() => onReset(index)} title="입력한 내용을 지웁니다." />
               <Button label="삭제" onClick={() => deleteByIndex(index)} title="해당 열을 삭제합니다." />
             </TrackForm>
           ))}
