@@ -8,7 +8,7 @@ const GamePage = lazy(() => import('@P/GamePage'));
 const routes: RouteType[] = [
   { path: '/', element: MainPage },
   { path: '/theme', element: PlayListPage },
-  { path: '/:room-id', element: GamePage },
+  { path: '/:room-id', element: GamePage }
 ];
 
 export default routes;
