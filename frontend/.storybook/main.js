@@ -1,19 +1,34 @@
 const path = require('path');
 const toPath = (_path) => path.join(process.cwd(), _path);
 
-module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/preset-create-react-app',
-  ],
-  framework: '@storybook/react',
-  core: {
-    builder: 'webpack5',
-  },
+function resolve(dir) {
+  return path.resolve(__dirname, dir);
+}
 
-  webpackFinal: async (config, { configType }) => {
+const alias = {
+  '@IMG': resolve('../src/static/img'),
+  '@API': resolve('../src/api'),
+  '@RECOIL': resolve('../src/recoil'),
+  '@DATA': resolve('../src/data'),
+  '@CONFIG': resolve('../src/config'),
+  '@FUNC': resolve('../src/functions'),
+  '@HOOK': resolve('../src/hooks'),
+  '@TS': resolve('../src/types'),
+  '@C': resolve('../src/components/container'),
+  '@F': resolve('../src/components/foundation'),
+  '@P': resolve('../src/components/page/'),
+  '@': resolve('../src'),
+  // '@emotion/core': toPath('node_modules/@emotion/react'),
+  // '@emotion/styled': toPath('node_modules/@emotion/styled'),
+};
+
+module.exports = {
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/preset-create-react-app'],
+  framework: '@storybook/react',
+  core: { builder: 'webpack5' },
+
+  webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       loader: require.resolve('babel-loader'),
@@ -23,29 +38,8 @@ module.exports = {
       },
     });
     config.resolve.extensions.push('.ts', '.tsx');
+    config.resolve.alias = { ...config.resolve?.alias, ...alias };
 
-    return {
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve.alias,
-          '@IMG': path.resolve(__dirname, '../src/static/img'),
-          '@API': path.resolve(__dirname, '../src/api'),
-          '@RECOIL': path.resolve(__dirname, '../src/recoil'),
-          '@DATA': path.resolve(__dirname, '../src/data'),
-          '@CONFIG': path.resolve(__dirname, '../src/config'),
-          '@FUNC': path.resolve(__dirname, '../src/functions'),
-          '@HOOK': path.resolve(__dirname, '../src/hooks'),
-          '@TS': path.resolve(__dirname, '../src/types'),
-          '@C': path.resolve(__dirname, '../src/components/container'),
-          '@F': path.resolve(__dirname, '../src/components/foundation'),
-          '@P': path.resolve(__dirname, '../src/components/page/'),
-          '@': path.resolve(__dirname, '../src'),
-          '@emotion/core': toPath('node_modules/@emotion/react'),
-          '@emotion/styled': toPath('node_modules/@emotion/styled'),
-        },
-      },
-    };
+    return config;
   },
 };
