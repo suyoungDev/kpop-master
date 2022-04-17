@@ -1,14 +1,7 @@
 /node_modules
+
 .env
-dev.js
-cli/.gitignore
-cli/.eslintcache
-cli/public/logo512.png
-cli/public/robots.txt
-cli/src/logo.svg
-cli/public/logo192.png
-server/routes/chart.js
 .vscode
-Test.jsx
-cli/src/constants/image/outroImage/error.svg
 .gitignore
+
+server/routes/chart.js

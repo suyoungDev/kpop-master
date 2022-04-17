@@ -1,24 +1,14 @@
-require('dotenv').config();
 const express = require('express');
 const router = express.Router();
+const YouTube = require('youtube-node');
+const getVideoId = require('../function/youtube');
+const { successResponse } = require('../function/response');
 
-const { Url } = require('../model/YoutubeUrl');
-
-var YouTube = require('youtube-node');
-var youTube = new YouTube();
+const youTube = new YouTube();
 youTube.setKey(process.env.YOUTUBE_KEY);
 
-router.post('/getId', async (req, res) => {
-  const searchTerm = req.body.trackName;
-
-  youTube.search(searchTerm, 1, function (error, result) {
-    if (error) {
-      console.log(error);
-    } else {
-      const data = JSON.stringify(result, null, 1);
-      res.status(200).send(data);
-    }
-  });
+router.get('/videoId', async (req, res) => {
+  await getVideoId(req.body, successResponse(res));
 });
 
 router.post('/saveUrl', async (req, res) => {

@@ -1,79 +1,83 @@
 const express = require('express');
 const router = express.Router();
-var melon = require('melon-chart-parser');
+const melon = require('melon-chart-parser');
+const { successResponse, failResponse } = require('../function/response');
+
+const Song = require('../model/SongsOfYear.js');
 
 const regex = /[(]/g;
 
-// 랜덤한 5개의 곡을 뽑음
-const filtering = (data) => {
-  const result = data
+const getRandomSongs = (data, quantity) => {
+  return data
     .sort(() => Math.random() - 0.5)
-    .slice(0, 5)
+    .slice(0, quantity)
     .map((song) => ({
+      year: song.year,
+      rank: song.rank,
       trackName: song.trackName.split(regex)[0],
       artistName: song.artistName.split(regex)[0],
     }));
-
-  return result;
 };
 
-// options에 맞는 멜론 차트 리스트를 가져옴
-const fetchData = async (opts) => {
+const LEVEL = {
+  easy: 10,
+  regular: 50,
+  hard: 100,
+};
+
+router.get('/byTheme', async (req, res) => {
   try {
-    let parsedData = await melon.parse(opts);
-    let result = await filtering(parsedData);
-    return result;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-router.post('/getByYear', async (req, res) => {
-  let result = [];
-  let year = Number(req.body.value);
-  let finallYear = year === 2020 ? 2020 : Number(req.body.value) + 10;
-
-  for (let i = year; i < finallYear; i++) {
-    const opts = {
-      limit: req.body.limit,
-      type: req.body.theme,
+    const { level, theme, artistName, quantity = 5 } = req.body;
+    if (theme === undefined) throw new Error('oops');
+    const options = {
+      limit: LEVEL[level],
+      type: theme,
+      term: artistName,
       genre: 'KPOP',
-      year: i,
     };
 
-    try {
-      const parsedData = await melon.parse(opts);
-      result.push(...parsedData);
-    } catch (error) {
-      console.error(error);
-    }
+    const parsedData = await melon.parse(options);
+    const result = getRandomSongs(parsedData, quantity);
+    return successResponse(res)({ quantity, level, result });
+  } catch (error) {
+    console.error(error);
+    return failResponse(res, 'please fill the correct format');
   }
-
-  const shuffled = result.sort(() => Math.random() - 0.5).slice(0, 5);
-  const filtered = filtering(shuffled);
-
-  res.status(200).json({ success: true, result: filtered });
 });
 
-router.post('/getByArtist', async (req, res) => {
-  const opts = {
-    limit: req.body.limit,
-    type: req.body.theme,
-    term: req.body.value,
-  };
+router.get('/byYear', async (req, res) => {
+  const { level, theme = 'year', targetYear, quantity = 5 } = req.body;
 
-  let result = await fetchData(opts);
-  res.status(200).json({ success: true, result });
-});
+  try {
+    if (targetYear === 2022) {
+      const options = {
+        limit: LEVEL[level],
+        type: theme,
+        year: targetYear,
+        genre: 'KPOP',
+      };
 
-router.post('/getByWeek', async (req, res) => {
-  const opts = {
-    limit: req.body.limit,
-    type: req.body.theme,
-  };
+      const parsedData = await melon.parse(options);
+      const trackList = getRandomSongs(parsedData, quantity);
 
-  let result = await fetchData(opts);
-  res.status(200).json({ success: true, result });
+      return successResponse(res)({ quantity, level, targetYear, trackList });
+    } else {
+      const targetEra = `year${targetYear}`;
+      Song[targetEra].find().exec((err, song) => {
+        if (err) return failResponse(res, err);
+
+        const sortedByLevel = song
+          .sort((a, b) => a.rank - b.rank)
+          .slice(0, LEVEL[level]);
+        const trackList = getRandomSongs(sortedByLevel, quantity);
+
+        return successResponse(res)({ quantity, level, targetYear, trackList });
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return failResponse(res, 'something went wrong');
+  }
 });
 
 module.exports = router;

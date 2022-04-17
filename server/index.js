@@ -3,16 +3,16 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const app = express();
+
 require('dotenv').config();
 
-const app = express();
 const PORT = process.env.PORT || 5000;
+const mongo = process.env.MONGO_URI;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-const mongo = process.env.MONGO_URI;
 
 mongoose
   .connect(mongo, {
@@ -21,15 +21,14 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false,
   })
-  .then(() => console.log('MongoDB Connected...🌼'))
+  .then(() => console.log('MongoDB_Connected...🌼'))
   .catch((err) => console.log(err));
 
 app.use('/api/chart', require('./routes/chart'));
 app.use('/api/game', require('./routes/game'));
 app.use('/api/youtube', require('./routes/youtube'));
-app.use('/api/user', require('./routes/user'));
-app.use('/api/comment', require('./routes/comment'));
-app.use('/api/heart', require('./routes/heart'));
+app.use('/api/theme', require('./routes/customPlaylist'));
+app.use('/api/url', require('./routes/urls'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('cli/build'));
@@ -40,5 +39,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => {
-  console.log(`running on ${PORT}`);
+  console.log(`running on ${PORT}...✨`);
 });
