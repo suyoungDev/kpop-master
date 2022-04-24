@@ -1,12 +1,16 @@
-import { globalStyles } from '../styles';
 import { AppProps } from 'next/app';
+import { DefaultSeo } from 'next-seo';
+import Footer from '../container/Footer';
+import SEO from '../config/seo.config';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div>
-      {globalStyles}
+    <>
+      <DefaultSeo {...SEO} />
       <Component {...pageProps} />
-    </div>
+      <Footer />
+    </>
   );
 }
 
