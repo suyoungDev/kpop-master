@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
-import Footer from '../container/Footer';
+import Footer from '../containers/Footer';
 import SEO from '../config/seo.config';
 import '../styles/globals.css';
 

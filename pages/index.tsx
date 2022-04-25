@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
-import Header from '../container/Header';
+import MainHeader from '../containers/MainHeader';
 
 const Home: NextPage = () => {
   return (
     <>
-      <Header rightElement={<button>확인</button>} />
+      <MainHeader />
       <main>잘되나요?</main>
     </>
   );
