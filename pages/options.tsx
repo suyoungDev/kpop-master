@@ -1,5 +1,5 @@
 import React from 'react';
-import MainHeader from '../containers/MainHeader';
+import MainHeader from '@C/MainHeader';
 
 const Options = () => {
   return (

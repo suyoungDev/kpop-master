@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
-import MainHeader from '../containers/MainHeader';
 import useSWR, { useSWRConfig } from 'swr';
+import MainHeader from '@C/MainHeader';
 
 const Home: NextPage = () => {
   const { mutate } = useSWRConfig();

@@ -1,9 +1,9 @@
 import { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
-import Footer from '../containers/Footer';
-import SEO from '../config/seo.config';
-import '../styles/globals.css';
 import { SWRConfig } from 'swr';
+import Footer from '@C/Footer';
+import SEO from '@config/seo.config';
+import '@styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

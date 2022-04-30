@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from '@emotion/styled';
-import flexGenerator from '../../styles/flex';
+import flexGenerator from '@styles/flex';
 
 type Props = {
   rightElement: JSX.Element;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import Header from '../../foundations/Header';
+import Header from '@F/Header';
 
 const MainHeader = () => {
   const RightMenu = (
@@ -13,6 +13,7 @@ const MainHeader = () => {
       </li>
     </ul>
   );
+
   return <Header rightElement={RightMenu} />;
 };
 
