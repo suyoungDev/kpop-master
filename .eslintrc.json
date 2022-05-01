@@ -1,6 +1,18 @@
 {
+  "root": true,
   "extends": ["next/core-web-vitals", "prettier"],
   "rules": {
     "import/no-anonymous-default-export": ["warn", { "allowObject": true }]
-  }
+  },
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": ["**/*.test.ts?(x)"],
+      "extends": [
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended"
+      ],
+      "plugins": ["jest-dom", "testing-library"]
+    }
+  ]
 }
