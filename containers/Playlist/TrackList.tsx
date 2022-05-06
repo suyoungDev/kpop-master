@@ -1,7 +1,9 @@
-import React from 'react';
-import TrackInput from './TrackInput';
+import React, { useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 import type { Output } from '@hooks/useInputs';
-import { MINIMUM_QUANTITY } from './';
+import errorStatus from '@atom/create/errorList';
+import TrackInput from './TrackInput';
+import CREATE from '@data/create';
 
 type Props = {
   playlist: Output<TrackInfo>['inputs'];
@@ -16,6 +18,19 @@ const TrackList = ({
   onReset,
   deleteTrack,
 }: Props): JSX.Element => {
+  const [errors, setErrors] = useRecoilState(errorStatus);
+
+  const changeErrorStatus = useCallback(
+    (index: number) => (key: TrackKey, status: boolean) => {
+      setErrors((prev) =>
+        [...prev].map((item, idx) =>
+          idx !== index ? item : { ...item, [key]: status }
+        )
+      );
+    },
+    [setErrors]
+  );
+
   return (
     <ul>
       {playlist.map((track, idx) => (
@@ -25,7 +40,9 @@ const TrackList = ({
           key={`playlist_track_${idx}`}
           onReset={() => onReset(idx)}
           deleteTrack={() => deleteTrack(idx)}
-          ableToDelete={idx < MINIMUM_QUANTITY}
+          ableToDelete={idx < CREATE.MIN_QUANTITY}
+          errors={errors[idx]}
+          setError={changeErrorStatus(idx)}
         />
       ))}
     </ul>

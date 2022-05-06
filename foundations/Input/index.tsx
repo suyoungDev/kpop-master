@@ -1,16 +1,24 @@
 import React from 'react';
 
 export type Props = {
-  id: string;
-  label: string;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  alertMessage: string;
+  setError: () => void;
+} & PlaylistInputFields &
+  React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = ({ id, label, ...props }: Props): JSX.Element => {
+const Input = ({
+  isError,
+  label,
+  setError,
+  alertMessage,
+  ...props
+}: Props): JSX.Element => {
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <input type="text" id={id} name={id} {...props} />
-    </div>
+    <>
+      <label htmlFor={props.id}>{label}</label>
+      <input onInvalid={setError} {...props} />
+      {isError && <span role="alert">{alertMessage}</span>}
+    </>
   );
 };
 

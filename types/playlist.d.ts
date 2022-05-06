@@ -1,7 +1,7 @@
+type ReactInput = import('react').InputHTMLAttributes<HTMLInputElement>;
+
 declare type PlaylistInputFields = {
-  id: string;
-  placeholder: string;
   label: string;
-  value: string;
-  required: boolean;
-};
+  isError: boolean;
+  id: TrackKey;
+} & ReactInput;
