@@ -7,9 +7,7 @@ export default {
   components: Playlist,
 } as ComponentMeta<typeof Playlist>;
 
-const Template: ComponentStory<typeof Playlist> = (args) => {
-  return <Playlist />;
-};
+const Template: ComponentStory<typeof Playlist> = () => <Playlist />;
 
 export const Default = Template.bind({});
 Default.args = {};
