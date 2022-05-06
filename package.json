@@ -5,10 +5,13 @@
   "author": "suyoungDev",
   "private": true,
   "main": "index.js",
+  "engines": {
+    "node": ">=14.18"
+  },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "postbuild": "next-sitemap",
+    "start": "next dev",
     "lint": "next lint",
     "sb": "start-storybook -p 6006",
     "build-sb": "build-storybook",
@@ -18,6 +21,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "immer": "^9.0.12",
     "next": "12.1.5",
     "next-seo": "^5.4.0",
     "react": "^17",
@@ -55,6 +59,7 @@
     "jest": "^27.4.3",
     "jsdom": "^19.0.0",
     "lint-staged": "^12.4.1",
+    "next-sitemap": "^2.5.20",
     "prettier": "^2.6.2",
     "ts-jest": "^27.1.4",
     "typescript": "4.6.3",
