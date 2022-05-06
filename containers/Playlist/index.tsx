@@ -1,10 +1,10 @@
-import React, { useCallback, FormEvent, useEffect, useRef } from 'react';
-import useInputs from '@hooks/useInputs';
-import TrackList from './TrackList';
-import { focusOn } from '@fn/focusOn';
+import React, { FormEvent, useCallback, useEffect, useRef } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import useInputs from '@hooks/useInputs';
+import { focusOn } from '@fn/focusOn';
 import errorStatus, { defaultErrorStatus } from '@atom/create/errorList';
 import CREATE from '@data/create';
+import TrackList from './TrackList';
 
 const FORM: TrackInfo = { trackName: '', artistName: '' };
 

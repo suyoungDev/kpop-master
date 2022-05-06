@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import type { Output } from '@hooks/useInputs';
 import errorStatus from '@atom/create/errorList';
-import TrackInput from './TrackInput';
 import CREATE from '@data/create';
+import TrackInput from './TrackInput';
 
 type Props = {
   playlist: Output<TrackInfo>['inputs'];

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ChangeEvent } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 
 export type Output<T> = {
   inputs: T[];

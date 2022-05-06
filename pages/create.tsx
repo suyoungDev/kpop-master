@@ -1,6 +1,6 @@
-import React from 'react';
 import { NextSeo } from 'next-seo';
-import MainHeader from '../containers/MainHeader';
+import React from 'react';
+import MainHeader from '@C/MainHeader';
 import Playlist from '@C/Playlist';
 
 const Create = () => {

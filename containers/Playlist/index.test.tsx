@@ -1,5 +1,5 @@
-import { screen, render, cleanup } from 'test-utils';
 import { logRoles } from '@testing-library/react';
+import { cleanup, render, screen } from 'test-utils';
 import Playlist from './index';
 
 afterEach(() => cleanup());
