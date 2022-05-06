@@ -20,13 +20,13 @@
       "@C/*": ["containers/*"],
       "@F/*": ["foundations/*"],
       "@config/*": ["config/*"],
-      "@data/*": ["data/*"],
       "@atom/*": ["atom/*"],
-      "@TS/*": ["types/*"],
-      "@fn/*": ["functions/*"],
-      "@hooks/*": ["hooks/*"],
       "@styles/*": ["styles/*"],
-      "test-utils": ["./utils/test-utils"]
+      "@data/*": ["utils/data/*"],
+      "@TS/*": ["utils/types/*"],
+      "@fn/*": ["utils/functions/*"],
+      "@hooks/*": ["utils/hooks/*"],
+      "test-utils": ["utils/test-utils"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
