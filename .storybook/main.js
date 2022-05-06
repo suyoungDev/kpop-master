@@ -13,7 +13,7 @@ module.exports = {
   core: {
     builder: '@storybook/builder-vite',
   },
-  viteFinal: async config => {
+  viteFinal: async (config) => {
     return {
       ...config,
       resolve: {
@@ -46,6 +46,14 @@ module.exports = {
           {
             find: '@styles',
             replacement: path.resolve(__dirname, '/styles'),
+          },
+          {
+            find: '@data',
+            replacement: path.resolve(__dirname, '/data'),
+          },
+          {
+            find: '@atom',
+            replacement: path.resolve(__dirname, '/atom'),
           },
         ],
       },

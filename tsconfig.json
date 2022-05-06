@@ -20,6 +20,8 @@
       "@C/*": ["containers/*"],
       "@F/*": ["foundations/*"],
       "@config/*": ["config/*"],
+      "@data/*": ["data/*"],
+      "@atom/*": ["atom/*"],
       "@TS/*": ["types/*"],
       "@fn/*": ["functions/*"],
       "@hooks/*": ["hooks/*"],

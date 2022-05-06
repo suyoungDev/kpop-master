@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { SWRConfig } from 'swr';
+import { RecoilRoot } from 'recoil';
 import Footer from '@C/Footer';
 import SEO from '@config/seo.config';
 import '@styles/globals.css';
@@ -12,10 +13,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       <SWRConfig
         value={{
           fetcher: (resource, init) =>
-            fetch(resource, init).then(res => res.json()),
+            fetch(resource, init).then((res) => res.json()),
         }}
       >
-        <Component {...pageProps} />
+        <RecoilRoot>
+          <Component {...pageProps} />
+        </RecoilRoot>
       </SWRConfig>
       <Footer />
     </>

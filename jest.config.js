@@ -18,6 +18,8 @@ const customJestConfig = {
     '^@fn/(.*)$': '<rootDir>/functions/$1',
     '^@hooks/(.*)$': '<rootDir>/hooks/$1',
     '^@styles/(.*)$': '<rootDir>/styles/$1',
+    '^@data/(.*)$': '<rootDir>/data/$1',
+    '^@atom/(.*)$': '<rootDir>/atom/$1',
   },
 };
 
