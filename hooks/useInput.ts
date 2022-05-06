@@ -1,12 +1,12 @@
-import { useState, ChangeEvent, useCallback } from 'react';
+import React, { useState, ChangeEvent, useCallback } from 'react';
 
-const useInput = <T = string>(
-  initialValue: T,
-  resetValue?: T
-): [T, (e: ChangeEvent<unknown>) => void, () => void] => {
-  const [input, setInput] = useState<T>(initialValue);
+const useInput = (
+  initialValue: string,
+  resetValue?: string
+): [string, (e: ChangeEvent<HTMLInputElement>) => void, () => void] => {
+  const [input, setInput] = useState<string>(initialValue);
 
-  const onChange = useCallback(e => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   }, []);
 

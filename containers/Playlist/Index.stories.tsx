@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import TrackForm from './Playlist';
+import Playlist from './';
 
 export default {
-  title: 'containers/TrackForm',
-  components: TrackForm,
-} as ComponentMeta<typeof TrackForm>;
+  title: 'containers/Playlist',
+  components: Playlist,
+} as ComponentMeta<typeof Playlist>;
 
-const Template: ComponentStory<typeof TrackForm> = args => {
-  return <TrackForm />;
+const Template: ComponentStory<typeof Playlist> = (args) => {
+  return <Playlist />;
 };
 
 export const Default = Template.bind({});
