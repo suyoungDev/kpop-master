@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tag inputs 안녕,하세요,웰컴,웁스, 라고 작성시 태그가 4개가 만들어진다. 1`] = `
+<div
+  aria-labelledby="안녕"
+  class="css-pfzkzm"
+  role="note"
+>
+  <span
+    id="안녕"
+  >
+    안녕
+  </span>
+  <button
+    aria-label="delete 안녕 tag"
+  >
+    x
+  </button>
+</div>
+`;
