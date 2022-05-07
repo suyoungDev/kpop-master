@@ -60,6 +60,10 @@ const GlobalStyle = () => {
           list-style: none;
         }
 
+        li {
+          display: flex;
+          flex-direction: row;
+        }
         button {
           background: inherit;
           border: none;
@@ -74,6 +78,7 @@ const GlobalStyle = () => {
         }
 
         input {
+          width: 100%;
           font-family: inherit;
         }
 

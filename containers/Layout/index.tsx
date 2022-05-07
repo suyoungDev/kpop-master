@@ -5,15 +5,18 @@ import MainHeader from '@C/MainHeader';
 import themeStatus from '@atom/theme';
 import themeList from '@styles/theme';
 
-type Props = { children: JSX.Element };
+type Props = { children: JSX.Element; title?: string };
 
-const Layout = ({ children }: Props): JSX.Element => {
+const Layout = ({ children, title }: Props): JSX.Element => {
   const theme = useRecoilValue(themeStatus);
 
   return (
     <ThemeProvider theme={themeList[theme]}>
       <MainHeader />
-      <main>{children}</main>
+      <main>
+        {title && <h1>{title}</h1>}
+        {children}
+      </main>
     </ThemeProvider>
   );
 };

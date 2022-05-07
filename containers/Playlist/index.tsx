@@ -47,11 +47,7 @@ const PlaylistForm = (): JSX.Element => {
   const isTooLong = playlist.length > CREATE.MAX_QUANTITY;
 
   return (
-    <div>
-      <h1>you can create playlist and share it :)</h1>
-      <button onClick={appendNewTrack} accessKey="a" disabled={isTooLong}>
-        추가하기
-      </button>
+    <>
       {isTooLong && (
         <p role="alert" aria-live="polite">
           최대 {CREATE.MAX_QUANTITY}개까지만 가능합니다. :(
@@ -81,8 +77,16 @@ const PlaylistForm = (): JSX.Element => {
             reset
           </button>
         </div>
+        <button
+          type="button"
+          onClick={appendNewTrack}
+          accessKey="a"
+          disabled={isTooLong}
+        >
+          추가하기
+        </button>
       </form>
-    </div>
+    </>
   );
 };
 
