@@ -1,6 +1,6 @@
 import React from 'react';
+import TagInputs from '@C/create/TagInputs';
 import Tag from '@F/Tag';
-import TagInputs from '@F/TagInputs';
 import { TagListWrapper } from './styles';
 
 const TagSection = () => {

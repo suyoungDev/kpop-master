@@ -1,8 +1,8 @@
 import { NextSeo } from 'next-seo';
 import React from 'react';
 import Layout from '@C/Layout';
-import PlaylistSection from '@C/PlaylistSection';
-import TagSection from '@C/TagSection';
+import PlaylistSection from '@C/create/PlaylistSection';
+import TagSection from '@C/create/TagSection';
 
 const Create = () => {
   return (

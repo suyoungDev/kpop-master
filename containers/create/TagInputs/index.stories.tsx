@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import TagInputs from './';
+import TagInputs from '.';
 
 export default {
   title: 'containers/TagInputs',

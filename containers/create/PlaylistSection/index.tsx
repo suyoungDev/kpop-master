@@ -1,5 +1,5 @@
 import React from 'react';
-import Playlist from '@C/Playlist';
+import Playlist from '@C/create/Playlist';
 import CREATE from '@data/create';
 
 const PlaylistSection = () => {
