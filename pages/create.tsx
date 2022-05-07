@@ -3,6 +3,7 @@ import React from 'react';
 import Layout from '@C/Layout';
 import PlaylistSection from '@C/create/PlaylistSection';
 import TagSection from '@C/create/TagSection';
+import Title from '@C/create/Title';
 
 const Create = () => {
   return (
@@ -17,6 +18,7 @@ const Create = () => {
       />
       <Layout title="플레이리스트 생성">
         <>
+          <Title />
           <TagSection />
           <PlaylistSection />
         </>

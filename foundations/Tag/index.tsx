@@ -9,7 +9,7 @@ type Props = {
 const Tag = ({ label, deleteTag }: Props): JSX.Element => {
   return (
     <S.Wrapper role="note" aria-labelledby={label}>
-      <span id={label}># {label}</span>
+      <span id={label}>{label}</span>
       {deleteTag && (
         <button onClick={deleteTag} aria-label={`delete ${label} tag`}>
           x

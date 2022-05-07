@@ -1,9 +1,13 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 
-const useInput = (
-  initialValue: string,
-  resetValue?: string
-): [string, (e: ChangeEvent<HTMLInputElement>) => void, () => void] => {
+type Output = {
+  input: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onReset: () => void;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const useInput = (initialValue: string, resetValue?: string): Output => {
   const [input, setInput] = useState<string>(initialValue);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +19,7 @@ const useInput = (
     else setInput(initialValue);
   }, [initialValue, resetValue]);
 
-  return [input, onChange, onReset];
+  return { input, onChange, onReset, setInput };
 };
 
 export default useInput;
