@@ -5,18 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useRecoilState } from 'recoil';
 import Tag from '@F/Tag';
+import tagStore from '@atom/create/tags';
 import * as S from './styles';
-
-export type Props = {
-  tags: string[];
-  setTags: React.Dispatch<React.SetStateAction<string[]>>;
-};
 
 const DIVIDING_KEYWORD = ['Comma', 'Enter'];
 const ARROW = ['ArrowUp', 'ArrowDown'];
 
-const TagInputs = ({ tags, setTags }: Props): JSX.Element => {
+const TagInputs = (): JSX.Element => {
+  const [tags, setTags] = useRecoilState(tagStore);
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const focusIndex = useRef(0);
@@ -70,16 +68,12 @@ const TagInputs = ({ tags, setTags }: Props): JSX.Element => {
     [setTags]
   );
 
-  const focusOnInput = useCallback(() => {
-    if (inputRef && inputRef.current) inputRef.current.focus();
-  }, []);
-
   useEffect(() => {
     if (inputRef && inputRef.current) inputRef.current.focus();
   }, []);
 
   return (
-    <S.Wrapper onClick={focusOnInput}>
+    <S.Wrapper>
       <div role="region">
         {tags.map((tag, idx) => (
           <Tag key={tag} label={tag} deleteTag={() => deleteTag(idx)} />
