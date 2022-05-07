@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React from 'react';
-import flexGenerator from '@styles/flex';
+import { flex } from '@styles/index';
 
 type Props = {
   rightElement: JSX.Element;
@@ -16,7 +16,7 @@ const Header = ({ rightElement }: Props) => (
 export default Header;
 
 const HeaderComponent = styled.header`
-  ${flexGenerator({ jc: 'sb' })};
+  ${flex({ jc: 'sb' })};
   padding: 1rem;
   background-color: white;
 `;

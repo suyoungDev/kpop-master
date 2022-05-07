@@ -1,4 +1,4 @@
-import { css, SerializedStyles } from '@emotion/react';
+import { SerializedStyles, css } from '@emotion/react';
 
 type Props = {
   /** direction */
@@ -17,7 +17,7 @@ const JC = {
   start: 'flex-start',
   end: 'flex-end',
 };
-const flexGenerator = ({
+export const flex = ({
   dir = 'row',
   jc = 'center',
 }: Props): SerializedStyles => {
@@ -27,5 +27,3 @@ const flexGenerator = ({
     justify-content: ${JC[jc]};
   `;
 };
-
-export default flexGenerator;

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import useSWR, { useSWRConfig } from 'swr';
-import MainHeader from '@C/MainHeader';
+import Layout from '@C/Layout';
 
 const Home: NextPage = () => {
   const { mutate } = useSWRConfig();
@@ -22,14 +22,13 @@ const Home: NextPage = () => {
   if (!data) return <div>loading...</div>;
 
   return (
-    <>
-      <MainHeader />
-      <main>
+    <Layout>
+      <>
         잘되나요?
         <div>hello {data.name}!</div>
         <button onClick={onMutate}>mutate</button>
-      </main>
-    </>
+      </>
+    </Layout>
   );
 };
 

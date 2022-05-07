@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo';
 import React from 'react';
-import MainHeader from '@C/MainHeader';
+import Layout from '@C/Layout';
 import Playlist from '@C/Playlist';
 
 const Create = () => {
@@ -14,10 +14,9 @@ const Create = () => {
           url: 'https://kpop-master.dev/create',
         }}
       />
-      <MainHeader />
-      <main>
+      <Layout>
         <Playlist />
-      </main>
+      </Layout>
     </>
   );
 };

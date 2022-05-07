@@ -1,14 +1,15 @@
 import React from 'react';
-import MainHeader from '@C/MainHeader';
+import Layout from '@C/Layout';
 
 const Options = () => {
   return (
-    <>
-      <MainHeader />
-      <main>
+    <Layout>
+      <>
         <h1>you can edit game settings in this page</h1>
-      </main>
-    </>
+        <p>여기서 테마 수정 가능</p>
+        <p>효과음 등등 수정할 수 있게 할 예정</p>
+      </>
+    </Layout>
   );
 };
 

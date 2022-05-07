@@ -1,13 +1,15 @@
-import React from 'react';
 import Link from 'next/link';
-import styled from '@emotion/styled';
+import React from 'react';
+import Layout from '@C/Layout';
 
 const Custom404 = (): JSX.Element => {
   return (
-    <main>
-      <p>페이지를 찾을 수 없습니다.</p>
-      <Link href="/">돌아가기</Link>
-    </main>
+    <Layout>
+      <>
+        <p>페이지를 찾을 수 없습니다.</p>
+        <Link href="/">돌아가기</Link>
+      </>
+    </Layout>
   );
 };
 
