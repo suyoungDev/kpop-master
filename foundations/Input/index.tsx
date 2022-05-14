@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { InputHTMLAttributes, useRef } from 'react';
 
 export type Props = {
   alertMessage: string;
-  setError: () => void;
+  setError: (validity: ValidityState) => void;
 } & Omit<TrackInputField, 'id'> &
-  React.InputHTMLAttributes<HTMLInputElement>;
+  InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
   label,
@@ -13,10 +13,17 @@ const Input = ({
   alertMessage,
   ...props
 }: Props): JSX.Element => {
+  const input = useRef<HTMLInputElement>(null);
   return (
     <>
       <label htmlFor={props.id}>{label}</label>
-      <input onInvalid={setError} {...props} />
+      <input
+        onInvalid={() => {
+          setError(input.current?.validity as ValidityState);
+        }}
+        {...props}
+        ref={input}
+      />
       {isError && <span role="alert">{alertMessage}</span>}
     </>
   );
