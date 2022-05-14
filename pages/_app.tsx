@@ -4,7 +4,7 @@ import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
-import Footer from '@C/Footer';
+import Footer from '@F/Footer';
 import SEO from '@config/seo.config';
 import GlobalStyle from '@styles/global';
 

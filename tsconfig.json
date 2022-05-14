@@ -21,7 +21,7 @@
       "@F/*": ["foundations/*"],
       "@config/*": ["config/*", "config/index"],
       "@atom/*": ["atom/*"],
-      "@styles/*": ["styles/*", "styles"],
+      "@styles/*": ["styles/*", "styles/index"],
       "@data/*": ["utils/data/*"],
       "@TS/*": ["utils/types/*"],
       "@fn/*": ["utils/functions/*"],

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { flex, transition } from '@styles/';
+import { flex, transition } from '@styles/index';
 
 export const Wrapper = styled.div`
   ${flex({ dir: 'row', jc: 'sb' })};

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import useSWR, { useSWRConfig } from 'swr';
-import Layout from '@C/Layout';
+import Layout from '@F/Layout';
 
 const Home: NextPage = () => {
   const { mutate } = useSWRConfig();

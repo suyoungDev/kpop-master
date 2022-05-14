@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import MainHeader from '@C/MainHeader';
+import MainHeader from '@F/MainHeader';
 import themeStatus from '@atom/theme';
 import themeList from '@styles/theme';
 

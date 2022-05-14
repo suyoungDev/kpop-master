@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import Layout from '@C/Layout';
+import Layout from '@F/Layout';
 
 const Custom404 = (): JSX.Element => {
   return (
