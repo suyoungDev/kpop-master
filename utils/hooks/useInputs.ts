@@ -6,7 +6,7 @@ export type Output<T> = {
   onChange: (idx: number) => (e: ChangeEvent<HTMLInputElement>) => void;
   onReset: (index: number) => void;
   deleteInput: (idx: number) => void;
-  resetAll: () => void;
+  resetInputs: () => void;
 };
 
 const useInputs = <T = any>(initialValue: T[], resetValue: T): Output<T> => {
@@ -42,11 +42,18 @@ const useInputs = <T = any>(initialValue: T[], resetValue: T): Output<T> => {
     [resetValue]
   );
 
-  const resetAll = useCallback(() => {
+  const resetInputs = useCallback(() => {
     setInputs(initialValue);
   }, [initialValue]);
 
-  return { inputs, onChange, onReset, setInputs, deleteInput, resetAll };
+  return {
+    inputs,
+    onChange,
+    onReset,
+    setInputs,
+    deleteInput,
+    resetInputs,
+  };
 };
 
 export default useInputs;

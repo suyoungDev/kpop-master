@@ -3,12 +3,12 @@ import React from 'react';
 export type Props = {
   alertMessage: string;
   setError: () => void;
-} & PlaylistInputFields &
+} & Omit<TrackInputField, 'id'> &
   React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
-  isError,
   label,
+  isError,
   setError,
   alertMessage,
   ...props
@@ -22,4 +22,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default React.memo(Input);

@@ -43,6 +43,7 @@ const TrackList = ({
           ableToDelete={idx < CREATE.MIN_QUANTITY}
           errors={errors[idx]}
           setError={changeErrorStatus(idx)}
+          index={idx}
         />
       ))}
     </ul>

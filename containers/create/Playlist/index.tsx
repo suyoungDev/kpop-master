@@ -14,7 +14,7 @@ const PlaylistForm = (): JSX.Element => {
     setInputs: setPlaylist,
     onChange: changePlaylist,
     onReset,
-    resetAll,
+    resetInputs,
     deleteInput,
   } = useInputs<TrackInfo>(Array(CREATE.MIN_QUANTITY).fill(FORM), FORM);
   const form = useRef<HTMLFormElement>(null);
@@ -30,14 +30,10 @@ const PlaylistForm = (): JSX.Element => {
     (e: FormEvent) => {
       e.preventDefault();
       // TODO: api 연결
-      resetAll();
+      resetInputs();
     },
-    [resetAll]
+    [resetInputs]
   );
-
-  useEffect(() => {
-    focusOn('input#artistName');
-  }, []);
 
   const invalidForm = useCallback((e: FormEvent) => {
     e.preventDefault();
@@ -48,17 +44,12 @@ const PlaylistForm = (): JSX.Element => {
 
   return (
     <>
-      {isTooLong && (
-        <p role="alert" aria-live="polite">
-          최대 {CREATE.MAX_QUANTITY}개까지만 가능합니다. :(
-        </p>
-      )}
       <form
         name="create_playlist"
         onSubmit={createPlaylist}
         onInvalid={invalidForm}
         onReset={() => {
-          resetAll();
+          resetInputs();
           resetErrors();
         }}
         ref={form}
@@ -85,6 +76,11 @@ const PlaylistForm = (): JSX.Element => {
         >
           추가하기
         </button>
+        {isTooLong && (
+          <p role="alert" aria-live="polite">
+            최대 {CREATE.MAX_QUANTITY}개까지만 가능합니다. :(
+          </p>
+        )}
       </form>
     </>
   );

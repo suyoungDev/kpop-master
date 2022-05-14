@@ -1,7 +1,5 @@
-type ReactInput = import('react').InputHTMLAttributes<HTMLInputElement>;
-
-declare type PlaylistInputFields = {
+declare type TrackInputField = {
   label: string;
   isError: boolean;
   id: TrackKey;
-} & ReactInput;
+} & import('react').InputHTMLAttributes<HTMLInputElement>;
