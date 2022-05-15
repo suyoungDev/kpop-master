@@ -3,6 +3,7 @@ import React from 'react';
 import PlaylistSection from '@C/create/PlaylistSection';
 import TagSection from '@C/create/TagSection';
 import Title from '@C/create/Title';
+import ErrorBoundary from '@F/ErrorBoundary';
 import Layout from '@F/Layout';
 
 const Create = () => {
@@ -17,11 +18,11 @@ const Create = () => {
         }}
       />
       <Layout title="플레이리스트 생성">
-        <>
+        <ErrorBoundary>
           <Title />
           <TagSection />
           <PlaylistSection />
-        </>
+        </ErrorBoundary>
       </Layout>
     </>
   );
