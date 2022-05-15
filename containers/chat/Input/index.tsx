@@ -5,16 +5,20 @@ import { RANDOM_LABEL } from '@data/game';
 import { ERROR_MESSAGE } from '@data/game/';
 import * as S from './styles';
 
+type Props = {
+  onEmitMessage: (message: string) => void;
+};
+
 const ARROW = ['ArrowUp', 'ArrowDown'];
-const ChatInput = (): JSX.Element => {
+const ChatInput = ({ onEmitMessage }: Props): JSX.Element => {
   const { input, onChange, setInput, onReset } = useInput('');
   const [buttonLabelIndex, setButtonLabelIndex] = useState(0);
   const [error, setError] = useState<ChattingMessageErrorType | null>(null);
 
   const sendingMessage = useCallback(() => {
-    // TODO: api 보내기
+    onEmitMessage(input);
     onReset();
-  }, [onReset]);
+  }, [input, onEmitMessage, onReset]);
 
   // TODO: chat log 가져와서 이전에 보낸 내역을 input에 할당
   const getChatLog = useCallback(

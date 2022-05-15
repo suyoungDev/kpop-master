@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import useSWR, { useSWRConfig } from 'swr';
+import Chat from '@C/chat';
 import Layout from '@F/Layout';
 
 const Home: NextPage = () => {
@@ -24,6 +25,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <>
+        <Chat />
         잘되나요?
         <div>hello {data.name}!</div>
         <button onClick={onMutate}>mutate</button>
