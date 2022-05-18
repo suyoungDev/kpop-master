@@ -14,16 +14,24 @@ const SocketHandler = (req: any, res: any) => {
     >(res.socket.server);
     res.socket.server.io = io;
 
-    io.on('connection', (socket) => {
-      socket.data.username = 'alice';
-      socket.broadcast.emit('hello', 'world');
+    io.use((socket, next) => {
+      const username = socket.handshake.auth.username;
 
-      socket.on('chat', (msg) => {
+      if (!username) {
+        return next(new Error('invalid username'));
+      }
+
+      socket.username = username;
+      next();
+    });
+
+    io.on('connection', (socket) => {
+      socket.on('chat', (msg: string) => {
         socket.emit('updateChat', msg);
       });
 
-      socket.on('hello', () => {
-        socket.broadcast.emit('newBuddy', socket.id);
+      socket.on('disconnect', () => {
+        console.log('user disconnected');
       });
     });
   }

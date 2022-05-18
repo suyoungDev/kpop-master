@@ -1,11 +1,11 @@
 import { ThemeProvider } from '@emotion/react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 import MainHeader from '@F/MainHeader';
 import themeStatus from '@atom/theme';
 import themeList from '@styles/theme';
 
-type Props = { children: JSX.Element; title?: string };
+type Props = { children: ReactNode; title?: string };
 
 const Layout = ({ children, title }: Props): JSX.Element => {
   const theme = useRecoilValue(themeStatus);
