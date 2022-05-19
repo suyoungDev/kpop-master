@@ -1,23 +1,18 @@
-import { StringSchemaDefinition } from 'mongoose';
-
-declare interface ServerToClientEvents {
-  updateChat: (message: string, callback: (text: string) => void) => void;
-  newBuddy: (
-    id: StringSchemaDefinition,
-    callback: (text: string) => void
-  ) => void;
+interface ServerToClientEvents {
+  updateChat: (message: string) => void;
+  newBuddy: (id: string, callback: (text: string) => void) => void;
   hello: (id: string) => void;
 }
 
-declare interface ClientToServerEvents {
+interface ClientToServerEvents {
   hello: (id: string) => void;
   chat: (message: string) => void;
 }
 
-declare interface InterServerEvents {
+interface InterServerEvents {
   ping: () => void;
 }
 
-declare interface SocketData {
+interface SocketData {
   username: string;
 }

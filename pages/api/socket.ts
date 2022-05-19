@@ -21,7 +21,7 @@ const SocketHandler = (req: any, res: any) => {
         return next(new Error('invalid username'));
       }
 
-      socket.username = username;
+      socket.data.username = username;
       next();
     });
 
