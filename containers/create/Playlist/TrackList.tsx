@@ -1,15 +1,15 @@
 import React, { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
-import type { Output } from '@hooks/useInputs';
+import type { InputOutput } from '@hooks/useInputs';
 import errorStatus from '@atom/create/errorList';
 import CREATE from '@data/create';
 import TrackInput from './TrackInput';
 
 type Props = {
-  playlist: Output<TrackInfo>['inputs'];
-  changePlaylist: Output<TrackInfo>['onChange'];
-  onReset: Output<TrackInfo>['onReset'];
-  deleteTrack: Output<TrackInfo>['deleteInput'];
+  playlist: InputOutput<Track>['inputs'];
+  changePlaylist: InputOutput<Track>['onChange'];
+  onReset: InputOutput<Track>['onReset'];
+  deleteTrack: InputOutput<Track>['deleteInput'];
 };
 
 const TrackList = ({

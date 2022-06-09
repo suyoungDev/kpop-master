@@ -1,19 +1,20 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
 import socket from 'utils/socket';
 import Input from '@F/Input';
 import useInput from '@hooks/useInput';
+import useInputError from '@hooks/useInputError';
 import user from '@atom/user';
+import ERROR_MESSAGE from '@data/errorMessage';
 
 const UserName = () => {
   const { input, onChange, onReset } = useInput('');
+  const { error, setError, onError } = useInputError();
   const setUserName = useSetRecoilState(user);
-  const [error, setError] = useState(false);
 
   const confirmUserName = useCallback(() => {
     setUserName(input);
-    localStorage.setItem('username', input);
-    socket.connect('/api/socket', input);
+    socket.connect('', input);
     onReset();
   }, [input]);
 
@@ -33,13 +34,14 @@ const UserName = () => {
         name="userName"
         value={input}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setError(false);
+          setError(null);
           onChange(e);
         }}
-        isError={error}
-        setError={setError}
+        isError={!!error}
+        setError={onError}
         minLength={2}
-        alertMessage="이름은 2글자 이상이어야합니다."
+        maxLength={10}
+        alertMessage={error ? ERROR_MESSAGE.USER[error] : ''}
       />
       <button type="submit">결정!</button>
     </form>

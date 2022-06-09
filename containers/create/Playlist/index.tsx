@@ -6,7 +6,7 @@ import errorStatus, { defaultErrorStatus } from '@atom/create/errorList';
 import CREATE from '@data/create';
 import TrackList from './TrackList';
 
-const FORM: TrackInfo = { trackName: '', artistName: '' };
+const FORM: Track = { trackName: '', artistName: '' };
 
 const PlaylistForm = (): JSX.Element => {
   const {
@@ -16,7 +16,7 @@ const PlaylistForm = (): JSX.Element => {
     onReset,
     resetInputs,
     deleteInput,
-  } = useInputs<TrackInfo>(Array(CREATE.MIN_QUANTITY).fill(FORM), FORM);
+  } = useInputs<Track>(Array(CREATE.MIN_QUANTITY).fill(FORM), FORM);
   const form = useRef<HTMLFormElement>(null);
   const addNewTrack = useSetRecoilState(errorStatus);
   const resetErrors = useResetRecoilState(errorStatus);

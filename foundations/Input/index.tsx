@@ -1,10 +1,10 @@
-import React, { InputHTMLAttributes, useRef } from 'react';
+import React, { useRef } from 'react';
 
 export type Props = {
   alertMessage: string;
-  setError: (validity: ValidityState) => void;
-} & Omit<TrackInputField, 'id'> &
-  InputHTMLAttributes<HTMLInputElement>;
+  setError: (validity: InputError) => void;
+} & ValidateInput<string, string> &
+  React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
   label,
@@ -19,7 +19,7 @@ const Input = ({
       <label htmlFor={props.id}>{label}</label>
       <input
         onInvalid={() => {
-          setError(input.current?.validity as ValidityState);
+          setError(input.current?.validity as InputError);
         }}
         {...props}
         ref={input}

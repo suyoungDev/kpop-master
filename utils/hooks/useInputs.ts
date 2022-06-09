@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 
-export type Output<T> = {
+export type InputOutput<T> = {
   inputs: T[];
   setInputs: React.Dispatch<React.SetStateAction<T[]>>;
   onChange: (idx: number) => (e: ChangeEvent<HTMLInputElement>) => void;
@@ -9,7 +9,10 @@ export type Output<T> = {
   resetInputs: () => void;
 };
 
-const useInputs = <T = any>(initialValue: T[], resetValue: T): Output<T> => {
+const useInputs = <T = any>(
+  initialValue: T[],
+  resetValue: T
+): InputOutput<T> => {
   const [inputs, setInputs] = useState<T[]>(initialValue);
 
   const onChange = useCallback(

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Input from '@F/Input';
 
 export type Props = {
-  values: TrackInfo;
+  values: Track;
   setValues: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onReset: () => void;
   deleteTrack: () => void;
@@ -23,7 +23,7 @@ const TrackInput = ({
   index,
 }: Props): JSX.Element => {
   const { trackName, artistName } = values;
-  const TRACK_INPUTS_FORM: TrackInputField[] = [
+  const TRACK_INPUTS_FORM: TrackValidateInput[] = [
     {
       id: 'artistName',
       placeholder: '가수 이름',
@@ -45,7 +45,7 @@ const TrackInput = ({
   ];
 
   const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>, id: TrackKey) => {
+    (id: TrackKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setValues(e);
       if (e.target.value === '') return setError(id, false);
       // TODO: debounce 적용하기
@@ -60,7 +60,7 @@ const TrackInput = ({
       {TRACK_INPUTS_FORM.map(({ id, ...trackInput }) => (
         <Input
           {...trackInput}
-          onChange={(e) => onChange(e, id)}
+          onChange={onChange(id)}
           type="text"
           name={id}
           key={id}

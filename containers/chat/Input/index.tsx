@@ -1,3 +1,4 @@
+import useInputError from '@utils/hooks/useInputError';
 import React, { useCallback, useState } from 'react';
 import Input from '@F/Input';
 import useInput from '@hooks/useInput';
@@ -13,7 +14,7 @@ const ARROW = ['ArrowUp', 'ArrowDown'];
 const ChatInput = ({ onEmitMessage }: Props): JSX.Element => {
   const { input, onChange, setInput, onReset } = useInput('');
   const [buttonLabelIndex, setButtonLabelIndex] = useState(0);
-  const [error, setError] = useState<ChattingMessageErrorType | null>(null);
+  const { error, onError, setError } = useInputError();
 
   const sendingMessage = useCallback(() => {
     onEmitMessage(input);
@@ -51,19 +52,12 @@ const ChatInput = ({ onEmitMessage }: Props): JSX.Element => {
     );
   }, []);
 
-  const onError = useCallback((validity: ValidityState) => {
-    const { valueMissing, tooShort, tooLong } = validity;
-    if (valueMissing) setError('valueMissing');
-    if (tooShort) setError('tooShort');
-    if (tooLong) setError('tooLong');
-  }, []);
-
   return (
     <S.Form
       onSubmit={(e) => {
         e.preventDefault();
         // TODO: 보낸지 0.5초안에 다시 못보내게 시간재기
-        // if (true) return  setError('tooFast');
+        // if (true) return setError('tooFast');
         setError(null);
         sendingMessage();
         generateRandomLabelIndex();
