@@ -22,11 +22,13 @@
       "@config/*": ["config/*", "config/index"],
       "@atom/*": ["atom/*"],
       "@styles/*": ["styles/*", "styles/index"],
+      "@utils/*": ["utils/*"],
       "@data/*": ["utils/data/*"],
       "@TS/*": ["utils/types/*"],
       "@fn/*": ["utils/functions/*"],
       "@hooks/*": ["utils/hooks/*"],
-      "test-utils": ["utils/test-utils"]
+      "test-utils": ["utils/test-utils"],
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
