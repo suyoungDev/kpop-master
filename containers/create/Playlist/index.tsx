@@ -2,8 +2,8 @@ import React, { FormEvent, useCallback, useEffect, useRef } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import useInputs from '@hooks/useInputs';
 import { focusOn } from '@fn/focusOn';
-import errorStatus, { defaultErrorStatus } from '@atom/create/errorList';
 import CREATE from '@data/create';
+import errorStatus, { defaultErrorStatus } from '@store/create/errorList';
 import TrackList from './TrackList';
 
 const FORM: Track = { trackName: '', artistName: '' };

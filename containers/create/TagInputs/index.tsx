@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useRecoilState } from 'recoil';
 import Tag from '@F/Tag';
-import tagStore from '@atom/create/tags';
+import tagStore from '@store/create/tags';
 import * as S from './styles';
 
 const DIVIDING_KEYWORD = ['Comma', 'Enter'];

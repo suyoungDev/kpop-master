@@ -4,8 +4,8 @@ import socket from 'utils/socket';
 import Input from '@F/Input';
 import useInput from '@hooks/useInput';
 import useInputError from '@hooks/useInputError';
-import user from '@atom/user';
 import ERROR_MESSAGE from '@data/errorMessage';
+import user from '@store/user';
 
 const UserName = () => {
   const { input, onChange, onReset } = useInput('');

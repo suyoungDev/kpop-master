@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import Chat from '@C/chat';
 import UserName from '@C/landing/User';
 import Layout from '@F/Layout';
-import { currentState } from '@atom/stage';
+import { currentState } from '@store/stage';
 
 const Home: NextPage = () => {
   const stage = useRecoilValue(currentState);

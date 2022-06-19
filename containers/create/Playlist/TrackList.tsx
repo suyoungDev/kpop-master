@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import type { InputOutput } from '@hooks/useInputs';
-import errorStatus from '@atom/create/errorList';
 import CREATE from '@data/create';
+import errorStatus from '@store/create/errorList';
 import TrackInput from './TrackInput';
 
 type Props = {

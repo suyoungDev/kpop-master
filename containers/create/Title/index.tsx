@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import useInput from '@hooks/useInput';
-import titleStore from '@atom/create/title';
+import titleStore from '@store/create/title';
 import * as S from './styles';
 
 const PageTitle = (): JSX.Element => {

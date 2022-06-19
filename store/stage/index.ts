@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import userName from '@atom/user';
+import userName from '@store/user';
 
 type Stage = 'enter' | 'chat' | 'game';
 export const stageProgress = atom<Stage>({

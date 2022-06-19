@@ -20,7 +20,7 @@
       "@C/*": ["containers/*"],
       "@F/*": ["foundations/*"],
       "@config/*": ["config/*", "config/index"],
-      "@atom/*": ["atom/*"],
+      "@store/*": ["store/*"],
       "@styles/*": ["styles/*", "styles/index"],
       "@utils/*": ["utils/*"],
       "@data/*": ["utils/data/*"],

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import userName from '@atom/user';
+import userName from '@store/user';
 // import socket from 'utils/socket';
 import ChatInput from './Input';
 

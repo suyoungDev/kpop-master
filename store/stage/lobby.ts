@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import userName from '@atom/user';
+import userName from '@store/user';
 
 type GameState = 'standby' | 'ready';
 type UserGameState = { id: string; name: string; state: GameState }[];

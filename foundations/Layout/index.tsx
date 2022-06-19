@@ -2,8 +2,8 @@ import { ThemeProvider } from '@emotion/react';
 import React, { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 import MainHeader from '@F/MainHeader';
-import themeStatus from '@atom/theme';
 import themeList from '@styles/theme';
+import themeStatus from '@store/theme';
 
 type Props = { children: ReactNode; title?: string };
 
